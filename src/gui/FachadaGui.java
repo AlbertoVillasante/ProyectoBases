@@ -5,7 +5,7 @@ import aplicacion.Libro;
 import aplicacion.Usuario;
 import aplicacion.Ejemplar;
 
-public class FachadaGui {
+public class FachadaGui {           //Esta es la fachada
 
     aplicacion.FachadaAplicacion fa;
     VPrincipal vp;

@@ -24,7 +24,9 @@ public class FachadaBaseDatos {
         FileInputStream arqConfiguracion;
 
         try {
-            arqConfiguracion = new FileInputStream("baseDatos.properties");
+            //arqConfiguracion = new FileInputStream("baseDatos.properties");
+            arqConfiguracion = new FileInputStream("basesDatos.properties");
+
             configuracion.load(arqConfiguracion);
             arqConfiguracion.close();
 

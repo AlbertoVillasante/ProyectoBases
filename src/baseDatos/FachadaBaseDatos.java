@@ -25,7 +25,7 @@ public class FachadaBaseDatos {
 
         try {
             //arqConfiguracion = new FileInputStream("baseDatos.properties");
-            arqConfiguracion = new FileInputStream("basesDatos.properties");
+            arqConfiguracion = new FileInputStream("basesDatos.properties");            //Hugo
 
             configuracion.load(arqConfiguracion);
             arqConfiguracion.close();

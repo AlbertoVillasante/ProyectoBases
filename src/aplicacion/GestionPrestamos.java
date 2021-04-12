@@ -28,4 +28,9 @@ public class GestionPrestamos {
     public Integer DiasFaltanParaVencer(Integer libro, Integer ejemplar) {
         return fbd.DiasFaltanParaVencer(libro, ejemplar);
     }
+    
+    public void nuevoBeneficio(){
+         fgui.nuevoBeneficio();
+    }
+    
 }

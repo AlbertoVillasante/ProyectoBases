@@ -1,8 +1,9 @@
 package baseDatos;
 
 import aplicacion.Ejemplar;
-import aplicacion.EmpresaUsuario;
+import aplicacion.InversorUsuario;
 import aplicacion.Categoria;
+import aplicacion.EmpresaUsuario;
 import aplicacion.Libro;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -161,5 +162,11 @@ public class FachadaBaseDatos {
 
     public Integer DiasFaltanParaVencer(Integer libro, Integer ejemplar) {
         return daoLibros.DiasFaltanParaVencer(libro, ejemplar);
+    }
+     public InversorUsuario validarUsuario(String idUsuario, String clave) {
+        return daoUsuarios.validarUsuarioInversor(idUsuario, clave);
+    }
+      public EmpresaUsuario validarUsuarioE(String idUsuario, String clave) {
+        return daoUsuarios.validarUsuarioEmpresa(idUsuario, clave);
     }
 }

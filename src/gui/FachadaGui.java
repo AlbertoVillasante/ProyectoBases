@@ -8,11 +8,11 @@ import aplicacion.Ejemplar;
 public class FachadaGui {           //Esta es la fachada
 
     aplicacion.FachadaAplicacion fa;
-    VPrincipal vp;
+    MenuDeUsuario vp;
 
     public FachadaGui(aplicacion.FachadaAplicacion fa) {
         this.fa = fa;
-        this.vp = new VPrincipal(fa);
+        this.vp = new MenuDeUsuario(fa);
     }
 
     public void iniciaVista() {
@@ -80,6 +80,14 @@ public class FachadaGui {           //Esta es la fachada
 
         vvp = new VPrestamos(vp, true, fa, e);
         vvp.setVisible(true);
+    }
+    
+    public void nuevoBeneficio(){
+        VBeneficios vb;
+        
+        vb = new VBeneficios(vp,true,fa);
+        vb.setVisible(true);
+
     }
 
 }

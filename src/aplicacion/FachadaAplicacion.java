@@ -61,9 +61,9 @@ public class FachadaAplicacion {
         return gl.actualizarEjemplaresLibro(idLibro, ejemplares, borrar);
     }
     //Comentado para que no de error
-    /*public Boolean comprobarAutentificacion(String idUsuario, String clave) {
+    public Boolean comprobarAutentificacion(String idUsuario, String clave) {
         return gu.comprobarAutentificacion(idUsuario, clave);
-    }*/
+    }
 
     public void nuevoUsuario() {
         gu.nuevoUsuario();
@@ -117,4 +117,8 @@ public class FachadaAplicacion {
         return gp.DiasFaltanParaVencer(libro, ejemplar);
     }
 
+    
+     public void nuevoBeneficio() {
+        gp.nuevoBeneficio();
+    }
 }

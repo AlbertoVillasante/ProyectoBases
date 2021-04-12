@@ -23,7 +23,7 @@ public class DAOUsuarios extends AbstractDAO {
 
         try {
             stmUsuario = con.prepareStatement("select idUsuario, clave, nombre, apellido1, apellido2, direccion, telefono, tipoUsuario "
-                    + "from usuarioEmpresa "
+                    + "from inversorUsuario "
                     + "where idUsuario = ? and clave = ? and tipoUsuario != ?");
             stmUsuario.setString(1, idUsuario);
             stmUsuario.setString(2, clave);
@@ -57,8 +57,8 @@ public class DAOUsuarios extends AbstractDAO {
         con = this.getConexion();
 
         try {
-            stmUsuario = con.prepareStatement("select idUsuario, clave, nombreComercial, direccion, telefono, tipoUsuario "
-                    + "from usuario "
+            stmUsuario = con.prepareStatement("select * "
+                    + "from EmpresaUsuario "
                     + "where idUsuario = ? and clave = ? and tipoUsuario != ?");
             stmUsuario.setString(1, idUsuario);
             stmUsuario.setString(2, clave);

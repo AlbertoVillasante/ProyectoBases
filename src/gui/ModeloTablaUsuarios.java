@@ -1,15 +1,15 @@
 package gui;
 
-import aplicacion.Usuario;
+import aplicacion.EmpresaUsuario;
 import java.util.ArrayList;
 import javax.swing.table.*;
 
 public class ModeloTablaUsuarios extends AbstractTableModel {
 
-    private java.util.List<Usuario> usuarios;
+    private java.util.List<EmpresaUsuario> usuarios;
 
     public ModeloTablaUsuarios() {
-        this.usuarios = new java.util.ArrayList<Usuario>();
+        this.usuarios = new java.util.ArrayList<EmpresaUsuario>();
     }
 
     public int getColumnCount() {
@@ -67,7 +67,7 @@ public class ModeloTablaUsuarios extends AbstractTableModel {
         return false;
     }
 
-    public Object getValueAt(int row, int col) {
+    public Object getValueAt(int row, int col) {      //Comentado por ahora, para que no de error
         Object resultado = null;
 
         switch (col) {
@@ -78,7 +78,7 @@ public class ModeloTablaUsuarios extends AbstractTableModel {
                 resultado = usuarios.get(row).getNombre();
                 break;
             case 2:
-                resultado = usuarios.get(row).getEmail();
+                //resultado = usuarios.get(row).getEmail();
                 break;
             case 3:
                 resultado = usuarios.get(row).getTipoUsuario();
@@ -87,18 +87,18 @@ public class ModeloTablaUsuarios extends AbstractTableModel {
         return resultado;
     }
 
-    public void setFilas(java.util.List<Usuario> usuarios) {
+    public void setFilas(java.util.List<EmpresaUsuario> usuarios) {
         this.usuarios = usuarios;
         fireTableDataChanged();
     }
 
-    public Usuario obtenerUsuario(int i) {
+    public EmpresaUsuario obtenerUsuario(int i) {
         return this.usuarios.get(i);
     }
 
     public java.util.List<String> obtenerId() {
         java.util.ArrayList<String> us = new ArrayList<String>();
-        for (Usuario u : this.usuarios) {
+        for (EmpresaUsuario u : this.usuarios) {
             us.add(u.getIdUsuario());
         }
         return us;

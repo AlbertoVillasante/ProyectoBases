@@ -1,7 +1,7 @@
 package gui;
 
 import aplicacion.TipoUsuario;
-import aplicacion.Usuario;
+import aplicacion.EmpresaUsuario;
 import java.awt.Color;
 
 public class VUsuario extends javax.swing.JDialog {
@@ -398,21 +398,21 @@ public class VUsuario extends javax.swing.JDialog {
         if (obligatorioTexto.isEnabled()) {
             return;
         }
-        Usuario u;
-        u = new Usuario(btnID.getText(), btnClave.getText(), btnNombre.getText(), btnDireccion.getText(),
+        EmpresaUsuario u;
+        u = new EmpresaUsuario(btnID.getText(), btnClave.getText(), btnNombre.getText(), btnDireccion.getText(),
                 btnMail.getText(), TipoUsuario.valueOf(tipo_usr.getSelectedItem().toString()));
         if (m.obtenerId().contains(u.getIdUsuario())) {
             id = u.getIdUsuario();
         }
-        fa.actualizarUsuario(u, id);
+        //fa.actualizarUsuario(u, id);  //Comentado para que no de error
 
         this.buscarUsuarios();
         this.BtnNuevoUsuarioActionPerformed(evt);
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void TablaUsuariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaUsuariosMouseClicked
-        ModeloTablaUsuarios m;
-        Usuario u;
+        /*ModeloTablaUsuarios m;    //Comentado por ahora, para que no de error
+        EmpresaUsuario u;
         m = (ModeloTablaUsuarios) TablaUsuarios.getModel();
         u = m.obtenerUsuario(TablaUsuarios.getSelectedRow());
         btnID.setText(u.getIdUsuario());
@@ -421,16 +421,16 @@ public class VUsuario extends javax.swing.JDialog {
         btnDireccion.setText(u.getDireccion());
         btnMail.setText(u.getEmail());
         tipo_usr.setSelectedItem(u.getTipoUsuario().toString());
-        id = u.getIdUsuario();
+        id = u.getIdUsuario();*/
     }//GEN-LAST:event_TablaUsuariosMouseClicked
 
     private void btnBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarActionPerformed
-        ModeloTablaUsuarios m;
-        Usuario u;
+        /*ModeloTablaUsuarios m;        //Comentado para que no de error
+        EmpresaUsuario u;
         m = (ModeloTablaUsuarios) TablaUsuarios.getModel();
         u = m.obtenerUsuario(TablaUsuarios.getSelectedRow());
         fa.borrarUsuario(u.getIdUsuario());
-        this.buscarUsuarios();
+        this.buscarUsuarios();*/
     }//GEN-LAST:event_btnBorrarActionPerformed
 
     private void btnClaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClaveActionPerformed
@@ -474,7 +474,7 @@ public class VUsuario extends javax.swing.JDialog {
         ModeloTablaUsuarios m;
 
         m = (ModeloTablaUsuarios) TablaUsuarios.getModel();
-        m.setFilas(fa.obtenerUsuarios(buscaId.getText(), buscaNombre.getText()));
+        //m.setFilas(fa.obtenerUsuarios(buscaId.getText(), buscaNombre.getText()));     //Comentado para que no de error
         if (m.getRowCount() > 0) {
             TablaUsuarios.setRowSelectionInterval(0, 0);
             btnBorrar.setEnabled(true);

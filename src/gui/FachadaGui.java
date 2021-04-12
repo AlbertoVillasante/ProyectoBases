@@ -2,7 +2,7 @@ package gui;
 
 import aplicacion.Categoria;
 import aplicacion.Libro;
-import aplicacion.Usuario;
+import aplicacion.EmpresaUsuario;
 import aplicacion.Ejemplar;
 
 public class FachadaGui {           //Esta es la fachada
@@ -56,7 +56,7 @@ public class FachadaGui {           //Esta es la fachada
         vu.setVisible(true);
     }
 
-    public void visualizaUsuario(Usuario u) {
+    public void visualizaUsuario(EmpresaUsuario u) {
         VUsuario vu;
         vu = new VUsuario(vp, true, fa);
         vu.setVisible(true);

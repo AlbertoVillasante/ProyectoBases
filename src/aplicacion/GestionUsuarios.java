@@ -12,27 +12,27 @@ public class GestionUsuarios {
         this.fgui = fgui;
         this.fbd = fbd;
     }
-
-    public Boolean comprobarAutentificacion(String idUsuario, String clave) {
-        Usuario u;
+    //Comentado para que no de error
+    /*public Boolean comprobarAutentificacion(String idUsuario, String clave) {
+        EmpresaUsuario u;
 
         u = fbd.validarUsuario(idUsuario, clave);
         if (u != null) {
-            return u.getTipoUsuario() == TipoUsuario.Administrador;
+            return u.getTipoUsuario() == TipoUsuario.Regulador;
         } else {
             return false;
         }
-    }
+    }*/
 
     public void nuevoUsuario() {
         fgui.nuevoUsuario();
     }
-
-    public java.util.List<Usuario> obtenerUsuarios(String idUsuario, String nombreUsuario) {
+/*  //Comentado para que no de error
+    public java.util.List<EmpresaUsuario> obtenerUsuarios(String idUsuario, String nombreUsuario) {
         return fbd.consultarListaUsuarios(idUsuario, nombreUsuario);
     }
 
-    public void actualizarUsuario(Usuario u, String id) {
+    public void actualizarUsuario(EmpresaUsuario u, String id) {
 
         if (id == null) {
             fbd.insertarUsuario(u);
@@ -45,7 +45,8 @@ public class GestionUsuarios {
         fbd.borrarUsuario(idUsuario);
     }
 
-    public java.util.List<Usuario> obtenerUsuariosPrestamo(String idUsuario, String nombreUsuario) {
+    public java.util.List<EmpresaUsuario> obtenerUsuariosPrestamo(String idUsuario, String nombreUsuario) {
         return fbd.consultarListaUsuariosPrestamo(idUsuario, nombreUsuario);
     }
+*/
 }

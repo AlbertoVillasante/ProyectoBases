@@ -1,7 +1,8 @@
 
 package baseDatos;
 
-import aplicacion.Usuario;
+import aplicacion.EmpresaUsuario;
+import aplicacion.InversorUsuario;
 import aplicacion.TipoUsuario;
 import java.sql.*;
 
@@ -12,8 +13,8 @@ public class DAOUsuarios extends AbstractDAO {
         super.setFachadaAplicacion(fa);
     }
 
-    public Usuario validarUsuario(String idUsuario, String clave) {
-        Usuario resultado = null;
+    public InversorUsuario validarUsuarioInversor(String idUsuario, String clave) {
+        InversorUsuario resultado = null;
         Connection con;
         PreparedStatement stmUsuario = null;
         ResultSet rsUsuario;
@@ -21,16 +22,52 @@ public class DAOUsuarios extends AbstractDAO {
         con = this.getConexion();
 
         try {
-            stmUsuario = con.prepareStatement("select id_usuario, clave, nombre, direccion, email, tipo_usuario "
-                    + "from usuario "
-                    + "where id_usuario = ? and clave = ?");
+            stmUsuario = con.prepareStatement("select idUsuario, clave, nombre, apellido1, apellido2, direccion, telefono, tipoUsuario "
+                    + "from usuarioEmpresa "
+                    + "where idUsuario = ? and clave = ? and tipoUsuario != ?");
             stmUsuario.setString(1, idUsuario);
             stmUsuario.setString(2, clave);
+            stmUsuario.setString(3, "PendienteAlta");       //Depende de la implementación, posible cambio
             rsUsuario = stmUsuario.executeQuery();
             if (rsUsuario.next()) {
-                resultado = new Usuario(rsUsuario.getString("id_usuario"), rsUsuario.getString("clave"),
-                        rsUsuario.getString("nombre"), rsUsuario.getString("direccion"),
-                        rsUsuario.getString("email"), TipoUsuario.valueOf(rsUsuario.getString("tipo_usuario")));
+                resultado = new InversorUsuario(rsUsuario.getString("idUsuario"), rsUsuario.getString("clave"),
+                        rsUsuario.getString("nombre"), rsUsuario.getString("apellido1"), rsUsuario.getString("apellido2"), rsUsuario.getString("direccion"),
+                        rsUsuario.getString("telefono"), TipoUsuario.valueOf(rsUsuario.getString("tipoUsuario")));
+
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        } finally {
+            try {
+                stmUsuario.close();
+            } catch (SQLException e) {
+                System.out.println("Imposible cerrar cursores");
+            }
+        }
+        return resultado;
+    }
+    
+    public EmpresaUsuario validarUsuarioEmpresa(String idUsuario, String clave) {
+        EmpresaUsuario resultado = null;
+        Connection con;
+        PreparedStatement stmUsuario = null;
+        ResultSet rsUsuario;
+
+        con = this.getConexion();
+
+        try {
+            stmUsuario = con.prepareStatement("select idUsuario, clave, nombreComercial, direccion, telefono, tipoUsuario "
+                    + "from usuario "
+                    + "where idUsuario = ? and clave = ? and tipoUsuario != ?");
+            stmUsuario.setString(1, idUsuario);
+            stmUsuario.setString(2, clave);
+            stmUsuario.setString(3, "PendienteAlta");           //Igual que en validarUsuarioInversor
+            rsUsuario = stmUsuario.executeQuery();
+            if (rsUsuario.next()) {
+                resultado = new EmpresaUsuario(rsUsuario.getString("idUsuario"), rsUsuario.getString("clave"),
+                        rsUsuario.getString("nombreComercial"), rsUsuario.getString("direccion"),
+                        rsUsuario.getString("telefono"), TipoUsuario.valueOf(rsUsuario.getString("tipoUsuario")));
 
             }
         } catch (SQLException e) {
@@ -46,9 +83,9 @@ public class DAOUsuarios extends AbstractDAO {
         return resultado;
     }
 
-    public java.util.List<Usuario> consultarListaUsuarios(String idUsuario, String nombreUsuario) {
-        java.util.List<Usuario> resultado = new java.util.ArrayList<Usuario>();
-        Usuario usuarioActual;
+    /*public java.util.List<EmpresaUsuario> consultarListaUsuarios(String idUsuario, String nombreUsuario) {
+        java.util.List<EmpresaUsuario> resultado = new java.util.ArrayList<EmpresaUsuario>();
+        EmpresaUsuario usuarioActual;
         Connection con;
         PreparedStatement stmUsuario = null;
         ResultSet rsUsuario;
@@ -66,7 +103,7 @@ public class DAOUsuarios extends AbstractDAO {
             rsUsuario = stmUsuario.executeQuery();
 
             while (rsUsuario.next()) {
-                usuarioActual = new Usuario(rsUsuario.getString("id_usuario"), rsUsuario.getString("clave"), rsUsuario.getString("nombre"),
+                usuarioActual = new EmpresaUsuario(rsUsuario.getString("id_usuario"), rsUsuario.getString("clave"), rsUsuario.getString("nombre"),
                         rsUsuario.getString("direccion"), rsUsuario.getString("email"), TipoUsuario.valueOf(rsUsuario.getString("tipo_usuario")));
 
                 resultado.add(usuarioActual);
@@ -84,22 +121,53 @@ public class DAOUsuarios extends AbstractDAO {
             }
         }
         return resultado;
-    }
+    }*/
 
-    public void insertarUsuario(Usuario u) {
+    public void insertarUsuarioEmpresa(EmpresaUsuario u) {
         Connection con;
         PreparedStatement stmUsuario = null;
         con = super.getConexion();
 
         try {
-            stmUsuario = con.prepareStatement("insert into usuario(id_usuario, clave, nombre, direccion, email, tipo_usuario) "
+            stmUsuario = con.prepareStatement("insert into usuario(idUsuario, clave, nombre, direccion, telefono, tipoUsuario) "
                     + "values (?,?,?,?,?,?)");
             stmUsuario.setString(1, u.getIdUsuario());
             stmUsuario.setString(2, u.getClave());
             stmUsuario.setString(3, u.getNombre());
             stmUsuario.setString(4, u.getDireccion());
-            stmUsuario.setString(5, u.getEmail());
-            stmUsuario.setString(6, u.getTipoUsuario().toString());
+            stmUsuario.setString(5, u.getTelefono());
+            stmUsuario.setString(6, "PendienteAlta");
+            stmUsuario.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        } finally {
+            try {
+                stmUsuario.close();
+            } catch (SQLException e) {
+                System.out.println("Imposible cerrar cursores");
+            }
+        }
+
+    }
+    
+    public void insertarUsuarioInversor(InversorUsuario u) {
+        Connection con;
+        PreparedStatement stmUsuario = null;
+        con = super.getConexion();
+
+        try {
+            stmUsuario = con.prepareStatement("insert into usuario(idUsuario, clave, nombre, apellido1, apellido2, direccion, telefono, tipoUsuario) "
+                    + "values (?,?,?,?,?,?,?,?)");
+            stmUsuario.setString(1, u.getIdUsuario());
+            stmUsuario.setString(2, u.getClave());
+            stmUsuario.setString(3, u.getNombre());
+            stmUsuario.setString(4, u.getApellido1());
+            stmUsuario.setString(5, u.getApellido2());
+            stmUsuario.setString(6, u.getDireccion());
+            stmUsuario.setString(7, u.getTelefono());
+            stmUsuario.setString(8, "PendienteAlta");
             stmUsuario.executeUpdate();
 
         } catch (SQLException e) {
@@ -115,7 +183,7 @@ public class DAOUsuarios extends AbstractDAO {
 
     }
 
-    public void modificarUsuario(Usuario u, String id) {
+    /*public void modificarUsuario(EmpresaUsuario u, String id) {
         Connection con;
         PreparedStatement stmUsuarios = null;
         con = super.getConexion();
@@ -173,9 +241,9 @@ public class DAOUsuarios extends AbstractDAO {
         }
     }
 
-    public java.util.List<Usuario> consultarListaUsuariosPrestamo(String idUsuario, String nombreUsuario) {
-        java.util.List<Usuario> resultado = new java.util.ArrayList<Usuario>();
-        Usuario usuarioActual;
+    public java.util.List<EmpresaUsuario> consultarListaUsuariosPrestamo(String idUsuario, String nombreUsuario) {
+        java.util.List<EmpresaUsuario> resultado = new java.util.ArrayList<EmpresaUsuario>();
+        EmpresaUsuario usuarioActual;
         Connection con;
         PreparedStatement stmUsuario = null;
         ResultSet rsUsuario;
@@ -198,7 +266,7 @@ public class DAOUsuarios extends AbstractDAO {
             
          
             while (rsUsuario.next()) {
-                usuarioActual = new Usuario(rsUsuario.getString("id_usuario"), rsUsuario.getString("clave"), rsUsuario.getString("nombre"),
+                usuarioActual = new EmpresaUsuario(rsUsuario.getString("id_usuario"), rsUsuario.getString("clave"), rsUsuario.getString("nombre"),
                         rsUsuario.getString("direccion"), rsUsuario.getString("email"), TipoUsuario.valueOf(rsUsuario.getString("tipo_usuario")));
                 usuarioActual.setPrestamosVencidos(rsUsuario.getInt("vencido"));
                 resultado.add(usuarioActual);
@@ -216,6 +284,6 @@ public class DAOUsuarios extends AbstractDAO {
             }
         }
         return resultado;
-    }
+    }*/
 
 }

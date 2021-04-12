@@ -1,7 +1,7 @@
 package baseDatos;
 
 import aplicacion.Ejemplar;
-import aplicacion.Usuario;
+import aplicacion.EmpresaUsuario;
 import aplicacion.Categoria;
 import aplicacion.Libro;
 import java.io.FileInputStream;
@@ -102,27 +102,27 @@ public class FachadaBaseDatos {
     public void modificarEjemplarLibro(Integer idLibro, Ejemplar ejemplar) {
         daoLibros.modificarEjemplarLibro(idLibro, ejemplar);
     }
-
-    public Usuario validarUsuario(String idUsuario, String clave) {
+/*  //Comentado para que no de error
+    public EmpresaUsuario validarUsuario(String idUsuario, String clave) {
         return daoUsuarios.validarUsuario(idUsuario, clave);
     }
 
-    public java.util.List<Usuario> consultarListaUsuarios(String idUsuario, String nombreUsuario) {
+    public java.util.List<EmpresaUsuario> consultarListaUsuarios(String idUsuario, String nombreUsuario) {
         return daoUsuarios.consultarListaUsuarios(idUsuario, nombreUsuario);
     }
 
-    public void insertarUsuario(Usuario u) {
+    public void insertarUsuario(EmpresaUsuario u) {
         daoUsuarios.insertarUsuario(u);
     }
 
-    public void modificarUsuario(Usuario u, String id) {
+    public void modificarUsuario(EmpresaUsuario u, String id) {
         daoUsuarios.modificarUsuario(u, id);
     }
 
     public void borrarUsuario(String idUsuario) {
         daoUsuarios.borrarUsuario(idUsuario);
     }
-
+*/
     public java.util.List<Categoria> consultarCategorias() {
         return daoCategorias.consultarCategorias();
     }
@@ -146,11 +146,11 @@ public class FachadaBaseDatos {
     public void nuevoPrestamo(Ejemplar e) {
         daoLibros.nuevoPrestamo(e);
     }
-
-    public java.util.List<Usuario> consultarListaUsuariosPrestamo(String idUsuario, String nombreUsuario) {
+/*  //Comentado para que no de error
+    public java.util.List<EmpresaUsuario> consultarListaUsuariosPrestamo(String idUsuario, String nombreUsuario) {
         return daoUsuarios.consultarListaUsuariosPrestamo(idUsuario, nombreUsuario);
     }
-
+*/
     public void devolverEjemplar(Integer ejemplar, String usuario, Integer libro) {
         daoLibros.devolverEjemplar(ejemplar, usuario, libro);
     }

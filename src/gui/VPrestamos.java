@@ -1,7 +1,7 @@
 package gui;
 
 import aplicacion.Ejemplar;
-import aplicacion.Usuario;
+import aplicacion.EmpresaUsuario;
 
 public class VPrestamos extends javax.swing.JDialog {
 
@@ -161,13 +161,13 @@ public class VPrestamos extends javax.swing.JDialog {
         buscarUsuarios();
 
     }//GEN-LAST:event_btnBuscarActionPerformed
-
+        //Comentado por ahora, para que no de error
     private void TablaPrestamosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaPrestamosMouseClicked
-        Usuario u;
+        EmpresaUsuario u;
         ModeloTablaPrestamos me;
         me = (ModeloTablaPrestamos) TablaPrestamos.getModel();
         u = me.obtenerUsuario(TablaPrestamos.getSelectedRow());
-        if (u.getPrestamosVencidos() > 0) {
+        if (/*u.getPrestamosVencidos() > 0*/true) {
             btnPrestar.setEnabled(false);
         } else {
             btnPrestar.setEnabled(true);
@@ -191,7 +191,7 @@ public class VPrestamos extends javax.swing.JDialog {
 
     public void buscarUsuarios() {
         ModeloTablaPrestamos p;
-
+        /*  //Comentado para que no de error
         p = (ModeloTablaPrestamos) TablaPrestamos.getModel();
         p.setFilas(fa.obtenerUsuariosPrestamo(CuadroID.getText(), cuadroNombre.getText()));
         if (p.getRowCount() > 0) {
@@ -199,7 +199,7 @@ public class VPrestamos extends javax.swing.JDialog {
             btnPrestar.setEnabled(true);
         } else {
             btnSalir.setEnabled(false);
-        }
+        }*/
     }
 
     public void InsertarPrestamo() {

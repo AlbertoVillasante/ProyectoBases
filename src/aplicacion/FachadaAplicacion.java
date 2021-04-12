@@ -60,27 +60,27 @@ public class FachadaAplicacion {
     public java.util.List<Ejemplar> actualizarEjemplaresLibro(Integer idLibro, java.util.List<Ejemplar> ejemplares, java.util.List<Integer> borrar) {
         return gl.actualizarEjemplaresLibro(idLibro, ejemplares, borrar);
     }
-
-    public Boolean comprobarAutentificacion(String idUsuario, String clave) {
+    //Comentado para que no de error
+    /*public Boolean comprobarAutentificacion(String idUsuario, String clave) {
         return gu.comprobarAutentificacion(idUsuario, clave);
-    }
+    }*/
 
     public void nuevoUsuario() {
         gu.nuevoUsuario();
     }
-
-    public java.util.List<Usuario> obtenerUsuarios(String idUsuario, String nombreUsuario) {
+/*  //Comentado para que no de error
+    public java.util.List<EmpresaUsuario> obtenerUsuarios(String idUsuario, String nombreUsuario) {
         return gu.obtenerUsuarios(idUsuario, nombreUsuario);
     }
 
-    public void actualizarUsuario(Usuario u, String id) {
+    public void actualizarUsuario(EmpresaUsuario u, String id) {
         gu.actualizarUsuario(u, id);
     }
 
     public void borrarUsuario(String idUsuario) {
         gu.borrarUsuario(idUsuario);
     }
-
+*/
     public void nuevaCategoria() {
         gc.nuevaCategoria();
     }
@@ -100,11 +100,11 @@ public class FachadaAplicacion {
     public void nuevoPrestamo(Ejemplar e) {
         gp.nuevoPrestamo(e);
     }
-
-    public java.util.List<Usuario> obtenerUsuariosPrestamo(String idUsuario, String nombreUsuario) {
+/*  //Comentado para que no de error
+    public java.util.List<EmpresaUsuario> obtenerUsuariosPrestamo(String idUsuario, String nombreUsuario) {
         return gu.obtenerUsuariosPrestamo(idUsuario, nombreUsuario);
     }
-
+*/
     public void devolverEjemplar(Integer ejemplar, String usuario, Integer libro) {
         gp.devolverEjemplar(ejemplar, usuario, libro);
     }

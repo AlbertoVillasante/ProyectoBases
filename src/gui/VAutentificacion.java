@@ -143,11 +143,11 @@ public class VAutentificacion extends javax.swing.JDialog {
     }//GEN-LAST:event_textoUsuarioActionPerformed
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
-        etiquetaFallo.setVisible(false);
+        /*etiquetaFallo.setVisible(false);          //Comentado para que no de error
         if (fa.comprobarAutentificacion(textoUsuario.getText(), textoClave.getText()))
             this.dispose();
         else
-            etiquetaFallo.setVisible(true);
+            etiquetaFallo.setVisible(true);*/
     }//GEN-LAST:event_btnAceptarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
@@ -155,25 +155,25 @@ public class VAutentificacion extends javax.swing.JDialog {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void textoClaveKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textoClaveKeyPressed
-        if (evt.getKeyChar() == '\n') {
+        /*if (evt.getKeyChar() == '\n') {           //Comentado para que no de error
             etiquetaFallo.setVisible(false);
             if (fa.comprobarAutentificacion(textoUsuario.getText(), textoClave.getText())) {
                 this.dispose();
             } else {
                 etiquetaFallo.setVisible(true);
             }
-        }
+        }*/
     }//GEN-LAST:event_textoClaveKeyPressed
 
     private void textoUsuarioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textoUsuarioKeyPressed
-        if (evt.getKeyChar() == '\n') {
+        /*if (evt.getKeyChar() == '\n') {           //Comentado para que no de error
             etiquetaFallo.setVisible(false);
             if (fa.comprobarAutentificacion(textoUsuario.getText(), textoClave.getText())) {
                 this.dispose();
             } else {
                 etiquetaFallo.setVisible(true);
             }
-        }
+        }*/
     }//GEN-LAST:event_textoUsuarioKeyPressed
 
     /**

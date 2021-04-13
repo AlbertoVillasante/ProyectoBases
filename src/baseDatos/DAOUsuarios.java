@@ -507,7 +507,7 @@ public class DAOUsuarios extends AbstractDAO {
             stmUsuarios.executeUpdate();
 
             try{
-                stmUsuarios = con.prepareStatement("delete from empresaUsuario "
+                stmUsuarios = con.prepareStatement("delete from empresaUsuario "        //Posible error
                     + "where idUsuario = ? and numeroParticipaciones != 0");
 
                 stmUsuarios.setString(1, id);

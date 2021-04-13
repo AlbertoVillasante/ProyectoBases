@@ -30,106 +30,76 @@ public class VUsuario extends javax.swing.JDialog {
     private void initComponents() {
 
         jButton4 = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        buscaId = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        buscaNombre = new javax.swing.JTextField();
-        BotonBuscarUsuarios = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        TablaUsuarios = new javax.swing.JTable();
         jLabel3 = new javax.swing.JLabel();
-        btnID = new javax.swing.JTextField();
+        btnUsuario = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        btnNombre = new javax.swing.JTextField();
-        btnMail = new javax.swing.JTextField();
+        btnClave = new javax.swing.JTextField();
+        btnTelefono = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        btnDireccion = new javax.swing.JTextField();
+        btnEmpresa = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         tipo_usr = new javax.swing.JComboBox();
-        BtnNuevoUsuario = new javax.swing.JButton();
-        btnGuardar = new javax.swing.JButton();
-        btnBorrar = new javax.swing.JButton();
-        btnSalir = new javax.swing.JButton();
-        btnClave = new javax.swing.JPasswordField();
+        btnActualizar = new javax.swing.JButton();
+        btnRegistrar = new javax.swing.JButton();
+        btnCancelar = new javax.swing.JButton();
+        btnDireccion = new javax.swing.JPasswordField();
         obligatorio1 = new javax.swing.JLabel();
         obligatorio2 = new javax.swing.JLabel();
         obligatorio3 = new javax.swing.JLabel();
         obligatorio4 = new javax.swing.JLabel();
-        obligatorioTexto = new javax.swing.JLabel();
+        obligatorio5 = new javax.swing.JLabel();
+        obligatorio6 = new javax.swing.JLabel();
+        obligatorio7 = new javax.swing.JLabel();
+        obligatorio8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        btnInversor = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
+        btnApellido2 = new javax.swing.JTextField();
+        btnApellido1 = new javax.swing.JTextField();
+        jLabel11 = new javax.swing.JLabel();
 
         jButton4.setText("Guardar");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Gestión de Usuarios");
 
-        jLabel1.setText("id:");
+        jLabel3.setText("Usuario:");
 
-        buscaId.addActionListener(new java.awt.event.ActionListener() {
+        btnUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buscaIdActionPerformed(evt);
+                btnUsuarioActionPerformed(evt);
             }
         });
 
-        jLabel2.setText("nombre:");
+        jLabel4.setText("Clave:");
 
-        buscaNombre.addActionListener(new java.awt.event.ActionListener() {
+        btnClave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buscaNombreActionPerformed(evt);
+                btnClaveActionPerformed(evt);
             }
         });
 
-        BotonBuscarUsuarios.setText("Buscar");
-        BotonBuscarUsuarios.addActionListener(new java.awt.event.ActionListener() {
+        btnTelefono.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BotonBuscarUsuariosActionPerformed(evt);
+                btnTelefonoActionPerformed(evt);
             }
         });
 
-        TablaUsuarios.setModel(new ModeloTablaUsuarios());
-        TablaUsuarios.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                TablaUsuariosMouseClicked(evt);
-            }
-        });
-        jScrollPane1.setViewportView(TablaUsuarios);
+        jLabel5.setText("Dirección:");
 
-        jLabel3.setText("id:");
+        jLabel6.setText("Teléfono:");
 
-        btnID.addActionListener(new java.awt.event.ActionListener() {
+        btnEmpresa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnIDActionPerformed(evt);
+                btnEmpresaActionPerformed(evt);
             }
         });
 
-        jLabel4.setText("Nombre:");
+        jLabel7.setText("Tipo usuario:");
 
-        btnNombre.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNombreActionPerformed(evt);
-            }
-        });
-
-        btnMail.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnMailActionPerformed(evt);
-            }
-        });
-
-        jLabel5.setText("clave:");
-
-        jLabel6.setText("e-mail:");
-
-        btnDireccion.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDireccionActionPerformed(evt);
-            }
-        });
-
-        jLabel7.setText("tipo:");
-
-        jLabel8.setText("dirección:");
+        jLabel8.setText("Nombre empresa:");
 
         tipo_usr.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Normal", "Administrador" }));
         tipo_usr.setAutoscrolls(true);
@@ -139,39 +109,32 @@ public class VUsuario extends javax.swing.JDialog {
             }
         });
 
-        BtnNuevoUsuario.setText("Nuevo");
-        BtnNuevoUsuario.addActionListener(new java.awt.event.ActionListener() {
+        btnActualizar.setText("Actualizar");
+        btnActualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnNuevoUsuarioActionPerformed(evt);
+                btnActualizarActionPerformed(evt);
             }
         });
 
-        btnGuardar.setText("Guardar");
-        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
+        btnRegistrar.setText("Registrarse");
+        btnRegistrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGuardarActionPerformed(evt);
+                btnRegistrarActionPerformed(evt);
             }
         });
 
-        btnBorrar.setText("Borrar");
-        btnBorrar.addActionListener(new java.awt.event.ActionListener() {
+        btnCancelar.setBackground(new java.awt.Color(180, 22, 45));
+        btnCancelar.setForeground(new java.awt.Color(0, 0, 0));
+        btnCancelar.setText("Cancelar");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBorrarActionPerformed(evt);
+                btnCancelarActionPerformed(evt);
             }
         });
 
-        btnSalir.setBackground(new java.awt.Color(180, 22, 45));
-        btnSalir.setForeground(new java.awt.Color(0, 0, 0));
-        btnSalir.setText("Salir");
-        btnSalir.addActionListener(new java.awt.event.ActionListener() {
+        btnDireccion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSalirActionPerformed(evt);
-            }
-        });
-
-        btnClave.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnClaveActionPerformed(evt);
+                btnDireccionActionPerformed(evt);
             }
         });
 
@@ -187,132 +150,181 @@ public class VUsuario extends javax.swing.JDialog {
         obligatorio4.setForeground(new java.awt.Color(255, 0, 0));
         obligatorio4.setText("*");
 
-        obligatorioTexto.setForeground(new java.awt.Color(255, 0, 0));
-        obligatorioTexto.setText("Rellena los campos obligatorios *");
+        obligatorio5.setForeground(new java.awt.Color(255, 0, 0));
+        obligatorio5.setText("*");
+
+        obligatorio6.setForeground(new java.awt.Color(255, 0, 0));
+        obligatorio6.setText("*");
+
+        obligatorio7.setForeground(new java.awt.Color(255, 0, 0));
+        obligatorio7.setText("*");
+
+        obligatorio8.setForeground(new java.awt.Color(255, 0, 0));
+        obligatorio8.setText("*");
+
+        jLabel9.setText("Nombre inversor:");
+
+        btnInversor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnInversorActionPerformed(evt);
+            }
+        });
+
+        jLabel10.setText("Apellido 2:");
+
+        btnApellido2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnApellido2ActionPerformed(evt);
+            }
+        });
+
+        btnApellido1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnApellido1ActionPerformed(evt);
+            }
+        });
+
+        jLabel11.setText("Apellido 1:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(38, 38, 38)
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(obligatorioTexto)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(obligatorio3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(18, 18, 18)
-                                .addComponent(buscaId)
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(buscaNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(BotonBuscarUsuarios))
+                        .addComponent(btnActualizar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnCancelar))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
- .addGroup(layout.createSequentialGroup()
-     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-         .addComponent(jLabel4)
-         .addGroup(layout.createSequentialGroup()
-             .addComponent(obligatorio1)
-             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-             .addComponent(jLabel3)))
-     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-         .addComponent(btnNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 81, Short.MAX_VALUE)
-         .addComponent(btnID))
-     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-         .addGroup(layout.createSequentialGroup()
-             .addGap(69, 69, 69)
-             .addComponent(obligatorio2))
-         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-             .addComponent(obligatorio4)))
-     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-         .addGroup(layout.createSequentialGroup()
-             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-             .addComponent(jLabel5))
-         .addGroup(layout.createSequentialGroup()
-             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-             .addComponent(jLabel6))))
- .addGroup(layout.createSequentialGroup()
-     .addComponent(BtnNuevoUsuario)
-     .addGap(46, 46, 46)
-     .addComponent(btnGuardar)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(obligatorio3)
+                                    .addComponent(obligatorio1))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel3)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(106, 106, 106)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
- .addComponent(btnBorrar)
- .addComponent(btnMail, javax.swing.GroupLayout.DEFAULT_SIZE, 79, Short.MAX_VALUE)
- .addComponent(btnClave))
-                                .addGap(24, 24, 24)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
- .addGroup(layout.createSequentialGroup()
-     .addComponent(jLabel7)
-     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-     .addComponent(tipo_usr, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
- .addGroup(layout.createSequentialGroup()
-     .addComponent(jLabel8)
-     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-     .addComponent(btnDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
- .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 529, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(50, Short.MAX_VALUE))
+                                    .addComponent(btnClave, javax.swing.GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE)
+                                    .addComponent(btnUsuario))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(obligatorio7)
+                            .addComponent(obligatorio5))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel8)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnEmpresa))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel9)
+                                .addGap(22, 22, 22)
+                                .addComponent(btnInversor, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(obligatorio2)
+                            .addComponent(obligatorio4, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel5))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnTelefono, javax.swing.GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE)
+                            .addComponent(btnDireccion))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(obligatorio6)
+                            .addComponent(obligatorio8, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel10)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnApellido2, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel11)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnApellido1, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jLabel7)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(tipo_usr, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(176, 176, 176))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(btnRegistrar)
+                                .addGap(228, 228, 228)))))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(21, 21, 21)
+                .addGap(8, 8, 8)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(buscaId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2)
-                    .addComponent(buscaNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BotonBuscarUsuarios))
+                    .addComponent(jLabel7)
+                    .addComponent(tipo_usr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(4, 4, 4)
-                .addComponent(obligatorioTexto)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
-                            .addComponent(btnID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(obligatorio1))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4)
-                            .addComponent(btnNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(obligatorio3, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel7)
-                            .addComponent(tipo_usr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(obligatorio1)
                             .addComponent(jLabel8)
-                            .addComponent(btnDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(btnEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel4)
+                                .addComponent(btnClave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(obligatorio3, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btnInversor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(obligatorio5)
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(obligatorio7, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel9))))
+                .addGap(18, 18, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
-                            .addComponent(btnClave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(obligatorio2, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6)
-                            .addComponent(btnMail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(obligatorio4, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(18, 18, 18)
+                            .addComponent(btnTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(obligatorio4, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(obligatorio6, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel11))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(obligatorio8, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel10)
+                            .addComponent(btnApellido2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addComponent(btnApellido1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(BtnNuevoUsuario)
-                    .addComponent(btnSalir)
-                    .addComponent(btnBorrar)
-                    .addComponent(btnGuardar))
-                .addContainerGap(11, Short.MAX_VALUE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnCancelar)
+                        .addComponent(btnRegistrar))
+                    .addComponent(btnActualizar))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         tipo_usr.getAccessibleContext().setAccessibleName("");
@@ -320,89 +332,77 @@ public class VUsuario extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void buscaIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscaIdActionPerformed
+    private void btnUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUsuarioActionPerformed
+
+    }//GEN-LAST:event_btnUsuarioActionPerformed
+
+    private void btnClaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClaveActionPerformed
+
+    }//GEN-LAST:event_btnClaveActionPerformed
+
+    private void btnTelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTelefonoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_buscaIdActionPerformed
+    }//GEN-LAST:event_btnTelefonoActionPerformed
 
-    private void buscaNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscaNombreActionPerformed
+    private void btnEmpresaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEmpresaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_buscaNombreActionPerformed
-
-    private void btnIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIDActionPerformed
-
-    }//GEN-LAST:event_btnIDActionPerformed
-
-    private void btnNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNombreActionPerformed
-
-    }//GEN-LAST:event_btnNombreActionPerformed
-
-    private void btnMailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMailActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnMailActionPerformed
-
-    private void btnDireccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDireccionActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnDireccionActionPerformed
+    }//GEN-LAST:event_btnEmpresaActionPerformed
 
     private void tipo_usrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tipo_usrActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tipo_usrActionPerformed
 
-    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         this.dispose();
-    }//GEN-LAST:event_btnSalirActionPerformed
+    }//GEN-LAST:event_btnCancelarActionPerformed
 
-    private void BotonBuscarUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonBuscarUsuariosActionPerformed
-        this.buscarUsuarios();
-    }//GEN-LAST:event_BotonBuscarUsuariosActionPerformed
-
-    private void BtnNuevoUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnNuevoUsuarioActionPerformed
+    private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
         id = null;
-        btnID.setText("");
-        btnClave.setText("");
-        btnNombre.setText("");
+        btnUsuario.setText("");
         btnDireccion.setText("");
-        btnMail.setText("");
+        btnClave.setText("");
+        btnEmpresa.setText("");
+        btnTelefono.setText("");
         tipo_usr.setSelectedIndex(0);
         btnBorrar.setEnabled(true);
-        btnGuardar.setEnabled(true);
-    }//GEN-LAST:event_BtnNuevoUsuarioActionPerformed
+        btnRegistrar.setEnabled(true);
+    }//GEN-LAST:event_btnActualizarActionPerformed
 
-    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+    private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
         ModeloTablaUsuarios m;
         m = (ModeloTablaUsuarios) TablaUsuarios.getModel();
 
-        if (btnID.getText().equals("")) {
+        if (btnUsuario.getText().equals("")) {
             obligatorioTexto.setEnabled(true);
         } else {
             obligatorio1.setEnabled(false);
         }
-        if (btnNombre.getText().equals("")) {
+        if (btnClave.getText().equals("")) {
             obligatorioTexto.setEnabled(true);
         } else {
             obligatorio3.setEnabled(false);
         }
-        if (btnClave.getText().equals("")) {
+        if (btnDireccion.getText().equals("")) {
             obligatorioTexto.setEnabled(true);
         } else {
             obligatorio2.setEnabled(false);
         }
-        if (btnMail.getText().equals("")) {
+        if (btnTelefono.getText().equals("")) {
             obligatorioTexto.setEnabled(true);
         } else {
             obligatorio4.setEnabled(false);
         }
 
-        if (!btnID.getText().equals("") && !btnNombre.getText().equals("")
-                && !btnClave.getText().equals("") && !btnMail.getText().equals("")) {
+        if (!btnUsuario.getText().equals("") && !btnClave.getText().equals("")
+                && !btnDireccion.getText().equals("") && !btnTelefono.getText().equals("")) {
             obligatorioTexto.setEnabled(false);
         }
         if (obligatorioTexto.isEnabled()) {
             return;
         }
         EmpresaUsuario u;
-        u = new EmpresaUsuario(btnID.getText(), btnClave.getText(), btnNombre.getText(), btnDireccion.getText(),
-                btnMail.getText(), TipoUsuario.valueOf(tipo_usr.getSelectedItem().toString()));
+        u = new EmpresaUsuario(btnUsuario.getText(), btnDireccion.getText(), btnClave.getText(), btnEmpresa.getText(),
+                btnTelefono.getText(), TipoUsuario.valueOf(tipo_usr.getSelectedItem().toString()));
         if (m.obtenerId().contains(u.getIdUsuario())) {
             id = u.getIdUsuario();
         }
@@ -410,65 +410,55 @@ public class VUsuario extends javax.swing.JDialog {
 
         this.buscarUsuarios();
         this.BtnNuevoUsuarioActionPerformed(evt);
-    }//GEN-LAST:event_btnGuardarActionPerformed
+    }//GEN-LAST:event_btnRegistrarActionPerformed
 
-    private void TablaUsuariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaUsuariosMouseClicked
-        /*ModeloTablaUsuarios m;    //Comentado por ahora, para que no de error
-        EmpresaUsuario u;
-        m = (ModeloTablaUsuarios) TablaUsuarios.getModel();
-        u = m.obtenerUsuario(TablaUsuarios.getSelectedRow());
-        btnID.setText(u.getIdUsuario());
-        btnClave.setText(u.getClave());
-        btnNombre.setText(u.getNombre());
-        btnDireccion.setText(u.getDireccion());
-        btnMail.setText(u.getEmail());
-        tipo_usr.setSelectedItem(u.getTipoUsuario().toString());
-        id = u.getIdUsuario();*/
-    }//GEN-LAST:event_TablaUsuariosMouseClicked
-
-    private void btnBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarActionPerformed
-        /*ModeloTablaUsuarios m;        //Comentado para que no de error
-        EmpresaUsuario u;
-        m = (ModeloTablaUsuarios) TablaUsuarios.getModel();
-        u = m.obtenerUsuario(TablaUsuarios.getSelectedRow());
-        fa.borrarUsuario(u.getIdUsuario());
-        this.buscarUsuarios();*/
-    }//GEN-LAST:event_btnBorrarActionPerformed
-
-    private void btnClaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClaveActionPerformed
+    private void btnDireccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDireccionActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnClaveActionPerformed
+    }//GEN-LAST:event_btnDireccionActionPerformed
+
+    private void btnInversorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInversorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnInversorActionPerformed
+
+    private void btnApellido2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApellido2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnApellido2ActionPerformed
+
+    private void btnApellido1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApellido1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnApellido1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton BotonBuscarUsuarios;
-    private javax.swing.JButton BtnNuevoUsuario;
-    private javax.swing.JTable TablaUsuarios;
-    private javax.swing.JButton btnBorrar;
-    private javax.swing.JPasswordField btnClave;
-    private javax.swing.JTextField btnDireccion;
-    private javax.swing.JButton btnGuardar;
-    private javax.swing.JTextField btnID;
-    private javax.swing.JTextField btnMail;
-    private javax.swing.JTextField btnNombre;
-    private javax.swing.JButton btnSalir;
-    private javax.swing.JTextField buscaId;
-    private javax.swing.JTextField buscaNombre;
+    private javax.swing.JButton btnActualizar;
+    private javax.swing.JTextField btnApellido1;
+    private javax.swing.JTextField btnApellido2;
+    private javax.swing.JButton btnCancelar;
+    private javax.swing.JTextField btnClave;
+    private javax.swing.JPasswordField btnDireccion;
+    private javax.swing.JTextField btnEmpresa;
+    private javax.swing.JTextField btnInversor;
+    private javax.swing.JButton btnRegistrar;
+    private javax.swing.JTextField btnTelefono;
+    private javax.swing.JTextField btnUsuario;
     private javax.swing.JButton jButton4;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel obligatorio1;
     private javax.swing.JLabel obligatorio2;
     private javax.swing.JLabel obligatorio3;
     private javax.swing.JLabel obligatorio4;
-    private javax.swing.JLabel obligatorioTexto;
+    private javax.swing.JLabel obligatorio5;
+    private javax.swing.JLabel obligatorio6;
+    private javax.swing.JLabel obligatorio7;
+    private javax.swing.JLabel obligatorio8;
     private javax.swing.JComboBox tipo_usr;
     // End of variables declaration//GEN-END:variables
 

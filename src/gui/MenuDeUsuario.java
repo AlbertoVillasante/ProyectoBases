@@ -11,9 +11,8 @@ package gui;
  */
 public class MenuDeUsuario extends javax.swing.JFrame {
 
-    
     aplicacion.FachadaAplicacion fa;
-     
+
     public MenuDeUsuario(aplicacion.FachadaAplicacion fa) {
         this.fa = fa;
         initComponents();
@@ -28,46 +27,156 @@ public class MenuDeUsuario extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        botonDolar = new javax.swing.JButton();
+        botonParticipaciones = new javax.swing.JButton();
+        textoBeneficios = new javax.swing.JLabel();
+        botonConfiguracion = new javax.swing.JButton();
+        textoConfiguracion = new javax.swing.JLabel();
+        botonBeneficios = new javax.swing.JButton();
+        textoParticipaciones = new javax.swing.JLabel();
+        botonEstadisticas = new javax.swing.JButton();
+        textoEstadisticas = new javax.swing.JLabel();
+        textoMenu = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        botonDolar.setBackground(new java.awt.Color(255, 255, 255));
-        botonDolar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/dolar.jpeg"))); // NOI18N
-        botonDolar.addActionListener(new java.awt.event.ActionListener() {
+        botonParticipaciones.setBackground(new java.awt.Color(255, 255, 255));
+        botonParticipaciones.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/stonks.jpeg"))); // NOI18N
+        botonParticipaciones.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonDolarActionPerformed(evt);
+                botonParticipacionesActionPerformed(evt);
             }
         });
+
+        textoBeneficios.setFont(new java.awt.Font("Ubuntu", 1, 16)); // NOI18N
+        textoBeneficios.setText("Beneficios");
+
+        botonConfiguracion.setBackground(new java.awt.Color(255, 255, 255));
+        botonConfiguracion.setForeground(new java.awt.Color(255, 255, 255));
+        botonConfiguracion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/rueda(1).jpeg"))); // NOI18N
+        botonConfiguracion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonConfiguracionActionPerformed(evt);
+            }
+        });
+
+        textoConfiguracion.setFont(new java.awt.Font("Ubuntu", 1, 16)); // NOI18N
+        textoConfiguracion.setText("Configuración");
+
+        botonBeneficios.setBackground(new java.awt.Color(255, 255, 255));
+        botonBeneficios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/dolar.jpeg"))); // NOI18N
+        botonBeneficios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonBeneficiosActionPerformed(evt);
+            }
+        });
+
+        textoParticipaciones.setFont(new java.awt.Font("Ubuntu", 1, 16)); // NOI18N
+        textoParticipaciones.setText("Participaciones");
+
+        botonEstadisticas.setBackground(new java.awt.Color(255, 255, 255));
+        botonEstadisticas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/Estadistica.jpeg"))); // NOI18N
+        botonEstadisticas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonEstadisticasActionPerformed(evt);
+            }
+        });
+
+        textoEstadisticas.setFont(new java.awt.Font("Ubuntu", 1, 16)); // NOI18N
+        textoEstadisticas.setText("Estadísticas");
+
+        textoMenu.setFont(new java.awt.Font("Ubuntu", 1, 36)); // NOI18N
+        textoMenu.setText("Menú");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(86, 86, 86)
-                .addComponent(botonDolar, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(535, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(95, 95, 95)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(46, 46, 46)
+                                .addComponent(textoBeneficios))
+                            .addComponent(botonParticipaciones, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(botonBeneficios, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(119, 119, 119)
+                        .addComponent(textoParticipaciones)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 192, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(botonConfiguracion, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(botonEstadisticas, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(96, 96, 96))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(textoConfiguracion)
+                        .addGap(130, 130, 130))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(textoEstadisticas)
+                        .addGap(133, 133, 133))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(311, 311, 311)
+                .addComponent(textoMenu)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(95, 95, 95)
-                .addComponent(botonDolar, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(248, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addComponent(textoMenu)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(botonBeneficios, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(textoBeneficios)
+                        .addGap(26, 26, 26)
+                        .addComponent(botonParticipaciones, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(textoParticipaciones))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(botonEstadisticas, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(textoEstadisticas)
+                        .addGap(30, 30, 30)
+                        .addComponent(botonConfiguracion, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(textoConfiguracion)))
+                .addGap(68, 68, 68))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void botonDolarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonDolarActionPerformed
-       fa.nuevoBeneficio();
-    }//GEN-LAST:event_botonDolarActionPerformed
+    private void botonParticipacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonParticipacionesActionPerformed
+        fa.nuevasParticipaciones();
+    }//GEN-LAST:event_botonParticipacionesActionPerformed
 
- 
+    private void botonConfiguracionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonConfiguracionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_botonConfiguracionActionPerformed
+
+    private void botonBeneficiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBeneficiosActionPerformed
+        fa.nuevoBeneficio();
+    }//GEN-LAST:event_botonBeneficiosActionPerformed
+
+    private void botonEstadisticasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEstadisticasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_botonEstadisticasActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton botonDolar;
+    private javax.swing.JButton botonBeneficios;
+    private javax.swing.JButton botonConfiguracion;
+    private javax.swing.JButton botonEstadisticas;
+    private javax.swing.JButton botonParticipaciones;
+    private javax.swing.JLabel textoBeneficios;
+    private javax.swing.JLabel textoConfiguracion;
+    private javax.swing.JLabel textoEstadisticas;
+    private javax.swing.JLabel textoMenu;
+    private javax.swing.JLabel textoParticipaciones;
     // End of variables declaration//GEN-END:variables
 }

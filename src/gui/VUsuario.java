@@ -10,8 +10,7 @@ public class VUsuario extends javax.swing.JDialog {
     String id = null;
     int CheckeoUsuario;
 
-    public VUsuario(java.awt.Frame parent, boolean modal, aplicacion.FachadaAplicacion fa) {
-        super(parent, modal);
+    public VUsuario(aplicacion.FachadaAplicacion fa) {
         this.fa = fa;
         initComponents();
         obligatorioTexto.setEnabled(false);

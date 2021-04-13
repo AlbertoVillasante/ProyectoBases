@@ -13,7 +13,7 @@ public class GestionPrestamos {
         this.fbd = fbd;
     }
 
-    public void nuevoPrestamo(Ejemplar e) {
+    /*public void nuevoPrestamo(Ejemplar e) {
         if (e.getPrestamo().getUsuario() == null) {
             fgui.nuevoPrestamo(e);
         } else {
@@ -27,10 +27,7 @@ public class GestionPrestamos {
     
     public Integer DiasFaltanParaVencer(Integer libro, Integer ejemplar) {
         return fbd.DiasFaltanParaVencer(libro, ejemplar);
-    }
+    }*/
     
-    public void nuevoBeneficio(){
-         fgui.nuevoBeneficio();
-    }
     
 }

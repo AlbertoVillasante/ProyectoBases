@@ -203,10 +203,10 @@ public class VPrestamos extends javax.swing.JDialog {
     }
 
     public void InsertarPrestamo() {
-        ModeloTablaPrestamos mp;
+      /*  ModeloTablaPrestamos mp;
         mp = (ModeloTablaPrestamos) TablaPrestamos.getModel();
         e.getPrestamo().setUsuario(mp.obtenerUsuario(TablaPrestamos.getSelectedRow()).getIdUsuario()); // D LOKOS
         fa.nuevoPrestamo(e);
-        this.dispose();
+        this.dispose();*/
     }
 }

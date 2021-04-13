@@ -8,6 +8,8 @@ public class FachadaAplicacion {
     GestionUsuarios gu;
     GestionCategorias gc;
     GestionPrestamos gp;
+    GestionBeneficios gb;
+    GestionParticipaciones gpart;
 
     public FachadaAplicacion() {
         fgui = new gui.FachadaGui(this);
@@ -15,7 +17,8 @@ public class FachadaAplicacion {
         gl = new GesionLibros(fgui, fbd);
         gu = new GestionUsuarios(fgui, fbd);
         gc = new GestionCategorias(fgui, fbd);
-        gp = new GestionPrestamos(fgui, fbd);
+        gb = new GestionBeneficios(fgui, fbd);
+        gpart = new GestionParticipaciones(fgui,fbd);
     }
 
     public static void main(String args[]) {
@@ -37,13 +40,13 @@ public class FachadaAplicacion {
         return gl.obtenerLibros(id, titulo, isbn, autor);
     }
 
-    public void visualizarLibro(Integer idLibro) {
+    /*public void visualizarLibro(Integer idLibro) {
         gl.visualizarLibro(idLibro);
     }
 
     public void nuevoLibro() {
         gl.nuevoLibro();
-    }
+    }*/
 
     public Integer actualizarLibro(Libro l) {
         return gl.actualizarLibro(l);
@@ -61,7 +64,7 @@ public class FachadaAplicacion {
         return gl.actualizarEjemplaresLibro(idLibro, ejemplares, borrar);
     }
     //Comentado para que no de error
-    public Boolean comprobarAutentificacion(String idUsuario, String clave) {
+    public String comprobarAutentificacion(String idUsuario, String clave) {
         return gu.comprobarAutentificacion(idUsuario, clave);
     }
 
@@ -81,7 +84,7 @@ public class FachadaAplicacion {
         gu.borrarUsuario(idUsuario);
     }
 */
-    public void nuevaCategoria() {
+    /*public void nuevaCategoria() {
         gc.nuevaCategoria();
     }
 
@@ -105,20 +108,28 @@ public class FachadaAplicacion {
         return gu.obtenerUsuariosPrestamo(idUsuario, nombreUsuario);
     }
 */
-    public void devolverEjemplar(Integer ejemplar, String usuario, Integer libro) {
+    /*public void devolverEjemplar(Integer ejemplar, String usuario, Integer libro) {
         gp.devolverEjemplar(ejemplar, usuario, libro);
-    }
+    }*/
 
     public boolean checkeo_borrado_ejemplares_prestados(int ejemplar, int libro) {
         return gl.checkeo_borrado_ejemplares_prestados(ejemplar, libro);
     }
 
-    public Integer DiasFaltanParaVencer(Integer libro, Integer ejemplar) {
+   /* public Integer DiasFaltanParaVencer(Integer libro, Integer ejemplar) {
         return gp.DiasFaltanParaVencer(libro, ejemplar);
-    }
+    }*/
 
     
      public void nuevoBeneficio() {
-        gp.nuevoBeneficio();
+        gb.nuevoBeneficio();
     }
+     
+     public void nuevasParticipaciones() {
+        gpart.nuevasParticipaciones();
+    }
+     public void nuevoRegistro(){
+        gu.nuevoUsuario();
+    }
+
 }

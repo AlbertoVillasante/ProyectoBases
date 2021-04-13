@@ -17,7 +17,7 @@ public class GesionLibros {
         return fbd.consultarCatalogo(id, titulo, isbn, autor);
     }
 
-    public void visualizarLibro(Integer idLibro) {
+   /* public void visualizarLibro(Integer idLibro) {
         java.util.List<String> restoCategorias;
         Libro l;
         l = fbd.consultarLibro(idLibro); 
@@ -33,7 +33,7 @@ public class GesionLibros {
         }
 
         fgui.nuevoLibro(restoCategorias);
-    }
+    }*/
 
     public Integer actualizarLibro(Libro l) {
 

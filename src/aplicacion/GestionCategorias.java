@@ -18,7 +18,7 @@ public class GestionCategorias {
         this.fbd = fbd;
     }
 
-    public void nuevaCategoria() {
+   /* public void nuevaCategoria() {
         fgui.nuevaCategoria();
     }
 
@@ -43,5 +43,5 @@ public class GestionCategorias {
 
     public void borrarCategoria(String nombre) {
         fbd.borrarCategoria(nombre);
-    }
+    }*/
 }

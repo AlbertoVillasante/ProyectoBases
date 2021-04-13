@@ -4,26 +4,34 @@ import aplicacion.Categoria;
 import aplicacion.Libro;
 import aplicacion.EmpresaUsuario;
 import aplicacion.Ejemplar;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 public class FachadaGui {           //Esta es la fachada
 
     aplicacion.FachadaAplicacion fa;
-    MenuDeUsuario vp;
+    VPortada vp;
 
     public FachadaGui(aplicacion.FachadaAplicacion fa) {
-        this.fa = fa;
-        this.vp = new MenuDeUsuario(fa);
+        try {
+            UIManager.setLookAndFeel("com.sun.java.swing.plaf.gtk.GTKLookAndFeel");
+            this.fa = fa;
+            this.vp = new VPortada(fa);
+        } catch (Exception ex) {
+        }
     }
 
     public void iniciaVista() {
         VAutentificacion va;
-
-        va  = new VAutentificacion(vp, true, fa);
+        va  = new VAutentificacion(fa, vp);
+        va.setLocation(185, 80);
         vp.setVisible(true);
         va.setVisible(true);
     }
 
-    public void visualizaLibro(Libro l, java.util.List<String> restoCategorias) {
+    /* public void visualizaLibro(Libro l, java.util.List<String> restoCategorias) {
         VLibro vl;
         java.util.List<String> categorias = new java.util.ArrayList<String>();
 
@@ -40,20 +48,6 @@ public class FachadaGui {           //Esta es la fachada
 
         vl = new VLibro(vp, true, fa, restoCategorias);
         vl.setVisible(true);
-    }
-
-    public void muestraExcepcion(String txtExcepcion) {
-        VAviso va;
-
-        va  = new VAviso(vp, true, txtExcepcion);
-        va.setVisible(true);
-    }
-
-    public void nuevoUsuario() {
-        VUsuario vu;
-
-        vu = new VUsuario(vp, true, fa);
-        vu.setVisible(true);
     }
 
     public void visualizaUsuario(EmpresaUsuario u) {
@@ -80,14 +74,35 @@ public class FachadaGui {           //Esta es la fachada
 
         vvp = new VPrestamos(vp, true, fa, e);
         vvp.setVisible(true);
-    }
-    
-    public void nuevoBeneficio(){
+    }*/
+    public void nuevoBeneficio() {
         VBeneficios vb;
-        
-        vb = new VBeneficios(vp,true,fa);
+
+        vb = new VBeneficios(fa);
         vb.setVisible(true);
 
+    }
+
+    public void nuevasParticipaciones() {
+        VParticipaciones vpart;
+
+        vpart = new VParticipaciones(fa);
+        vpart.setVisible(true);
+
+    }
+
+    public void muestraExcepcion(String txtExcepcion) {
+        VAviso va;
+
+        va  = new VAviso(txtExcepcion);
+        va.setVisible(true);
+    }
+
+    public void nuevoUsuario() {
+        VUsuario vu;
+
+        vu = new VUsuario(fa);
+        vu.setVisible(true);
     }
 
 }

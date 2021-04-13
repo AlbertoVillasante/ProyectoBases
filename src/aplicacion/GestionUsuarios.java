@@ -14,15 +14,23 @@ public class GestionUsuarios {
     }
 
     //Comentado para que no de error
-    public Boolean comprobarAutentificacion(String idUsuario, String clave) {
+    public String comprobarAutentificacion(String idUsuario, String clave) {
         if (idUsuario.length() == 9) {
             InversorUsuario u;
             u = fbd.validarUsuario(idUsuario, clave);
-            return u != null;
+            if (u != null) {
+                return u.getTipo().name();
+            } else {
+                return "";
+            }
         } else {
             EmpresaUsuario u;
             u = fbd.validarUsuarioE(idUsuario, clave);
-            return u != null;
+            if (u != null) {
+                return u.getTipo().name();
+            } else {
+                return "";
+            }
         }
     }
 

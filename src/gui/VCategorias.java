@@ -171,7 +171,7 @@ public class VCategorias extends javax.swing.JDialog {
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnAnhadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnhadirActionPerformed
-        AnhadirCategoria();
+        /*AnhadirCategoria();
         ModeloListaStrings ma;
         ma = (ModeloListaStrings) lstCategorias.getModel();
 
@@ -179,11 +179,11 @@ public class VCategorias extends javax.swing.JDialog {
             ma.nuevoElemento(CuadroNombre.getText());
             lstCategorias.setSelectedIndex(ma.getSize() - 1);
             btnBorrar.setEnabled(true);
-        }
+        }*/
     }//GEN-LAST:event_btnAnhadirActionPerformed
 
     private void btnBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarActionPerformed
-        ModeloListaStrings m;
+        /*ModeloListaStrings m;
 
         m = (ModeloListaStrings) lstCategorias.getModel();
         String c = m.getElementAt(lstCategorias.getSelectedIndex());
@@ -192,11 +192,11 @@ public class VCategorias extends javax.swing.JDialog {
         fa.borrarCategoria(c);
         CuadroNombre.setText("");
         CuadroDescripcion.setText("");
-        this.BuscarCategorias();
+        this.BuscarCategorias();*/
     }//GEN-LAST:event_btnBorrarActionPerformed
 
     private void lstCategoriasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lstCategoriasMouseClicked
-        ModeloListaStrings m;
+        /*ModeloListaStrings m;
         List<Categoria> categorias = fa.obtenerCategoria(""); //Así obtengo todas las categorías y puedo settear la descripción
 
         m = (ModeloListaStrings) lstCategorias.getModel();
@@ -207,7 +207,7 @@ public class VCategorias extends javax.swing.JDialog {
                 CuadroDescripcion.setText(cat.getDescripcion());
             }
         }
-        btnBorrar.setEnabled(true);
+        btnBorrar.setEnabled(true);*/
 
     }//GEN-LAST:event_lstCategoriasMouseClicked
 
@@ -229,7 +229,7 @@ public class VCategorias extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     public void AnhadirCategoria() {
-        if (CuadroNombre.getText().equals("")) {
+        /*if (CuadroNombre.getText().equals("")) {
             obligatorioTexto.setEnabled(true);
         } else {
             obligatorio1.setEnabled(false);
@@ -246,11 +246,11 @@ public class VCategorias extends javax.swing.JDialog {
         fa.actualizarCategoria(c);
         CuadroNombre.setText("");
         CuadroDescripcion.setText("");
-        this.BuscarCategorias();
+        this.BuscarCategorias();*/
     }
 
     public void BuscarCategorias() {
-        ModeloListaStrings m = new ModeloListaStrings();
+        /*ModeloListaStrings m = new ModeloListaStrings();
         List<Categoria> categorias = fa.obtenerCategoria(CuadroNombre.getText());
         lstCategorias.setModel(m);
         for (Categoria cat : categorias) {
@@ -259,7 +259,7 @@ public class VCategorias extends javax.swing.JDialog {
         }
         if (m.getSize() > 0) {
             lstCategorias.setSelectedIndex(0);
-        }
+        }*/
     }
 
 }

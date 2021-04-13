@@ -3,13 +3,16 @@ package gui;
 public class VAutentificacion extends javax.swing.JDialog {
 
     aplicacion.FachadaAplicacion fa;
+    VPortada vp;
+    MenuDeUsuario mu;
+    VRegulador vr;
 
     /**
      * Creates new form VAutentificacion
      */
-    public VAutentificacion(java.awt.Frame parent, boolean modal, aplicacion.FachadaAplicacion fa) {
-        super(parent, modal);
+    public VAutentificacion(aplicacion.FachadaAplicacion fa, VPortada vp) {
         this.fa = fa;
+        this.vp = vp;
         initComponents();
         etiquetaFallo.setVisible(false);
         this.addWindowListener(new java.awt.event.WindowAdapter() {
@@ -37,6 +40,7 @@ public class VAutentificacion extends javax.swing.JDialog {
         btnCancelar = new javax.swing.JButton();
         etiquetaFallo = new javax.swing.JLabel();
         textoClave = new javax.swing.JPasswordField();
+        btnRegistro = new javax.swing.JButton();
 
         javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
         jDialog1.getContentPane().setLayout(jDialog1Layout);
@@ -51,6 +55,7 @@ public class VAutentificacion extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Autentificación de usuarios");
+        setLocationByPlatform(true);
         setModal(true);
         setName("VAutentificacion"); // NOI18N
         setResizable(false);
@@ -93,46 +98,68 @@ public class VAutentificacion extends javax.swing.JDialog {
             }
         });
 
+        btnRegistro.setText("Registrarse");
+        btnRegistro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegistroActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel1))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addGap(29, 29, 29))
+                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(textoUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, 197, Short.MAX_VALUE)
-                            .addComponent(etiquetaFallo)
-                            .addComponent(textoClave, javax.swing.GroupLayout.DEFAULT_SIZE, 197, Short.MAX_VALUE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btnAceptar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnCancelar)))
-                .addContainerGap())
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(19, 19, 19)
+                                .addComponent(textoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(btnAceptar)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(btnCancelar))
+                                    .addComponent(textoClave, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(0, 27, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(etiquetaFallo))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(btnRegistro)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGap(50, 50, 50))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(textoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(textoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(textoClave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(textoClave, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
                 .addGap(18, 18, 18)
                 .addComponent(etiquetaFallo)
-                .addGap(18, 18, 18)
+                .addGap(14, 14, 14)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnRegistro)
                     .addComponent(btnAceptar)
                     .addComponent(btnCancelar))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
@@ -143,10 +170,20 @@ public class VAutentificacion extends javax.swing.JDialog {
     }//GEN-LAST:event_textoUsuarioActionPerformed
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
-        etiquetaFallo.setVisible(false);          //Comentado para que no de error
-        if (fa.comprobarAutentificacion(textoUsuario.getText(), textoClave.getText()))
+        etiquetaFallo.setVisible(false);
+        String tipo;
+        if (!(tipo = fa.comprobarAutentificacion(textoUsuario.getText(), textoClave.getText())).equals("")) {
             this.dispose();
-        else
+            vp.dispose();
+            vp.setVisible(false);
+            if (tipo.equals("Normal")) {
+                mu = new MenuDeUsuario(fa);
+                mu.setVisible(true);
+            } else if (tipo.equals("Regulador")) {
+                vr = new VRegulador(fa);
+                vr.setVisible(true);
+            }
+        } else
             etiquetaFallo.setVisible(true);
     }//GEN-LAST:event_btnAceptarActionPerformed
 
@@ -157,8 +194,19 @@ public class VAutentificacion extends javax.swing.JDialog {
     private void textoClaveKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textoClaveKeyPressed
         if (evt.getKeyChar() == '\n') {           //Comentado para que no de error
             etiquetaFallo.setVisible(false);
-            if (fa.comprobarAutentificacion(textoUsuario.getText(), textoClave.getText())) {
+            String tipo;
+
+            if (!(tipo = fa.comprobarAutentificacion(textoUsuario.getText(), textoClave.getText())).equals("")) {
                 this.dispose();
+                vp.dispose();
+                vp.setVisible(false);
+                if (tipo.equals("Normal")) {
+                    mu = new MenuDeUsuario(fa);
+                    mu.setVisible(true);
+                } else if (tipo.equals("Regulador")) {
+                    vr = new VRegulador(fa);
+                    vr.setVisible(true);
+                }
             } else {
                 etiquetaFallo.setVisible(true);
             }
@@ -166,15 +214,32 @@ public class VAutentificacion extends javax.swing.JDialog {
     }//GEN-LAST:event_textoClaveKeyPressed
 
     private void textoUsuarioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textoUsuarioKeyPressed
-        if (evt.getKeyChar() == '\n') {           //Comentado para que no de error
+        if (evt.getKeyChar() == '\n') {
+            String tipo;
             etiquetaFallo.setVisible(false);
-            if (fa.comprobarAutentificacion(textoUsuario.getText(), textoClave.getText())) {
+            if (!(tipo = fa.comprobarAutentificacion(textoUsuario.getText(), textoClave.getText())).equals("")) {
                 this.dispose();
+                vp.dispose();
+                vp.setVisible(false);
+                if (tipo.equals("Normal")) {
+                    mu = new MenuDeUsuario(fa);
+                    mu.setVisible(true);
+                } else if (tipo.equals("Regulador")) {
+                    vr = new VRegulador(fa);
+                    vr.setVisible(true);
+                }
             } else {
                 etiquetaFallo.setVisible(true);
             }
         }
     }//GEN-LAST:event_textoUsuarioKeyPressed
+
+    private void btnRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistroActionPerformed
+        this.dispose();
+        fa.nuevoRegistro();
+        vp.dispose();
+        vp.setVisible(false);
+    }//GEN-LAST:event_btnRegistroActionPerformed
 
     /**
      * @param args the command line arguments
@@ -183,6 +248,7 @@ public class VAutentificacion extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAceptar;
     private javax.swing.JButton btnCancelar;
+    private javax.swing.JButton btnRegistro;
     private javax.swing.JLabel etiquetaFallo;
     private javax.swing.JDialog jDialog1;
     private javax.swing.JLabel jLabel1;

@@ -14,8 +14,7 @@ public class VBeneficios extends javax.swing.JDialog {
     /**
      * Creates new form VBeneficios
      */
-    public VBeneficios(java.awt.Frame parent, boolean modal, aplicacion.FachadaAplicacion fa) {
-        super(parent, modal);
+    public VBeneficios(aplicacion.FachadaAplicacion fa) {
         initComponents();
     }
 

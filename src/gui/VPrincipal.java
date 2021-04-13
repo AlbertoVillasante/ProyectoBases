@@ -219,12 +219,12 @@ public class VPrincipal extends javax.swing.JFrame {
         ModeloTablaLibros mtl = (ModeloTablaLibros) tablaLibros.getModel();
         int idLibro;
         idLibro = mtl.obtenerLibro(tablaLibros.getSelectedRow()).getIdLibro();
-        fa.visualizarLibro(idLibro);
+        //fa.visualizarLibro(idLibro);
     }//GEN-LAST:event_btnEditarLibroActionPerformed
 
     private void btnNuevoLibroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoLibroActionPerformed
         // TODO add your handling code here:
-        fa.nuevoLibro();
+        //fa.nuevoLibro();
     }//GEN-LAST:event_btnNuevoLibroActionPerformed
 
     private void jMenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu1ActionPerformed
@@ -236,7 +236,7 @@ public class VPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        fa.nuevaCategoria();
+        //fa.nuevaCategoria();
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void buscaIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscaIdActionPerformed

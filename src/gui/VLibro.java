@@ -771,20 +771,20 @@ public class VLibro extends javax.swing.JDialog {
     }//GEN-LAST:event_btnActualizarEjemplaresLibroActionPerformed
 
     private void PrestamoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PrestamoActionPerformed
-        Ejemplar e;
+       /* Ejemplar e;
         ModeloTablaEjemplares me;
         me = (ModeloTablaEjemplares) tablaEjemplares.getModel();
         e = me.obtenerEjemplar(tablaEjemplares.getSelectedRow());
         fa.nuevoPrestamo(e);
         java.util.List<Ejemplar> ejemplares;
         ejemplares = fa.actualizarEjemplaresLibro(idLibro, me.getFilas(), ejemplaresBorrados);
-        me.setFilas(ejemplares);
+        me.setFilas(ejemplares);*/
 
     }//GEN-LAST:event_PrestamoActionPerformed
 
     private void btnDevolverEjemplarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDevolverEjemplarActionPerformed
         // TODO add your handling code here:
-        Ejemplar e;
+       /* Ejemplar e;
         ModeloTablaEjemplares me;
         me = (ModeloTablaEjemplares) tablaEjemplares.getModel();
         e = me.obtenerEjemplar(tablaEjemplares.getSelectedRow());
@@ -794,7 +794,7 @@ public class VLibro extends javax.swing.JDialog {
         } else {
             fa.devolverEjemplar(e.getNumEjemplar(), e.getPrestamo().getUsuario(), e.getLibro());
             me.setFilas(fa.actualizarEjemplaresLibro(idLibro, me.getFilas(), ejemplaresBorrados));
-        }
+        }*/
     }//GEN-LAST:event_btnDevolverEjemplarActionPerformed
 
     private void textoTituloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textoTituloActionPerformed

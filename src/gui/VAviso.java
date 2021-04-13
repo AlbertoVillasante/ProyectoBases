@@ -5,8 +5,7 @@ public class VAviso extends javax.swing.JDialog {
     /**
      * Creates new form VAviso
      */
-    public VAviso(java.awt.Frame parent, boolean modal, String txtExcepcion) {
-        super(parent, modal);
+    public VAviso(String txtExcepcion) {
         initComponents();
         textoExcepcion.setText(txtExcepcion);
         this.addWindowListener(new java.awt.event.WindowAdapter() {

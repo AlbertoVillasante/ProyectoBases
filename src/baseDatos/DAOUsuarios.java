@@ -458,7 +458,75 @@ public class DAOUsuarios extends AbstractDAO {
         }
     }
     
+    public void confirmarBajaInversor(String id){
+        Connection con;
+        PreparedStatement stmUsuarios = null;
+        con = super.getConexion();
+
+        try {
+            stmUsuarios = con.prepareStatement("update inversorUsuario "
+                    + "set fondosDisponiblesCuenta = 0.0 "
+                    + "where idUsuario = ? and numeroParticipaciones != 0");
+
+            stmUsuarios.setString(1, id);
+            stmUsuarios.executeUpdate();
+
+            try{
+                stmUsuarios = con.prepareStatement("delete from inversorUsuario "
+                    + "where idUsuario = ? and numeroParticipaciones != 0");
+
+                stmUsuarios.setString(1, id);
+                stmUsuarios.executeUpdate();
+            }catch (SQLException e) {
+                System.out.println(e.getMessage());
+                this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        } finally {
+            try {
+                stmUsuarios.close();
+            } catch (SQLException e) {
+                System.out.println("Imposible cerrar cursores");
+            }
+        }
+    }
     
+    public void confirmarBajaEmpresa(String id){
+        Connection con;
+        PreparedStatement stmUsuarios = null;
+        con = super.getConexion();
+
+        try {
+            stmUsuarios = con.prepareStatement("update empresaUsuario "
+                    + "set fondosDisponiblesCuenta = 0.0 "
+                    + "where idUsuario = ? and numeroParticipaciones != 0");
+
+            stmUsuarios.setString(1, id);
+            stmUsuarios.executeUpdate();
+
+            try{
+                stmUsuarios = con.prepareStatement("delete from empresaUsuario "
+                    + "where idUsuario = ? and numeroParticipaciones != 0");
+
+                stmUsuarios.setString(1, id);
+                stmUsuarios.executeUpdate();
+            }catch (SQLException e) {
+                System.out.println(e.getMessage());
+                this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        } finally {
+            try {
+                stmUsuarios.close();
+            } catch (SQLException e) {
+                System.out.println("Imposible cerrar cursores");
+            }
+        }
+    }
     
     /*public void borrarUsuario(String idUsuario) {
         Connection con;

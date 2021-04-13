@@ -30,10 +30,8 @@ public class VParticipaciones extends javax.swing.JDialog {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        btnSalir = new javax.swing.JButton();
-        compraventaPanel = new javax.swing.JTabbedPane();
-        altabajaPanel = new javax.swing.JPanel();
-        jPanel1 = new javax.swing.JPanel();
+        participacionesPanel = new javax.swing.JTabbedPane();
+        compraventaPanel = new javax.swing.JPanel();
         saldoLabel = new javax.swing.JLabel();
         saldoText = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
@@ -51,9 +49,18 @@ public class VParticipaciones extends javax.swing.JDialog {
         jTable2 = new javax.swing.JTable();
         aceptarButton = new javax.swing.JButton();
         buscarButton = new javax.swing.JButton();
-        btnSalir1 = new javax.swing.JButton();
-        btnSalir2 = new javax.swing.JButton();
-        btnSalir3 = new javax.swing.JButton();
+        altabajaPanel = new javax.swing.JPanel();
+        carteraLabel = new javax.swing.JLabel();
+        numeroLabel = new javax.swing.JLabel();
+        carteraText = new javax.swing.JTextField();
+        numeroText = new javax.swing.JTextField();
+        altaCheckBox = new javax.swing.JCheckBox();
+        bajaCheckBox = new javax.swing.JCheckBox();
+        aceptarButton1 = new javax.swing.JButton();
+        msjObligatorio = new java.awt.Label();
+        msNoParticipaciones = new java.awt.Label();
+        msSoloUnaOpcion = new java.awt.Label();
+        btnSalir = new javax.swing.JButton();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -68,29 +75,7 @@ public class VParticipaciones extends javax.swing.JDialog {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        btnSalir.setBackground(new java.awt.Color(180, 22, 45));
-        btnSalir.setForeground(new java.awt.Color(0, 0, 0));
-        btnSalir.setLabel("Salir");
-        btnSalir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSalirActionPerformed(evt);
-            }
-        });
-
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-
-        javax.swing.GroupLayout altabajaPanelLayout = new javax.swing.GroupLayout(altabajaPanel);
-        altabajaPanel.setLayout(altabajaPanelLayout);
-        altabajaPanelLayout.setHorizontalGroup(
-            altabajaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 569, Short.MAX_VALUE)
-        );
-        altabajaPanelLayout.setVerticalGroup(
-            altabajaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 255, Short.MAX_VALUE)
-        );
-
-        compraventaPanel.addTab("alta / baja", altabajaPanel);
 
         saldoLabel.setText("saldo:");
 
@@ -155,16 +140,16 @@ public class VParticipaciones extends javax.swing.JDialog {
             }
         });
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout compraventaPanelLayout = new javax.swing.GroupLayout(compraventaPanel);
+        compraventaPanel.setLayout(compraventaPanelLayout);
+        compraventaPanelLayout.setHorizontalGroup(
+            compraventaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(compraventaPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(compraventaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(aceptarButton)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGroup(compraventaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(compraventaPanelLayout.createSequentialGroup()
                             .addComponent(saldoLabel)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(saldoText, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -172,36 +157,36 @@ public class VParticipaciones extends javax.swing.JDialog {
                             .addComponent(jLabel1))
                         .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(compraventaPanelLayout.createSequentialGroup()
                             .addComponent(nparticipacionesLabel)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                             .addComponent(nParticipacionesText, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(compraventaPanelLayout.createSequentialGroup()
+                            .addGroup(compraventaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(comisionLabel)
                                 .addComponent(precioLabel))
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(compraventaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(comisionText, javax.swing.GroupLayout.DEFAULT_SIZE, 52, Short.MAX_VALUE)
                                 .addComponent(precioText))
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(compraventaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jLabel2)
                                 .addComponent(jLabel3)))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 73, Short.MAX_VALUE)
+                .addGroup(compraventaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(buscarButton, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        compraventaPanelLayout.setVerticalGroup(
+            compraventaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(compraventaPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                .addGroup(compraventaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, compraventaPanelLayout.createSequentialGroup()
+                        .addGroup(compraventaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(saldoLabel)
                             .addComponent(saldoText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel1))
@@ -210,192 +195,230 @@ public class VParticipaciones extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(compraventaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(nparticipacionesLabel)
                             .addComponent(nParticipacionesText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(compraventaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(compraventaPanelLayout.createSequentialGroup()
+                                .addGroup(compraventaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(precioLabel)
                                     .addComponent(precioText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel2))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(comisionLabel))
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addGroup(compraventaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(comisionText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jLabel3)))))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(compraventaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(buscarButton)
                     .addComponent(aceptarButton))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        compraventaPanel.addTab("compra / venta", jPanel1);
+        participacionesPanel.addTab("compra / venta", compraventaPanel);
 
-        btnSalir1.setBackground(new java.awt.Color(180, 22, 45));
-        btnSalir1.setForeground(new java.awt.Color(0, 0, 0));
-        btnSalir1.setLabel("Salir");
-        btnSalir1.addActionListener(new java.awt.event.ActionListener() {
+        carteraLabel.setText("Cartera de participaciones:");
+
+        numeroLabel.setText("Número de participaciones:");
+
+        carteraText.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSalir1ActionPerformed(evt);
+                carteraTextActionPerformed(evt);
             }
         });
 
-        btnSalir2.setBackground(new java.awt.Color(180, 22, 45));
-        btnSalir2.setForeground(new java.awt.Color(0, 0, 0));
-        btnSalir2.setLabel("Salir");
-        btnSalir2.addActionListener(new java.awt.event.ActionListener() {
+        numeroText.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSalir2ActionPerformed(evt);
+                numeroTextActionPerformed(evt);
             }
         });
 
-        btnSalir3.setBackground(new java.awt.Color(180, 22, 45));
-        btnSalir3.setForeground(new java.awt.Color(0, 0, 0));
-        btnSalir3.setLabel("Salir");
-        btnSalir3.addActionListener(new java.awt.event.ActionListener() {
+        altaCheckBox.setText("Alta");
+
+        bajaCheckBox.setText("Baja");
+        bajaCheckBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSalir3ActionPerformed(evt);
+                bajaCheckBoxActionPerformed(evt);
             }
         });
+
+        aceptarButton1.setText("Aceptar");
+
+        msjObligatorio.setForeground(new java.awt.Color(255, 0, 0));
+        msjObligatorio.setText("Rellena los campos obligatorios (*)");
+
+        msNoParticipaciones.setForeground(new java.awt.Color(255, 0, 0));
+        msNoParticipaciones.setText("No dispones de ese número de participaciones*");
+
+        msSoloUnaOpcion.setForeground(new java.awt.Color(255, 0, 0));
+        msSoloUnaOpcion.setText("Selecciona solo una opción *");
+
+        javax.swing.GroupLayout altabajaPanelLayout = new javax.swing.GroupLayout(altabajaPanel);
+        altabajaPanel.setLayout(altabajaPanelLayout);
+        altabajaPanelLayout.setHorizontalGroup(
+            altabajaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(altabajaPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(altabajaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(altabajaPanelLayout.createSequentialGroup()
+                        .addComponent(msjObligatorio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(aceptarButton1))
+                    .addGroup(altabajaPanelLayout.createSequentialGroup()
+                        .addGroup(altabajaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(altabajaPanelLayout.createSequentialGroup()
+                                .addComponent(carteraLabel)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(carteraText, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGap(139, 139, 139)
+                            .addComponent(msNoParticipaciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(altabajaPanelLayout.createSequentialGroup()
+                        .addGroup(altabajaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(altabajaPanelLayout.createSequentialGroup()
+                                .addComponent(altaCheckBox)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(bajaCheckBox))
+                            .addComponent(numeroLabel))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(altabajaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(altabajaPanelLayout.createSequentialGroup()
+                                .addComponent(numeroText)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 338, Short.MAX_VALUE))
+                            .addGroup(altabajaPanelLayout.createSequentialGroup()
+                                .addComponent(msSoloUnaOpcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 179, Short.MAX_VALUE)))))
+                .addContainerGap())
+        );
+        altabajaPanelLayout.setVerticalGroup(
+            altabajaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(altabajaPanelLayout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addGroup(altabajaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(carteraLabel)
+                    .addComponent(carteraText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(altabajaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(numeroLabel)
+                    .addComponent(numeroText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(19, 19, 19)
+                .addComponent(msNoParticipaciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(19, 19, 19)
+                .addGroup(altabajaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(altabajaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(altaCheckBox)
+                        .addComponent(bajaCheckBox))
+                    .addComponent(msSoloUnaOpcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
+                .addGroup(altabajaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(aceptarButton1, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(msjObligatorio, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+        );
+
+        participacionesPanel.addTab("alta / baja", altabajaPanel);
+
+        btnSalir.setBackground(new java.awt.Color(180, 22, 45));
+        btnSalir.setForeground(new java.awt.Color(0, 0, 0));
+        btnSalir.setLabel("Salir");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(compraventaPanel)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(254, 254, 254)
-                    .addComponent(btnSalir1)
-                    .addContainerGap(254, Short.MAX_VALUE)))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(participacionesPanel)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnSalir)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(compraventaPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 32, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(144, 144, 144)
-                    .addComponent(btnSalir1)
-                    .addContainerGap(145, Short.MAX_VALUE)))
+                .addComponent(participacionesPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnSalir)
+                .addGap(0, 8, Short.MAX_VALUE))
         );
 
-        compraventaPanel.getAccessibleContext().setAccessibleName("Compra / Venta");
+        participacionesPanel.getAccessibleContext().setAccessibleName("Compra / Venta");
 
         getAccessibleContext().setAccessibleName("altabajaPanel");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void saldoTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saldoTextActionPerformed
+    private void buscarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_saldoTextActionPerformed
-
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
-
-    private void nParticipacionesTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nParticipacionesTextActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_nParticipacionesTextActionPerformed
+    }//GEN-LAST:event_buscarButtonActionPerformed
 
     private void precioTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_precioTextActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_precioTextActionPerformed
 
-    private void buscarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarButtonActionPerformed
+    private void nParticipacionesTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nParticipacionesTextActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_buscarButtonActionPerformed
+    }//GEN-LAST:event_nParticipacionesTextActionPerformed
 
-    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         // TODO add your handling code here:
-        padre.buscarLibros();
-        this.dispose();
-    }//GEN-LAST:event_btnSalirActionPerformed
+    }//GEN-LAST:event_jComboBox1ActionPerformed
 
-    private void btnSalir1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalir1ActionPerformed
+    private void saldoTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saldoTextActionPerformed
         // TODO add your handling code here:
-        padre.buscarLibros();
-        this.dispose();
-    }//GEN-LAST:event_btnSalir1ActionPerformed
+    }//GEN-LAST:event_saldoTextActionPerformed
 
-    private void btnSalir2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalir2ActionPerformed
+    private void carteraTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_carteraTextActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnSalir2ActionPerformed
+    }//GEN-LAST:event_carteraTextActionPerformed
 
-    private void btnSalir3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalir3ActionPerformed
+    private void numeroTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_numeroTextActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnSalir3ActionPerformed
+    }//GEN-LAST:event_numeroTextActionPerformed
+
+    private void bajaCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bajaCheckBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bajaCheckBoxActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VParticipaciones.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VParticipaciones.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VParticipaciones.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VParticipaciones.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                VParticipaciones dialog = new VParticipaciones(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton aceptarButton;
+    private javax.swing.JButton aceptarButton1;
+    private javax.swing.JCheckBox altaCheckBox;
     private javax.swing.JPanel altabajaPanel;
+    private javax.swing.JCheckBox bajaCheckBox;
     private javax.swing.JButton btnSalir;
-    private javax.swing.JButton btnSalir1;
-    private javax.swing.JButton btnSalir2;
-    private javax.swing.JButton btnSalir3;
     private javax.swing.JButton buscarButton;
+    private javax.swing.JLabel carteraLabel;
+    private javax.swing.JTextField carteraText;
     private javax.swing.JLabel comisionLabel;
     private javax.swing.JTextField comisionText;
-    private javax.swing.JTabbedPane compraventaPanel;
+    private javax.swing.JPanel compraventaPanel;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JComboBox jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
+    private java.awt.Label msNoParticipaciones;
+    private java.awt.Label msSoloUnaOpcion;
+    private java.awt.Label msjObligatorio;
     private javax.swing.JTextField nParticipacionesText;
     private javax.swing.JLabel nparticipacionesLabel;
+    private javax.swing.JLabel numeroLabel;
+    private javax.swing.JTextField numeroText;
+    private javax.swing.JTabbedPane participacionesPanel;
     private javax.swing.JLabel precioLabel;
     private javax.swing.JTextField precioText;
     private javax.swing.JLabel saldoLabel;

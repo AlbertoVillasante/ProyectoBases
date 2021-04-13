@@ -59,6 +59,7 @@ public class MenuDeUsuario extends javax.swing.JFrame {
         botonConfiguracion.setBackground(new java.awt.Color(255, 255, 255));
         botonConfiguracion.setForeground(new java.awt.Color(255, 255, 255));
         botonConfiguracion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/rueda(1).jpeg"))); // NOI18N
+        botonConfiguracion.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         botonConfiguracion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonConfiguracionActionPerformed(evt);

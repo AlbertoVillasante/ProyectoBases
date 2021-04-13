@@ -32,9 +32,22 @@ public class VParticipaciones extends javax.swing.JDialog {
         comisionText.setBackground(prueba1);
         carteraText.setBackground(prueba1);
         numeroText.setBackground(prueba1);
+        msNoParticipaciones.setBackground(prueba);
+        msjObligatorio.setBackground(prueba);
+        buscarButton.setBackground(prueba1);
+        Alta.setBackground(prueba);
+        Baja.setBackground(prueba);
+        aceptarButton.setBackground(prueba1);
+        aceptarButton1.setBackground(prueba1);
         compraventaPanel.setBackground(prueba);
         altabajaPanel.setBackground(prueba);
         jTable2.setBackground(prueba1);
+        jTable2.setSelectionBackground(prueba1);
+        participacionesPanel.setBackgroundAt(0, prueba);
+        participacionesPanel.setBackgroundAt(1, prueba);
+        buttonGroup8.add(Baja);
+        buttonGroup8.add(Alta);
+
     }
 
     /**
@@ -48,6 +61,14 @@ public class VParticipaciones extends javax.swing.JDialog {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        buttonGroup1 = new javax.swing.ButtonGroup();
+        buttonGroup2 = new javax.swing.ButtonGroup();
+        buttonGroup3 = new javax.swing.ButtonGroup();
+        buttonGroup4 = new javax.swing.ButtonGroup();
+        buttonGroup5 = new javax.swing.ButtonGroup();
+        buttonGroup6 = new javax.swing.ButtonGroup();
+        buttonGroup7 = new javax.swing.ButtonGroup();
+        buttonGroup8 = new javax.swing.ButtonGroup();
         participacionesPanel = new javax.swing.JTabbedPane();
         compraventaPanel = new javax.swing.JPanel();
         saldoLabel = new javax.swing.JLabel();
@@ -72,12 +93,11 @@ public class VParticipaciones extends javax.swing.JDialog {
         numeroLabel = new javax.swing.JLabel();
         carteraText = new javax.swing.JTextField();
         numeroText = new javax.swing.JTextField();
-        altaCheckBox = new javax.swing.JCheckBox();
-        bajaCheckBox = new javax.swing.JCheckBox();
         aceptarButton1 = new javax.swing.JButton();
         msjObligatorio = new java.awt.Label();
         msNoParticipaciones = new java.awt.Label();
-        msSoloUnaOpcion = new java.awt.Label();
+        Alta = new javax.swing.JRadioButton();
+        Baja = new javax.swing.JRadioButton();
         btnSalir = new javax.swing.JButton();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -95,9 +115,12 @@ public class VParticipaciones extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
+        participacionesPanel.setForeground(new java.awt.Color(187, 187, 188));
+
         saldoLabel.setForeground(new java.awt.Color(187, 187, 188));
         saldoLabel.setText("saldo:");
 
+        saldoText.setForeground(new java.awt.Color(187, 187, 188));
         saldoText.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 saldoTextActionPerformed(evt);
@@ -121,6 +144,7 @@ public class VParticipaciones extends javax.swing.JDialog {
         nparticipacionesLabel.setForeground(new java.awt.Color(187, 187, 188));
         nparticipacionesLabel.setText("Número de participaciones:");
 
+        nParticipacionesText.setForeground(new java.awt.Color(187, 187, 188));
         nParticipacionesText.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nParticipacionesTextActionPerformed(evt);
@@ -133,6 +157,9 @@ public class VParticipaciones extends javax.swing.JDialog {
         comisionLabel.setForeground(new java.awt.Color(187, 187, 188));
         comisionLabel.setText("Comisión:");
 
+        comisionText.setForeground(new java.awt.Color(187, 187, 188));
+
+        precioText.setForeground(new java.awt.Color(187, 187, 188));
         precioText.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 precioTextActionPerformed(evt);
@@ -145,8 +172,17 @@ public class VParticipaciones extends javax.swing.JDialog {
         jLabel3.setForeground(new java.awt.Color(187, 187, 188));
         jLabel3.setText("%");
 
+        jTable2.setForeground(new java.awt.Color(187, 187, 188));
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null},
@@ -158,8 +194,10 @@ public class VParticipaciones extends javax.swing.JDialog {
         ));
         jScrollPane2.setViewportView(jTable2);
 
+        aceptarButton.setForeground(new java.awt.Color(187, 187, 188));
         aceptarButton.setText("Aceptar");
 
+        buscarButton.setForeground(new java.awt.Color(187, 187, 188));
         buscarButton.setText("Buscar");
         buscarButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -172,108 +210,123 @@ public class VParticipaciones extends javax.swing.JDialog {
         compraventaPanelLayout.setHorizontalGroup(
             compraventaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(compraventaPanelLayout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(compraventaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(compraventaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(aceptarButton)
+                    .addGroup(compraventaPanelLayout.createSequentialGroup()
+                        .addGap(25, 25, 25)
                         .addGroup(compraventaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(compraventaPanelLayout.createSequentialGroup()
-                                .addComponent(saldoLabel)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(saldoText, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel1))
-                            .addGroup(compraventaPanelLayout.createSequentialGroup()
                                 .addComponent(nparticipacionesLabel)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGap(18, 18, 18)
                                 .addComponent(nParticipacionesText, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(compraventaPanelLayout.createSequentialGroup()
+                                .addGroup(compraventaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(aceptarButton)
+                                    .addGroup(compraventaPanelLayout.createSequentialGroup()
+                                        .addGroup(compraventaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(precioLabel)
+                                            .addComponent(comisionLabel))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(compraventaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(comisionText, javax.swing.GroupLayout.DEFAULT_SIZE, 74, Short.MAX_VALUE)
+                                            .addComponent(precioText))))
                                 .addGroup(compraventaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(comisionLabel)
-                                    .addComponent(precioLabel))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(compraventaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(comisionText)
-                                    .addComponent(precioText))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(compraventaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel3)))))
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
+                                    .addGroup(compraventaPanelLayout.createSequentialGroup()
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(compraventaPanelLayout.createSequentialGroup()
+                                        .addGap(14, 14, 14)
+                                        .addComponent(jLabel3))))
+                            .addGroup(compraventaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(jComboBox1, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jComboBox2, javax.swing.GroupLayout.Alignment.LEADING, 0, 112, Short.MAX_VALUE))))
+                    .addGroup(compraventaPanelLayout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addComponent(saldoLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(saldoText, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10)
+                        .addComponent(jLabel1)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
                 .addGroup(compraventaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(buscarButton, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addGap(42, 42, 42))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, compraventaPanelLayout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(38, 38, 38))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, compraventaPanelLayout.createSequentialGroup()
+                        .addComponent(buscarButton)
+                        .addGap(135, 135, 135))))
         );
         compraventaPanelLayout.setVerticalGroup(
             compraventaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(compraventaPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(compraventaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 204, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, compraventaPanelLayout.createSequentialGroup()
-                        .addGap(3, 3, 3)
-                        .addGroup(compraventaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(saldoLabel)
-                            .addComponent(saldoText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(16, 16, 16)
+                .addGroup(compraventaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(compraventaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(compraventaPanelLayout.createSequentialGroup()
+                            .addGap(6, 6, 6)
                             .addComponent(jLabel1))
-                        .addGap(18, 18, 18)
-                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(12, 12, 12)
-                        .addGroup(compraventaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(nparticipacionesLabel)
-                            .addComponent(nParticipacionesText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(compraventaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(compraventaPanelLayout.createSequentialGroup()
-                                .addGroup(compraventaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(precioLabel)
-                                    .addComponent(precioText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel2))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(comisionLabel))
-                            .addGroup(compraventaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(comisionText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel3)))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                        .addComponent(saldoText, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(saldoLabel, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12)
                 .addGroup(compraventaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(aceptarButton)
-                    .addComponent(buscarButton))
+                    .addComponent(nparticipacionesLabel)
+                    .addComponent(nParticipacionesText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(compraventaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel3)
+                    .addGroup(compraventaPanelLayout.createSequentialGroup()
+                        .addGroup(compraventaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(compraventaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(precioText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel2))
+                            .addComponent(precioLabel))
+                        .addGap(18, 18, 18)
+                        .addGroup(compraventaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(comisionLabel)
+                            .addComponent(comisionText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(aceptarButton)
                 .addGap(27, 27, 27))
+            .addGroup(compraventaPanelLayout.createSequentialGroup()
+                .addGap(33, 33, 33)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(buscarButton)
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
         participacionesPanel.addTab("compra / venta", compraventaPanel);
 
+        carteraLabel.setForeground(new java.awt.Color(187, 187, 188));
         carteraLabel.setText("Cartera de participaciones:");
 
+        numeroLabel.setForeground(new java.awt.Color(187, 187, 188));
         numeroLabel.setText("Número de participaciones:");
 
+        carteraText.setForeground(new java.awt.Color(187, 187, 188));
         carteraText.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 carteraTextActionPerformed(evt);
             }
         });
 
+        numeroText.setForeground(new java.awt.Color(187, 187, 188));
         numeroText.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 numeroTextActionPerformed(evt);
             }
         });
 
-        altaCheckBox.setText("Alta");
-
-        bajaCheckBox.setText("Baja");
-        bajaCheckBox.addActionListener(new java.awt.event.ActionListener() {
+        aceptarButton1.setForeground(new java.awt.Color(187, 187, 188));
+        aceptarButton1.setText("Aceptar");
+        aceptarButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bajaCheckBoxActionPerformed(evt);
+                aceptarButton1ActionPerformed(evt);
             }
         });
-
-        aceptarButton1.setText("Aceptar");
 
         msjObligatorio.setForeground(new java.awt.Color(255, 0, 0));
         msjObligatorio.setText("Rellena los campos obligatorios (*)");
@@ -281,69 +334,74 @@ public class VParticipaciones extends javax.swing.JDialog {
         msNoParticipaciones.setForeground(new java.awt.Color(255, 0, 0));
         msNoParticipaciones.setText("No dispones de ese número de participaciones*");
 
-        msSoloUnaOpcion.setForeground(new java.awt.Color(255, 0, 0));
-        msSoloUnaOpcion.setText("Selecciona solo una opción *");
+        Alta.setForeground(new java.awt.Color(187, 187, 188));
+        Alta.setText("Alta");
+        Alta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AltaActionPerformed(evt);
+            }
+        });
+
+        Baja.setForeground(new java.awt.Color(187, 187, 188));
+        Baja.setText("Baja");
+        Baja.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BajaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout altabajaPanelLayout = new javax.swing.GroupLayout(altabajaPanel);
         altabajaPanel.setLayout(altabajaPanelLayout);
         altabajaPanelLayout.setHorizontalGroup(
             altabajaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(altabajaPanelLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(19, 19, 19)
                 .addGroup(altabajaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(altabajaPanelLayout.createSequentialGroup()
+                        .addGroup(altabajaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(numeroLabel)
+                            .addComponent(carteraLabel))
+                        .addGap(18, 18, 18)
+                        .addGroup(altabajaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(carteraText)
+                            .addComponent(numeroText, javax.swing.GroupLayout.DEFAULT_SIZE, 71, Short.MAX_VALUE))
+                        .addGap(316, 316, 316))
                     .addGroup(altabajaPanelLayout.createSequentialGroup()
                         .addComponent(msjObligatorio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(aceptarButton1))
+                        .addComponent(aceptarButton1)
+                        .addGap(41, 41, 41))
                     .addGroup(altabajaPanelLayout.createSequentialGroup()
                         .addGroup(altabajaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(msNoParticipaciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(altabajaPanelLayout.createSequentialGroup()
-                                .addComponent(carteraLabel)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(carteraText, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(msNoParticipaciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(altabajaPanelLayout.createSequentialGroup()
-                        .addGroup(altabajaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(altabajaPanelLayout.createSequentialGroup()
-                                .addComponent(altaCheckBox)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(bajaCheckBox))
-                            .addComponent(numeroLabel))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(altabajaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(altabajaPanelLayout.createSequentialGroup()
-                                .addComponent(numeroText)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 338, Short.MAX_VALUE))
-                            .addGroup(altabajaPanelLayout.createSequentialGroup()
-                                .addComponent(msSoloUnaOpcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 179, Short.MAX_VALUE)))))
-                .addContainerGap())
+                                .addComponent(Alta, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(31, 31, 31)
+                                .addComponent(Baja)))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         altabajaPanelLayout.setVerticalGroup(
             altabajaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(altabajaPanelLayout.createSequentialGroup()
-                .addGap(14, 14, 14)
+                .addContainerGap(39, Short.MAX_VALUE)
                 .addGroup(altabajaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(carteraLabel)
                     .addComponent(carteraText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(24, 24, 24)
                 .addGroup(altabajaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(numeroLabel)
                     .addComponent(numeroText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(19, 19, 19)
+                .addGap(26, 26, 26)
                 .addComponent(msNoParticipaciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(19, 19, 19)
-                .addGroup(altabajaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(altabajaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(altaCheckBox)
-                        .addComponent(bajaCheckBox))
-                    .addComponent(msSoloUnaOpcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 101, Short.MAX_VALUE)
+                .addGap(27, 27, 27)
+                .addGroup(altabajaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Alta, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Baja, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(altabajaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(aceptarButton1, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(msjObligatorio, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                    .addComponent(aceptarButton1)
+                    .addComponent(msjObligatorio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(38, 38, 38))
         );
 
         participacionesPanel.addTab("alta / baja", altabajaPanel);
@@ -415,26 +473,42 @@ public class VParticipaciones extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_numeroTextActionPerformed
 
-    private void bajaCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bajaCheckBoxActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_bajaCheckBoxActionPerformed
-
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         this.dispose();
     }//GEN-LAST:event_btnSalirActionPerformed
+
+    private void AltaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AltaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_AltaActionPerformed
+
+    private void BajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BajaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BajaActionPerformed
+
+    private void aceptarButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aceptarButton1ActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_aceptarButton1ActionPerformed
 
     /**
      * @param args the command line arguments
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JRadioButton Alta;
+    private javax.swing.JRadioButton Baja;
     private javax.swing.JButton aceptarButton;
     private javax.swing.JButton aceptarButton1;
-    private javax.swing.JCheckBox altaCheckBox;
     private javax.swing.JPanel altabajaPanel;
-    private javax.swing.JCheckBox bajaCheckBox;
     private javax.swing.JButton btnSalir;
     private javax.swing.JButton buscarButton;
+    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.ButtonGroup buttonGroup2;
+    private javax.swing.ButtonGroup buttonGroup3;
+    private javax.swing.ButtonGroup buttonGroup4;
+    private javax.swing.ButtonGroup buttonGroup5;
+    private javax.swing.ButtonGroup buttonGroup6;
+    private javax.swing.ButtonGroup buttonGroup7;
+    private javax.swing.ButtonGroup buttonGroup8;
     private javax.swing.JLabel carteraLabel;
     private javax.swing.JTextField carteraText;
     private javax.swing.JLabel comisionLabel;
@@ -450,7 +524,6 @@ public class VParticipaciones extends javax.swing.JDialog {
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
     private java.awt.Label msNoParticipaciones;
-    private java.awt.Label msSoloUnaOpcion;
     private java.awt.Label msjObligatorio;
     private javax.swing.JTextField nParticipacionesText;
     private javax.swing.JLabel nparticipacionesLabel;

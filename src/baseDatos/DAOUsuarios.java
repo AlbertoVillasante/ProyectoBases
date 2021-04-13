@@ -182,6 +182,57 @@ public class DAOUsuarios extends AbstractDAO {
         }
 
     }
+    
+    public void registroInversor(InversorUsuario inversor){
+        Connection con;
+        PreparedStatement stmUsuario = null;
+        con = super.getConexion();
+
+        try {
+            stmUsuario = con.prepareStatement("update inversorUsuario"
+                    + "set tipoUsuario = ?"
+                    + "where idUsuario = ?");
+            stmUsuario.setString(1, "Normal");
+            stmUsuario.setString(2, inversor.getIdUsuario());
+            stmUsuario.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        } finally {
+            try {
+                stmUsuario.close();
+            } catch (SQLException e) {
+                System.out.println("Imposible cerrar cursores");
+            }
+        }
+    }
+    
+    public void registroEmpresa(EmpresaUsuario empresa){
+        
+        Connection con;
+        PreparedStatement stmUsuario = null;
+        con = super.getConexion();
+
+        try {
+            stmUsuario = con.prepareStatement("update empresaUsuario"
+                    + "set tipoUsuario = ?"
+                    + "where idUsuario = ?");
+            stmUsuario.setString(1, "Normal");
+            stmUsuario.setString(2, empresa.getIdUsuario());
+            stmUsuario.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        } finally {
+            try {
+                stmUsuario.close();
+            } catch (SQLException e) {
+                System.out.println("Imposible cerrar cursores");
+            }
+        }
+    }
 
     /*public void modificarUsuario(EmpresaUsuario u, String id) {
         Connection con;

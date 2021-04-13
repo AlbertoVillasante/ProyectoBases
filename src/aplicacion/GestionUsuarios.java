@@ -19,7 +19,7 @@ public class GestionUsuarios {
             InversorUsuario u;
             u = fbd.validarUsuario(idUsuario, clave);
             if (u != null) {
-                return u.getTipo().name();
+                return u.getTipoUsuario().name();
             } else {
                 return "";
             }

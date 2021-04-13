@@ -17,7 +17,7 @@ public class InversorUsuario {
     private String apellido2;
     private String direccion;
     private String telefono;
-    private TipoUsuario tipo;
+    private TipoUsuario tipoUsuario;
     private int nParticipaciones;
     private double fondosDisponiblesCuenta;
 
@@ -27,7 +27,7 @@ public class InversorUsuario {
         this.nombre = nombre;
         this.direccion = direccion;
         this.telefono = telefono;
-        this.tipo = tipo;
+        this.tipoUsuario = tipo;
     }
     
     public String getIdUsuario() {
@@ -86,12 +86,12 @@ public class InversorUsuario {
         this.telefono = telefono;
     }
 
-    public TipoUsuario getTipo() {
-        return tipo;
+    public TipoUsuario getTipoUsuario() {
+        return tipoUsuario;
     }
 
-    public void setTipo(TipoUsuario tipo) {
-        this.tipo = tipo;
+    public void setTipoUsuario(TipoUsuario tipo) {
+        this.tipoUsuario = tipo;
     }
 
     public int getnParticipaciones() {

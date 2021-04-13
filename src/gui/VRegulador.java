@@ -5,17 +5,23 @@
  */
 package gui;
 
+import java.awt.Color;
+
 /**
  *
  * @author hugo
  */
 public class VRegulador extends javax.swing.JDialog {
 
+    Color prueba = new Color(60, 63, 65);
+
     /**
      * Creates new form VRegulador
      */
     public VRegulador(aplicacion.FachadaAplicacion fa) {
         initComponents();
+        this.getContentPane().setBackground(prueba);
+
     }
 
     /**
@@ -66,7 +72,6 @@ public class VRegulador extends javax.swing.JDialog {
     /**
      * @param args the command line arguments
      */
-   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonConfiguracion;

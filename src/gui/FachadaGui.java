@@ -4,6 +4,7 @@ import aplicacion.Categoria;
 import aplicacion.Libro;
 import aplicacion.EmpresaUsuario;
 import aplicacion.Ejemplar;
+import java.awt.Color;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.UIManager;
@@ -16,7 +17,6 @@ public class FachadaGui {           //Esta es la fachada
 
     public FachadaGui(aplicacion.FachadaAplicacion fa) {
         try {
-            UIManager.setLookAndFeel("com.sun.java.swing.plaf.gtk.GTKLookAndFeel");
             this.fa = fa;
             this.vp = new VPortada(fa);
         } catch (Exception ex) {

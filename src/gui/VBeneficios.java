@@ -5,6 +5,8 @@
  */
 package gui;
 
+import java.awt.Color;
+
 /**
  *
  * @author hugo
@@ -14,8 +16,11 @@ public class VBeneficios extends javax.swing.JDialog {
     /**
      * Creates new form VBeneficios
      */
+    Color prueba = new Color(60, 63, 65);
+
     public VBeneficios(aplicacion.FachadaAplicacion fa) {
         initComponents();
+        this.getContentPane().setBackground(prueba);
     }
 
     /**
@@ -43,7 +48,6 @@ public class VBeneficios extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables

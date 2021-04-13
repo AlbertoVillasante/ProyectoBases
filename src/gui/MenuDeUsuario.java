@@ -5,6 +5,8 @@
  */
 package gui;
 
+import java.awt.Color;
+
 /**
  *
  * @author hugo
@@ -12,10 +14,13 @@ package gui;
 public class MenuDeUsuario extends javax.swing.JFrame {
 
     aplicacion.FachadaAplicacion fa;
+    Color prueba = new Color(60, 63, 65);
 
     public MenuDeUsuario(aplicacion.FachadaAplicacion fa) {
         this.fa = fa;
         initComponents();
+        this.getContentPane().setBackground(prueba);
+
     }
 
     /**
@@ -48,6 +53,7 @@ public class MenuDeUsuario extends javax.swing.JFrame {
         });
 
         textoBeneficios.setFont(new java.awt.Font("Ubuntu", 1, 16)); // NOI18N
+        textoBeneficios.setForeground(new java.awt.Color(187, 187, 188));
         textoBeneficios.setText("Beneficios");
 
         botonConfiguracion.setBackground(new java.awt.Color(255, 255, 255));
@@ -60,6 +66,7 @@ public class MenuDeUsuario extends javax.swing.JFrame {
         });
 
         textoConfiguracion.setFont(new java.awt.Font("Ubuntu", 1, 16)); // NOI18N
+        textoConfiguracion.setForeground(new java.awt.Color(187, 187, 188));
         textoConfiguracion.setText("Configuración");
 
         botonBeneficios.setBackground(new java.awt.Color(255, 255, 255));
@@ -71,6 +78,7 @@ public class MenuDeUsuario extends javax.swing.JFrame {
         });
 
         textoParticipaciones.setFont(new java.awt.Font("Ubuntu", 1, 16)); // NOI18N
+        textoParticipaciones.setForeground(new java.awt.Color(187, 187, 188));
         textoParticipaciones.setText("Participaciones");
 
         botonEstadisticas.setBackground(new java.awt.Color(255, 255, 255));
@@ -82,9 +90,11 @@ public class MenuDeUsuario extends javax.swing.JFrame {
         });
 
         textoEstadisticas.setFont(new java.awt.Font("Ubuntu", 1, 16)); // NOI18N
+        textoEstadisticas.setForeground(new java.awt.Color(187, 187, 188));
         textoEstadisticas.setText("Estadísticas");
 
         textoMenu.setFont(new java.awt.Font("Ubuntu", 1, 36)); // NOI18N
+        textoMenu.setForeground(new java.awt.Color(187, 187, 188));
         textoMenu.setText("Menú");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

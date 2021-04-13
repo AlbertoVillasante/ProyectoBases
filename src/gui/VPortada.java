@@ -5,17 +5,22 @@
  */
 package gui;
 
+import java.awt.Color;
+
 /**
  *
  * @author hugo
  */
 public class VPortada extends javax.swing.JFrame {
+    Color prueba = new Color(60, 63, 65);
 
     /**
      * Creates new form VPortada
      */
-    public VPortada( aplicacion.FachadaAplicacion fa) {
+    public VPortada(aplicacion.FachadaAplicacion fa) {
         initComponents();
+        this.getContentPane().setBackground(prueba);
+
     }
 
     /**

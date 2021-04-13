@@ -5,17 +5,36 @@
  */
 package gui;
 
+import java.awt.Color;
+import java.util.Locale;
+import javax.swing.JPanel;
+
 /**
  *
  * @author alumnogreibd
  */
 public class VParticipaciones extends javax.swing.JDialog {
 
+    Color prueba = new Color(60, 63, 65);
+    Color prueba1 = new Color(78, 82, 85);
+
     /**
      * Creates new form VParticipaciones
      */
     public VParticipaciones(aplicacion.FachadaAplicacion fa) {
         initComponents();
+        this.getContentPane().setBackground(prueba);
+        saldoText.setBackground(prueba1);
+        jComboBox2.setBackground(prueba1);
+        jComboBox1.setBackground(prueba1);
+        nParticipacionesText.setBackground(prueba1);
+        precioText.setBackground(prueba1);
+        comisionText.setBackground(prueba1);
+        carteraText.setBackground(prueba1);
+        numeroText.setBackground(prueba1);
+        compraventaPanel.setBackground(prueba);
+        altabajaPanel.setBackground(prueba);
+        jTable2.setBackground(prueba1);
     }
 
     /**
@@ -76,6 +95,7 @@ public class VParticipaciones extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
+        saldoLabel.setForeground(new java.awt.Color(187, 187, 188));
         saldoLabel.setText("saldo:");
 
         saldoText.addActionListener(new java.awt.event.ActionListener() {
@@ -84,8 +104,10 @@ public class VParticipaciones extends javax.swing.JDialog {
             }
         });
 
+        jLabel1.setForeground(new java.awt.Color(187, 187, 188));
         jLabel1.setText("€ ");
 
+        jComboBox1.setForeground(new java.awt.Color(187, 187, 188));
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -93,8 +115,10 @@ public class VParticipaciones extends javax.swing.JDialog {
             }
         });
 
+        jComboBox2.setForeground(new java.awt.Color(187, 187, 188));
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Comprar", "Vender" }));
 
+        nparticipacionesLabel.setForeground(new java.awt.Color(187, 187, 188));
         nparticipacionesLabel.setText("Número de participaciones:");
 
         nParticipacionesText.addActionListener(new java.awt.event.ActionListener() {
@@ -103,8 +127,10 @@ public class VParticipaciones extends javax.swing.JDialog {
             }
         });
 
+        precioLabel.setForeground(new java.awt.Color(187, 187, 188));
         precioLabel.setText("Precio:");
 
+        comisionLabel.setForeground(new java.awt.Color(187, 187, 188));
         comisionLabel.setText("Comisión:");
 
         precioText.addActionListener(new java.awt.event.ActionListener() {
@@ -113,8 +139,10 @@ public class VParticipaciones extends javax.swing.JDialog {
             }
         });
 
+        jLabel2.setForeground(new java.awt.Color(187, 187, 188));
         jLabel2.setText("€ ");
 
+        jLabel3.setForeground(new java.awt.Color(187, 187, 188));
         jLabel3.setText("%");
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(

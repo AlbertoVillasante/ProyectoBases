@@ -9,12 +9,15 @@ public class VUsuario extends javax.swing.JDialog {
     aplicacion.FachadaAplicacion fa;
     String id = null;
     int CheckeoUsuario;
+    Color prueba = new Color(60, 63, 65);
 
     public VUsuario(aplicacion.FachadaAplicacion fa) {
         this.fa = fa;
         initComponents();
+        this.getContentPane().setBackground(prueba);
         obligatorioTexto.setEnabled(false);
         this.buscarUsuarios();
+
     }
 
     /**

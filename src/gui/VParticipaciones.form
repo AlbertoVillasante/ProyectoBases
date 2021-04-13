@@ -195,6 +195,9 @@
           <SubComponents>
             <Component class="javax.swing.JLabel" name="saldoLabel">
               <Properties>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="bc" green="bb" red="bb" type="rgb"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="saldo:"/>
               </Properties>
             </Component>
@@ -205,11 +208,17 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel1">
               <Properties>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="bc" green="bb" red="bb" type="rgb"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="&#x20ac; "/>
               </Properties>
             </Component>
             <Component class="javax.swing.JComboBox" name="jComboBox1">
               <Properties>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="bc" green="bb" red="bb" type="rgb"/>
+                </Property>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="4">
                     <StringItem index="0" value="Item 1"/>
@@ -225,6 +234,9 @@
             </Component>
             <Component class="javax.swing.JComboBox" name="jComboBox2">
               <Properties>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="bc" green="bb" red="bb" type="rgb"/>
+                </Property>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="2">
                     <StringItem index="0" value="Comprar"/>
@@ -235,6 +247,9 @@
             </Component>
             <Component class="javax.swing.JLabel" name="nparticipacionesLabel">
               <Properties>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="bc" green="bb" red="bb" type="rgb"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="N&#xfa;mero de participaciones:"/>
               </Properties>
             </Component>
@@ -245,11 +260,17 @@
             </Component>
             <Component class="javax.swing.JLabel" name="precioLabel">
               <Properties>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="bc" green="bb" red="bb" type="rgb"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Precio:"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="comisionLabel">
               <Properties>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="bc" green="bb" red="bb" type="rgb"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Comisi&#xf3;n:"/>
               </Properties>
             </Component>
@@ -262,11 +283,17 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel2">
               <Properties>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="bc" green="bb" red="bb" type="rgb"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="&#x20ac; "/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel3">
               <Properties>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="bc" green="bb" red="bb" type="rgb"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="%"/>
               </Properties>
             </Component>

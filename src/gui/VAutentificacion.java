@@ -1,20 +1,28 @@
 package gui;
 
+import java.awt.Color;
+
 public class VAutentificacion extends javax.swing.JDialog {
 
     aplicacion.FachadaAplicacion fa;
     VPortada vp;
     MenuDeUsuario mu;
     VRegulador vr;
+    Color prueba = new Color(60, 63, 65);
+    Color prueba1 = new Color(78, 82, 85);
 
     /**
      * Creates new form VAutentificacion
      */
+    
     public VAutentificacion(aplicacion.FachadaAplicacion fa, VPortada vp) {
         this.fa = fa;
         this.vp = vp;
         initComponents();
         etiquetaFallo.setVisible(false);
+        this.getContentPane().setBackground(prueba);
+        textoClave.setBackground(prueba1);
+        textoUsuario.setBackground(prueba1);
         this.addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
             public void windowClosing(java.awt.event.WindowEvent e) {
@@ -60,8 +68,10 @@ public class VAutentificacion extends javax.swing.JDialog {
         setName("VAutentificacion"); // NOI18N
         setResizable(false);
 
+        jLabel1.setForeground(new java.awt.Color(187, 187, 188));
         jLabel1.setText("Usuario:");
 
+        textoUsuario.setForeground(new java.awt.Color(187, 187, 188));
         textoUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 textoUsuarioActionPerformed(evt);
@@ -73,8 +83,11 @@ public class VAutentificacion extends javax.swing.JDialog {
             }
         });
 
+        jLabel2.setForeground(new java.awt.Color(187, 187, 188));
         jLabel2.setText("Contraseña:");
 
+        btnAceptar.setBackground(new java.awt.Color(50, 50, 50));
+        btnAceptar.setForeground(new java.awt.Color(187, 187, 188));
         btnAceptar.setText("Aceptar");
         btnAceptar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -82,6 +95,8 @@ public class VAutentificacion extends javax.swing.JDialog {
             }
         });
 
+        btnCancelar.setBackground(new java.awt.Color(50, 50, 50));
+        btnCancelar.setForeground(new java.awt.Color(187, 187, 188));
         btnCancelar.setText("Cancelar");
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -92,12 +107,15 @@ public class VAutentificacion extends javax.swing.JDialog {
         etiquetaFallo.setForeground(new java.awt.Color(255, 51, 51));
         etiquetaFallo.setText("Autentificación incorrecta!");
 
+        textoClave.setForeground(new java.awt.Color(187, 187, 188));
         textoClave.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 textoClaveKeyPressed(evt);
             }
         });
 
+        btnRegistro.setBackground(new java.awt.Color(50, 50, 50));
+        btnRegistro.setForeground(new java.awt.Color(187, 187, 188));
         btnRegistro.setText("Registrarse");
         btnRegistro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -113,32 +131,27 @@ public class VAutentificacion extends javax.swing.JDialog {
                 .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(29, 29, 29))
-                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(19, 19, 19)
-                                .addComponent(textoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(btnAceptar)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(btnCancelar))
-                                    .addComponent(textoClave, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(0, 27, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(etiquetaFallo))
+                                        .addComponent(jLabel1)
+                                        .addGap(29, 29, 29))
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING))
+                                .addGap(19, 19, 19)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(textoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(textoClave, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(btnRegistro)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnAceptar)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnCancelar)))
+                        .addGap(0, 27, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(etiquetaFallo)
                         .addGap(50, 50, 50))))
         );
         layout.setVerticalGroup(

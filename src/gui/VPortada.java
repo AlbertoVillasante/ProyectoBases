@@ -38,7 +38,7 @@ public class VPortada extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         botonEstadisticas.setBackground(new java.awt.Color(255, 255, 255));
-        botonEstadisticas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/portada.jpeg"))); // NOI18N
+        botonEstadisticas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/portada.png"))); // NOI18N
         botonEstadisticas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonEstadisticasActionPerformed(evt);

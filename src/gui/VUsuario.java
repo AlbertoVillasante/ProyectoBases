@@ -8,16 +8,36 @@ public class VUsuario extends javax.swing.JDialog {
 
     aplicacion.FachadaAplicacion fa;
     String id = null;
+
     int CheckeoUsuario;
+
     Color prueba = new Color(60, 63, 65);
+    Color prueba1 = new Color(78, 82, 85);
 
     public VUsuario(aplicacion.FachadaAplicacion fa) {
         this.fa = fa;
         initComponents();
         this.getContentPane().setBackground(prueba);
-       /* obligatorioTexto.setEnabled(false);
-        this.buscarUsuarios();*/
+        tipo_usr.setBackground(prueba1);
+        btnUsuario.setBackground(prueba1);
+        btnActualizar.setBackground(prueba1);
+        btnApellido1.setBackground(prueba1);
+        btnApellido2.setBackground(prueba1);
+        btnBaja.setBackground(prueba1);
+        btnClave.setBackground(prueba1);
+        btnDireccion.setBackground(prueba1);
 
+        btnEmpresa.setBackground(prueba);
+        btnEmpresa.setEnabled(false);
+        obligatorio5.setEnabled(false);
+        nombreEmpresa.setEnabled(false);
+
+        btnInversor.setBackground(prueba1);
+        btnRegistrar.setBackground(prueba1);
+        btnTelefono.setBackground(prueba1);
+        btnUsuario.setBackground(prueba1);
+        /* obligatorioTexto.setEnabled(false);
+        this.buscarUsuarios();*/
     }
 
     /**
@@ -39,70 +59,82 @@ public class VUsuario extends javax.swing.JDialog {
         jLabel6 = new javax.swing.JLabel();
         btnEmpresa = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
+        nombreEmpresa = new javax.swing.JLabel();
         tipo_usr = new javax.swing.JComboBox();
         btnActualizar = new javax.swing.JButton();
         btnRegistrar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
         btnDireccion = new javax.swing.JPasswordField();
         obligatorio1 = new javax.swing.JLabel();
-        obligatorio2 = new javax.swing.JLabel();
         obligatorio3 = new javax.swing.JLabel();
+        obligatorio2 = new javax.swing.JLabel();
         obligatorio4 = new javax.swing.JLabel();
         obligatorio5 = new javax.swing.JLabel();
-        obligatorio6 = new javax.swing.JLabel();
         obligatorio7 = new javax.swing.JLabel();
+        obligatorio6 = new javax.swing.JLabel();
         obligatorio8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
+        nombreInversor = new javax.swing.JLabel();
         btnInversor = new javax.swing.JTextField();
-        jLabel10 = new javax.swing.JLabel();
+        apellido2 = new javax.swing.JLabel();
         btnApellido2 = new javax.swing.JTextField();
         btnApellido1 = new javax.swing.JTextField();
-        jLabel11 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        apellido1 = new javax.swing.JLabel();
+        btnBaja = new javax.swing.JButton();
 
         jButton4.setText("Guardar");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Gestión de Usuarios");
 
+        jLabel3.setForeground(new java.awt.Color(187, 187, 188));
         jLabel3.setText("Usuario:");
 
+        btnUsuario.setForeground(new java.awt.Color(187, 187, 188));
+        btnUsuario.setToolTipText("DNI/NIF");
         btnUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnUsuarioActionPerformed(evt);
             }
         });
 
+        jLabel4.setForeground(new java.awt.Color(187, 187, 188));
         jLabel4.setText("Clave:");
 
+        btnClave.setForeground(new java.awt.Color(187, 187, 188));
         btnClave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnClaveActionPerformed(evt);
             }
         });
 
+        btnTelefono.setForeground(new java.awt.Color(187, 187, 188));
         btnTelefono.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnTelefonoActionPerformed(evt);
             }
         });
 
+        jLabel5.setForeground(new java.awt.Color(187, 187, 188));
         jLabel5.setText("Dirección:");
 
+        jLabel6.setForeground(new java.awt.Color(187, 187, 188));
         jLabel6.setText("Teléfono:");
 
+        btnEmpresa.setForeground(new java.awt.Color(187, 187, 188));
         btnEmpresa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEmpresaActionPerformed(evt);
             }
         });
 
+        jLabel7.setForeground(new java.awt.Color(187, 187, 188));
         jLabel7.setText("Tipo usuario:");
 
-        jLabel8.setText("Nombre empresa:");
+        nombreEmpresa.setForeground(new java.awt.Color(187, 187, 188));
+        nombreEmpresa.setText("Nombre empresa:");
 
-        tipo_usr.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Normal", "Administrador" }));
+        tipo_usr.setForeground(new java.awt.Color(187, 187, 188));
+        tipo_usr.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Inversor", "Empresa" }));
         tipo_usr.setAutoscrolls(true);
         tipo_usr.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -110,6 +142,7 @@ public class VUsuario extends javax.swing.JDialog {
             }
         });
 
+        btnActualizar.setForeground(new java.awt.Color(187, 187, 188));
         btnActualizar.setText("Actualizar");
         btnActualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -117,6 +150,7 @@ public class VUsuario extends javax.swing.JDialog {
             }
         });
 
+        btnRegistrar.setForeground(new java.awt.Color(187, 187, 188));
         btnRegistrar.setText("Registrarse");
         btnRegistrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -133,6 +167,7 @@ public class VUsuario extends javax.swing.JDialog {
             }
         });
 
+        btnDireccion.setForeground(new java.awt.Color(187, 187, 188));
         btnDireccion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDireccionActionPerformed(evt);
@@ -142,11 +177,11 @@ public class VUsuario extends javax.swing.JDialog {
         obligatorio1.setForeground(new java.awt.Color(255, 0, 0));
         obligatorio1.setText("*");
 
-        obligatorio2.setForeground(new java.awt.Color(255, 0, 0));
-        obligatorio2.setText("*");
-
         obligatorio3.setForeground(new java.awt.Color(255, 0, 0));
         obligatorio3.setText("*");
+
+        obligatorio2.setForeground(new java.awt.Color(255, 0, 0));
+        obligatorio2.setText("*");
 
         obligatorio4.setForeground(new java.awt.Color(255, 0, 0));
         obligatorio4.setText("*");
@@ -154,40 +189,47 @@ public class VUsuario extends javax.swing.JDialog {
         obligatorio5.setForeground(new java.awt.Color(255, 0, 0));
         obligatorio5.setText("*");
 
-        obligatorio6.setForeground(new java.awt.Color(255, 0, 0));
-        obligatorio6.setText("*");
-
         obligatorio7.setForeground(new java.awt.Color(255, 0, 0));
         obligatorio7.setText("*");
+
+        obligatorio6.setForeground(new java.awt.Color(255, 0, 0));
+        obligatorio6.setText("*");
 
         obligatorio8.setForeground(new java.awt.Color(255, 0, 0));
         obligatorio8.setText("*");
 
-        jLabel9.setText("Nombre inversor:");
+        nombreInversor.setForeground(new java.awt.Color(187, 187, 188));
+        nombreInversor.setText("Nombre inversor:");
 
+        btnInversor.setForeground(new java.awt.Color(187, 187, 188));
         btnInversor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnInversorActionPerformed(evt);
             }
         });
 
-        jLabel10.setText("Apellido 2:");
+        apellido2.setForeground(new java.awt.Color(187, 187, 188));
+        apellido2.setText("Apellido 2:");
 
+        btnApellido2.setForeground(new java.awt.Color(187, 187, 188));
         btnApellido2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnApellido2ActionPerformed(evt);
             }
         });
 
+        btnApellido1.setForeground(new java.awt.Color(187, 187, 188));
         btnApellido1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnApellido1ActionPerformed(evt);
             }
         });
 
-        jLabel11.setText("Apellido 1:");
+        apellido1.setForeground(new java.awt.Color(187, 187, 188));
+        apellido1.setText("Apellido 1:");
 
-        jButton1.setText("Solicitar baja");
+        btnBaja.setForeground(new java.awt.Color(187, 187, 188));
+        btnBaja.setText("Solicitar baja");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -197,82 +239,82 @@ public class VUsuario extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnActualizar)
-                        .addGap(133, 133, 133)
-                        .addComponent(btnRegistrar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 144, Short.MAX_VALUE)
-                        .addComponent(btnCancelar))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(obligatorio1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel3))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(106, 106, 106)
-                                .addComponent(btnUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(obligatorio5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel8)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnEmpresa))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jLabel7)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(tipo_usr, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(69, 69, 69)
-                        .addComponent(jButton1))
-                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jLabel7)
+                                .addGap(18, 18, 18)
+                                .addComponent(tipo_usr, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(obligatorio7)
+                                    .addComponent(obligatorio6)
+                                    .addComponent(obligatorio8)
+                                    .addComponent(obligatorio5))
+                                .addGap(20, 20, 20)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(nombreInversor)
+                                    .addComponent(nombreEmpresa))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(btnEmpresa)
+                                    .addComponent(btnInversor, javax.swing.GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE))
+                                .addGap(35, 35, 35))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(obligatorio3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel4))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(106, 106, 106)
-                                .addComponent(btnClave)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(obligatorio7)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel9)
-                        .addGap(22, 22, 22)
-                        .addComponent(btnInversor, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(143, 143, 143)
+                                .addComponent(btnApellido2, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(btnBaja)
+                                .addGap(99, 99, 99))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(obligatorio2)
-                            .addComponent(obligatorio4, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel5))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnTelefono)
-                            .addComponent(btnDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(obligatorio6)
-                            .addComponent(obligatorio8, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(46, 46, 46)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.LEADING)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(293, 293, 293)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(obligatorio2)
+                            .addComponent(obligatorio4)
+                            .addComponent(obligatorio3)
+                            .addComponent(obligatorio1))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnClave, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel6))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(btnTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(18, 146, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnApellido1, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnApellido2, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap())
+                            .addComponent(apellido1)
+                            .addComponent(apellido2))
+                        .addGap(69, 69, 69)
+                        .addComponent(btnApellido1, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(35, 35, 35))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(97, 97, 97)
+                .addComponent(btnActualizar)
+                .addGap(156, 156, 156)
+                .addComponent(btnRegistrar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnCancelar)
+                .addGap(60, 60, 60))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
+                    .addComponent(btnBaja)
                     .addComponent(jLabel7)
                     .addComponent(tipo_usr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(31, 31, 31)
@@ -282,52 +324,46 @@ public class VUsuario extends javax.swing.JDialog {
                         .addComponent(btnUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(obligatorio1))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel8)
-                        .addComponent(btnEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(obligatorio5))
-                .addGap(18, 18, 18)
+                        .addComponent(nombreEmpresa)
+                        .addComponent(btnEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(obligatorio5)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(4, 4, 4)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4)
-                            .addComponent(btnClave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(obligatorio3, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(4, 4, 4)
-                        .addComponent(btnInversor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(obligatorio7, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel9)))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
+                        .addGap(79, 79, 79)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
-                            .addComponent(btnDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(obligatorio2, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, Short.MAX_VALUE)
+                            .addComponent(obligatorio3, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(30, 30, 30)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel6)
-                            .addComponent(btnTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(obligatorio4, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(obligatorio6, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel11))
+                            .addComponent(nombreInversor)
+                            .addComponent(btnInversor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(obligatorio6, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnClave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(obligatorio2, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4))
+                        .addGap(25, 25, 25)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(apellido1)
+                            .addComponent(obligatorio7, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnApellido1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
+                        .addGap(31, 31, 31)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(apellido2)
+                            .addComponent(btnApellido2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(obligatorio8, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel10)
-                            .addComponent(btnApellido2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(47, 47, 47)
+                            .addComponent(jLabel6)
+                            .addComponent(obligatorio4, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addGap(46, 46, 46)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnRegistrar)
-                    .addComponent(btnCancelar)
-                    .addComponent(btnActualizar))
-                .addContainerGap())
+                    .addComponent(btnActualizar)
+                    .addComponent(btnCancelar))
+                .addGap(35, 35, 35))
         );
 
         tipo_usr.getAccessibleContext().setAccessibleName("");
@@ -352,7 +388,34 @@ public class VUsuario extends javax.swing.JDialog {
     }//GEN-LAST:event_btnEmpresaActionPerformed
 
     private void tipo_usrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tipo_usrActionPerformed
-        // TODO add your handling code here:
+        if (tipo_usr.getSelectedIndex() == 1) {
+            btnEmpresa.setEnabled(true);
+            obligatorio5.setEnabled(true);
+            nombreEmpresa.setEnabled(true);
+            apellido1.setEnabled(false);
+            apellido2.setEnabled(false);
+            nombreInversor.setEnabled(false);
+            obligatorio6.setEnabled(false);
+            obligatorio7.setEnabled(false);
+            obligatorio8.setEnabled(false);
+            btnInversor.setEnabled(false);
+            btnApellido1.setEnabled(false);
+            btnApellido2.setEnabled(false);
+
+        } else {
+            btnEmpresa.setEnabled(false);
+            obligatorio5.setEnabled(false);
+            nombreEmpresa.setEnabled(false);
+            apellido1.setEnabled(true);
+            apellido2.setEnabled(true);
+            nombreInversor.setEnabled(true);
+            obligatorio6.setEnabled(true);
+            obligatorio7.setEnabled(true);
+            obligatorio8.setEnabled(true);
+            btnInversor.setEnabled(true);
+            btnApellido1.setEnabled(true);
+            btnApellido2.setEnabled(true);
+        }
     }//GEN-LAST:event_tipo_usrActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
@@ -360,15 +423,19 @@ public class VUsuario extends javax.swing.JDialog {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
-        /*id = null;
+        //id = null;
         btnUsuario.setText("");
         btnDireccion.setText("");
         btnClave.setText("");
         btnEmpresa.setText("");
         btnTelefono.setText("");
+        btnApellido1.setText("");
+        btnApellido2.setText("");
+        btnInversor.setText("");
         tipo_usr.setSelectedIndex(0);
-        btnBorrar.setEnabled(true);
-        btnRegistrar.setEnabled(true);*/
+        
+        //btnBorrar.setEnabled(true);
+        //btnRegistrar.setEnabled(true);
     }//GEN-LAST:event_btnActualizarActionPerformed
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
@@ -433,9 +500,12 @@ public class VUsuario extends javax.swing.JDialog {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel apellido1;
+    private javax.swing.JLabel apellido2;
     private javax.swing.JButton btnActualizar;
     private javax.swing.JTextField btnApellido1;
     private javax.swing.JTextField btnApellido2;
+    private javax.swing.JButton btnBaja;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JTextField btnClave;
     private javax.swing.JPasswordField btnDireccion;
@@ -444,17 +514,14 @@ public class VUsuario extends javax.swing.JDialog {
     private javax.swing.JButton btnRegistrar;
     private javax.swing.JTextField btnTelefono;
     private javax.swing.JTextField btnUsuario;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton4;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel nombreEmpresa;
+    private javax.swing.JLabel nombreInversor;
     private javax.swing.JLabel obligatorio1;
     private javax.swing.JLabel obligatorio2;
     private javax.swing.JLabel obligatorio3;

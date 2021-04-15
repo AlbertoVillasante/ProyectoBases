@@ -5,23 +5,25 @@
  */
 package gui;
 
+import aplicacion.FachadaAplicacion;
 import java.awt.Color;
 
 /**
  *
  * @author hugo
  */
-public class VRegulador extends javax.swing.JDialog {
+public class VRegulador extends javax.swing.JFrame {
 
     Color prueba = new Color(60, 63, 65);
+    FachadaAplicacion fa;
 
     /**
      * Creates new form VRegulador
      */
     public VRegulador(aplicacion.FachadaAplicacion fa) {
+        this.fa = fa;
         initComponents();
         this.getContentPane().setBackground(prueba);
-
     }
 
     /**
@@ -33,9 +35,29 @@ public class VRegulador extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        botonBolsa = new javax.swing.JButton();
+        botonSolicitudes = new javax.swing.JButton();
         botonConfiguracion = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
+        botonBolsa.setBackground(new java.awt.Color(255, 255, 255));
+        botonBolsa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/bolsaDinero.jpeg"))); // NOI18N
+        botonBolsa.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        botonBolsa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonBolsaActionPerformed(evt);
+            }
+        });
+
+        botonSolicitudes.setBackground(new java.awt.Color(255, 255, 255));
+        botonSolicitudes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/checkearCandado.jpeg"))); // NOI18N
+        botonSolicitudes.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        botonSolicitudes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonSolicitudesActionPerformed(evt);
+            }
+        });
 
         botonConfiguracion.setBackground(new java.awt.Color(255, 255, 255));
         botonConfiguracion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/rueda(1).jpeg"))); // NOI18N
@@ -50,24 +72,39 @@ public class VRegulador extends javax.swing.JDialog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(448, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(55, 55, 55)
+                .addComponent(botonBolsa, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(70, 70, 70)
+                .addComponent(botonSolicitudes, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 71, Short.MAX_VALUE)
                 .addComponent(botonConfiguracion, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(144, 144, 144))
+                .addGap(62, 62, 62))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(169, Short.MAX_VALUE)
-                .addComponent(botonConfiguracion, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(160, 160, 160))
+                .addContainerGap(172, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(botonConfiguracion, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(botonSolicitudes, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(botonBolsa, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(157, 157, 157))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void botonBolsaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBolsaActionPerformed
+        fa.nuevaModificacion();
+    }//GEN-LAST:event_botonBolsaActionPerformed
+
+    private void botonSolicitudesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSolicitudesActionPerformed
+        fa.nuevaSolicitud();
+    }//GEN-LAST:event_botonSolicitudesActionPerformed
+
     private void botonConfiguracionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonConfiguracionActionPerformed
-        // TODO add your handling code here:
+        fa.configuracionRegulador();
     }//GEN-LAST:event_botonConfiguracionActionPerformed
 
     /**
@@ -75,6 +112,8 @@ public class VRegulador extends javax.swing.JDialog {
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton botonBolsa;
     private javax.swing.JButton botonConfiguracion;
+    private javax.swing.JButton botonSolicitudes;
     // End of variables declaration//GEN-END:variables
 }

@@ -37,6 +37,19 @@ public class GestionUsuarios {
     public void nuevoUsuario() {
         fgui.nuevoUsuario();
     }
+
+    public void nuevaSolicitud() {
+        fgui.nuevaSolicitud();
+    }
+
+    public void nuevaModificacion() {
+        fgui.nuevaModificacion();
+    }
+    
+    public void configuracionRegulador() {
+        fgui.configuracionRegulador();
+    }
+
     /*  //Comentado para que no de error
     public java.util.List<EmpresaUsuario> obtenerUsuarios(String idUsuario, String nombreUsuario) {
         return fbd.consultarListaUsuarios(idUsuario, nombreUsuario);

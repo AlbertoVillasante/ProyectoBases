@@ -105,4 +105,24 @@ public class FachadaGui {           //Esta es la fachada
         vu.setVisible(true);
     }
 
+    public void nuevaSolicitud() {
+        VVerificacion vv;
+
+        vv = new VVerificacion(fa);
+        vv.setVisible(true);
+    }
+
+    public void nuevaModificacion() {
+        VSaldos vs;
+
+        vs = new VSaldos(fa);
+        vs.setVisible(true);
+    }
+
+    public void configuracionRegulador() {
+        VConfiguracionRegulador vc;
+
+        vc = new VConfiguracionRegulador(fa);
+        vc.setVisible(true);
+    }
 }

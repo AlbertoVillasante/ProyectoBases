@@ -70,6 +70,16 @@ public class VParticipaciones extends javax.swing.JDialog {
         buttonGroup7 = new javax.swing.ButtonGroup();
         buttonGroup8 = new javax.swing.ButtonGroup();
         participacionesPanel = new javax.swing.JTabbedPane();
+        altabajaPanel = new javax.swing.JPanel();
+        carteraLabel = new javax.swing.JLabel();
+        numeroLabel = new javax.swing.JLabel();
+        carteraText = new javax.swing.JTextField();
+        numeroText = new javax.swing.JTextField();
+        aceptarButton1 = new javax.swing.JButton();
+        msjObligatorio = new java.awt.Label();
+        msNoParticipaciones = new java.awt.Label();
+        Alta = new javax.swing.JRadioButton();
+        Baja = new javax.swing.JRadioButton();
         compraventaPanel = new javax.swing.JPanel();
         saldoLabel = new javax.swing.JLabel();
         saldoText = new javax.swing.JTextField();
@@ -88,16 +98,6 @@ public class VParticipaciones extends javax.swing.JDialog {
         jTable2 = new javax.swing.JTable();
         aceptarButton = new javax.swing.JButton();
         buscarButton = new javax.swing.JButton();
-        altabajaPanel = new javax.swing.JPanel();
-        carteraLabel = new javax.swing.JLabel();
-        numeroLabel = new javax.swing.JLabel();
-        carteraText = new javax.swing.JTextField();
-        numeroText = new javax.swing.JTextField();
-        aceptarButton1 = new javax.swing.JButton();
-        msjObligatorio = new java.awt.Label();
-        msNoParticipaciones = new java.awt.Label();
-        Alta = new javax.swing.JRadioButton();
-        Baja = new javax.swing.JRadioButton();
         btnSalir = new javax.swing.JButton();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -116,6 +116,112 @@ public class VParticipaciones extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         participacionesPanel.setForeground(new java.awt.Color(187, 187, 188));
+
+        carteraLabel.setForeground(new java.awt.Color(187, 187, 188));
+        carteraLabel.setText("Cartera de participaciones:");
+
+        numeroLabel.setForeground(new java.awt.Color(187, 187, 188));
+        numeroLabel.setText("Número de participaciones:");
+
+        carteraText.setForeground(new java.awt.Color(187, 187, 188));
+        carteraText.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                carteraTextActionPerformed(evt);
+            }
+        });
+
+        numeroText.setForeground(new java.awt.Color(187, 187, 188));
+        numeroText.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                numeroTextActionPerformed(evt);
+            }
+        });
+
+        aceptarButton1.setForeground(new java.awt.Color(187, 187, 188));
+        aceptarButton1.setText("Aceptar");
+        aceptarButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                aceptarButton1ActionPerformed(evt);
+            }
+        });
+
+        msjObligatorio.setForeground(new java.awt.Color(255, 0, 0));
+        msjObligatorio.setText("Rellena los campos obligatorios (*)");
+
+        msNoParticipaciones.setForeground(new java.awt.Color(255, 0, 0));
+        msNoParticipaciones.setText("No dispones de ese número de participaciones*");
+
+        Alta.setForeground(new java.awt.Color(187, 187, 188));
+        Alta.setText("Alta");
+        Alta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AltaActionPerformed(evt);
+            }
+        });
+
+        Baja.setForeground(new java.awt.Color(187, 187, 188));
+        Baja.setText("Baja");
+        Baja.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BajaActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout altabajaPanelLayout = new javax.swing.GroupLayout(altabajaPanel);
+        altabajaPanel.setLayout(altabajaPanelLayout);
+        altabajaPanelLayout.setHorizontalGroup(
+            altabajaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(altabajaPanelLayout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addGroup(altabajaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(altabajaPanelLayout.createSequentialGroup()
+                        .addGroup(altabajaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(numeroLabel)
+                            .addComponent(carteraLabel))
+                        .addGap(18, 18, 18)
+                        .addGroup(altabajaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(carteraText)
+                            .addComponent(numeroText, javax.swing.GroupLayout.DEFAULT_SIZE, 71, Short.MAX_VALUE))
+                        .addGap(316, 316, 316))
+                    .addGroup(altabajaPanelLayout.createSequentialGroup()
+                        .addComponent(msjObligatorio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(aceptarButton1)
+                        .addGap(41, 41, 41))
+                    .addGroup(altabajaPanelLayout.createSequentialGroup()
+                        .addGroup(altabajaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(msNoParticipaciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(altabajaPanelLayout.createSequentialGroup()
+                                .addComponent(Alta, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(31, 31, 31)
+                                .addComponent(Baja)))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+        );
+        altabajaPanelLayout.setVerticalGroup(
+            altabajaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(altabajaPanelLayout.createSequentialGroup()
+                .addContainerGap(39, Short.MAX_VALUE)
+                .addGroup(altabajaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(carteraLabel)
+                    .addComponent(carteraText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(24, 24, 24)
+                .addGroup(altabajaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(numeroLabel)
+                    .addComponent(numeroText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(26, 26, 26)
+                .addComponent(msNoParticipaciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
+                .addGroup(altabajaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Alta, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Baja, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(altabajaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(aceptarButton1)
+                    .addComponent(msjObligatorio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(38, 38, 38))
+        );
+
+        participacionesPanel.addTab("alta / baja", altabajaPanel);
 
         saldoLabel.setForeground(new java.awt.Color(187, 187, 188));
         saldoLabel.setText("saldo:");
@@ -299,112 +405,6 @@ public class VParticipaciones extends javax.swing.JDialog {
         );
 
         participacionesPanel.addTab("compra / venta", compraventaPanel);
-
-        carteraLabel.setForeground(new java.awt.Color(187, 187, 188));
-        carteraLabel.setText("Cartera de participaciones:");
-
-        numeroLabel.setForeground(new java.awt.Color(187, 187, 188));
-        numeroLabel.setText("Número de participaciones:");
-
-        carteraText.setForeground(new java.awt.Color(187, 187, 188));
-        carteraText.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                carteraTextActionPerformed(evt);
-            }
-        });
-
-        numeroText.setForeground(new java.awt.Color(187, 187, 188));
-        numeroText.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                numeroTextActionPerformed(evt);
-            }
-        });
-
-        aceptarButton1.setForeground(new java.awt.Color(187, 187, 188));
-        aceptarButton1.setText("Aceptar");
-        aceptarButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                aceptarButton1ActionPerformed(evt);
-            }
-        });
-
-        msjObligatorio.setForeground(new java.awt.Color(255, 0, 0));
-        msjObligatorio.setText("Rellena los campos obligatorios (*)");
-
-        msNoParticipaciones.setForeground(new java.awt.Color(255, 0, 0));
-        msNoParticipaciones.setText("No dispones de ese número de participaciones*");
-
-        Alta.setForeground(new java.awt.Color(187, 187, 188));
-        Alta.setText("Alta");
-        Alta.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                AltaActionPerformed(evt);
-            }
-        });
-
-        Baja.setForeground(new java.awt.Color(187, 187, 188));
-        Baja.setText("Baja");
-        Baja.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BajaActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout altabajaPanelLayout = new javax.swing.GroupLayout(altabajaPanel);
-        altabajaPanel.setLayout(altabajaPanelLayout);
-        altabajaPanelLayout.setHorizontalGroup(
-            altabajaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(altabajaPanelLayout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addGroup(altabajaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(altabajaPanelLayout.createSequentialGroup()
-                        .addGroup(altabajaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(numeroLabel)
-                            .addComponent(carteraLabel))
-                        .addGap(18, 18, 18)
-                        .addGroup(altabajaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(carteraText)
-                            .addComponent(numeroText, javax.swing.GroupLayout.DEFAULT_SIZE, 71, Short.MAX_VALUE))
-                        .addGap(316, 316, 316))
-                    .addGroup(altabajaPanelLayout.createSequentialGroup()
-                        .addComponent(msjObligatorio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(aceptarButton1)
-                        .addGap(41, 41, 41))
-                    .addGroup(altabajaPanelLayout.createSequentialGroup()
-                        .addGroup(altabajaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(msNoParticipaciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(altabajaPanelLayout.createSequentialGroup()
-                                .addComponent(Alta, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(31, 31, 31)
-                                .addComponent(Baja)))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-        );
-        altabajaPanelLayout.setVerticalGroup(
-            altabajaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(altabajaPanelLayout.createSequentialGroup()
-                .addContainerGap(39, Short.MAX_VALUE)
-                .addGroup(altabajaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(carteraLabel)
-                    .addComponent(carteraText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(24, 24, 24)
-                .addGroup(altabajaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(numeroLabel)
-                    .addComponent(numeroText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
-                .addComponent(msNoParticipaciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
-                .addGroup(altabajaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Alta, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Baja, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(altabajaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(aceptarButton1)
-                    .addComponent(msjObligatorio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(38, 38, 38))
-        );
-
-        participacionesPanel.addTab("alta / baja", altabajaPanel);
 
         btnSalir.setBackground(new java.awt.Color(180, 22, 45));
         btnSalir.setForeground(new java.awt.Color(0, 0, 0));

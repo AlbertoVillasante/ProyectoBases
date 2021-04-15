@@ -63,13 +63,16 @@ public class FachadaAplicacion {
         return gl.actualizarEjemplaresLibro(idLibro, ejemplares, borrar);
     }
 
-    //Comentado para que no de error
-    public String comprobarAutentificacion(String idUsuario, String clave) {
-        return gu.comprobarAutentificacion(idUsuario, clave);
+    public InversorUsuario comprobarAutentificacionI(String idUsuario, String clave) {
+        return gu.comprobarAutentificacionI(idUsuario, clave);
     }
 
-    public void nuevoUsuario() {
-        gu.nuevoUsuario();
+    public EmpresaUsuario comprobarAutentificacionE(String idUsuario, String clave) {
+        return gu.comprobarAutentificacionE(idUsuario, clave);
+    }
+
+    public void nuevoUsuario(boolean c, InversorUsuario iu, EmpresaUsuario eu) {
+        gu.nuevoUsuario(c, iu, eu);
     }
 
     /*  //Comentado para que no de error
@@ -127,10 +130,6 @@ public class FachadaAplicacion {
         gpart.nuevasParticipaciones();
     }
 
-    public void nuevoRegistro() {
-        gu.nuevoUsuario();
-    }
-
     public void nuevaSolicitud() {
         gu.nuevaSolicitud();
     }
@@ -139,7 +138,7 @@ public class FachadaAplicacion {
         gu.nuevaModificacion();
     }
 
-    public void configuracionRegulador() {
-        gu.configuracionRegulador();
+    public void configuracionRegulador(InversorUsuario iu, EmpresaUsuario eu) {
+        gu.configuracionRegulador(iu, eu);
     }
 }

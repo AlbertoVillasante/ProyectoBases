@@ -5,6 +5,8 @@
  */
 package gui;
 
+import aplicacion.EmpresaUsuario;
+import aplicacion.InversorUsuario;
 import java.awt.Color;
 
 /**
@@ -13,13 +15,23 @@ import java.awt.Color;
  */
 public class MenuDeUsuario extends javax.swing.JFrame {
 
+    InversorUsuario iu;
+    EmpresaUsuario eu;
     aplicacion.FachadaAplicacion fa;
     Color prueba = new Color(60, 63, 65);
+    Color prueba1 = new Color(78, 82, 85);
 
-    public MenuDeUsuario(aplicacion.FachadaAplicacion fa) {
+    public MenuDeUsuario(aplicacion.FachadaAplicacion fa, InversorUsuario iu, EmpresaUsuario eu) {
         this.fa = fa;
+        if (iu != null) {
+            this.iu = iu;
+        }
+        if (eu != null) {
+            this.eu = eu;
+        }
         initComponents();
         this.getContentPane().setBackground(prueba);
+        btnCerrarSesion.setBackground(prueba1);
 
     }
 
@@ -109,8 +121,8 @@ public class MenuDeUsuario extends javax.swing.JFrame {
             }
         });
 
-        btnCerrarSesion.setBackground(new java.awt.Color(102, 255, 102));
-        btnCerrarSesion.setForeground(new java.awt.Color(0, 0, 0));
+        btnCerrarSesion.setBackground(new java.awt.Color(153, 153, 153));
+        btnCerrarSesion.setForeground(new java.awt.Color(187, 187, 188));
         btnCerrarSesion.setText("Cerrar sesión");
         btnCerrarSesion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -197,7 +209,7 @@ public class MenuDeUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_botonParticipacionesActionPerformed
 
     private void botonConfiguracionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonConfiguracionActionPerformed
-        // TODO add your handling code here:
+        fa.nuevoUsuario(false, iu, eu);
     }//GEN-LAST:event_botonConfiguracionActionPerformed
 
     private void botonBeneficiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBeneficiosActionPerformed
@@ -209,11 +221,16 @@ public class MenuDeUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_botonEstadisticasActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-
+        this.dispose();
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarSesionActionPerformed
-        // TODO add your handling code here:
+        this.dispose();
+        VPortada vp = new VPortada(fa);
+        VAutentificacion va=  new VAutentificacion(fa, vp);
+        vp.setVisible(true);
+        va.setLocation(185, 80);
+        va.setVisible(true);
     }//GEN-LAST:event_btnCerrarSesionActionPerformed
 
 

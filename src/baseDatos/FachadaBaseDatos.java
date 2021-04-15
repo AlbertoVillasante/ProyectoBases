@@ -163,6 +163,7 @@ public class FachadaBaseDatos {
     public Integer DiasFaltanParaVencer(Integer libro, Integer ejemplar) {
         return daoLibros.DiasFaltanParaVencer(libro, ejemplar);
     }
+    
      public InversorUsuario validarUsuario(String idUsuario, String clave) {
         return daoUsuarios.validarUsuarioInversor(idUsuario, clave);
     }

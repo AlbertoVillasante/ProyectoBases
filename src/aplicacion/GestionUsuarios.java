@@ -14,28 +14,33 @@ public class GestionUsuarios {
     }
 
     //Comentado para que no de error
-    public String comprobarAutentificacion(String idUsuario, String clave) {
-        if (idUsuario.length() == 9) {
-            InversorUsuario u;
-            u = fbd.validarUsuario(idUsuario, clave);
-            if (u != null) {
-                return u.getTipoUsuario().name();
-            } else {
-                return "";
-            }
+    public InversorUsuario comprobarAutentificacionI(String idUsuario, String clave) {
+        InversorUsuario u;
+
+        u = fbd.validarUsuario(idUsuario, clave);
+        if (u != null) {
+            return u;
         } else {
-            EmpresaUsuario u;
-            u = fbd.validarUsuarioE(idUsuario, clave);
-            if (u != null) {
-                return u.getTipo().name();
-            } else {
-                return "";
-            }
+            u = new InversorUsuario("", null, null, null, null, null, null, null);
+            return u;
+        }
+
+    }
+
+    public EmpresaUsuario comprobarAutentificacionE(String idUsuario, String clave) {
+        EmpresaUsuario u;
+
+        u = fbd.validarUsuarioE(idUsuario, clave);
+        if (u != null) {
+            return u;
+        } else {
+            u = new EmpresaUsuario("", null, null, null, null, null);
+            return u;
         }
     }
 
-    public void nuevoUsuario() {
-        fgui.nuevoUsuario();
+    public void nuevoUsuario(boolean c,InversorUsuario iu, EmpresaUsuario eu) {
+        fgui.nuevoUsuario(c,iu,eu);
     }
 
     public void nuevaSolicitud() {
@@ -45,9 +50,9 @@ public class GestionUsuarios {
     public void nuevaModificacion() {
         fgui.nuevaModificacion();
     }
-    
-    public void configuracionRegulador() {
-        fgui.configuracionRegulador();
+
+    public void configuracionRegulador(InversorUsuario iu, EmpresaUsuario eu) {
+        fgui.configuracionRegulador(iu,eu);
     }
 
     /*  //Comentado para que no de error

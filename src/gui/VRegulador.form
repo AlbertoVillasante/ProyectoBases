@@ -30,7 +30,6 @@
                       <Component id="btnCerrarSesion" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                       <Component id="btnSalir" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
                       <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
@@ -38,26 +37,27 @@
                       <Component id="jButton1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
-                  <Group type="102" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="modificarSaldosLabel" max="32767" attributes="0"/>
                           <Component id="botonBolsa" min="-2" pref="167" max="-2" attributes="1"/>
                       </Group>
-                      <EmptySpace min="-2" pref="70" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="botonSolicitudes" min="-2" pref="167" max="-2" attributes="1"/>
-                          <Component id="solicitudesPendientesLabel" max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="77" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="botonSolicitudes" alignment="1" min="-2" pref="167" max="-2" attributes="1"/>
+                          <Component id="solicitudesPendientesLabel" alignment="1" min="-2" pref="167" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="71" max="32767" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="botonConfiguracion" min="-2" pref="167" max="-2" attributes="1"/>
-                          <Component id="configuracionLabel" max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="77" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="botonConfiguracion" alignment="1" min="-2" pref="167" max="-2" attributes="1"/>
+                          <Component id="configuracionLabel" alignment="1" min="-2" pref="167" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="62" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="64" max="-2" attributes="0"/>
                   </Group>
               </Group>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -149,16 +149,25 @@
     </Component>
     <Component class="javax.swing.JLabel" name="modificarSaldosLabel">
       <Properties>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="bc" green="bb" red="bb" type="rgb"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="       Modificar saldos"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="solicitudesPendientesLabel">
       <Properties>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="bc" green="bb" red="bb" type="rgb"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Solicitudes pendientes"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="configuracionLabel">
       <Properties>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="bc" green="bb" red="bb" type="rgb"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="        Configuraci&#xf3;n"/>
       </Properties>
     </Component>
@@ -178,7 +187,11 @@
     </Component>
     <Component class="javax.swing.JButton" name="jButton1">
       <Properties>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="bc" green="bb" red="bb" type="rgb"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Men&#xfa;"/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
@@ -186,21 +199,27 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="bc" green="bb" red="bb" type="rgb"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="______________________________________________"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="bc" green="bb" red="bb" type="rgb"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="_____________________________________________"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="btnCerrarSesion">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="66" green="ff" red="66" type="rgb"/>
+          <Color blue="99" green="99" red="99" type="rgb"/>
         </Property>
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="0" green="0" red="0" type="rgb"/>
+          <Color blue="bc" green="bb" red="bb" type="rgb"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Cerrar sesi&#xf3;n"/>
       </Properties>

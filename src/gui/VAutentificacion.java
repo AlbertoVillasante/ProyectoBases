@@ -1,5 +1,7 @@
 package gui;
 
+import aplicacion.EmpresaUsuario;
+import aplicacion.InversorUsuario;
 import java.awt.Color;
 
 public class VAutentificacion extends javax.swing.JDialog {
@@ -14,7 +16,6 @@ public class VAutentificacion extends javax.swing.JDialog {
     /**
      * Creates new form VAutentificacion
      */
-    
     public VAutentificacion(aplicacion.FachadaAplicacion fa, VPortada vp) {
         this.fa = fa;
         this.vp = vp;
@@ -72,11 +73,6 @@ public class VAutentificacion extends javax.swing.JDialog {
         jLabel1.setText("Usuario:");
 
         textoUsuario.setForeground(new java.awt.Color(187, 187, 188));
-        textoUsuario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textoUsuarioActionPerformed(evt);
-            }
-        });
         textoUsuario.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 textoUsuarioKeyPressed(evt);
@@ -178,26 +174,41 @@ public class VAutentificacion extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void textoUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textoUsuarioActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textoUsuarioActionPerformed
-
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
         etiquetaFallo.setVisible(false);
-        String tipo;
-        if (!(tipo = fa.comprobarAutentificacion(textoUsuario.getText(), textoClave.getText())).equals("")) {
-            this.dispose();
-            vp.dispose();
-            vp.setVisible(false);
-            if (tipo.equals("Normal")) {
-                mu = new MenuDeUsuario(fa);
-                mu.setVisible(true);
-            } else if (tipo.equals("Regulador")) {
-                vr = new VRegulador(fa);
-                vr.setVisible(true);
+        if (textoUsuario.getText().length() == 9) {
+            InversorUsuario u;
+            if (!(u = fa.comprobarAutentificacionI(textoUsuario.getText(), textoClave.getText())).getIdUsuario().equals("")) {
+                this.dispose();
+                vp.dispose();
+                vp.setVisible(false);
+                if (u.getTipoUsuario().name().equals("Normal")) {
+                    mu = new MenuDeUsuario(fa,u,null);
+                    mu.setVisible(true);
+                } else if (u.getTipoUsuario().name().equals("Regulador")) {
+                    vr = new VRegulador(fa,u,null);
+                    vr.setVisible(true);
+                }
+            } else {
+                etiquetaFallo.setVisible(true);
             }
-        } else
-            etiquetaFallo.setVisible(true);
+        } else {
+            EmpresaUsuario u;
+            if (!(u = fa.comprobarAutentificacionE(textoUsuario.getText(), textoClave.getText())).getIdUsuario().equals("")) {
+                this.dispose();
+                vp.dispose();
+                vp.setVisible(false);
+                if (u.getTipoUsuario().name().equals("Normal")) {
+                    mu = new MenuDeUsuario(fa,null,u);
+                    mu.setVisible(true);
+                } else if (u.getTipoUsuario().name().equals("Regulador")) {
+                    vr = new VRegulador(fa,null,u);
+                    vr.setVisible(true);
+                }
+            } else {
+                etiquetaFallo.setVisible(true);
+            }
+        }
     }//GEN-LAST:event_btnAceptarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
@@ -207,49 +218,84 @@ public class VAutentificacion extends javax.swing.JDialog {
     private void textoClaveKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textoClaveKeyPressed
         if (evt.getKeyChar() == '\n') {           //Comentado para que no de error
             etiquetaFallo.setVisible(false);
-            String tipo;
-
-            if (!(tipo = fa.comprobarAutentificacion(textoUsuario.getText(), textoClave.getText())).equals("")) {
-                this.dispose();
-                vp.dispose();
-                vp.setVisible(false);
-                if (tipo.equals("Normal")) {
-                    mu = new MenuDeUsuario(fa);
-                    mu.setVisible(true);
-                } else if (tipo.equals("Regulador")) {
-                    vr = new VRegulador(fa);
-                    vr.setVisible(true);
+            if (textoUsuario.getText().length() == 9) {
+                InversorUsuario u;
+                if (!(u = fa.comprobarAutentificacionI(textoUsuario.getText(), textoClave.getText())).getIdUsuario().equals("")) {
+                    this.dispose();
+                    vp.dispose();
+                    vp.setVisible(false);
+                    if (u.getTipoUsuario().name().equals("Normal")) {
+                        mu = new MenuDeUsuario(fa,u,null);
+                        mu.setVisible(true);
+                    } else if (u.getTipoUsuario().name().equals("Regulador")) {
+                        vr = new VRegulador(fa,u,null);
+                        vr.setVisible(true);
+                    }
+                } else {
+                    etiquetaFallo.setVisible(true);
                 }
             } else {
-                etiquetaFallo.setVisible(true);
+                EmpresaUsuario u;
+                if (!(u = fa.comprobarAutentificacionE(textoUsuario.getText(), textoClave.getText())).getIdUsuario().equals("")) {
+                    this.dispose();
+                    vp.dispose();
+                    vp.setVisible(false);
+                    if (u.getTipoUsuario().name().equals("Normal")) {
+                        mu = new MenuDeUsuario(fa,null,u);
+                        mu.setVisible(true);
+                    } else if (u.getTipoUsuario().name().equals("Regulador")) {
+                        vr = new VRegulador(fa,null,u);
+                        vr.setVisible(true);
+                    }
+                } else {
+                    etiquetaFallo.setVisible(true);
+                }
             }
         }
     }//GEN-LAST:event_textoClaveKeyPressed
 
     private void textoUsuarioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textoUsuarioKeyPressed
-        if (evt.getKeyChar() == '\n') {
-            String tipo;
-            etiquetaFallo.setVisible(false);
-            if (!(tipo = fa.comprobarAutentificacion(textoUsuario.getText(), textoClave.getText())).equals("")) {
-                this.dispose();
-                vp.dispose();
-                vp.setVisible(false);
-                if (tipo.equals("Normal")) {
-                    mu = new MenuDeUsuario(fa);
-                    mu.setVisible(true);
-                } else if (tipo.equals("Regulador")) {
-                    vr = new VRegulador(fa);
-                    vr.setVisible(true);
+        if (evt.getKeyChar() == '\n') {           //Comentado para que no de error
+
+            if (textoUsuario.getText().length() == 9) {
+                InversorUsuario u;
+                if (!(u = fa.comprobarAutentificacionI(textoUsuario.getText(), textoClave.getText())).getIdUsuario().equals("")) {
+                    this.dispose();
+                    vp.dispose();
+                    vp.setVisible(false);
+                    if (u.getTipoUsuario().name().equals("Normal")) {
+                        mu = new MenuDeUsuario(fa,u,null);
+                        mu.setVisible(true);
+                    } else if (u.getTipoUsuario().name().equals("Regulador")) {
+                        vr = new VRegulador(fa,u,null);
+                        vr.setVisible(true);
+                    }
+                } else {
+                    etiquetaFallo.setVisible(true);
                 }
             } else {
-                etiquetaFallo.setVisible(true);
+                EmpresaUsuario u;
+                if (!(u = fa.comprobarAutentificacionE(textoUsuario.getText(), textoClave.getText())).getIdUsuario().equals("")) {
+                    this.dispose();
+                    vp.dispose();
+                    vp.setVisible(false);
+                    if (u.getTipoUsuario().name().equals("Normal")) {
+                        mu = new MenuDeUsuario(fa,null,u);
+                        mu.setVisible(true);
+                    } else if (u.getTipoUsuario().name().equals("Regulador")) {
+                        vr = new VRegulador(fa,null,u);
+                        vr.setVisible(true);
+                    }
+                } else {
+                    etiquetaFallo.setVisible(true);
+                }
             }
         }
     }//GEN-LAST:event_textoUsuarioKeyPressed
 
     private void btnRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistroActionPerformed
         this.dispose();
-        fa.nuevoRegistro();
+        fa.nuevoUsuario(true,null,null);
         vp.dispose();
         vp.setVisible(false);
     }//GEN-LAST:event_btnRegistroActionPerformed

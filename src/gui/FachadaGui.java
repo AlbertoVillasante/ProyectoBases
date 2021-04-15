@@ -4,6 +4,7 @@ import aplicacion.Categoria;
 import aplicacion.Libro;
 import aplicacion.EmpresaUsuario;
 import aplicacion.Ejemplar;
+import aplicacion.InversorUsuario;
 import java.awt.Color;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -98,10 +99,10 @@ public class FachadaGui {           //Esta es la fachada
         va.setVisible(true);
     }
 
-    public void nuevoUsuario() {
+    public void nuevoUsuario(boolean c,InversorUsuario iu, EmpresaUsuario eu) {
         VUsuario vu;
 
-        vu = new VUsuario(fa);
+        vu = new VUsuario(fa,c,iu,eu);
         vu.setVisible(true);
     }
 
@@ -119,10 +120,10 @@ public class FachadaGui {           //Esta es la fachada
         vs.setVisible(true);
     }
 
-    public void configuracionRegulador() {
+    public void configuracionRegulador(InversorUsuario iu, EmpresaUsuario eu) {
         VConfiguracionRegulador vc;
 
-        vc = new VConfiguracionRegulador(fa);
+        vc = new VConfiguracionRegulador(fa,iu,eu);
         vc.setVisible(true);
     }
 }

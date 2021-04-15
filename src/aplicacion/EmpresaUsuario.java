@@ -86,4 +86,8 @@ public class EmpresaUsuario {
         return this.tipo;
     }
 
+    public void setIdUsuario(String idUsuario) {
+        this.idUsuario = idUsuario;
+    }
+    
 }

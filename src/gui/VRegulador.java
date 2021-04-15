@@ -5,7 +5,9 @@
  */
 package gui;
 
+import aplicacion.EmpresaUsuario;
 import aplicacion.FachadaAplicacion;
+import aplicacion.InversorUsuario;
 import java.awt.Color;
 
 /**
@@ -15,15 +17,26 @@ import java.awt.Color;
 public class VRegulador extends javax.swing.JFrame {
 
     Color prueba = new Color(60, 63, 65);
+    Color prueba1 = new Color(78, 82, 85);
+
     FachadaAplicacion fa;
+    InversorUsuario iu;
+    EmpresaUsuario eu;
 
     /**
      * Creates new form VRegulador
      */
-    public VRegulador(aplicacion.FachadaAplicacion fa) {
+    public VRegulador(aplicacion.FachadaAplicacion fa, InversorUsuario iu, EmpresaUsuario eu) {
         this.fa = fa;
+        if (iu != null) {
+            this.iu = iu;
+        }
+        if (eu != null) {
+            this.eu = eu;
+        }
         initComponents();
         this.getContentPane().setBackground(prueba);
+        btnCerrarSesion.setBackground(prueba1);
     }
 
     /**
@@ -76,10 +89,13 @@ public class VRegulador extends javax.swing.JFrame {
             }
         });
 
+        modificarSaldosLabel.setForeground(new java.awt.Color(187, 187, 188));
         modificarSaldosLabel.setText("       Modificar saldos");
 
+        solicitudesPendientesLabel.setForeground(new java.awt.Color(187, 187, 188));
         solicitudesPendientesLabel.setText("Solicitudes pendientes");
 
+        configuracionLabel.setForeground(new java.awt.Color(187, 187, 188));
         configuracionLabel.setText("        Configuración");
 
         btnSalir.setBackground(new java.awt.Color(180, 22, 45));
@@ -91,19 +107,23 @@ public class VRegulador extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setForeground(new java.awt.Color(187, 187, 188));
         jButton1.setText("Menú");
+        jButton1.setEnabled(false);
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
 
+        jLabel1.setForeground(new java.awt.Color(187, 187, 188));
         jLabel1.setText("______________________________________________");
 
+        jLabel2.setForeground(new java.awt.Color(187, 187, 188));
         jLabel2.setText("_____________________________________________");
 
-        btnCerrarSesion.setBackground(new java.awt.Color(102, 255, 102));
-        btnCerrarSesion.setForeground(new java.awt.Color(0, 0, 0));
+        btnCerrarSesion.setBackground(new java.awt.Color(153, 153, 153));
+        btnCerrarSesion.setForeground(new java.awt.Color(187, 187, 188));
         btnCerrarSesion.setText("Cerrar sesión");
         btnCerrarSesion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -121,28 +141,28 @@ public class VRegulador extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnCerrarSesion)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnSalir)
-                        .addContainerGap())
+                        .addComponent(btnSalir))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel2)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(modificarSaldosLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(botonBolsa, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(70, 70, 70)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(botonSolicitudes, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(solicitudesPendientesLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 71, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(botonConfiguracion, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(configuracionLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(62, 62, 62))))
+                        .addGap(77, 77, 77)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(botonSolicitudes, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(solicitudesPendientesLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(77, 77, 77)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(botonConfiguracion, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(configuracionLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(64, 64, 64)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -181,11 +201,11 @@ public class VRegulador extends javax.swing.JFrame {
     }//GEN-LAST:event_botonSolicitudesActionPerformed
 
     private void botonConfiguracionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonConfiguracionActionPerformed
-        fa.configuracionRegulador();
+        fa.configuracionRegulador(iu,eu);
     }//GEN-LAST:event_botonConfiguracionActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-
+        this.dispose();
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -193,7 +213,12 @@ public class VRegulador extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarSesionActionPerformed
-        // TODO add your handling code here:
+        this.dispose();
+        VPortada vp = new VPortada(fa);
+        VAutentificacion va=  new VAutentificacion(fa, vp);
+        vp.setVisible(true);
+        va.setLocation(185, 80);
+        va.setVisible(true);
     }//GEN-LAST:event_btnCerrarSesionActionPerformed
 
     /**

@@ -2,6 +2,7 @@ package gui;
 
 import aplicacion.TipoUsuario;
 import aplicacion.EmpresaUsuario;
+import aplicacion.InversorUsuario;
 import java.awt.Color;
 
 public class VUsuario extends javax.swing.JDialog {
@@ -14,7 +15,7 @@ public class VUsuario extends javax.swing.JDialog {
     Color prueba = new Color(60, 63, 65);
     Color prueba1 = new Color(78, 82, 85);
 
-    public VUsuario(aplicacion.FachadaAplicacion fa) {
+    public VUsuario(aplicacion.FachadaAplicacion fa, boolean flag, InversorUsuario iu, EmpresaUsuario eu) {
         this.fa = fa;
         initComponents();
         this.getContentPane().setBackground(prueba);
@@ -26,20 +27,41 @@ public class VUsuario extends javax.swing.JDialog {
         btnBaja.setBackground(prueba1);
         btnClave.setBackground(prueba1);
         btnDireccion.setBackground(prueba1);
-
         btnEmpresa.setBackground(prueba);
-        btnEmpresa.setEnabled(false);
-        obligatorio5.setEnabled(false);
-        nombreEmpresa.setEnabled(false);
-
         btnInversor.setBackground(prueba1);
         btnRegistrar.setBackground(prueba1);
         btnTelefono.setBackground(prueba1);
         btnUsuario.setBackground(prueba1);
-        /* obligatorioTexto.setEnabled(false);
-        this.buscarUsuarios();*/
+        if (flag) {
+            btnEmpresa.setEnabled(false);
+            obligatorio5.setEnabled(false);
+            nombreEmpresa.setEnabled(false);
+            obligatorioTexto.setEnabled(false);
+            txtUsuarioNoDisponible.setEnabled(false);
+        } else {
+            if (iu != null) {
+                tipo_usr.setSelectedIndex(1);
+                btnUsuario.setText(iu.getIdUsuario());
+                btnClave.setText(iu.getClave());
+                btnDireccion.setText(iu.getDireccion());
+                btnTelefono.setText(iu.getTelefono());
+                btnInversor.setText(iu.getNombre());
+                btnApellido1.setText(iu.getApellido1());
+                btnApellido2.setText(iu.getApellido1());
+
+            }
+            if (eu != null) {
+                tipo_usr.setSelectedIndex(1);
+                btnUsuario.setText(eu.getIdUsuario());
+                btnClave.setText(eu.getClave());
+                btnDireccion.setText(eu.getDireccion());
+                btnTelefono.setText(eu.getTelefono());
+                btnInversor.setText(eu.getNombreComercial());
+            }
+        }
     }
 
+    /*this.buscarUsuarios();*/
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -80,8 +102,8 @@ public class VUsuario extends javax.swing.JDialog {
         btnApellido1 = new javax.swing.JTextField();
         apellido1 = new javax.swing.JLabel();
         btnBaja = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        obligatorioTexto = new javax.swing.JLabel();
+        txtUsuarioNoDisponible = new javax.swing.JLabel();
 
         jButton4.setText("Guardar");
 
@@ -94,6 +116,11 @@ public class VUsuario extends javax.swing.JDialog {
         btnUsuario.setForeground(new java.awt.Color(187, 187, 188));
         btnUsuario.setText("DNI / NIF");
         btnUsuario.setToolTipText("DNI/NIF");
+        btnUsuario.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                btnUsuarioFocusGained(evt);
+            }
+        });
         btnUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnUsuarioActionPerformed(evt);
@@ -234,11 +261,11 @@ public class VUsuario extends javax.swing.JDialog {
         btnBaja.setForeground(new java.awt.Color(187, 187, 188));
         btnBaja.setText("Solicitar baja");
 
-        jLabel1.setForeground(new java.awt.Color(255, 51, 51));
-        jLabel1.setText("Rellena los campos obligatorios *");
+        obligatorioTexto.setForeground(new java.awt.Color(255, 51, 51));
+        obligatorioTexto.setText("Rellena los campos obligatorios *");
 
-        jLabel2.setForeground(new java.awt.Color(255, 51, 51));
-        jLabel2.setText("Usuario no disponible");
+        txtUsuarioNoDisponible.setForeground(new java.awt.Color(255, 51, 51));
+        txtUsuarioNoDisponible.setText("Usuario no disponible");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -307,8 +334,8 @@ public class VUsuario extends javax.swing.JDialog {
                                 .addGap(35, 35, 35))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel1))
+                                    .addComponent(txtUsuarioNoDisponible)
+                                    .addComponent(obligatorioTexto))
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
             .addGroup(layout.createSequentialGroup()
                 .addGap(97, 97, 97)
@@ -328,7 +355,7 @@ public class VUsuario extends javax.swing.JDialog {
                     .addComponent(jLabel7)
                     .addComponent(tipo_usr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(4, 4, 4)
-                .addComponent(jLabel2)
+                .addComponent(txtUsuarioNoDisponible)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -369,7 +396,7 @@ public class VUsuario extends javax.swing.JDialog {
                             .addComponent(obligatorio4, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
-                .addComponent(jLabel1)
+                .addComponent(obligatorioTexto)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnRegistrar)
@@ -436,7 +463,7 @@ public class VUsuario extends javax.swing.JDialog {
 
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
         //id = null;
-        btnUsuario.setText("");
+        btnUsuario.setText("DNI / NIF");
         btnDireccion.setText("");
         btnClave.setText("");
         btnEmpresa.setText("");
@@ -445,53 +472,97 @@ public class VUsuario extends javax.swing.JDialog {
         btnApellido2.setText("");
         btnInversor.setText("");
         tipo_usr.setSelectedIndex(0);
-        
+
         //btnBorrar.setEnabled(true);
         //btnRegistrar.setEnabled(true);
     }//GEN-LAST:event_btnActualizarActionPerformed
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
         /*ModeloTablaUsuarios m;
-        m = (ModeloTablaUsuarios) TablaUsuarios.getModel();
+        m = (ModeloTablaUsuarios) TablaUsuarios.getModel();*/
 
-        if (btnUsuario.getText().equals("")) {
+        if (btnUsuario.getText().equals("") || btnUsuario.getText().equals("DNI / NIF")) {
             obligatorioTexto.setEnabled(true);
+            obligatorio1.setEnabled(true);
         } else {
             obligatorio1.setEnabled(false);
         }
         if (btnClave.getText().equals("")) {
             obligatorioTexto.setEnabled(true);
-        } else {
-            obligatorio3.setEnabled(false);
-        }
-        if (btnDireccion.getText().equals("")) {
-            obligatorioTexto.setEnabled(true);
+            obligatorio2.setEnabled(true);
         } else {
             obligatorio2.setEnabled(false);
         }
+        if (btnDireccion.getText().equals("")) {
+            obligatorioTexto.setEnabled(true);
+            obligatorio3.setEnabled(true);
+        } else {
+            obligatorio3.setEnabled(false);
+        }
         if (btnTelefono.getText().equals("")) {
             obligatorioTexto.setEnabled(true);
+            obligatorio4.setEnabled(true);
         } else {
             obligatorio4.setEnabled(false);
         }
 
-        if (!btnUsuario.getText().equals("") && !btnClave.getText().equals("")
-                && !btnDireccion.getText().equals("") && !btnTelefono.getText().equals("")) {
-            obligatorioTexto.setEnabled(false);
+        if (tipo_usr.getSelectedIndex() == 0) {
+            if (btnInversor.getText().equals("")) {
+                obligatorioTexto.setEnabled(true);
+                obligatorio6.setEnabled(true);
+            } else {
+                obligatorio6.setEnabled(false);
+            }
+            if (btnApellido1.getText().equals("")) {
+                obligatorioTexto.setEnabled(true);
+                obligatorio7.setEnabled(true);
+            } else {
+                obligatorio7.setEnabled(false);
+            }
+            if (btnApellido2.getText().equals("")) {
+                obligatorioTexto.setEnabled(true);
+                obligatorio8.setEnabled(true);
+            } else {
+                obligatorio8.setEnabled(false);
+            }
         }
+
+        if (tipo_usr.getSelectedIndex() == 1) {
+            if (btnApellido2.getText().equals("")) {
+                obligatorioTexto.setEnabled(true);
+                obligatorio5.setEnabled(true);
+            } else {
+                obligatorio5.setEnabled(false);
+            }
+        }
+        if (tipo_usr.getSelectedIndex() == 0) {
+            if (!btnUsuario.getText().equals("") && !btnUsuario.getText().equals("DNI / NIF") && !btnClave.getText().equals("")
+                    && !btnDireccion.getText().equals("") && !btnTelefono.getText().equals("")
+                    && !btnInversor.getText().equals("") && !btnApellido1.getText().equals("") && !btnApellido2.getText().equals("")) {
+                obligatorioTexto.setEnabled(false);
+            }
+        }
+        if (tipo_usr.getSelectedIndex() == 1) {
+            if (!btnUsuario.getText().equals("") && !btnUsuario.getText().equals("DNI / NIF") && !btnClave.getText().equals("")
+                    && !btnDireccion.getText().equals("") && !btnTelefono.getText().equals("")
+                    && btnEmpresa.getText().equals("")) {
+                obligatorioTexto.setEnabled(false);
+            }
+        }
+
         if (obligatorioTexto.isEnabled()) {
             return;
         }
-        EmpresaUsuario u;
+        /* EmpresaUsuario u;
         u = new EmpresaUsuario(btnUsuario.getText(), btnDireccion.getText(), btnClave.getText(), btnEmpresa.getText(),
                 btnTelefono.getText(), TipoUsuario.valueOf(tipo_usr.getSelectedItem().toString()));
         if (m.obtenerId().contains(u.getIdUsuario())) {
             id = u.getIdUsuario();
-        }
+        }*/
         //fa.actualizarUsuario(u, id);  //Comentado para que no de error
 
-        this.buscarUsuarios();
-        this.BtnNuevoUsuarioActionPerformed(evt);*/
+        //this.buscarUsuarios();
+        // this.BtnNuevoUsuarioActionPerformed(evt);
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
     private void btnDireccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDireccionActionPerformed
@@ -510,6 +581,12 @@ public class VUsuario extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnApellido1ActionPerformed
 
+    private void btnUsuarioFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_btnUsuarioFocusGained
+        if (btnUsuario.getText().equals("DNI / NIF")) {
+            btnUsuario.setText("");
+        }
+    }//GEN-LAST:event_btnUsuarioFocusGained
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel apellido1;
@@ -527,8 +604,6 @@ public class VUsuario extends javax.swing.JDialog {
     private javax.swing.JTextField btnTelefono;
     private javax.swing.JTextField btnUsuario;
     private javax.swing.JButton jButton4;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -544,7 +619,9 @@ public class VUsuario extends javax.swing.JDialog {
     private javax.swing.JLabel obligatorio6;
     private javax.swing.JLabel obligatorio7;
     private javax.swing.JLabel obligatorio8;
+    private javax.swing.JLabel obligatorioTexto;
     private javax.swing.JComboBox tipo_usr;
+    private javax.swing.JLabel txtUsuarioNoDisponible;
     // End of variables declaration//GEN-END:variables
 
     /*public void buscarUsuarios() {

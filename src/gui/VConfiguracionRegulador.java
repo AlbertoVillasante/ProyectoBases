@@ -5,7 +5,9 @@
  */
 package gui;
 
+import aplicacion.EmpresaUsuario;
 import aplicacion.FachadaAplicacion;
+import aplicacion.InversorUsuario;
 
 /**
  *
@@ -14,10 +16,27 @@ import aplicacion.FachadaAplicacion;
 public class VConfiguracionRegulador extends javax.swing.JDialog {
 
     FachadaAplicacion fa;
-    
-    public VConfiguracionRegulador(FachadaAplicacion fa) {
-        this.fa=fa;
+    double saldo;
+
+    public VConfiguracionRegulador(FachadaAplicacion fa, InversorUsuario iu, EmpresaUsuario eu) {
+        this.fa = fa;
         initComponents();
+
+        if (iu != null) {
+            claveText.setText(iu.getClave());
+            direccionText.setText(iu.getDireccion());
+            tlfnText.setText(iu.getTelefono());
+            fondosText.setText(String.valueOf(iu.getFondosDisponiblesCuenta()));
+            comisionText.setText("0");
+
+        }
+        if (eu != null) {
+            claveText.setText(eu.getClave());
+            direccionText.setText(eu.getDireccion());
+            tlfnText.setText(eu.getTelefono());
+            fondosText.setText(String.valueOf(eu.getFondosDisponiblesCuenta()));
+            comisionText.setText("0");
+        }
     }
 
     /**

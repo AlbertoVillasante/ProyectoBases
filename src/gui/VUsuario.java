@@ -25,24 +25,27 @@ public class VUsuario extends javax.swing.JDialog {
         btnApellido1.setBackground(prueba1);
         btnApellido2.setBackground(prueba1);
         btnBaja.setBackground(prueba1);
-        btnClave.setBackground(prueba1);
         btnDireccion.setBackground(prueba1);
+        btnClave1.setBackground(prueba1);
         btnEmpresa.setBackground(prueba);
         btnInversor.setBackground(prueba1);
         btnRegistrar.setBackground(prueba1);
         btnTelefono.setBackground(prueba1);
         btnUsuario.setBackground(prueba1);
         if (flag) {
+            tipo_usr.setEnabled(true);
             btnEmpresa.setEnabled(false);
             obligatorio5.setEnabled(false);
             nombreEmpresa.setEnabled(false);
             obligatorioTexto.setEnabled(false);
             txtUsuarioNoDisponible.setEnabled(false);
         } else {
+            tipo_usr.setEnabled(false);
+            tipo_usr.setForeground(prueba);
             if (iu != null) {
-                tipo_usr.setSelectedIndex(1);
+                tipo_usr.setSelectedIndex(0);
                 btnUsuario.setText(iu.getIdUsuario());
-                btnClave.setText(iu.getClave());
+                btnClave1.setText(iu.getClave());
                 btnDireccion.setText(iu.getDireccion());
                 btnTelefono.setText(iu.getTelefono());
                 btnInversor.setText(iu.getNombre());
@@ -53,10 +56,10 @@ public class VUsuario extends javax.swing.JDialog {
             if (eu != null) {
                 tipo_usr.setSelectedIndex(1);
                 btnUsuario.setText(eu.getIdUsuario());
-                btnClave.setText(eu.getClave());
+                btnClave1.setText(eu.getClave());
                 btnDireccion.setText(eu.getDireccion());
                 btnTelefono.setText(eu.getTelefono());
-                btnInversor.setText(eu.getNombreComercial());
+                btnEmpresa.setText(eu.getNombreComercial());
             }
         }
     }
@@ -72,10 +75,11 @@ public class VUsuario extends javax.swing.JDialog {
     private void initComponents() {
 
         jButton4 = new javax.swing.JButton();
+        jSeparator1 = new javax.swing.JSeparator();
         jLabel3 = new javax.swing.JLabel();
         btnUsuario = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        btnClave = new javax.swing.JTextField();
+        btnDireccion = new javax.swing.JTextField();
         btnTelefono = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -86,7 +90,6 @@ public class VUsuario extends javax.swing.JDialog {
         btnActualizar = new javax.swing.JButton();
         btnRegistrar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
-        btnDireccion = new javax.swing.JPasswordField();
         obligatorio1 = new javax.swing.JLabel();
         obligatorio3 = new javax.swing.JLabel();
         obligatorio2 = new javax.swing.JLabel();
@@ -104,6 +107,7 @@ public class VUsuario extends javax.swing.JDialog {
         btnBaja = new javax.swing.JButton();
         obligatorioTexto = new javax.swing.JLabel();
         txtUsuarioNoDisponible = new javax.swing.JLabel();
+        btnClave1 = new javax.swing.JTextField();
 
         jButton4.setText("Guardar");
 
@@ -130,10 +134,10 @@ public class VUsuario extends javax.swing.JDialog {
         jLabel4.setForeground(new java.awt.Color(187, 187, 188));
         jLabel4.setText("Clave:");
 
-        btnClave.setForeground(new java.awt.Color(187, 187, 188));
-        btnClave.addActionListener(new java.awt.event.ActionListener() {
+        btnDireccion.setForeground(new java.awt.Color(187, 187, 188));
+        btnDireccion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnClaveActionPerformed(evt);
+                btnDireccionActionPerformed(evt);
             }
         });
 
@@ -194,13 +198,6 @@ public class VUsuario extends javax.swing.JDialog {
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelarActionPerformed(evt);
-            }
-        });
-
-        btnDireccion.setForeground(new java.awt.Color(187, 187, 188));
-        btnDireccion.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDireccionActionPerformed(evt);
             }
         });
 
@@ -267,76 +264,83 @@ public class VUsuario extends javax.swing.JDialog {
         txtUsuarioNoDisponible.setForeground(new java.awt.Color(255, 51, 51));
         txtUsuarioNoDisponible.setText("Usuario no disponible");
 
+        btnClave1.setForeground(new java.awt.Color(187, 187, 188));
+        btnClave1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClave1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(46, 46, 46)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jLabel7)
-                                .addGap(18, 18, 18)
-                                .addComponent(tipo_usr, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(obligatorio7)
-                                    .addComponent(obligatorio6)
-                                    .addComponent(obligatorio8)
-                                    .addComponent(obligatorio5))
-                                .addGap(20, 20, 20)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(nombreInversor)
-                                    .addComponent(nombreEmpresa))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(btnEmpresa)
-                                    .addComponent(btnInversor, javax.swing.GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE))
-                                .addGap(35, 35, 35))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(143, 143, 143)
-                                .addComponent(btnApellido2, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(btnBaja)
-                                .addGap(99, 99, 99))))
+                            .addComponent(txtUsuarioNoDisponible)
+                            .addComponent(obligatorioTexto))
+                        .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(46, 46, 46)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(obligatorio2)
+                            .addComponent(obligatorio4)
+                            .addComponent(obligatorio3)
+                            .addComponent(obligatorio1))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel6))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(obligatorio2)
-                                    .addComponent(obligatorio4)
-                                    .addComponent(obligatorio3)
-                                    .addComponent(obligatorio1))
-                                .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel5)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel6))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(0, 0, Short.MAX_VALUE)
+                                        .addComponent(jLabel7)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(tipo_usr, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(btnClave1, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(obligatorio7)
+                                            .addComponent(obligatorio6)
+                                            .addComponent(obligatorio8)
+                                            .addComponent(obligatorio5))
+                                        .addGap(20, 20, 20)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(nombreInversor)
+                                            .addComponent(nombreEmpresa))
+                                        .addGap(18, 18, 18)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                            .addComponent(btnEmpresa)
+                                            .addComponent(btnInversor, javax.swing.GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE))
+                                        .addGap(35, 35, 35))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(143, 143, 143)
+                                        .addComponent(btnApellido2, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(btnBaja)
+                                        .addGap(99, 99, 99))))
+                            .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(btnTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(btnUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btnDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btnClave, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(btnDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 187, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(apellido1)
                                     .addComponent(apellido2))
                                 .addGap(69, 69, 69)
                                 .addComponent(btnApellido1, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(35, 35, 35))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtUsuarioNoDisponible)
-                                    .addComponent(obligatorioTexto))
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
+                                .addGap(35, 35, 35))))))
             .addGroup(layout.createSequentialGroup()
                 .addGap(97, 97, 97)
                 .addComponent(btnActualizar)
@@ -379,9 +383,9 @@ public class VUsuario extends javax.swing.JDialog {
                             .addComponent(nombreInversor)
                             .addComponent(btnInversor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(obligatorio6, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnClave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(obligatorio2, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4))
+                            .addComponent(jLabel4)
+                            .addComponent(btnClave1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(25, 25, 25)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(apellido1)
@@ -414,9 +418,9 @@ public class VUsuario extends javax.swing.JDialog {
 
     }//GEN-LAST:event_btnUsuarioActionPerformed
 
-    private void btnClaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClaveActionPerformed
+    private void btnDireccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDireccionActionPerformed
 
-    }//GEN-LAST:event_btnClaveActionPerformed
+    }//GEN-LAST:event_btnDireccionActionPerformed
 
     private void btnTelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTelefonoActionPerformed
         // TODO add your handling code here:
@@ -464,8 +468,8 @@ public class VUsuario extends javax.swing.JDialog {
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
         //id = null;
         btnUsuario.setText("DNI / NIF");
+        btnClave1.setText("");
         btnDireccion.setText("");
-        btnClave.setText("");
         btnEmpresa.setText("");
         btnTelefono.setText("");
         btnApellido1.setText("");
@@ -487,7 +491,7 @@ public class VUsuario extends javax.swing.JDialog {
         } else {
             obligatorio1.setEnabled(false);
         }
-        if (btnClave.getText().equals("")) {
+        if (btnClave1.getText().equals("")) {
             obligatorioTexto.setEnabled(true);
             obligatorio2.setEnabled(true);
         } else {
@@ -536,15 +540,15 @@ public class VUsuario extends javax.swing.JDialog {
             }
         }
         if (tipo_usr.getSelectedIndex() == 0) {
-            if (!btnUsuario.getText().equals("") && !btnUsuario.getText().equals("DNI / NIF") && !btnClave.getText().equals("")
-                    && !btnDireccion.getText().equals("") && !btnTelefono.getText().equals("")
+            if (!btnUsuario.getText().equals("") && !btnUsuario.getText().equals("DNI / NIF") && !btnDireccion.getText().equals("")
+                    && !btnClave1.getText().equals("") && !btnTelefono.getText().equals("")
                     && !btnInversor.getText().equals("") && !btnApellido1.getText().equals("") && !btnApellido2.getText().equals("")) {
                 obligatorioTexto.setEnabled(false);
             }
         }
         if (tipo_usr.getSelectedIndex() == 1) {
-            if (!btnUsuario.getText().equals("") && !btnUsuario.getText().equals("DNI / NIF") && !btnClave.getText().equals("")
-                    && !btnDireccion.getText().equals("") && !btnTelefono.getText().equals("")
+            if (!btnUsuario.getText().equals("") && !btnUsuario.getText().equals("DNI / NIF") && !btnDireccion.getText().equals("")
+                    && !btnClave1.getText().equals("") && !btnTelefono.getText().equals("")
                     && btnEmpresa.getText().equals("")) {
                 obligatorioTexto.setEnabled(false);
             }
@@ -565,10 +569,6 @@ public class VUsuario extends javax.swing.JDialog {
         // this.BtnNuevoUsuarioActionPerformed(evt);
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
-    private void btnDireccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDireccionActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnDireccionActionPerformed
-
     private void btnInversorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInversorActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnInversorActionPerformed
@@ -587,6 +587,10 @@ public class VUsuario extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_btnUsuarioFocusGained
 
+    private void btnClave1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClave1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnClave1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel apellido1;
@@ -596,8 +600,8 @@ public class VUsuario extends javax.swing.JDialog {
     private javax.swing.JTextField btnApellido2;
     private javax.swing.JButton btnBaja;
     private javax.swing.JButton btnCancelar;
-    private javax.swing.JTextField btnClave;
-    private javax.swing.JPasswordField btnDireccion;
+    private javax.swing.JTextField btnClave1;
+    private javax.swing.JTextField btnDireccion;
     private javax.swing.JTextField btnEmpresa;
     private javax.swing.JTextField btnInversor;
     private javax.swing.JButton btnRegistrar;
@@ -609,6 +613,7 @@ public class VUsuario extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel nombreEmpresa;
     private javax.swing.JLabel nombreInversor;
     private javax.swing.JLabel obligatorio1;

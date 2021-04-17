@@ -20,6 +20,8 @@ public class VConfiguracionRegulador extends javax.swing.JDialog {
     double saldo;
     Color prueba = new Color(60, 63, 65);
     Color prueba1 = new Color(78, 82, 85);
+    InversorUsuario iu;
+    EmpresaUsuario eu;
 
     public VConfiguracionRegulador(FachadaAplicacion fa, InversorUsuario iu, EmpresaUsuario eu) {
         this.fa = fa;
@@ -33,19 +35,21 @@ public class VConfiguracionRegulador extends javax.swing.JDialog {
         botonAceptar.setBackground(prueba1);
 
         if (iu != null) {
+            this.iu = iu;
             claveText.setText(iu.getClave());
             direccionText.setText(iu.getDireccion());
             tlfnText.setText(iu.getTelefono());
             fondosText.setText(String.valueOf(iu.getFondosDisponiblesCuenta()));
-            comisionText.setText("0");
+            comisionText.setText(String.valueOf(iu.getComision()));
 
         }
         if (eu != null) {
+            this.eu = eu;
             claveText.setText(eu.getClave());
             direccionText.setText(eu.getDireccion());
             tlfnText.setText(eu.getTelefono());
             fondosText.setText(String.valueOf(eu.getFondosDisponiblesCuenta()));
-            comisionText.setText("0");
+            comisionText.setText(String.valueOf(eu.getComision()));
         }
     }
 
@@ -175,6 +179,11 @@ public class VConfiguracionRegulador extends javax.swing.JDialog {
 
         botonAceptar.setForeground(new java.awt.Color(187, 187, 188));
         botonAceptar.setText("Aceptar");
+        botonAceptar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonAceptarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -324,6 +333,18 @@ public class VConfiguracionRegulador extends javax.swing.JDialog {
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         this.dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void botonAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAceptarActionPerformed
+        float comision = Float.parseFloat(comisionText.getText());
+        fa.actualizarComision(comision);
+        if (iu != null) {
+            iu.setComision(comision);
+        }
+        if (eu != null) {
+            eu.setComision(comision);
+        }
+        this.dispose();
+    }//GEN-LAST:event_botonAceptarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

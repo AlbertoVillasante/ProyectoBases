@@ -18,7 +18,15 @@ public class GestionParticipaciones {
         this.fbd = fbd;
     }
 
-   public void nuevasParticipaciones(){
-         fgui.nuevasParticipaciones();
+   public void nuevasParticipaciones(EmpresaUsuario eu){
+         fgui.nuevasParticipaciones(eu);
+    }
+   
+    public void altaParticipacionesEmpresa(int participaciones, String id) {
+        fbd.altaParticipacionesEmpresa(participaciones, id);
+    }
+    
+    public void bajaParticipacionesEmpresa(int participaciones, String id) {
+        fbd.bajaParticipacionesEmpresa(participaciones, id);
     }
 }

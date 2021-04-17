@@ -126,8 +126,8 @@ public class FachadaAplicacion {
         gb.nuevoBeneficio();
     }
 
-    public void nuevasParticipaciones() {
-        gpart.nuevasParticipaciones();
+    public void nuevasParticipaciones(EmpresaUsuario eu) {
+        gpart.nuevasParticipaciones(eu);
     }
 
     public void nuevaSolicitud() {
@@ -140,5 +140,17 @@ public class FachadaAplicacion {
 
     public void configuracionRegulador(InversorUsuario iu, EmpresaUsuario eu) {
         gu.configuracionRegulador(iu, eu);
+    }
+
+    public void altaParticipacionesEmpresa(int participaciones, String id) {
+        gpart.altaParticipacionesEmpresa(participaciones, id);
+    }
+    
+     public void bajaParticipacionesEmpresa(int participaciones, String id) {
+        gpart.bajaParticipacionesEmpresa(participaciones, id);
+    }
+     
+     public void actualizarComision(float comision) {
+        gu.actualizarComision(comision);
     }
 }

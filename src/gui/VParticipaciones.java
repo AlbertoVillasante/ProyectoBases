@@ -5,6 +5,7 @@
  */
 package gui;
 
+import aplicacion.EmpresaUsuario;
 import java.awt.Color;
 import java.util.Locale;
 import javax.swing.JPanel;
@@ -15,13 +16,16 @@ import javax.swing.JPanel;
  */
 public class VParticipaciones extends javax.swing.JDialog {
 
+    aplicacion.FachadaAplicacion fa;
     Color prueba = new Color(60, 63, 65);
     Color prueba1 = new Color(78, 82, 85);
+    EmpresaUsuario eu;
+    VAviso va;
 
     /**
      * Creates new form VParticipaciones
      */
-    public VParticipaciones(aplicacion.FachadaAplicacion fa) {
+    public VParticipaciones(aplicacion.FachadaAplicacion fa, EmpresaUsuario eu) {
         initComponents();
         this.getContentPane().setBackground(prueba);
         saldoText.setBackground(prueba1);
@@ -31,6 +35,8 @@ public class VParticipaciones extends javax.swing.JDialog {
         precioText.setBackground(prueba1);
         comisionText.setBackground(prueba1);
         carteraText.setBackground(prueba1);
+        carteraText.setText(String.valueOf(eu.getnParticipaciones()));
+        carteraText.setEditable(false);
         numeroText.setBackground(prueba1);
         msNoParticipaciones.setBackground(prueba);
         msjObligatorio.setBackground(prueba);
@@ -47,7 +53,8 @@ public class VParticipaciones extends javax.swing.JDialog {
         participacionesPanel.setBackgroundAt(1, prueba);
         buttonGroup8.add(Baja);
         buttonGroup8.add(Alta);
-
+        this.eu = eu;
+        this.fa = fa;
     }
 
     /**
@@ -487,7 +494,17 @@ public class VParticipaciones extends javax.swing.JDialog {
     }//GEN-LAST:event_BajaActionPerformed
 
     private void aceptarButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aceptarButton1ActionPerformed
-        this.dispose();
+        if (Alta.isSelected()) {
+            fa.altaParticipacionesEmpresa(Integer.parseInt(numeroText.getText()), eu.getIdUsuario());
+        } else if (Baja.isSelected()) {
+            if (Integer.parseInt(carteraText.getText()) - Integer.parseInt(numeroText.getText()) >= 0) {
+                fa.bajaParticipacionesEmpresa(Integer.parseInt(numeroText.getText()), eu.getIdUsuario());
+            } else {
+                va  = new VAviso("No dispone de ese número de participaciones");
+                va.setVisible(true);
+            }
+        }
+        //this.dispose();
     }//GEN-LAST:event_aceptarButton1ActionPerformed
 
     /**

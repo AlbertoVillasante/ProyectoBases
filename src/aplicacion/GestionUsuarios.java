@@ -54,7 +54,11 @@ public class GestionUsuarios {
     public void configuracionRegulador(InversorUsuario iu, EmpresaUsuario eu) {
         fgui.configuracionRegulador(iu,eu);
     }
-
+    
+    public void actualizarComision(float comision) {
+        fbd.actualizarComision(comision);
+    }
+}
     /*  //Comentado para que no de error
     public java.util.List<EmpresaUsuario> obtenerUsuarios(String idUsuario, String nombreUsuario) {
         return fbd.consultarListaUsuarios(idUsuario, nombreUsuario);
@@ -77,4 +81,4 @@ public class GestionUsuarios {
         return fbd.consultarListaUsuariosPrestamo(idUsuario, nombreUsuario);
     }
      */
-}
+

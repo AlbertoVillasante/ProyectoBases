@@ -1,12 +1,17 @@
 package gui;
 
+import java.awt.Color;
+
 public class VAviso extends javax.swing.JDialog {
 
-    /**
-     * Creates new form VAviso
-     */
+    Color prueba = new Color(60, 63, 65);
+    Color prueba1 = new Color(78, 82, 85);
+
     public VAviso(String txtExcepcion) {
         initComponents();
+        this.getContentPane().setBackground(prueba);
+        textoExcepcion.setBackground(prueba1);
+        btnCerrar.setBackground(prueba1);
         textoExcepcion.setText(txtExcepcion);
         this.addWindowListener(new java.awt.event.WindowAdapter() {
 

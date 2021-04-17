@@ -1,4 +1,3 @@
-
 package baseDatos;
 
 import aplicacion.EmpresaUsuario;
@@ -33,7 +32,7 @@ public class DAOUsuarios extends AbstractDAO {
                 resultado = new InversorUsuario(rsUsuario.getString("idUsuario"), rsUsuario.getString("clave"),
                         rsUsuario.getString("nombre"), rsUsuario.getString("apellido1"), rsUsuario.getString("apellido2"), rsUsuario.getString("direccion"),
                         rsUsuario.getString("telefono"), TipoUsuario.valueOf(rsUsuario.getString("tipoUsuario")));
-
+                resultado.setComision(Float.parseFloat(rsUsuario.getString("comision")));
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -47,7 +46,7 @@ public class DAOUsuarios extends AbstractDAO {
         }
         return resultado;
     }
-    
+
     public EmpresaUsuario validarUsuarioEmpresa(String idUsuario, String clave) {
         EmpresaUsuario resultado = null;
         Connection con;
@@ -68,6 +67,8 @@ public class DAOUsuarios extends AbstractDAO {
                 resultado = new EmpresaUsuario(rsUsuario.getString("idUsuario"), rsUsuario.getString("clave"),
                         rsUsuario.getString("nombreComercial"), rsUsuario.getString("direccion"),
                         rsUsuario.getString("telefono"), TipoUsuario.valueOf(rsUsuario.getString("tipoUsuario")));
+                resultado.setnParticipaciones(Integer.parseInt(rsUsuario.getString("numeroParticipaciones")));
+                resultado.setComision(Float.parseFloat(rsUsuario.getString("comision")));
 
             }
         } catch (SQLException e) {
@@ -122,7 +123,6 @@ public class DAOUsuarios extends AbstractDAO {
         }
         return resultado;
     }*/
-
     public void insertarUsuarioEmpresa(EmpresaUsuario u) {
         Connection con;
         PreparedStatement stmUsuario = null;
@@ -151,7 +151,7 @@ public class DAOUsuarios extends AbstractDAO {
         }
 
     }
-    
+
     public void insertarUsuarioInversor(InversorUsuario u) {
         Connection con;
         PreparedStatement stmUsuario = null;
@@ -182,8 +182,8 @@ public class DAOUsuarios extends AbstractDAO {
         }
 
     }
-    
-    public void registroInversor(InversorUsuario inversor){
+
+    public void registroInversor(InversorUsuario inversor) {
         Connection con;
         PreparedStatement stmUsuario = null;
         con = super.getConexion();
@@ -207,9 +207,9 @@ public class DAOUsuarios extends AbstractDAO {
             }
         }
     }
-    
-    public void registroEmpresa(EmpresaUsuario empresa){
-        
+
+    public void registroEmpresa(EmpresaUsuario empresa) {
+
         Connection con;
         PreparedStatement stmUsuario = null;
         con = super.getConexion();
@@ -233,63 +233,69 @@ public class DAOUsuarios extends AbstractDAO {
             }
         }
     }
-    
-    public int comprobarIdInversor(String id){          //Posible union de las dos funciones con ifs
-        Integer resultado=null;
+
+    public int comprobarIdInversor(String id) {          //Posible union de las dos funciones con ifs
+        Integer resultado = null;
         Connection con;
-        PreparedStatement stmPrestamos=null;
+        PreparedStatement stmPrestamos = null;
         ResultSet rsPrestamos;
         String consulta;
 
-        con=this.getConexion();
-        
-        try  {
+        con = this.getConexion();
+
+        try {
             consulta = "select count(*) as ids "
                     + "from inversorUsuario "
                     + "where idUsuario = ? ";
-            
-            stmPrestamos=con.prepareStatement(consulta);
+
+            stmPrestamos = con.prepareStatement(consulta);
             stmPrestamos.setString(1, id);
-            rsPrestamos=stmPrestamos.executeQuery();
-            if (rsPrestamos.next())
-            {
+            rsPrestamos = stmPrestamos.executeQuery();
+            if (rsPrestamos.next()) {
                 resultado = rsPrestamos.getInt("ids");
             }
-        } catch (SQLException e){
-          System.out.println(e.getMessage());
-          this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
-        }finally{
-          try {stmPrestamos.close();} catch (SQLException e){System.out.println("Imposible cerrar cursores");}
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        } finally {
+            try {
+                stmPrestamos.close();
+            } catch (SQLException e) {
+                System.out.println("Imposible cerrar cursores");
+            }
         }
         return resultado;
     }
-    
-    public int comprobarIdEmpresa(String id){
-        Integer resultado=null;
+
+    public int comprobarIdEmpresa(String id) {
+        Integer resultado = null;
         Connection con;
-        PreparedStatement stmPrestamos=null;
+        PreparedStatement stmPrestamos = null;
         ResultSet rsPrestamos;
         String consulta;
 
-        con=this.getConexion();
-        
-        try  {
+        con = this.getConexion();
+
+        try {
             consulta = "select count(*) as ids "
                     + "from empresaUsuario "
                     + "where idUsuario = ? ";
-            
-            stmPrestamos=con.prepareStatement(consulta);
+
+            stmPrestamos = con.prepareStatement(consulta);
             stmPrestamos.setString(1, id);
-            rsPrestamos=stmPrestamos.executeQuery();
-            if (rsPrestamos.next())
-            {
+            rsPrestamos = stmPrestamos.executeQuery();
+            if (rsPrestamos.next()) {
                 resultado = rsPrestamos.getInt("ids");
             }
-        } catch (SQLException e){
-          System.out.println(e.getMessage());
-          this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
-        }finally{
-          try {stmPrestamos.close();} catch (SQLException e){System.out.println("Imposible cerrar cursores");}
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        } finally {
+            try {
+                stmPrestamos.close();
+            } catch (SQLException e) {
+                System.out.println("Imposible cerrar cursores");
+            }
         }
         return resultado;
     }
@@ -322,7 +328,7 @@ public class DAOUsuarios extends AbstractDAO {
             }
         }
     }
-    
+
     public void modificarUsuarioInversor(InversorUsuario u) {
         Connection con;
         PreparedStatement stmUsuarios = null;
@@ -354,19 +360,19 @@ public class DAOUsuarios extends AbstractDAO {
         }
     }
 
-    public void solicitarBajaInversor(String id){
+    public void solicitarBajaInversor(String id) {
         Connection con;
         PreparedStatement stmUsuario = null;
         con = super.getConexion();
         try {
-            stmUsuario = con.prepareStatement("update inversorUsuario"                 
-                    + "set tipoUsuario = ?"                    
+            stmUsuario = con.prepareStatement("update inversorUsuario"
+                    + "set tipoUsuario = ?"
                     + "where idUsuario = ?");
-            
+
             stmUsuario.setString(1, "PendienteBaja");
             stmUsuario.setString(2, id);
             stmUsuario.executeUpdate();
-            
+
         } catch (SQLException e) {
             System.out.println(e.getMessage());
             this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
@@ -379,19 +385,19 @@ public class DAOUsuarios extends AbstractDAO {
         }
     }
 
-    public void solicitarBajaEmpresa(String id){
+    public void solicitarBajaEmpresa(String id) {
         Connection con;
         PreparedStatement stmUsuario = null;
         con = super.getConexion();
         try {
-            stmUsuario = con.prepareStatement("update empresaUsuario"                 
-                    + "set tipoUsuario = ?"                    
+            stmUsuario = con.prepareStatement("update empresaUsuario"
+                    + "set tipoUsuario = ?"
                     + "where idUsuario = ?");
-            
+
             stmUsuario.setString(1, "PendienteBaja");
             stmUsuario.setString(2, id);
             stmUsuario.executeUpdate();
-            
+
         } catch (SQLException e) {
             System.out.println(e.getMessage());
             this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
@@ -404,7 +410,7 @@ public class DAOUsuarios extends AbstractDAO {
         }
     }
 
-    public void modificarCuentaInversor(InversorUsuario usuario){
+    public void modificarCuentaInversor(InversorUsuario usuario) {
         Connection con;
         PreparedStatement stmUsuarios = null;
         con = super.getConexion();
@@ -430,8 +436,8 @@ public class DAOUsuarios extends AbstractDAO {
             }
         }
     }
-    
-    public void modificarCuentaEmpresa(EmpresaUsuario usuario){
+
+    public void modificarCuentaEmpresa(EmpresaUsuario usuario) {
         Connection con;
         PreparedStatement stmUsuarios = null;
         con = super.getConexion();
@@ -457,8 +463,8 @@ public class DAOUsuarios extends AbstractDAO {
             }
         }
     }
-    
-    public void confirmarBajaInversor(String id){
+
+    public void confirmarBajaInversor(String id) {
         Connection con;
         PreparedStatement stmUsuarios = null;
         con = super.getConexion();
@@ -471,13 +477,13 @@ public class DAOUsuarios extends AbstractDAO {
             stmUsuarios.setString(1, id);
             stmUsuarios.executeUpdate();
 
-            try{
+            try {
                 stmUsuarios = con.prepareStatement("delete from inversorUsuario "
-                    + "where idUsuario = ? and numeroParticipaciones != 0");
+                        + "where idUsuario = ? and numeroParticipaciones != 0");
 
                 stmUsuarios.setString(1, id);
                 stmUsuarios.executeUpdate();
-            }catch (SQLException e) {
+            } catch (SQLException e) {
                 System.out.println(e.getMessage());
                 this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
             }
@@ -492,8 +498,8 @@ public class DAOUsuarios extends AbstractDAO {
             }
         }
     }
-    
-    public void confirmarBajaEmpresa(String id){
+
+    public void confirmarBajaEmpresa(String id) {
         Connection con;
         PreparedStatement stmUsuarios = null;
         con = super.getConexion();
@@ -506,13 +512,13 @@ public class DAOUsuarios extends AbstractDAO {
             stmUsuarios.setString(1, id);
             stmUsuarios.executeUpdate();
 
-            try{
-                stmUsuarios = con.prepareStatement("delete from empresaUsuario "        //Posible error
-                    + "where idUsuario = ? and numeroParticipaciones != 0");
+            try {
+                stmUsuarios = con.prepareStatement("delete from empresaUsuario " //Posible error
+                        + "where idUsuario = ? and numeroParticipaciones != 0");
 
                 stmUsuarios.setString(1, id);
                 stmUsuarios.executeUpdate();
-            }catch (SQLException e) {
+            } catch (SQLException e) {
                 System.out.println(e.getMessage());
                 this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
             }
@@ -527,7 +533,7 @@ public class DAOUsuarios extends AbstractDAO {
             }
         }
     }
-    
+
     /*public void borrarUsuario(String idUsuario) {
         Connection con;
         PreparedStatement stmUsuario = null;
@@ -595,5 +601,46 @@ public class DAOUsuarios extends AbstractDAO {
         }
         return resultado;
     }*/
+    public void actualizarComision(float valor) {
+        Connection con;
+        PreparedStatement stmComision = null;
 
+        con = super.getConexion();
+
+        try {
+            stmComision = con.prepareStatement("update InversorUsuario "
+                    + "set comision=?");
+
+            stmComision.setFloat(1, valor);
+            stmComision.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        } finally {
+            try {
+                stmComision.close();
+            } catch (SQLException e) {
+                System.out.println("Imposible cerrar cursores");
+            }
+        }
+
+        try {
+            stmComision = con.prepareStatement("update EmpresaUsuario "
+                    + "set comision=?");
+
+            stmComision.setFloat(1, valor);
+            stmComision.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        } finally {
+            try {
+                stmComision.close();
+            } catch (SQLException e) {
+                System.out.println("Imposible cerrar cursores");
+            }
+        }
+    }
 }

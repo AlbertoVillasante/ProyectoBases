@@ -9,6 +9,7 @@ public class EmpresaUsuario {
     private String telefono;
     private TipoUsuario tipo;
     private int nParticipaciones;
+    private float comision;
     private double fondosDisponiblesCuenta;
 
     public EmpresaUsuario(String idUsuario, String clave, String nombreComercial, String direccion, String telefono, TipoUsuario tipo) {
@@ -19,7 +20,6 @@ public class EmpresaUsuario {
         this.telefono = telefono;
         this.tipo = tipo;
     }
-
 
     public String getNombreComercial() {
         return nombreComercial;
@@ -60,7 +60,7 @@ public class EmpresaUsuario {
     public void setFondosDisponiblesCuenta(double fondosDisponiblesCuenta) {
         this.fondosDisponiblesCuenta = fondosDisponiblesCuenta;
     }
-    
+
     public String getIdUsuario() {
 
         return this.idUsuario;
@@ -89,5 +89,14 @@ public class EmpresaUsuario {
     public void setIdUsuario(String idUsuario) {
         this.idUsuario = idUsuario;
     }
+
+    public float getComision() {
+        return comision;
+    }
+
+    public void setComision(float comision) {
+        this.comision = comision;
+    }
     
+
 }

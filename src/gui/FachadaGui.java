@@ -84,10 +84,10 @@ public class FachadaGui {           //Esta es la fachada
 
     }
 
-    public void nuevasParticipaciones() {
+    public void nuevasParticipaciones(EmpresaUsuario eu) {
         VParticipaciones vpart;
 
-        vpart = new VParticipaciones(fa);
+        vpart = new VParticipaciones(fa,eu);
         vpart.setVisible(true);
 
     }

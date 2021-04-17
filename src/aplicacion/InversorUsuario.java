@@ -19,6 +19,7 @@ public class InversorUsuario {
     private String telefono;
     private TipoUsuario tipoUsuario;
     private int nParticipaciones;
+    private float comision;
     private double fondosDisponiblesCuenta;
 
     public InversorUsuario(String idUsuario, String clave, String nombre, String apellido1, String apellido2, String direccion, String telefono, TipoUsuario tipo) {
@@ -109,6 +110,15 @@ public class InversorUsuario {
     public void setFondosDisponiblesCuenta(double fondosDisponiblesCuenta) {
         this.fondosDisponiblesCuenta = fondosDisponiblesCuenta;
     }
+
+    public float getComision() {
+        return comision;
+    }
+
+    public void setComision(float comision) {
+        this.comision = comision;
+    }
+    
     
     
 }

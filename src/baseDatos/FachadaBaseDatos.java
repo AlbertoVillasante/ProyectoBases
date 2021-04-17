@@ -17,6 +17,7 @@ public class FachadaBaseDatos {
     private DAOLibros daoLibros;
     private DAOCategorias daoCategorias;
     private DAOUsuarios daoUsuarios;
+    private DAOParticipaciones daoParticipaciones;
 
     public FachadaBaseDatos(aplicacion.FachadaAplicacion fa) {
 
@@ -27,7 +28,7 @@ public class FachadaBaseDatos {
         try {
             //arqConfiguracion = new FileInputStream("baseDatos.properties"); //linea a cambiar
             arqConfiguracion = new FileInputStream("basesDatos.properties");
-           
+
             configuracion.load(arqConfiguracion);
             arqConfiguracion.close();
 
@@ -46,6 +47,7 @@ public class FachadaBaseDatos {
             daoLibros = new DAOLibros(conexion, fa);
             daoCategorias = new DAOCategorias(conexion, fa);
             daoUsuarios = new DAOUsuarios(conexion, fa);
+            daoParticipaciones = new DAOParticipaciones(conexion, fa);
 
         } catch (FileNotFoundException f) {
             System.out.println(f.getMessage());
@@ -103,7 +105,8 @@ public class FachadaBaseDatos {
     public void modificarEjemplarLibro(Integer idLibro, Ejemplar ejemplar) {
         daoLibros.modificarEjemplarLibro(idLibro, ejemplar);
     }
-/*  //Comentado para que no de error
+
+    /*  //Comentado para que no de error
     public EmpresaUsuario validarUsuario(String idUsuario, String clave) {
         return daoUsuarios.validarUsuario(idUsuario, clave);
     }
@@ -123,7 +126,7 @@ public class FachadaBaseDatos {
     public void borrarUsuario(String idUsuario) {
         daoUsuarios.borrarUsuario(idUsuario);
     }
-*/
+     */
     public java.util.List<Categoria> consultarCategorias() {
         return daoCategorias.consultarCategorias();
     }
@@ -147,11 +150,12 @@ public class FachadaBaseDatos {
     public void nuevoPrestamo(Ejemplar e) {
         daoLibros.nuevoPrestamo(e);
     }
-/*  //Comentado para que no de error
+
+    /*  //Comentado para que no de error
     public java.util.List<EmpresaUsuario> consultarListaUsuariosPrestamo(String idUsuario, String nombreUsuario) {
         return daoUsuarios.consultarListaUsuariosPrestamo(idUsuario, nombreUsuario);
     }
-*/
+     */
     public void devolverEjemplar(Integer ejemplar, String usuario, Integer libro) {
         daoLibros.devolverEjemplar(ejemplar, usuario, libro);
     }
@@ -163,11 +167,24 @@ public class FachadaBaseDatos {
     public Integer DiasFaltanParaVencer(Integer libro, Integer ejemplar) {
         return daoLibros.DiasFaltanParaVencer(libro, ejemplar);
     }
-    
-     public InversorUsuario validarUsuario(String idUsuario, String clave) {
+
+    public InversorUsuario validarUsuario(String idUsuario, String clave) {
         return daoUsuarios.validarUsuarioInversor(idUsuario, clave);
     }
-      public EmpresaUsuario validarUsuarioE(String idUsuario, String clave) {
+
+    public EmpresaUsuario validarUsuarioE(String idUsuario, String clave) {
         return daoUsuarios.validarUsuarioEmpresa(idUsuario, clave);
+    }
+
+    public void altaParticipacionesEmpresa(int participaciones, String id) {
+        daoParticipaciones.altaParticipacionesEmpresa(participaciones, id);
+    }
+
+    public void bajaParticipacionesEmpresa(int participaciones, String id) {
+        daoParticipaciones.bajaParticipacionesEmpresa(participaciones, id);
+    }
+
+    public void actualizarComision(float comision) {
+            daoUsuarios.actualizarComision(comision);
     }
 }

@@ -58,6 +58,22 @@ public class GestionUsuarios {
     public void actualizarComision(float comision) {
         fbd.actualizarComision(comision);
     }
+    
+    public void insertarUsuarioInversor(InversorUsuario u){
+        fbd.insertarUsuarioInversor(u);
+    }
+    
+    public void insertarUsuarioEmpresa(EmpresaUsuario u){
+        fbd.insertarUsuarioEmpresa(u);
+    }
+    
+    public int comprobarIdInversor(String id){
+        return fbd.comprobarIdInversor(id);
+    }
+    
+    public int comprobarIdEmpresa(String id){
+        return fbd.comprobarIdEmpresa(id);
+    }
 }
     /*  //Comentado para que no de error
     public java.util.List<EmpresaUsuario> obtenerUsuarios(String idUsuario, String nombreUsuario) {

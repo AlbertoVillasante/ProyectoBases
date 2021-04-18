@@ -74,6 +74,22 @@ public class FachadaAplicacion {
     public void nuevoUsuario(boolean c, InversorUsuario iu, EmpresaUsuario eu) {
         gu.nuevoUsuario(c, iu, eu);
     }
+    
+    public void insertarUsuarioInversor(InversorUsuario u){
+        gu.insertarUsuarioInversor(u);
+    }
+    
+    public void insertarUsuarioEmpresa(EmpresaUsuario u){
+        gu.insertarUsuarioEmpresa(u);
+    }
+    
+    public int comprobarIdInversor(String id){
+        return gu.comprobarIdInversor(id);
+    }
+    
+    public int comprobarIdEmpresa(String id){
+        return gu.comprobarIdEmpresa(id);
+    }
 
     /*  //Comentado para que no de error
     public java.util.List<EmpresaUsuario> obtenerUsuarios(String idUsuario, String nombreUsuario) {

@@ -2,7 +2,7 @@ package aplicacion;
 
 public enum TipoUsuario {
     Regulador,
-    PendienteAlta,
-    PendienteBaja,
+    PendAlta,
+    PendBaja,
     Normal
 }

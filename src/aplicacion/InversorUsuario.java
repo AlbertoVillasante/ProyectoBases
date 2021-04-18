@@ -26,6 +26,8 @@ public class InversorUsuario {
         this.idUsuario = idUsuario;
         this.clave = clave;
         this.nombre = nombre;
+        this.apellido2=apellido2;
+        this.apellido1=apellido1;
         this.direccion = direccion;
         this.telefono = telefono;
         this.tipoUsuario = tipo;

@@ -11,6 +11,68 @@ public class DAOUsuarios extends AbstractDAO {
         super.setConexion(conexion);
         super.setFachadaAplicacion(fa);
     }
+    
+    public java.util.List<InversorUsuario> mostrarUsuarioInv(){
+        java.util.List<InversorUsuario> resultado = new java.util.ArrayList<InversorUsuario>();
+        InversorUsuario inversor;
+        Connection con;
+        PreparedStatement stmInversor=null;
+        ResultSet rsUsuario;
+
+        con=this.getConexion();
+
+        try  {
+        stmInversor=con.prepareStatement("select idUsuario, clave, nombre, apellido1, apellido2, direccion, telefono, tipoUsuario " 
+                + "from inversorusuario ");
+        rsUsuario=stmInversor.executeQuery();
+        while (rsUsuario.next())
+        {
+            inversor = new InversorUsuario(rsUsuario.getString("idUsuario"), rsUsuario.getString("clave"),
+                        rsUsuario.getString("nombre"), rsUsuario.getString("apellido1"), rsUsuario.getString("apellido2"), rsUsuario.getString("direccion"),
+                        rsUsuario.getString("telefono"), TipoUsuario.valueOf(rsUsuario.getString("tipoUsuario")));
+            resultado.add(inversor);
+        }
+
+        } catch (SQLException e){
+          System.out.println(e.getMessage());
+          this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        }finally{
+          try {stmInversor.close();} catch (SQLException e){System.out.println("Imposible cerrar cursores");}
+        }
+        return resultado;
+    }
+    
+    public java.util.List<EmpresaUsuario> mostrarUsuarioEmpr(){
+        java.util.List<EmpresaUsuario> resultado = new java.util.ArrayList<EmpresaUsuario>();
+        EmpresaUsuario empresa;
+        Connection con;
+        PreparedStatement stmEmpresa=null;
+        ResultSet rsUsuario;
+
+        con=this.getConexion();
+
+        try  {
+        stmEmpresa=con.prepareStatement("select * "
+                    + "from EmpresaUsuario");
+        rsUsuario=stmEmpresa.executeQuery();
+        while (rsUsuario.next())
+        {
+            empresa = new EmpresaUsuario(rsUsuario.getString("idUsuario"), rsUsuario.getString("clave"),
+                        rsUsuario.getString("nombreComercial"), rsUsuario.getString("direccion"),
+                        rsUsuario.getString("telefono"), TipoUsuario.valueOf(rsUsuario.getString("tipoUsuario")));
+            resultado.add(empresa);
+        }
+
+        } catch (SQLException e){
+          System.out.println(e.getMessage());
+          this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        }finally{
+          try {stmEmpresa.close();} catch (SQLException e){System.out.println("Imposible cerrar cursores");}
+        }
+        return resultado;
+    }
+    
+    
 
     public InversorUsuario validarUsuarioInversor(String idUsuario, String clave) {
         InversorUsuario resultado = null;
@@ -26,7 +88,7 @@ public class DAOUsuarios extends AbstractDAO {
                     + "where idUsuario = ? and clave = ? and tipoUsuario != ?");
             stmUsuario.setString(1, idUsuario);
             stmUsuario.setString(2, clave);
-            stmUsuario.setString(3, "PendienteAlta");       //Depende de la implementación, posible cambio
+            stmUsuario.setString(3, "PendAlta");       //Depende de la implementación, posible cambio
             rsUsuario = stmUsuario.executeQuery();
             if (rsUsuario.next()) {
                 resultado = new InversorUsuario(rsUsuario.getString("idUsuario"), rsUsuario.getString("clave"),
@@ -61,7 +123,7 @@ public class DAOUsuarios extends AbstractDAO {
                     + "where idUsuario = ? and clave = ? and tipoUsuario != ?");
             stmUsuario.setString(1, idUsuario);
             stmUsuario.setString(2, clave);
-            stmUsuario.setString(3, "PendienteAlta");           //Igual que en validarUsuarioInversor
+            stmUsuario.setString(3, "PendAlta");           //Igual que en validarUsuarioInversor
             rsUsuario = stmUsuario.executeQuery();
             if (rsUsuario.next()) {
                 resultado = new EmpresaUsuario(rsUsuario.getString("idUsuario"), rsUsuario.getString("clave"),
@@ -133,10 +195,10 @@ public class DAOUsuarios extends AbstractDAO {
                     + "values (?,?,?,?,?,?)");
             stmUsuario.setString(1, u.getIdUsuario());
             stmUsuario.setString(2, u.getClave());
-            stmUsuario.setString(3, u.getNombre());
+            stmUsuario.setString(3, u.getNombreComercial());
             stmUsuario.setString(4, u.getDireccion());
             stmUsuario.setString(5, u.getTelefono());
-            stmUsuario.setString(6, "PendienteAlta");
+            stmUsuario.setString(6, "PendAlta");
             stmUsuario.executeUpdate();
 
         } catch (SQLException e) {
@@ -167,7 +229,7 @@ public class DAOUsuarios extends AbstractDAO {
             stmUsuario.setString(5, u.getApellido2());
             stmUsuario.setString(6, u.getDireccion());
             stmUsuario.setString(7, u.getTelefono());
-            stmUsuario.setString(8, "PendienteAlta");
+            stmUsuario.setString(8, "PendAlta");
             stmUsuario.executeUpdate();
 
         } catch (SQLException e) {
@@ -369,7 +431,7 @@ public class DAOUsuarios extends AbstractDAO {
                     + "set tipoUsuario = ?"
                     + "where idUsuario = ?");
 
-            stmUsuario.setString(1, "PendienteBaja");
+            stmUsuario.setString(1, "PendBaja");
             stmUsuario.setString(2, id);
             stmUsuario.executeUpdate();
 
@@ -394,7 +456,7 @@ public class DAOUsuarios extends AbstractDAO {
                     + "set tipoUsuario = ?"
                     + "where idUsuario = ?");
 
-            stmUsuario.setString(1, "PendienteBaja");
+            stmUsuario.setString(1, "PendBaja");
             stmUsuario.setString(2, id);
             stmUsuario.executeUpdate();
 

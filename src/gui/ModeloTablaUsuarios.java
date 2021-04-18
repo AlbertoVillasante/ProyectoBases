@@ -75,7 +75,7 @@ public class ModeloTablaUsuarios extends AbstractTableModel {
                 resultado = usuarios.get(row).getIdUsuario();
                 break;
             case 1:
-                resultado = usuarios.get(row).getNombre();
+                resultado = usuarios.get(row).getNombreComercial();
                 break;
             case 2:
                 //resultado = usuarios.get(row).getEmail();

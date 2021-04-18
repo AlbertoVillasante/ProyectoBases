@@ -1,18 +1,22 @@
 package gui;
 
 import aplicacion.EmpresaUsuario;
+import aplicacion.InversorUsuario;
+import java.util.ArrayList;
 import javax.swing.table.*;
+/*
+public class ModeloTablaVerificacion extends AbstractTableModel {
 
-public class ModeloTablaPrestamos extends AbstractTableModel {
+    private java.util.List<EmpresaUsuario> usuariosEmp;
+    private java.util.List<InversorUsuario> usuariosInv;
 
-    private java.util.List<EmpresaUsuario> usuarios;
-
-    public ModeloTablaPrestamos() {
-        this.usuarios = new java.util.ArrayList<EmpresaUsuario>();
+    public ModeloTablaVerificacion() {
+        this.usuariosEmp = new java.util.ArrayList<EmpresaUsuario>();
+        this.usuariosInv = new java.util.ArrayList<InversorUsuario>();
     }
 
     public int getColumnCount() {
-        return 4;
+        return 6;
     }
 
     public int getRowCount() {
@@ -28,13 +32,19 @@ public class ModeloTablaPrestamos extends AbstractTableModel {
                 nombre = "ID";
                 break;
             case 1:
-                nombre = "Nombre";
+                nombre = "Clave";
                 break;
             case 2:
-                nombre = "E-mail";
+                nombre = "Nombre";
                 break;
             case 3:
-                nombre = "Prestamos Vencidos";
+                nombre = "Teléfono";
+                break;
+            case 4:
+                nombre = "Dirección";
+                break;
+            case 5:
+                nombre = "Estado";
                 break;
         }
         return nombre;
@@ -55,7 +65,13 @@ public class ModeloTablaPrestamos extends AbstractTableModel {
                 clase = java.lang.String.class;
                 break;
             case 3:
-                clase = java.lang.Integer.class;
+                clase = java.lang.String.class;
+                break;
+            case 4:
+                clase = java.lang.String.class;
+                break;
+            case 5:
+                clase = java.lang.String.class;
                 break;
         }
         return clase;
@@ -74,13 +90,13 @@ public class ModeloTablaPrestamos extends AbstractTableModel {
                 resultado = usuarios.get(row).getIdUsuario();
                 break;
             case 1:
-                resultado = usuarios.get(row).getNombreComercial();
+                resultado = usuarios.get(row).getClave();
                 break;
             case 2:
-                //resultado = usuarios.get(row).getEmail();
+                resultado = usuarios.get(row).getNombreComercial();
                 break;
             case 3:
-                //resultado = usuarios.get(row).getPrestamosVencidos();
+                resultado = usuarios.get(row).getTipoUsuario();
                 break;
         }
         return resultado;
@@ -95,4 +111,13 @@ public class ModeloTablaPrestamos extends AbstractTableModel {
         return this.usuarios.get(i);
     }
 
+    public java.util.List<String> obtenerId() {
+        java.util.ArrayList<String> us = new ArrayList<String>();
+        for (EmpresaUsuario u : this.usuarios) {
+            us.add(u.getIdUsuario());
+        }
+        return us;
+    }
+
 }
+*/

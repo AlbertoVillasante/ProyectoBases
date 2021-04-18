@@ -71,11 +71,6 @@ public class EmpresaUsuario {
         return this.clave;
     }
 
-    public String getNombre() {
-
-        return this.nombreComercial;
-    }
-
     public String getDireccion() {
 
         return this.direccion;

@@ -26,8 +26,8 @@ public class FachadaBaseDatos {
         FileInputStream arqConfiguracion;
 
         try {
-            //arqConfiguracion = new FileInputStream("baseDatos.properties"); //linea a cambiar
-            arqConfiguracion = new FileInputStream("basesDatos.properties");
+            arqConfiguracion = new FileInputStream("baseDatos.properties"); //linea a cambiar
+            //arqConfiguracion = new FileInputStream("basesDatos.properties");
 
             configuracion.load(arqConfiguracion);
             arqConfiguracion.close();
@@ -186,5 +186,21 @@ public class FachadaBaseDatos {
 
     public void actualizarComision(float comision) {
             daoUsuarios.actualizarComision(comision);
+    }
+    
+    public void insertarUsuarioInversor(InversorUsuario u){
+        daoUsuarios.insertarUsuarioInversor(u);
+    }
+    
+    public void insertarUsuarioEmpresa(EmpresaUsuario u){
+        daoUsuarios.insertarUsuarioEmpresa(u);
+    }
+    
+    public int comprobarIdInversor(String id){
+        return daoUsuarios.comprobarIdInversor(id);
+    }
+    
+    public int comprobarIdEmpresa(String id){
+        return daoUsuarios.comprobarIdEmpresa(id);
     }
 }

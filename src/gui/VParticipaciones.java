@@ -27,6 +27,13 @@ public class VParticipaciones extends javax.swing.JDialog {
      */
     public VParticipaciones(aplicacion.FachadaAplicacion fa, EmpresaUsuario eu) {
         initComponents();
+        if (eu == null) {
+            participacionesPanel.setSelectedIndex(1);
+            participacionesPanel.setEnabled(false);
+        } else {
+            carteraText.setText(String.valueOf(eu.getnParticipaciones()));
+            this.eu = eu;
+        }
         this.getContentPane().setBackground(prueba);
         saldoText.setBackground(prueba1);
         jComboBox2.setBackground(prueba1);
@@ -35,7 +42,6 @@ public class VParticipaciones extends javax.swing.JDialog {
         precioText.setBackground(prueba1);
         comisionText.setBackground(prueba1);
         carteraText.setBackground(prueba1);
-        carteraText.setText(String.valueOf(eu.getnParticipaciones()));
         carteraText.setEditable(false);
         numeroText.setBackground(prueba1);
         msNoParticipaciones.setBackground(prueba);
@@ -53,7 +59,6 @@ public class VParticipaciones extends javax.swing.JDialog {
         participacionesPanel.setBackgroundAt(1, prueba);
         buttonGroup8.add(Baja);
         buttonGroup8.add(Alta);
-        this.eu = eu;
         this.fa = fa;
     }
 
@@ -496,14 +501,19 @@ public class VParticipaciones extends javax.swing.JDialog {
     private void aceptarButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aceptarButton1ActionPerformed
         if (Alta.isSelected()) {
             fa.altaParticipacionesEmpresa(Integer.parseInt(numeroText.getText()), eu.getIdUsuario());
+            eu.setnParticipaciones(eu.getnParticipaciones() + Integer.parseInt(numeroText.getText()));
+            carteraText.setText(String.valueOf(eu.getnParticipaciones()));
         } else if (Baja.isSelected()) {
             if (Integer.parseInt(carteraText.getText()) - Integer.parseInt(numeroText.getText()) >= 0) {
                 fa.bajaParticipacionesEmpresa(Integer.parseInt(numeroText.getText()), eu.getIdUsuario());
+                eu.setnParticipaciones(eu.getnParticipaciones() - Integer.parseInt(numeroText.getText()));
+                carteraText.setText(String.valueOf(eu.getnParticipaciones()));
             } else {
                 va  = new VAviso("No dispone de ese número de participaciones");
                 va.setVisible(true);
             }
         }
+        numeroText.setText("");
         //this.dispose();
     }//GEN-LAST:event_aceptarButton1ActionPerformed
 

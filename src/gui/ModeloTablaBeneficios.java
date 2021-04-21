@@ -1,14 +1,14 @@
 package gui;
 
-import aplicacion.EmpresaUsuario;
+import aplicacion.AnunciarBeneficios;
 import javax.swing.table.*;
 
-public class ModeloTablaPrestamos extends AbstractTableModel {
+public class ModeloTablaBeneficios extends AbstractTableModel {
 
-    private java.util.List<EmpresaUsuario> usuarios;
+    private java.util.List<AnunciarBeneficios> beneficios;
 
-    public ModeloTablaPrestamos() {
-        this.usuarios = new java.util.ArrayList<EmpresaUsuario>();
+    public ModeloTablaBeneficios() {
+        this.beneficios = new java.util.ArrayList<AnunciarBeneficios>();
     }
 
     public int getColumnCount() {
@@ -16,7 +16,7 @@ public class ModeloTablaPrestamos extends AbstractTableModel {
     }
 
     public int getRowCount() {
-        return usuarios.size();
+        return beneficios.size();
     }
 
     @Override
@@ -25,16 +25,16 @@ public class ModeloTablaPrestamos extends AbstractTableModel {
 
         switch (col) {
             case 0:
-                nombre = "ID";
+                nombre = "Fecha de Pago";
                 break;
             case 1:
-                nombre = "Nombre";
+                nombre = "Nombre Empresa";
                 break;
             case 2:
-                nombre = "E-mail";
+                nombre = "Importe/Participacion";
                 break;
             case 3:
-                nombre = "Prestamos Vencidos";
+                nombre = "Participaciones";
                 break;
         }
         return nombre;
@@ -52,7 +52,7 @@ public class ModeloTablaPrestamos extends AbstractTableModel {
                 clase = java.lang.String.class;
                 break;
             case 2:
-                clase = java.lang.String.class;
+                clase = java.lang.Float.class;
                 break;
             case 3:
                 clase = java.lang.Integer.class;
@@ -71,28 +71,28 @@ public class ModeloTablaPrestamos extends AbstractTableModel {
 
         switch (col) {
             case 0:
-                resultado = usuarios.get(row).getIdUsuario();
+                resultado = beneficios.get(row).getFecha();
                 break;
             case 1:
-                resultado = usuarios.get(row).getNombreComercial();
+                resultado = beneficios.get(row).getNombreEmpresa();
                 break;
             case 2:
-                //resultado = usuarios.get(row).getEmail();
+                resultado = beneficios.get(row).getBeneficios();
                 break;
             case 3:
-                //resultado = usuarios.get(row).getPrestamosVencidos();
+                resultado = beneficios.get(row).getNumParticipaciones();
                 break;
         }
         return resultado;
     }
 
-    public void setFilas(java.util.List<EmpresaUsuario> usuarios) {
-        this.usuarios = usuarios;
+    public void setFilas(java.util.List<AnunciarBeneficios> beneficios) {
+        this.beneficios = beneficios;
         fireTableDataChanged();
     }
 
-    public EmpresaUsuario obtenerUsuario(int i) {
-        return this.usuarios.get(i);
+    public AnunciarBeneficios obtenerUsuario(int i) {
+        return this.beneficios.get(i);
     }
 
 }

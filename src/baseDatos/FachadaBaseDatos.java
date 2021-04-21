@@ -1,5 +1,6 @@
 package baseDatos;
 
+import aplicacion.AnunciarBeneficios;
 import aplicacion.Ejemplar;
 import aplicacion.InversorUsuario;
 import aplicacion.Categoria;
@@ -8,6 +9,7 @@ import aplicacion.Libro;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Properties;
 
 public class FachadaBaseDatos {
@@ -18,6 +20,7 @@ public class FachadaBaseDatos {
     private DAOCategorias daoCategorias;
     private DAOUsuarios daoUsuarios;
     private DAOParticipaciones daoParticipaciones;
+    private DAOBeneficios daoBeneficios;
 
     public FachadaBaseDatos(aplicacion.FachadaAplicacion fa) {
 
@@ -48,6 +51,7 @@ public class FachadaBaseDatos {
             daoCategorias = new DAOCategorias(conexion, fa);
             daoUsuarios = new DAOUsuarios(conexion, fa);
             daoParticipaciones = new DAOParticipaciones(conexion, fa);
+            daoBeneficios = new DAOBeneficios(conexion, fa);
 
         } catch (FileNotFoundException f) {
             System.out.println(f.getMessage());
@@ -185,22 +189,36 @@ public class FachadaBaseDatos {
     }
 
     public void actualizarComision(float comision) {
-            daoUsuarios.actualizarComision(comision);
+        daoUsuarios.actualizarComision(comision);
     }
-    
-    public void insertarUsuarioInversor(InversorUsuario u){
+
+    public void insertarUsuarioInversor(InversorUsuario u) {
         daoUsuarios.insertarUsuarioInversor(u);
     }
-    
-    public void insertarUsuarioEmpresa(EmpresaUsuario u){
+
+    public void insertarUsuarioEmpresa(EmpresaUsuario u) {
         daoUsuarios.insertarUsuarioEmpresa(u);
     }
-    
-    public int comprobarIdInversor(String id){
+
+    public int comprobarIdInversor(String id) {
         return daoUsuarios.comprobarIdInversor(id);
     }
-    
-    public int comprobarIdEmpresa(String id){
+
+    public int comprobarIdEmpresa(String id) {
         return daoUsuarios.comprobarIdEmpresa(id);
+    }
+
+    public ArrayList<String> getEmpresas() {
+        return daoUsuarios.getEmpresas();
+    }
+
+    public void altaPagoBeneficios(String fecha, float precio, int numParticipaciones, String nombreEmpresa) {
+        String idEmpresa = daoBeneficios.getIdEmpresa(nombreEmpresa);
+        System.out.println(fecha+precio+numParticipaciones+ idEmpresa);
+        daoBeneficios.altaPagoBeneficios(fecha, precio, numParticipaciones, idEmpresa);
+    }
+    
+     public ArrayList<AnunciarBeneficios> getBeneficios() {
+        return daoBeneficios.getBeneficios();
     }
 }

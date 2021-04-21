@@ -4,6 +4,7 @@ import aplicacion.EmpresaUsuario;
 import aplicacion.InversorUsuario;
 import aplicacion.TipoUsuario;
 import java.sql.*;
+import java.util.ArrayList;
 
 public class DAOUsuarios extends AbstractDAO {
 
@@ -11,68 +12,72 @@ public class DAOUsuarios extends AbstractDAO {
         super.setConexion(conexion);
         super.setFachadaAplicacion(fa);
     }
-    
-    public java.util.List<InversorUsuario> mostrarUsuarioInv(){
+
+    public java.util.List<InversorUsuario> mostrarUsuarioInv() {
         java.util.List<InversorUsuario> resultado = new java.util.ArrayList<InversorUsuario>();
         InversorUsuario inversor;
         Connection con;
-        PreparedStatement stmInversor=null;
+        PreparedStatement stmInversor = null;
         ResultSet rsUsuario;
 
-        con=this.getConexion();
+        con = this.getConexion();
 
-        try  {
-        stmInversor=con.prepareStatement("select idUsuario, clave, nombre, apellido1, apellido2, direccion, telefono, tipoUsuario " 
-                + "from inversorusuario ");
-        rsUsuario=stmInversor.executeQuery();
-        while (rsUsuario.next())
-        {
-            inversor = new InversorUsuario(rsUsuario.getString("idUsuario"), rsUsuario.getString("clave"),
+        try {
+            stmInversor = con.prepareStatement("select idUsuario, clave, nombre, apellido1, apellido2, direccion, telefono, tipoUsuario "
+                    + "from inversorusuario ");
+            rsUsuario = stmInversor.executeQuery();
+            while (rsUsuario.next()) {
+                inversor = new InversorUsuario(rsUsuario.getString("idUsuario"), rsUsuario.getString("clave"),
                         rsUsuario.getString("nombre"), rsUsuario.getString("apellido1"), rsUsuario.getString("apellido2"), rsUsuario.getString("direccion"),
                         rsUsuario.getString("telefono"), TipoUsuario.valueOf(rsUsuario.getString("tipoUsuario")));
-            resultado.add(inversor);
-        }
+                resultado.add(inversor);
+            }
 
-        } catch (SQLException e){
-          System.out.println(e.getMessage());
-          this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
-        }finally{
-          try {stmInversor.close();} catch (SQLException e){System.out.println("Imposible cerrar cursores");}
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        } finally {
+            try {
+                stmInversor.close();
+            } catch (SQLException e) {
+                System.out.println("Imposible cerrar cursores");
+            }
         }
         return resultado;
     }
-    
-    public java.util.List<EmpresaUsuario> mostrarUsuarioEmpr(){
+
+    public java.util.List<EmpresaUsuario> mostrarUsuarioEmpr() {
         java.util.List<EmpresaUsuario> resultado = new java.util.ArrayList<EmpresaUsuario>();
         EmpresaUsuario empresa;
         Connection con;
-        PreparedStatement stmEmpresa=null;
+        PreparedStatement stmEmpresa = null;
         ResultSet rsUsuario;
 
-        con=this.getConexion();
+        con = this.getConexion();
 
-        try  {
-        stmEmpresa=con.prepareStatement("select * "
+        try {
+            stmEmpresa = con.prepareStatement("select * "
                     + "from EmpresaUsuario");
-        rsUsuario=stmEmpresa.executeQuery();
-        while (rsUsuario.next())
-        {
-            empresa = new EmpresaUsuario(rsUsuario.getString("idUsuario"), rsUsuario.getString("clave"),
+            rsUsuario = stmEmpresa.executeQuery();
+            while (rsUsuario.next()) {
+                empresa = new EmpresaUsuario(rsUsuario.getString("idUsuario"), rsUsuario.getString("clave"),
                         rsUsuario.getString("nombreComercial"), rsUsuario.getString("direccion"),
                         rsUsuario.getString("telefono"), TipoUsuario.valueOf(rsUsuario.getString("tipoUsuario")));
-            resultado.add(empresa);
-        }
+                resultado.add(empresa);
+            }
 
-        } catch (SQLException e){
-          System.out.println(e.getMessage());
-          this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
-        }finally{
-          try {stmEmpresa.close();} catch (SQLException e){System.out.println("Imposible cerrar cursores");}
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        } finally {
+            try {
+                stmEmpresa.close();
+            } catch (SQLException e) {
+                System.out.println("Imposible cerrar cursores");
+            }
         }
         return resultado;
     }
-    
-    
 
     public InversorUsuario validarUsuarioInversor(String idUsuario, String clave) {
         InversorUsuario resultado = null;
@@ -94,7 +99,44 @@ public class DAOUsuarios extends AbstractDAO {
                 resultado = new InversorUsuario(rsUsuario.getString("idUsuario"), rsUsuario.getString("clave"),
                         rsUsuario.getString("nombre"), rsUsuario.getString("apellido1"), rsUsuario.getString("apellido2"), rsUsuario.getString("direccion"),
                         rsUsuario.getString("telefono"), TipoUsuario.valueOf(rsUsuario.getString("tipoUsuario")));
-                resultado.setComision(Float.parseFloat(rsUsuario.getString("comision")));
+            }
+            try {
+                stmUsuario = null;
+                stmUsuario = con.prepareStatement("select valor "
+                        + "from comision "
+                        + "where fechaComision = ( select max(fechaComision) from comision)");
+                rsUsuario = null;
+                rsUsuario = stmUsuario.executeQuery();
+                if (rsUsuario.next()) {
+                    resultado.setComision(Float.parseFloat(rsUsuario.getString("valor")));
+                }
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+                this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+            } finally {
+                try {
+                    stmUsuario.close();
+                } catch (SQLException e) {
+                    System.out.println("Imposible cerrar cursores");
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        } finally {
+            try {
+                stmUsuario.close();
+            } catch (SQLException e) {
+                System.out.println("Imposible cerrar cursores");
+            }
+        }
+        try {
+            stmUsuario = con.prepareStatement("select valor "
+                    + "from comision "
+                    + "where fechaComision = ( select max(fechaComision) from comision)");
+            rsUsuario = stmUsuario.executeQuery();
+            if (rsUsuario.next()) {
+                resultado.setComision(Float.parseFloat(rsUsuario.getString("valor")));
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -130,9 +172,28 @@ public class DAOUsuarios extends AbstractDAO {
                         rsUsuario.getString("nombreComercial"), rsUsuario.getString("direccion"),
                         rsUsuario.getString("telefono"), TipoUsuario.valueOf(rsUsuario.getString("tipoUsuario")));
                 resultado.setnParticipaciones(Integer.parseInt(rsUsuario.getString("numeroParticipaciones")));
-                resultado.setComision(Float.parseFloat(rsUsuario.getString("comision")));
-
             }
+            try {
+                stmUsuario = null;
+                stmUsuario = con.prepareStatement("select valor "
+                        + "from comision "
+                        + "where fechaComision = ( select max(fechaComision) from comision)");
+                rsUsuario=null;
+                rsUsuario = stmUsuario.executeQuery();
+                if (rsUsuario.next()) {
+                    resultado.setComision(Float.parseFloat(rsUsuario.getString("valor")));
+                }
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+                this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+            } finally {
+                try {
+                    stmUsuario.close();
+                } catch (SQLException e) {
+                    System.out.println("Imposible cerrar cursores");
+                }
+            }
+
         } catch (SQLException e) {
             System.out.println(e.getMessage());
             this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
@@ -143,6 +204,7 @@ public class DAOUsuarios extends AbstractDAO {
                 System.out.println("Imposible cerrar cursores");
             }
         }
+
         return resultado;
     }
 
@@ -618,6 +680,7 @@ public class DAOUsuarios extends AbstractDAO {
             }
         }
     }
+102346792845F
 
     public java.util.List<EmpresaUsuario> consultarListaUsuariosPrestamo(String idUsuario, String nombreUsuario) {
         java.util.List<EmpresaUsuario> resultado = new java.util.ArrayList<EmpresaUsuario>();
@@ -670,8 +733,8 @@ public class DAOUsuarios extends AbstractDAO {
         con = super.getConexion();
 
         try {
-            stmComision = con.prepareStatement("update InversorUsuario "
-                    + "set comision=?");
+            stmComision = con.prepareStatement("insert into Comision "
+                    + "values (?, now())");
 
             stmComision.setFloat(1, valor);
             stmComision.executeUpdate();
@@ -686,23 +749,37 @@ public class DAOUsuarios extends AbstractDAO {
                 System.out.println("Imposible cerrar cursores");
             }
         }
+    }
+    
+    public ArrayList<String> getEmpresas() {
+        ArrayList<String> resultado = new ArrayList<String>();
+        Connection con;
+        PreparedStatement stmPrestamos = null;
+        ResultSet rsPrestamos;
+        String consulta;
+
+        con = this.getConexion();
 
         try {
-            stmComision = con.prepareStatement("update EmpresaUsuario "
-                    + "set comision=?");
+            consulta = "select nombreComercial "
+                    + "from empresausuario as e "
+                    + "order by e.nombreComercial";
 
-            stmComision.setFloat(1, valor);
-            stmComision.executeUpdate();
-
+            stmPrestamos = con.prepareStatement(consulta);
+            rsPrestamos = stmPrestamos.executeQuery();
+            while (rsPrestamos.next()) {
+                resultado.add(rsPrestamos.getString("nombreComercial"));
+            }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
             this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
         } finally {
             try {
-                stmComision.close();
+                stmPrestamos.close();
             } catch (SQLException e) {
                 System.out.println("Imposible cerrar cursores");
             }
         }
+        return resultado;
     }
 }

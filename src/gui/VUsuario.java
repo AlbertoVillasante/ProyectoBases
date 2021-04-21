@@ -32,13 +32,14 @@ public class VUsuario extends javax.swing.JDialog {
         btnRegistrar.setBackground(prueba1);
         btnTelefono.setBackground(prueba1);
         btnUsuario.setBackground(prueba1);
+        txtUsuarioNoDisponible.setEnabled(false);
+
         if (flag) {
             tipo_usr.setEnabled(true);
             btnEmpresa.setEnabled(false);
             obligatorio5.setEnabled(false);
             nombreEmpresa.setEnabled(false);
             obligatorioTexto.setEnabled(false);
-            txtUsuarioNoDisponible.setEnabled(false);
         } else {
             tipo_usr.setEnabled(false);
             tipo_usr.setForeground(prueba);
@@ -484,6 +485,7 @@ public class VUsuario extends javax.swing.JDialog {
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
         /*ModeloTablaUsuarios m;
         m = (ModeloTablaUsuarios) TablaUsuarios.getModel();*/
+        txtUsuarioNoDisponible.setEnabled(false);
 
         if (btnUsuario.getText().equals("") || btnUsuario.getText().equals("DNI / NIF")) {
             obligatorioTexto.setEnabled(true);
@@ -557,10 +559,9 @@ public class VUsuario extends javax.swing.JDialog {
         if (obligatorioTexto.isEnabled()) {
             return;
         }
-        
+
         registrarUsuario();
-        
-        
+
         /* EmpresaUsuario u;
         u = new EmpresaUsuario(btnUsuario.getText(), btnDireccion.getText(), btnClave.getText(), btnEmpresa.getText(),
                 btnTelefono.getText(), TipoUsuario.valueOf(tipo_usr.getSelectedItem().toString()));
@@ -568,7 +569,6 @@ public class VUsuario extends javax.swing.JDialog {
             id = u.getIdUsuario();
         }*/
         //fa.actualizarUsuario(u, id);  //Comentado para que no de error
-
         //this.buscarUsuarios();
         // this.BtnNuevoUsuarioActionPerformed(evt);
     }//GEN-LAST:event_btnRegistrarActionPerformed
@@ -646,31 +646,43 @@ public class VUsuario extends javax.swing.JDialog {
         }
 
     }*/
-    
-    public void registrarUsuario(){
+    public void registrarUsuario() {
         Integer tipoUser = tipo_usr.getSelectedIndex();
-        String tipo= "PendAlta";
+        String tipo = "PendAlta";
         int cont = 0;
-        
-        if(tipoUser==0){
-            if(!btnUsuario.getText().isEmpty() && btnUsuario.getText().length()==9 && fa.comprobarIdInversor(btnUsuario.getText())==0){
-                if(!btnClave1.getText().isEmpty() && !btnDireccion.getText().isEmpty() && !btnTelefono.getText().isEmpty() && !btnInversor.getText().isEmpty() && !btnApellido1.getText().isEmpty() && !btnApellido2.getText().isEmpty()){
+
+        if (tipoUser == 0) {
+            if (!btnUsuario.getText().isEmpty() && btnUsuario.getText().length() == 9 && fa.comprobarIdInversor(btnUsuario.getText()) == 0) {
+                if (!btnClave1.getText().isEmpty() && !btnDireccion.getText().isEmpty() && !btnTelefono.getText().isEmpty() && !btnInversor.getText().isEmpty() && !btnApellido1.getText().isEmpty() && !btnApellido2.getText().isEmpty()) {
                     InversorUsuario iu;
-                    iu=new InversorUsuario(btnUsuario.getText(), btnClave1.getText(), btnInversor.getText(), btnApellido1.getText(), btnApellido2.getText(), btnDireccion.getText(), btnTelefono.getText(),TipoUsuario.valueOf(tipo));
+                    iu = new InversorUsuario(btnUsuario.getText(), btnClave1.getText(), btnInversor.getText(), btnApellido1.getText(), btnApellido2.getText(), btnDireccion.getText(), btnTelefono.getText(), TipoUsuario.valueOf(tipo));
                     fa.insertarUsuarioInversor(iu);
+                    this.dispose();
                 }
+            }
+            if (fa.comprobarIdInversor(btnUsuario.getText()) != 0) {
+                txtUsuarioNoDisponible.setEnabled(true);
+            }
+            if (btnUsuario.getText().length() != 9) {
+                VAviso a = new VAviso("Longitud de DNI incorrecta.Tiene que ser 9 y has introducido " + btnUsuario.getText().length());
+                a.setVisible(true);
+            }
+        } else {
+            if (!btnUsuario.getText().isEmpty() && btnUsuario.getText().length() == 13 && fa.comprobarIdEmpresa(btnUsuario.getText()) == 0) {
+                if (!btnClave1.getText().isEmpty() && !btnDireccion.getText().isEmpty() && !btnTelefono.getText().isEmpty() && !btnEmpresa.getText().isEmpty()) {
+                    EmpresaUsuario eu;
+                    eu = new EmpresaUsuario(btnUsuario.getText(), btnClave1.getText(), btnEmpresa.getText(), btnDireccion.getText(), btnTelefono.getText(), TipoUsuario.valueOf(tipo));
+                    fa.insertarUsuarioEmpresa(eu);
+                    this.dispose();
+                }
+            }
+            if (fa.comprobarIdEmpresa(btnUsuario.getText()) != 0) {
+                txtUsuarioNoDisponible.setEnabled(true);
+            }
+            if (btnUsuario.getText().length() != 13) {
+                VAviso a = new VAviso("Longitud de NIF incorrecta.Tiene que ser 13 y has introducido " + btnUsuario.getText().length());
+                a.setVisible(true);
             }
         }
-            
-        else{
-            if(!btnUsuario.getText().isEmpty() && btnUsuario.getText().length()==13 && fa.comprobarIdEmpresa(btnUsuario.getText())==0){
-                if(!btnClave1.getText().isEmpty() && !btnDireccion.getText().isEmpty() && !btnTelefono.getText().isEmpty() && !btnEmpresa.getText().isEmpty()){
-                    EmpresaUsuario eu;
-                    eu= new EmpresaUsuario(btnUsuario.getText(), btnClave1.getText(), btnEmpresa.getText(), btnDireccion.getText(), btnTelefono.getText(), TipoUsuario.valueOf(tipo));
-                    fa.insertarUsuarioEmpresa(eu);
-                }
-            }
-        }       
-    } 
     }
-
+}

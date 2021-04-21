@@ -217,7 +217,7 @@ public class MenuDeUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_botonBeneficiosActionPerformed
 
     private void botonEstadisticasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEstadisticasActionPerformed
-        // TODO add your handling code here:
+        fa.nuevaEstadistica(iu,eu);
     }//GEN-LAST:event_botonEstadisticasActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed

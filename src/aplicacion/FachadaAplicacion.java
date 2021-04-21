@@ -1,5 +1,7 @@
 package aplicacion;
 
+import java.util.ArrayList;
+
 public class FachadaAplicacion {
 
     gui.FachadaGui fgui;
@@ -74,20 +76,20 @@ public class FachadaAplicacion {
     public void nuevoUsuario(boolean c, InversorUsuario iu, EmpresaUsuario eu) {
         gu.nuevoUsuario(c, iu, eu);
     }
-    
-    public void insertarUsuarioInversor(InversorUsuario u){
+
+    public void insertarUsuarioInversor(InversorUsuario u) {
         gu.insertarUsuarioInversor(u);
     }
-    
-    public void insertarUsuarioEmpresa(EmpresaUsuario u){
+
+    public void insertarUsuarioEmpresa(EmpresaUsuario u) {
         gu.insertarUsuarioEmpresa(u);
     }
-    
-    public int comprobarIdInversor(String id){
+
+    public int comprobarIdInversor(String id) {
         return gu.comprobarIdInversor(id);
     }
-    
-    public int comprobarIdEmpresa(String id){
+
+    public int comprobarIdEmpresa(String id) {
         return gu.comprobarIdEmpresa(id);
     }
 
@@ -161,12 +163,28 @@ public class FachadaAplicacion {
     public void altaParticipacionesEmpresa(int participaciones, String id) {
         gpart.altaParticipacionesEmpresa(participaciones, id);
     }
-    
-     public void bajaParticipacionesEmpresa(int participaciones, String id) {
+
+    public void bajaParticipacionesEmpresa(int participaciones, String id) {
         gpart.bajaParticipacionesEmpresa(participaciones, id);
     }
-     
-     public void actualizarComision(float comision) {
+
+    public void actualizarComision(float comision) {
         gu.actualizarComision(comision);
+    }
+
+    public void nuevaEstadistica(InversorUsuario iu, EmpresaUsuario eu) {
+        gu.nuevaEstadistica(iu, eu);
+    }
+    
+    public ArrayList<String> getEmpresas() {
+        return gu.getEmpresas();
+    }
+    
+     public ArrayList<AnunciarBeneficios> getBeneficios() {
+        return gb.getBeneficios();
+    }
+    
+    public void altaPagoBeneficios(String fecha, float precio, int numParticipaciones, String nombreEmpresa){
+        gb.altaPagoBeneficios(fecha,precio,numParticipaciones,nombreEmpresa);
     }
 }

@@ -6,13 +6,16 @@ public class VAviso extends javax.swing.JDialog {
 
     Color prueba = new Color(60, 63, 65);
     Color prueba1 = new Color(78, 82, 85);
+    Color prueba2 = new Color(255, 255, 255);
 
     public VAviso(String txtExcepcion) {
         initComponents();
         this.getContentPane().setBackground(prueba);
         textoExcepcion.setBackground(prueba1);
         btnCerrar.setBackground(prueba1);
+        textoExcepcion.setForeground(prueba2);
         textoExcepcion.setText(txtExcepcion);
+        aviso.setBackground(prueba);
         this.addWindowListener(new java.awt.event.WindowAdapter() {
 
             @Override
@@ -39,6 +42,7 @@ public class VAviso extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
+        btnCerrar.setForeground(new java.awt.Color(187, 187, 188));
         btnCerrar.setText("Cerrar");
         btnCerrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

@@ -2,6 +2,7 @@ package aplicacion;
 
 import gui.FachadaGui;
 import baseDatos.FachadaBaseDatos;
+import java.util.ArrayList;
 
 public class GestionUsuarios {
 
@@ -55,6 +56,10 @@ public class GestionUsuarios {
         fgui.configuracionRegulador(iu,eu);
     }
     
+     public void nuevaEstadistica(InversorUsuario iu, EmpresaUsuario eu) {
+        fgui.nuevaEstadistica(iu, eu);
+    }
+    
     public void actualizarComision(float comision) {
         fbd.actualizarComision(comision);
     }
@@ -73,6 +78,10 @@ public class GestionUsuarios {
     
     public int comprobarIdEmpresa(String id){
         return fbd.comprobarIdEmpresa(id);
+    }
+    
+      public ArrayList<String> getEmpresas() {
+        return fbd.getEmpresas();
     }
 }
     /*  //Comentado para que no de error

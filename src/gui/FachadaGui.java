@@ -126,4 +126,11 @@ public class FachadaGui {           //Esta es la fachada
         vc = new VConfiguracionRegulador(fa,iu,eu);
         vc.setVisible(true);
     }
+    
+     public void nuevaEstadistica(InversorUsuario iu, EmpresaUsuario eu) {
+         VEstadistica Vest;
+         
+         Vest= new VEstadistica(fa,iu,eu);
+         Vest.setVisible(true);
+    }
 }

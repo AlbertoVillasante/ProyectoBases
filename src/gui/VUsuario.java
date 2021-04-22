@@ -263,6 +263,11 @@ public class VUsuario extends javax.swing.JDialog {
 
         btnBaja.setForeground(new java.awt.Color(187, 187, 188));
         btnBaja.setText("Solicitar baja");
+        btnBaja.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBajaActionPerformed(evt);
+            }
+        });
 
         obligatorioTexto.setForeground(new java.awt.Color(255, 51, 51));
         obligatorioTexto.setText("Rellena los campos obligatorios *");
@@ -602,6 +607,12 @@ public class VUsuario extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnClave1ActionPerformed
 
+    private void btnBajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBajaActionPerformed
+        // TODO add your handling code here:
+        solicitarBaja();
+        this.dispose();
+    }//GEN-LAST:event_btnBajaActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel apellido1;
@@ -694,18 +705,15 @@ public class VUsuario extends javax.swing.JDialog {
     }
     
     public void actualizarDatos(){
-        String tipo = "Normal";
         if(this.invu != null){
-            /*this.invu.setNombre(btnInversor.getText());
+            this.invu.setNombre(btnInversor.getText());
             this.invu.setApellido1(btnApellido1.getText());
             this.invu.setApellido2(btnApellido2.getText());
             this.invu.setClave(btnClave1.getText());
             this.invu.setDireccion(btnDireccion.getText());
-            this.invu.setTelefono(btnTelefono.getText());*/
+            this.invu.setTelefono(btnTelefono.getText());
             
-            
-            InversorUsuario inv = new InversorUsuario(btnUsuario.getText(), btnClave1.getText(), btnInversor.getText(), btnApellido1.getText(), btnApellido2.getText(), btnDireccion.getText(), btnTelefono.getText(), TipoUsuario.valueOf(tipo));
-            fa.modificarUsuarioInversor(inv);
+            fa.modificarUsuarioInversor(invu);
             /*btnClave1.setText(invu.getClave());
             btnDireccion.setText(invu.getDireccion());
             btnTelefono.setText(invu.getTelefono());
@@ -720,12 +728,21 @@ public class VUsuario extends javax.swing.JDialog {
             this.empu.setDireccion(btnDireccion.getText());
             this.empu.setTelefono(btnTelefono.getText());
             
-            EmpresaUsuario emp = new EmpresaUsuario(empu.getIdUsuario(), empu.getClave(), empu.getNombreComercial(), empu.getDireccion(), empu.getTelefono(), empu.getTipoUsuario());
             fa.modificarUsuarioEmpresa(empu);
             /*btnClave1.setText(empu.getClave());
             btnDireccion.setText(empu.getDireccion());
             btnEmpresa.setText(empu.getNombreComercial());
             btnTelefono.setText(empu.getTelefono());*/
+        }
+    }
+    
+    public void solicitarBaja(){
+        if(this.invu != null){
+            fa.solicitarBajaInversor(invu.getIdUsuario());
+        }
+        
+        else if(this.empu != null){
+            fa.solicitarBajaEmpresa(empu.getIdUsuario());
         }
     }
 }

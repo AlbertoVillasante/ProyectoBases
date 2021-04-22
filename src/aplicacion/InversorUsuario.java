@@ -18,7 +18,6 @@ public class InversorUsuario {
     private String direccion;
     private String telefono;
     private TipoUsuario tipoUsuario;
-    private int nParticipaciones;
     private float comision;
     private double fondosDisponiblesCuenta;
 
@@ -95,14 +94,6 @@ public class InversorUsuario {
 
     public void setTipoUsuario(TipoUsuario tipo) {
         this.tipoUsuario = tipo;
-    }
-
-    public int getnParticipaciones() {
-        return nParticipaciones;
-    }
-
-    public void setnParticipaciones(int nParticipaciones) {
-        this.nParticipaciones = nParticipaciones;
     }
 
     public double getFondosDisponiblesCuenta() {

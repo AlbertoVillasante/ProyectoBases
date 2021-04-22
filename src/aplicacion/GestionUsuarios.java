@@ -107,6 +107,22 @@ public class GestionUsuarios {
     public void modificarUsuarioInversor(InversorUsuario u) {
         fbd.modificarUsuarioInversor(u);
     }
+    
+    public void solicitarBajaInversor(String id){
+        fbd.solicitarBajaInversor(id);
+    }
+    
+    public void solicitarBajaEmpresa(String id){
+        fbd.solicitarBajaEmpresa(id);
+    }
+    
+    public void confirmarBajaInversor(String id) {
+        fbd.confirmarBajaInversor(id);
+    }
+    
+    public void confirmarBajaEmpresa(String id) {
+        fbd.confirmarBajaEmpresa(id);
+    }
 }
     /*  //Comentado para que no de error
     public java.util.List<EmpresaUsuario> obtenerUsuarios(String idUsuario, String nombreUsuario) {

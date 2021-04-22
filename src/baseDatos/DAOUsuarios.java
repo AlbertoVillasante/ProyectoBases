@@ -444,7 +444,7 @@ public class DAOUsuarios extends AbstractDAO {
             stmUsuarios.setString(2, u.getNombreComercial());
             stmUsuarios.setString(3, u.getDireccion());
             stmUsuarios.setString(4, u.getTelefono());
-            stmUsuarios.setString(5, u.getTipoUsuario().toString());
+            stmUsuarios.setString(5, u.getIdUsuario());
             stmUsuarios.executeUpdate();
 
         } catch (SQLException e) {
@@ -477,7 +477,7 @@ public class DAOUsuarios extends AbstractDAO {
             stmUsuarios.setString(4, u.getApellido2());
             stmUsuarios.setString(5, u.getDireccion());
             stmUsuarios.setString(6, u.getTelefono());
-            stmUsuarios.setString(7, u.getTipoUsuario().toString());
+            stmUsuarios.setString(7, u.getIdUsuario());
             stmUsuarios.executeUpdate();
 
         } catch (SQLException e) {
@@ -497,8 +497,8 @@ public class DAOUsuarios extends AbstractDAO {
         PreparedStatement stmUsuario = null;
         con = super.getConexion();
         try {
-            stmUsuario = con.prepareStatement("update inversorUsuario"
-                    + "set tipoUsuario = ?"
+            stmUsuario = con.prepareStatement("update inversorUsuario "
+                    + "set tipoUsuario = ? "
                     + "where idUsuario = ?");
 
             stmUsuario.setString(1, "PendBaja");
@@ -522,8 +522,8 @@ public class DAOUsuarios extends AbstractDAO {
         PreparedStatement stmUsuario = null;
         con = super.getConexion();
         try {
-            stmUsuario = con.prepareStatement("update empresaUsuario"
-                    + "set tipoUsuario = ?"
+            stmUsuario = con.prepareStatement("update empresaUsuario "
+                    + "set tipoUsuario = ? "
                     + "where idUsuario = ?");
 
             stmUsuario.setString(1, "PendBaja");
@@ -541,7 +541,7 @@ public class DAOUsuarios extends AbstractDAO {
             }
         }
     }
-
+    /*
     public void modificarCuentaInversor(InversorUsuario usuario) {
         Connection con;
         PreparedStatement stmUsuarios = null;
@@ -567,7 +567,7 @@ public class DAOUsuarios extends AbstractDAO {
                 System.out.println("Imposible cerrar cursores");
             }
         }
-    }
+    }*/
 
     public void modificarCuentaEmpresa(EmpresaUsuario usuario) {
         Connection con;
@@ -611,7 +611,7 @@ public class DAOUsuarios extends AbstractDAO {
 
             try {
                 stmUsuarios = con.prepareStatement("delete from inversorUsuario "
-                        + "where idUsuario = ? and numeroParticipaciones != 0");
+                        + "where idUsuario = ? and numeroParticipaciones == 0");
 
                 stmUsuarios.setString(1, id);
                 stmUsuarios.executeUpdate();

@@ -152,12 +152,25 @@ public class VVerificacion extends javax.swing.JDialog {
         
         if(tablaVerificacion.getSelectedRow() < m.obtenerNumEmprPend()){
             EmpresaUsuario eu= m.obtenerUsuarioEmpr(tablaVerificacion.getSelectedRow());
-            fa.registroEmpresa(eu);
+            if(eu.getTipoUsuario().toString().equals("PendAlta")){
+                fa.registroEmpresa(eu);
+            }
+            
+            else{
+                fa.confirmarBajaEmpresa(eu.getIdUsuario());
+            }
+            
         }
         
         else{
             InversorUsuario iu= m.obtenerUsuarioInv(tablaVerificacion.getSelectedRow() - m.obtenerNumEmprPend());
-            fa.registroInversor(iu);
+            if(iu.getTipoUsuario().toString().equals("PendAlta")){
+                fa.registroInversor(iu);
+            }
+            
+            else{
+                fa.confirmarBajaInversor(iu.getIdUsuario());
+            }
         }
     }
 

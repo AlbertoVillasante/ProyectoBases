@@ -245,4 +245,20 @@ public class FachadaBaseDatos {
     public void modificarUsuarioInversor(InversorUsuario u) {
         daoUsuarios.modificarUsuarioInversor(u);
     }
+    
+    public void solicitarBajaInversor(String id){
+        daoUsuarios.solicitarBajaInversor(id);
+    }
+    
+    public void solicitarBajaEmpresa(String id){
+        daoUsuarios.solicitarBajaEmpresa(id);
+    }
+    
+    public void confirmarBajaInversor(String id) {
+        daoUsuarios.confirmarBajaInversor(id);
+    }
+    
+    public void confirmarBajaEmpresa(String id) {
+        daoUsuarios.confirmarBajaEmpresa(id);
+    }
 }

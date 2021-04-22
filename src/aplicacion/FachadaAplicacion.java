@@ -211,4 +211,20 @@ public class FachadaAplicacion {
     public void registroEmpresa(EmpresaUsuario empresa){
         gu.registroEmpresa(empresa);
     }
+    
+    public void solicitarBajaInversor(String id){
+        gu.solicitarBajaInversor(id);
+    }
+    
+    public void solicitarBajaEmpresa(String id){
+        gu.solicitarBajaEmpresa(id);
+    }
+    
+    public void confirmarBajaInversor(String id) {
+        gu.confirmarBajaInversor(id);
+    }
+    
+    public void confirmarBajaEmpresa(String id) {
+        gu.confirmarBajaEmpresa(id);
+    }
 }

@@ -37,14 +37,6 @@ public class EmpresaUsuario {
         this.telefono = telefono;
     }
 
-    public TipoUsuario getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(TipoUsuario tipo) {
-        this.tipo = tipo;
-    }
-
     public int getnParticipaciones() {
         return nParticipaciones;
     }
@@ -81,6 +73,12 @@ public class EmpresaUsuario {
         return this.tipo;
     }
 
+    public void setTipoUsuario(TipoUsuario tipo) {
+        this.tipo = tipo;
+    }
+    
+    
+
     public void setIdUsuario(String idUsuario) {
         this.idUsuario = idUsuario;
     }
@@ -92,6 +90,14 @@ public class EmpresaUsuario {
     public void setComision(float comision) {
         this.comision = comision;
     }
-    
 
+    public void setClave(String clave) {
+        this.clave = clave;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
+    
+    
 }

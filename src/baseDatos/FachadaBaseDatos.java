@@ -29,8 +29,8 @@ public class FachadaBaseDatos {
         FileInputStream arqConfiguracion;
 
         try {
-            //arqConfiguracion = new FileInputStream("baseDatos.properties"); //linea a cambiar
-            arqConfiguracion = new FileInputStream("basesDatos.properties");
+            arqConfiguracion = new FileInputStream("baseDatos.properties"); //linea a cambiar
+            //arqConfiguracion = new FileInputStream("basesDatos.properties");
 
             configuracion.load(arqConfiguracion);
             arqConfiguracion.close();
@@ -220,5 +220,29 @@ public class FachadaBaseDatos {
     
      public ArrayList<AnunciarBeneficios> getBeneficios() {
         return daoBeneficios.getBeneficios();
+    }
+     
+    public java.util.List<InversorUsuario> mostrarUsuarioInvPend(){
+        return daoUsuarios.mostrarUsuarioInvPend();
+    }
+    
+    public java.util.List<EmpresaUsuario> mostrarUsuarioEmprPend(){
+        return daoUsuarios.mostrarUsuarioEmprPend();
+    }
+    
+    public void registroInversor(InversorUsuario inversor){
+        daoUsuarios.registroInversor(inversor);
+    }
+    
+    public void registroEmpresa(EmpresaUsuario empresa){
+        daoUsuarios.registroEmpresa(empresa);
+    }
+    
+    public void modificarUsuarioEmpresa(EmpresaUsuario u) {
+        daoUsuarios.modificarUsuarioEmpresa(u);
+    }
+    
+    public void modificarUsuarioInversor(InversorUsuario u) {
+        daoUsuarios.modificarUsuarioInversor(u);
     }
 }

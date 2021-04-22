@@ -5,7 +5,9 @@
  */
 package gui;
 
+import aplicacion.EmpresaUsuario;
 import aplicacion.FachadaAplicacion;
+import aplicacion.InversorUsuario;
 import java.awt.Color;
 
 /**
@@ -24,9 +26,11 @@ public class VVerificacion extends javax.swing.JDialog {
     public VVerificacion(FachadaAplicacion fa) {
         this.fa = fa;
         initComponents();
+        buscarUsuario();
         this.getContentPane().setBackground(prueba);
         btnAceptar.setBackground(prueba1);
-        jTable1.setBackground(prueba1);
+        tablaVerificacion.setBackground(prueba1);
+        
 
     }
 
@@ -42,7 +46,7 @@ public class VVerificacion extends javax.swing.JDialog {
         btnCancelar = new javax.swing.JButton();
         btnAceptar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tablaVerificacion = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -63,19 +67,14 @@ public class VVerificacion extends javax.swing.JDialog {
             }
         });
 
-        jTable1.setForeground(new java.awt.Color(187, 187, 188));
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
-            },
-            new String [] {
-                "ID", "Clave", "Nombre", "Teléfono", "Dirección", "Estado"
+        tablaVerificacion.setForeground(new java.awt.Color(187, 187, 188));
+        tablaVerificacion.setModel(new ModeloTablaVerificacion());
+        tablaVerificacion.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablaVerificacionMouseClicked(evt);
             }
-        ));
-        jScrollPane1.setViewportView(jTable1);
+        });
+        jScrollPane1.setViewportView(tablaVerificacion);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -107,12 +106,19 @@ public class VVerificacion extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-
+        this.dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
 
+        actualizarEstado();
+        buscarUsuario();
     }//GEN-LAST:event_btnAceptarActionPerformed
+
+    private void tablaVerificacionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaVerificacionMouseClicked
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_tablaVerificacionMouseClicked
 
     /**
      * @param args the command line arguments
@@ -122,6 +128,37 @@ public class VVerificacion extends javax.swing.JDialog {
     private javax.swing.JButton btnAceptar;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tablaVerificacion;
     // End of variables declaration//GEN-END:variables
+    
+    public void buscarUsuario(){
+        ModeloTablaVerificacion m;
+        m=(ModeloTablaVerificacion) tablaVerificacion.getModel();
+        m.setFilas(fa.mostrarUsuarioEmprPend(), fa.mostrarUsuarioInvPend());
+        if (m.getRowCount() > 0) {
+            tablaVerificacion.setRowSelectionInterval(0, 0);
+            btnAceptar.setEnabled(true);
+          
+            
+        }
+        else{
+            btnAceptar.setEnabled(false);
+        }
+    }
+    
+    public void actualizarEstado(){
+        ModeloTablaVerificacion m;
+        m=(ModeloTablaVerificacion) tablaVerificacion.getModel();
+        
+        if(tablaVerificacion.getSelectedRow() < m.obtenerNumEmprPend()){
+            EmpresaUsuario eu= m.obtenerUsuarioEmpr(tablaVerificacion.getSelectedRow());
+            fa.registroEmpresa(eu);
+        }
+        
+        else{
+            InversorUsuario iu= m.obtenerUsuarioInv(tablaVerificacion.getSelectedRow() - m.obtenerNumEmprPend());
+            fa.registroInversor(iu);
+        }
+    }
+
 }

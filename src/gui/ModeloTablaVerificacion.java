@@ -4,7 +4,7 @@ import aplicacion.EmpresaUsuario;
 import aplicacion.InversorUsuario;
 import java.util.ArrayList;
 import javax.swing.table.*;
-/*
+
 public class ModeloTablaVerificacion extends AbstractTableModel {
 
     private java.util.List<EmpresaUsuario> usuariosEmp;
@@ -20,7 +20,7 @@ public class ModeloTablaVerificacion extends AbstractTableModel {
     }
 
     public int getRowCount() {
-        return usuarios.size();
+        return usuariosEmp.size()+usuariosInv.size();
     }
 
     @Override
@@ -84,40 +84,81 @@ public class ModeloTablaVerificacion extends AbstractTableModel {
 
     public Object getValueAt(int row, int col) {      //Comentado por ahora, para que no de error
         Object resultado = null;
-
-        switch (col) {
-            case 0:
-                resultado = usuarios.get(row).getIdUsuario();
-                break;
-            case 1:
-                resultado = usuarios.get(row).getClave();
-                break;
-            case 2:
-                resultado = usuarios.get(row).getNombreComercial();
-                break;
-            case 3:
-                resultado = usuarios.get(row).getTipoUsuario();
-                break;
+        
+        if(row < usuariosEmp.size()){
+            switch (col) {
+                case 0:
+                    resultado = usuariosEmp.get(row).getIdUsuario();
+                    break;
+                case 1:
+                    resultado = usuariosEmp.get(row).getClave();
+                    break;
+                case 2:
+                    resultado = usuariosEmp.get(row).getNombreComercial();
+                    break;
+                case 3:
+                    resultado = usuariosEmp.get(row).getTelefono();
+                    break;
+                case 4:
+                    resultado = usuariosEmp.get(row).getDireccion();
+                    break;
+                case 5:
+                    resultado = usuariosEmp.get(row).getTipoUsuario();
+                    break;
+            }
         }
+        
+        else{
+            switch (col) {
+                case 0:
+                    resultado = usuariosInv.get(row - usuariosEmp.size()).getIdUsuario();
+                    break;
+                case 1:
+                    resultado = usuariosInv.get(row - usuariosEmp.size()).getClave();
+                    break;
+                case 2:
+                    resultado = usuariosInv.get(row - usuariosEmp.size()).getNombre();
+                    break;
+                case 3:
+                    resultado = usuariosInv.get(row - usuariosEmp.size()).getTelefono();
+                    break;
+                case 4:
+                    resultado = usuariosInv.get(row - usuariosEmp.size()).getDireccion();
+                    break;
+                case 5:
+                    resultado = usuariosInv.get(row - usuariosEmp.size()).getTipoUsuario();
+                    break;
+            }
+        }
+
+        
         return resultado;
     }
 
-    public void setFilas(java.util.List<EmpresaUsuario> usuarios) {
-        this.usuarios = usuarios;
+    public void setFilas(java.util.List<EmpresaUsuario> usuariosEmpr, java.util.List<InversorUsuario> usuariosInv) {
+        this.usuariosEmp=usuariosEmpr;
+        this.usuariosInv=usuariosInv;
         fireTableDataChanged();
     }
 
-    public EmpresaUsuario obtenerUsuario(int i) {
-        return this.usuarios.get(i);
+    public EmpresaUsuario obtenerUsuarioEmpr(int i) {
+        return this.usuariosEmp.get(i);
+    }
+    
+    public InversorUsuario obtenerUsuarioInv(int i) {
+        return this.usuariosInv.get(i);
+    }
+    
+    public int obtenerNumEmprPend(){
+        return this.usuariosEmp.size();
     }
 
-    public java.util.List<String> obtenerId() {
+    /*public java.util.List<String> obtenerId() {
         java.util.ArrayList<String> us = new ArrayList<String>();
         for (EmpresaUsuario u : this.usuarios) {
             us.add(u.getIdUsuario());
         }
         return us;
-    }
+    }*/
 
 }
-*/

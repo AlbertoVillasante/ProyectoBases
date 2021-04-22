@@ -83,6 +83,30 @@ public class GestionUsuarios {
       public ArrayList<String> getEmpresas() {
         return fbd.getEmpresas();
     }
+      
+    public java.util.List<InversorUsuario> mostrarUsuarioInvPend(){
+        return fbd.mostrarUsuarioInvPend();
+    }
+    
+    public java.util.List<EmpresaUsuario> mostrarUsuarioEmprPend(){
+        return fbd.mostrarUsuarioEmprPend();
+    }
+    
+    public void registroInversor(InversorUsuario inversor){
+        fbd.registroInversor(inversor);
+    }
+    
+    public void registroEmpresa(EmpresaUsuario empresa){
+        fbd.registroEmpresa(empresa);
+    }
+    
+    public void modificarUsuarioEmpresa(EmpresaUsuario u) {
+        fbd.modificarUsuarioEmpresa(u);
+    }
+    
+    public void modificarUsuarioInversor(InversorUsuario u) {
+        fbd.modificarUsuarioInversor(u);
+    }
 }
     /*  //Comentado para que no de error
     public java.util.List<EmpresaUsuario> obtenerUsuarios(String idUsuario, String nombreUsuario) {

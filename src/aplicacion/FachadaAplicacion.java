@@ -92,6 +92,22 @@ public class FachadaAplicacion {
     public int comprobarIdEmpresa(String id) {
         return gu.comprobarIdEmpresa(id);
     }
+    
+    public java.util.List<InversorUsuario> mostrarUsuarioInvPend(){
+        return gu.mostrarUsuarioInvPend();
+    }
+    
+    public java.util.List<EmpresaUsuario> mostrarUsuarioEmprPend(){
+        return gu.mostrarUsuarioEmprPend();
+    }
+    
+    public void modificarUsuarioEmpresa(EmpresaUsuario u) {
+        gu.modificarUsuarioEmpresa(u);
+    }
+    
+    public void modificarUsuarioInversor(InversorUsuario u) {
+        gu.modificarUsuarioInversor(u);
+    }
 
     /*  //Comentado para que no de error
     public java.util.List<EmpresaUsuario> obtenerUsuarios(String idUsuario, String nombreUsuario) {
@@ -186,5 +202,13 @@ public class FachadaAplicacion {
     
     public void altaPagoBeneficios(String fecha, float precio, int numParticipaciones, String nombreEmpresa){
         gb.altaPagoBeneficios(fecha,precio,numParticipaciones,nombreEmpresa);
+    }
+    
+    public void registroInversor(InversorUsuario inversor){
+        gu.registroInversor(inversor);
+    }
+    
+    public void registroEmpresa(EmpresaUsuario empresa){
+        gu.registroEmpresa(empresa);
     }
 }

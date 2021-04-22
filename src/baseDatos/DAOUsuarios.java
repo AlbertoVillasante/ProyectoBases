@@ -13,7 +13,7 @@ public class DAOUsuarios extends AbstractDAO {
         super.setFachadaAplicacion(fa);
     }
 
-    public java.util.List<InversorUsuario> mostrarUsuarioInv() {
+    public java.util.List<InversorUsuario> mostrarUsuarioInvPend() {
         java.util.List<InversorUsuario> resultado = new java.util.ArrayList<InversorUsuario>();
         InversorUsuario inversor;
         Connection con;
@@ -24,7 +24,10 @@ public class DAOUsuarios extends AbstractDAO {
 
         try {
             stmInversor = con.prepareStatement("select idUsuario, clave, nombre, apellido1, apellido2, direccion, telefono, tipoUsuario "
-                    + "from inversorusuario ");
+                    + "from inversorusuario "
+                    + "where tipoUsuario = ? or tipoUsuario = ?");
+            stmInversor.setString(1, "PendAlta");
+            stmInversor.setString(2, "PendBaja");
             rsUsuario = stmInversor.executeQuery();
             while (rsUsuario.next()) {
                 inversor = new InversorUsuario(rsUsuario.getString("idUsuario"), rsUsuario.getString("clave"),
@@ -46,7 +49,7 @@ public class DAOUsuarios extends AbstractDAO {
         return resultado;
     }
 
-    public java.util.List<EmpresaUsuario> mostrarUsuarioEmpr() {
+    public java.util.List<EmpresaUsuario> mostrarUsuarioEmprPend() {
         java.util.List<EmpresaUsuario> resultado = new java.util.ArrayList<EmpresaUsuario>();
         EmpresaUsuario empresa;
         Connection con;
@@ -57,7 +60,10 @@ public class DAOUsuarios extends AbstractDAO {
 
         try {
             stmEmpresa = con.prepareStatement("select * "
-                    + "from EmpresaUsuario");
+                    + "from EmpresaUsuario "
+                    + "where tipoUsuario = ? or tipoUsuario = ?");
+            stmEmpresa.setString(1, "PendAlta");
+            stmEmpresa.setString(2, "PendBaja");
             rsUsuario = stmEmpresa.executeQuery();
             while (rsUsuario.next()) {
                 empresa = new EmpresaUsuario(rsUsuario.getString("idUsuario"), rsUsuario.getString("clave"),
@@ -457,9 +463,11 @@ public class DAOUsuarios extends AbstractDAO {
         Connection con;
         PreparedStatement stmUsuarios = null;
         con = super.getConexion();
+        
+        System.out.println(u.getClave());
 
         try {
-            stmUsuarios = con.prepareStatement("update empresaUsuario "
+            stmUsuarios = con.prepareStatement("update inversorUsuario "
                     + "set clave = ?, nombre = ?, apellido1 = ?, apellido2 = ?, direccion = ?, telefono = ? "
                     + "where idusuario= ?");            //Posible complicacion, segun lo que dijo mosquera
 

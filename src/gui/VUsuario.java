@@ -9,6 +9,9 @@ public class VUsuario extends javax.swing.JDialog {
 
     aplicacion.FachadaAplicacion fa;
     String id = null;
+    
+    EmpresaUsuario empu;
+    InversorUsuario invu;
 
     int CheckeoUsuario;
 
@@ -17,6 +20,8 @@ public class VUsuario extends javax.swing.JDialog {
 
     public VUsuario(aplicacion.FachadaAplicacion fa, boolean flag, InversorUsuario iu, EmpresaUsuario eu) {
         this.fa = fa;
+        this.empu = eu;
+        this.invu = iu;
         initComponents();
         this.getContentPane().setBackground(prueba);
         tipo_usr.setBackground(prueba1);
@@ -51,7 +56,7 @@ public class VUsuario extends javax.swing.JDialog {
                 btnTelefono.setText(iu.getTelefono());
                 btnInversor.setText(iu.getNombre());
                 btnApellido1.setText(iu.getApellido1());
-                btnApellido2.setText(iu.getApellido1());
+                btnApellido2.setText(iu.getApellido2());
 
             }
             if (eu != null) {
@@ -468,7 +473,7 @@ public class VUsuario extends javax.swing.JDialog {
 
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
         //id = null;
-        btnUsuario.setText("DNI / NIF");
+        /*btnUsuario.setText("DNI / NIF");
         btnClave1.setText("");
         btnDireccion.setText("");
         btnEmpresa.setText("");
@@ -476,7 +481,9 @@ public class VUsuario extends javax.swing.JDialog {
         btnApellido1.setText("");
         btnApellido2.setText("");
         btnInversor.setText("");
-        tipo_usr.setSelectedIndex(0);
+        tipo_usr.setSelectedIndex(0);*/
+        
+        actualizarDatos();
 
         //btnBorrar.setEnabled(true);
         //btnRegistrar.setEnabled(true);
@@ -683,6 +690,42 @@ public class VUsuario extends javax.swing.JDialog {
                 VAviso a = new VAviso("Longitud de NIF incorrecta.Tiene que ser 13 y has introducido " + btnUsuario.getText().length());
                 a.setVisible(true);
             }
+        }
+    }
+    
+    public void actualizarDatos(){
+        String tipo = "Normal";
+        if(this.invu != null){
+            /*this.invu.setNombre(btnInversor.getText());
+            this.invu.setApellido1(btnApellido1.getText());
+            this.invu.setApellido2(btnApellido2.getText());
+            this.invu.setClave(btnClave1.getText());
+            this.invu.setDireccion(btnDireccion.getText());
+            this.invu.setTelefono(btnTelefono.getText());*/
+            
+            
+            InversorUsuario inv = new InversorUsuario(btnUsuario.getText(), btnClave1.getText(), btnInversor.getText(), btnApellido1.getText(), btnApellido2.getText(), btnDireccion.getText(), btnTelefono.getText(), TipoUsuario.valueOf(tipo));
+            fa.modificarUsuarioInversor(inv);
+            /*btnClave1.setText(invu.getClave());
+            btnDireccion.setText(invu.getDireccion());
+            btnTelefono.setText(invu.getTelefono());
+            btnApellido1.setText(invu.getApellido1());
+            btnApellido2.setText(invu.getApellido2());
+            btnInversor.setText(invu.getNombre());*/
+        }
+        
+        else if(this.empu != null){
+            this.empu.setNombreComercial(btnEmpresa.getText());
+            this.empu.setClave(btnClave1.getText());
+            this.empu.setDireccion(btnDireccion.getText());
+            this.empu.setTelefono(btnTelefono.getText());
+            
+            EmpresaUsuario emp = new EmpresaUsuario(empu.getIdUsuario(), empu.getClave(), empu.getNombreComercial(), empu.getDireccion(), empu.getTelefono(), empu.getTipoUsuario());
+            fa.modificarUsuarioEmpresa(empu);
+            /*btnClave1.setText(empu.getClave());
+            btnDireccion.setText(empu.getDireccion());
+            btnEmpresa.setText(empu.getNombreComercial());
+            btnTelefono.setText(empu.getTelefono());*/
         }
     }
 }

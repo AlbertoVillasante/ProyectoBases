@@ -28,7 +28,7 @@ public class VConfiguracionRegulador extends javax.swing.JDialog {
         initComponents();
         this.getContentPane().setBackground(prueba);
         claveText.setBackground(prueba1);
-        direccionText.setBackground(prueba1);
+        direcciontext.setBackground(prueba1);
         tlfnText.setBackground(prueba1);
         fondosText.setBackground(prueba1);
         comisionText.setBackground(prueba1);
@@ -37,7 +37,7 @@ public class VConfiguracionRegulador extends javax.swing.JDialog {
         if (iu != null) {
             this.iu = iu;
             claveText.setText(iu.getClave());
-            direccionText.setText(iu.getDireccion());
+            direcciontext.setText(iu.getDireccion());
             tlfnText.setText(iu.getTelefono());
             fondosText.setText(String.valueOf(iu.getFondosDisponiblesCuenta()));
             comisionText.setText(String.valueOf(iu.getComision()));
@@ -46,7 +46,7 @@ public class VConfiguracionRegulador extends javax.swing.JDialog {
         if (eu != null) {
             this.eu = eu;
             claveText.setText(eu.getClave());
-            direccionText.setText(eu.getDireccion());
+            direcciontext.setText(eu.getDireccion());
             tlfnText.setText(eu.getTelefono());
             fondosText.setText(String.valueOf(eu.getFondosDisponiblesCuenta()));
             comisionText.setText(String.valueOf(eu.getComision()));
@@ -65,7 +65,6 @@ public class VConfiguracionRegulador extends javax.swing.JDialog {
         lineaLabel = new javax.swing.JLabel();
         micuentaLabel = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        direccionText = new javax.swing.JPasswordField();
         obligatorio3 = new javax.swing.JLabel();
         obligatorio2 = new javax.swing.JLabel();
         obligatorio4 = new javax.swing.JLabel();
@@ -84,6 +83,7 @@ public class VConfiguracionRegulador extends javax.swing.JDialog {
         jLabel2 = new javax.swing.JLabel();
         btnCancelar = new javax.swing.JButton();
         botonAceptar = new javax.swing.JButton();
+        direcciontext = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -96,13 +96,6 @@ public class VConfiguracionRegulador extends javax.swing.JDialog {
 
         jLabel1.setForeground(new java.awt.Color(255, 51, 51));
         jLabel1.setText("Rellena los campos obligatorios *");
-
-        direccionText.setForeground(new java.awt.Color(187, 187, 188));
-        direccionText.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                direccionTextActionPerformed(evt);
-            }
-        });
 
         obligatorio3.setForeground(new java.awt.Color(255, 0, 0));
         obligatorio3.setText("*");
@@ -185,6 +178,8 @@ public class VConfiguracionRegulador extends javax.swing.JDialog {
             }
         });
 
+        direcciontext.setForeground(new java.awt.Color(187, 187, 188));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -232,9 +227,6 @@ public class VConfiguracionRegulador extends javax.swing.JDialog {
                                     .addComponent(fondosLabel)
                                     .addComponent(comisionLabel))))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(claveText, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addGap(26, 26, 26)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -246,8 +238,12 @@ public class VConfiguracionRegulador extends javax.swing.JDialog {
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jLabel3)
                                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addComponent(tlfnText, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(direccionText, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                    .addComponent(tlfnText, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(claveText, javax.swing.GroupLayout.DEFAULT_SIZE, 152, Short.MAX_VALUE)
+                                    .addComponent(direcciontext))))))
                 .addContainerGap(20, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
@@ -268,9 +264,9 @@ public class VConfiguracionRegulador extends javax.swing.JDialog {
                     .addComponent(jLabel4))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(direccionText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5)
-                    .addComponent(obligatorio3, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(obligatorio3, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(direcciontext, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(23, 23, 23)
@@ -309,10 +305,6 @@ public class VConfiguracionRegulador extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void direccionTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_direccionTextActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_direccionTextActionPerformed
 
     private void claveTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_claveTextActionPerformed
 
@@ -353,7 +345,7 @@ public class VConfiguracionRegulador extends javax.swing.JDialog {
     private javax.swing.JTextField claveText;
     private javax.swing.JLabel comisionLabel;
     private javax.swing.JTextField comisionText;
-    private javax.swing.JPasswordField direccionText;
+    private javax.swing.JTextField direcciontext;
     private javax.swing.JLabel fondosLabel;
     private javax.swing.JTextField fondosText;
     private javax.swing.JLabel jLabel1;

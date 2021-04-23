@@ -80,10 +80,6 @@
                           </Group>
                       </Group>
                       <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                          <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="claveText" min="-2" pref="152" max="-2" attributes="0"/>
-                          </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
@@ -99,7 +95,13 @@
                                       </Group>
                                   </Group>
                                   <Component id="tlfnText" min="-2" pref="152" max="-2" attributes="0"/>
-                                  <Component id="direccionText" alignment="0" min="-2" pref="152" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Group type="102" alignment="1" attributes="0">
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="claveText" pref="152" max="32767" attributes="0"/>
+                                  <Component id="direcciontext" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -130,9 +132,9 @@
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="direccionText" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="obligatorio3" alignment="3" min="-2" pref="23" max="-2" attributes="0"/>
+                  <Component id="direcciontext" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
@@ -210,16 +212,6 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Rellena los campos obligatorios *"/>
       </Properties>
-    </Component>
-    <Component class="javax.swing.JPasswordField" name="direccionText">
-      <Properties>
-        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="bc" green="bb" red="bb" type="rgb"/>
-        </Property>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="direccionTextActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="obligatorio3">
       <Properties>
@@ -381,6 +373,13 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonAceptarActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JTextField" name="direcciontext">
+      <Properties>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="bc" green="bb" red="bb" type="rgb"/>
+        </Property>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>

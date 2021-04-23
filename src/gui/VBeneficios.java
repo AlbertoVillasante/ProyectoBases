@@ -7,6 +7,7 @@ package gui;
 
 import aplicacion.FachadaAplicacion;
 import java.awt.Color;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 /**
@@ -58,13 +59,13 @@ public class VBeneficios extends javax.swing.JDialog {
         btnPagar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        cuadroFechaPago = new javax.swing.JTextField();
         cuadroBeneficio = new javax.swing.JTextField();
         btnBuscar = new javax.swing.JButton();
         numPart = new javax.swing.JSpinner();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaBeneficios = new javax.swing.JTable();
+        cuadroFechaPago = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -96,19 +97,10 @@ public class VBeneficios extends javax.swing.JDialog {
         jLabel2.setForeground(new java.awt.Color(187, 187, 188));
         jLabel2.setText("Beneficio/Participación:");
 
-        cuadroFechaPago.setForeground(new java.awt.Color(187, 187, 188));
-        cuadroFechaPago.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cuadroFechaPagoActionPerformed(evt);
-            }
-        });
-
         cuadroBeneficio.setForeground(new java.awt.Color(187, 187, 188));
 
         btnBuscar.setForeground(new java.awt.Color(187, 187, 188));
         btnBuscar.setText("Buscar");
-
-        numPart.setOpaque(true);
 
         jLabel3.setForeground(new java.awt.Color(187, 187, 188));
         jLabel3.setText("Número de Participaciones:");
@@ -133,8 +125,8 @@ public class VBeneficios extends javax.swing.JDialog {
                                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(cuadroFechaPago, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cuadroBeneficio, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(cuadroBeneficio, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                            .addComponent(cuadroFechaPago, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -158,13 +150,14 @@ public class VBeneficios extends javax.swing.JDialog {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(34, 34, 34)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(34, 34, 34)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                         .addGap(18, 18, 18))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGap(30, 30, 30)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel1)
                             .addComponent(cuadroFechaPago, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
@@ -175,7 +168,7 @@ public class VBeneficios extends javax.swing.JDialog {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
                             .addComponent(numPart, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
                         .addComponent(btnSelector, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -195,13 +188,11 @@ public class VBeneficios extends javax.swing.JDialog {
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void cuadroFechaPagoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cuadroFechaPagoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cuadroFechaPagoActionPerformed
-
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
         //comprobaciones
-        fa.altaPagoBeneficios(cuadroFechaPago.getText(), Float.parseFloat(cuadroBeneficio.getText()), Integer.parseInt(numPart.getValue().toString()), btnSelector.getSelectedItem().toString());
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd");
+        String date = sdf.format(cuadroFechaPago.getDate());
+        fa.altaPagoBeneficios(date, Float.parseFloat(cuadroBeneficio.getText()), Integer.parseInt(numPart.getValue().toString()), btnSelector.getSelectedItem().toString());
         actualizarTablaBeneficios();
     }//GEN-LAST:event_btnAceptarActionPerformed
 
@@ -212,7 +203,7 @@ public class VBeneficios extends javax.swing.JDialog {
     private javax.swing.JButton btnPagar;
     private javax.swing.JComboBox btnSelector;
     private javax.swing.JTextField cuadroBeneficio;
-    private javax.swing.JTextField cuadroFechaPago;
+    private com.toedter.calendar.JDateChooser cuadroFechaPago;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

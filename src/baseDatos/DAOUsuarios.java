@@ -107,7 +107,7 @@ public class DAOUsuarios extends AbstractDAO {
                         rsUsuario.getString("telefono"), TipoUsuario.valueOf(rsUsuario.getString("tipoUsuario")));
             }
             try {
-                stmUsuario = null;
+                stmUsuario = null;                                  //Cuidado con pendAlta --> nullPointer
                 stmUsuario = con.prepareStatement("select valor "
                         + "from comision "
                         + "where fechaComision = ( select max(fechaComision) from comision)");
@@ -604,16 +604,27 @@ public class DAOUsuarios extends AbstractDAO {
         try {
             stmUsuarios = con.prepareStatement("update inversorUsuario "
                     + "set fondosDisponiblesCuenta = 0.0 "
-                    + "where idUsuario = ? and numeroParticipaciones != 0");
+                    + "where idUsuario = ? "
+                    + "and 0 = (SELECT COUNT(p.idUsuario2) "
+                        + "FROM poseerparticipacionesinversor as p, inversorUsuario as i "
+                        + "WHERE i.idUsuario = ? "
+                        + "and i.idUsuario = p.idUsuario1 "
+                        + "and p.numparticipaciones <> 0 )");
 
             stmUsuarios.setString(1, id);
+            stmUsuarios.setString(2, id);
             stmUsuarios.executeUpdate();
 
             try {
                 stmUsuarios = con.prepareStatement("delete from inversorUsuario "
-                        + "where idUsuario = ? and numeroParticipaciones == 0");
+                        + "where idUsuario = ? and 0 = (SELECT COUNT(p.idUsuario2) "
+                            + "FROM poseerparticipacionesinversor as p, inversorUsuario as i "
+                            + "WHERE i.idUsuario = ? "
+                            + "and i.idUsuario = p.idUsuario1 "
+                            + "and p.numparticipaciones <> 0 )");
 
                 stmUsuarios.setString(1, id);
+                stmUsuarios.setString(2, id);
                 stmUsuarios.executeUpdate();
             } catch (SQLException e) {
                 System.out.println(e.getMessage());
@@ -639,16 +650,27 @@ public class DAOUsuarios extends AbstractDAO {
         try {
             stmUsuarios = con.prepareStatement("update empresaUsuario "
                     + "set fondosDisponiblesCuenta = 0.0 "
-                    + "where idUsuario = ? and numeroParticipaciones != 0");
+                    + "where idUsuario = ? "
+                    + "and 0 = (SELECT COUNT(p.idUsuario2) "
+                        + "FROM poseerparticipacionesempresa as p, empresaUsuario as i "
+                        + "WHERE i.idUsuario = ? "
+                        + "and i.idUsuario = p.idUsuario1 "
+                        + "and p.numparticipaciones <> 0 )");
 
             stmUsuarios.setString(1, id);
+            stmUsuarios.setString(2, id);
             stmUsuarios.executeUpdate();
 
             try {
-                stmUsuarios = con.prepareStatement("delete from empresaUsuario " //Posible error
-                        + "where idUsuario = ? and numeroParticipaciones != 0");
+                stmUsuarios = con.prepareStatement("delete from empresaUsuario "
+                        + "where idUsuario = ? and 0 = (SELECT COUNT(p.idUsuario2) "
+                            + "FROM poseerparticipacionesempresa as p, empresaUsuario as i "
+                            + "WHERE i.idUsuario = ? "
+                            + "and i.idUsuario = p.idUsuario1 "
+                            + "and p.numparticipaciones <> 0 )");
 
                 stmUsuarios.setString(1, id);
+                stmUsuarios.setString(2, id);
                 stmUsuarios.executeUpdate();
             } catch (SQLException e) {
                 System.out.println(e.getMessage());

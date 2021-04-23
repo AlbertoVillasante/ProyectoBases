@@ -140,8 +140,7 @@ public class VVerificacion extends javax.swing.JDialog {
             btnAceptar.setEnabled(true);
           
             
-        }
-        else{
+        }else{
             btnAceptar.setEnabled(false);
         }
     }
@@ -154,9 +153,7 @@ public class VVerificacion extends javax.swing.JDialog {
             EmpresaUsuario eu= m.obtenerUsuarioEmpr(tablaVerificacion.getSelectedRow());
             if(eu.getTipoUsuario().toString().equals("PendAlta")){
                 fa.registroEmpresa(eu);
-            }
-            
-            else{
+            }else{
                 fa.confirmarBajaEmpresa(eu.getIdUsuario());
             }
             
@@ -166,9 +163,7 @@ public class VVerificacion extends javax.swing.JDialog {
             InversorUsuario iu= m.obtenerUsuarioInv(tablaVerificacion.getSelectedRow() - m.obtenerNumEmprPend());
             if(iu.getTipoUsuario().toString().equals("PendAlta")){
                 fa.registroInversor(iu);
-            }
-            
-            else{
+            }else{
                 fa.confirmarBajaInversor(iu.getIdUsuario());
             }
         }

@@ -261,4 +261,12 @@ public class FachadaBaseDatos {
     public void confirmarBajaEmpresa(String id) {
         daoUsuarios.confirmarBajaEmpresa(id);
     }
+    
+    public void modificarCuentaEmpresa(EmpresaUsuario usuario){
+        daoUsuarios.modificarCuentaEmpresa(usuario);
+    }
+    
+    public void modificarCuentaInversor(InversorUsuario usuario){
+        daoUsuarios.modificarCuentaInversor(usuario);
+    }
 }

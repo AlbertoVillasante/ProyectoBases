@@ -123,6 +123,14 @@ public class GestionUsuarios {
     public void confirmarBajaEmpresa(String id) {
         fbd.confirmarBajaEmpresa(id);
     }
+    
+    public void modificarCuentaEmpresa(EmpresaUsuario usuario){
+        fbd.modificarCuentaEmpresa(usuario);
+    }
+    
+    public void modificarCuentaInversor(InversorUsuario usuario){
+        fbd.modificarCuentaInversor(usuario);
+    }
 }
     /*  //Comentado para que no de error
     public java.util.List<EmpresaUsuario> obtenerUsuarios(String idUsuario, String nombreUsuario) {

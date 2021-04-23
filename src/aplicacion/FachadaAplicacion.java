@@ -227,4 +227,12 @@ public class FachadaAplicacion {
     public void confirmarBajaEmpresa(String id) {
         gu.confirmarBajaEmpresa(id);
     }
+    
+    public void modificarCuentaEmpresa(EmpresaUsuario usuario){
+        gu.modificarCuentaEmpresa(usuario);
+    }
+    
+    public void modificarCuentaInversor(InversorUsuario usuario){
+        gu.modificarCuentaInversor(usuario);
+    }
 }

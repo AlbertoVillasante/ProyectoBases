@@ -541,7 +541,7 @@ public class DAOUsuarios extends AbstractDAO {
             }
         }
     }
-    /*
+    
     public void modificarCuentaInversor(InversorUsuario usuario) {
         Connection con;
         PreparedStatement stmUsuarios = null;
@@ -549,12 +549,11 @@ public class DAOUsuarios extends AbstractDAO {
 
         try {
             stmUsuarios = con.prepareStatement("update inversorUsuario "
-                    + "set fondosDisponiblesCuenta = ?, numeroParticipaciones = ? "
+                    + "set fondosDisponiblesCuenta = ? "
                     + "where idusuario= ?");
 
             stmUsuarios.setDouble(1, usuario.getFondosDisponiblesCuenta());
-            stmUsuarios.setInt(2, usuario.getnParticipaciones());
-            stmUsuarios.setString(3, usuario.getIdUsuario());
+            stmUsuarios.setString(2, usuario.getIdUsuario());
             stmUsuarios.executeUpdate();
 
         } catch (SQLException e) {
@@ -567,7 +566,7 @@ public class DAOUsuarios extends AbstractDAO {
                 System.out.println("Imposible cerrar cursores");
             }
         }
-    }*/
+    }
 
     public void modificarCuentaEmpresa(EmpresaUsuario usuario) {
         Connection con;
@@ -576,12 +575,11 @@ public class DAOUsuarios extends AbstractDAO {
 
         try {
             stmUsuarios = con.prepareStatement("update empresaUsuario "
-                    + "set fondosDisponiblesCuenta = ?, numeroParticipaciones = ? "
+                    + "set fondosDisponiblesCuenta = ? "
                     + "where idusuario= ?");
 
             stmUsuarios.setDouble(1, usuario.getFondosDisponiblesCuenta());
-            stmUsuarios.setInt(2, usuario.getnParticipaciones());
-            stmUsuarios.setString(3, usuario.getIdUsuario());
+            stmUsuarios.setString(2, usuario.getIdUsuario());
             stmUsuarios.executeUpdate();
 
         } catch (SQLException e) {

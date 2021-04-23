@@ -12,7 +12,8 @@ public class FachadaAplicacion {
     GestionPrestamos gp;
     GestionBeneficios gb;
     GestionParticipaciones gpart;
-
+    GestionNoticias gn;
+    
     public FachadaAplicacion() {
         fgui = new gui.FachadaGui(this);
         fbd = new baseDatos.FachadaBaseDatos(this);
@@ -21,6 +22,7 @@ public class FachadaAplicacion {
         gc = new GestionCategorias(fgui, fbd);
         gb = new GestionBeneficios(fgui, fbd);
         gpart = new GestionParticipaciones(fgui, fbd);
+        gn = new GestionNoticias(fgui,fbd);
     }
 
     public static void main(String args[]) {
@@ -200,8 +202,8 @@ public class FachadaAplicacion {
         return gb.getBeneficios();
     }
     
-    public void altaPagoBeneficios(String fecha, float precio, int numParticipaciones, String nombreEmpresa){
-        gb.altaPagoBeneficios(fecha,precio,numParticipaciones,nombreEmpresa);
+    public void altaPagoBeneficios(String fecha, double precio, String nombreEmpresa, int numParticipaciones){
+        gb.altaPagoBeneficios(fecha,precio,nombreEmpresa,numParticipaciones);
     }
     
     public void registroInversor(InversorUsuario inversor){
@@ -235,4 +237,9 @@ public class FachadaAplicacion {
     public void modificarCuentaInversor(InversorUsuario usuario){
         gu.modificarCuentaInversor(usuario);
     }
+    
+     public void nuevaNoticia(){
+        gn.nuevaNoticia();
+    }
+    
 }

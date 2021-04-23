@@ -22,8 +22,8 @@ public class GestionBeneficios {
     public void nuevoBeneficio(){
          fgui.nuevoBeneficio();
     }
-     public void altaPagoBeneficios(String fecha, float precio, int numParticipaciones, String nombreEmpresa){
-        fbd.altaPagoBeneficios(fecha,precio,numParticipaciones,nombreEmpresa);
+     public void altaPagoBeneficios(String fecha, double precio, String nombreEmpresa, int numParticipaciones){
+        fbd.altaPagoBeneficios(fecha,precio,nombreEmpresa,numParticipaciones);
     }
       public ArrayList<AnunciarBeneficios> getBeneficios() {
         return fbd.getBeneficios();

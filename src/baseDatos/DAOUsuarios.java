@@ -96,10 +96,11 @@ public class DAOUsuarios extends AbstractDAO {
         try {
             stmUsuario = con.prepareStatement("select idUsuario, clave, nombre, apellido1, apellido2, direccion, telefono, tipoUsuario "
                     + "from inversorUsuario "
-                    + "where idUsuario = ? and clave = ? and tipoUsuario != ?");
+                    //+ "where idUsuario = ? and clave = ? and tipoUsuario != ?");
+                    + "where idUsuario = ? and clave = ?");
             stmUsuario.setString(1, idUsuario);
             stmUsuario.setString(2, clave);
-            stmUsuario.setString(3, "PendAlta");       //Depende de la implementación, posible cambio
+            //stmUsuario.setString(3, "PendAlta");       //Depende de la implementación, posible cambio
             rsUsuario = stmUsuario.executeQuery();
             if (rsUsuario.next()) {
                 resultado = new InversorUsuario(rsUsuario.getString("idUsuario"), rsUsuario.getString("clave"),
@@ -113,7 +114,7 @@ public class DAOUsuarios extends AbstractDAO {
                         + "where fechaComision = ( select max(fechaComision) from comision)");
                 rsUsuario = null;
                 rsUsuario = stmUsuario.executeQuery();
-                if (rsUsuario.next()) {
+                if (rsUsuario.next() && resultado != null) {
                     resultado.setComision(Float.parseFloat(rsUsuario.getString("valor")));
                 }
             } catch (SQLException e) {
@@ -125,24 +126,6 @@ public class DAOUsuarios extends AbstractDAO {
                 } catch (SQLException e) {
                     System.out.println("Imposible cerrar cursores");
                 }
-            }
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
-        } finally {
-            try {
-                stmUsuario.close();
-            } catch (SQLException e) {
-                System.out.println("Imposible cerrar cursores");
-            }
-        }
-        try {
-            stmUsuario = con.prepareStatement("select valor "
-                    + "from comision "
-                    + "where fechaComision = ( select max(fechaComision) from comision)");
-            rsUsuario = stmUsuario.executeQuery();
-            if (rsUsuario.next()) {
-                resultado.setComision(Float.parseFloat(rsUsuario.getString("valor")));
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -168,10 +151,11 @@ public class DAOUsuarios extends AbstractDAO {
         try {
             stmUsuario = con.prepareStatement("select * "
                     + "from EmpresaUsuario "
-                    + "where idUsuario = ? and clave = ? and tipoUsuario != ?");
+                    //+ "where idUsuario = ? and clave = ? and tipoUsuario != ?");
+                    + "where idUsuario = ? and clave = ?");
             stmUsuario.setString(1, idUsuario);
             stmUsuario.setString(2, clave);
-            stmUsuario.setString(3, "PendAlta");           //Igual que en validarUsuarioInversor
+            //stmUsuario.setString(3, "PendAlta");           //Igual que en validarUsuarioInversor
             rsUsuario = stmUsuario.executeQuery();
             if (rsUsuario.next()) {
                 resultado = new EmpresaUsuario(rsUsuario.getString("idUsuario"), rsUsuario.getString("clave"),
@@ -184,9 +168,9 @@ public class DAOUsuarios extends AbstractDAO {
                 stmUsuario = con.prepareStatement("select valor "
                         + "from comision "
                         + "where fechaComision = ( select max(fechaComision) from comision)");
-                rsUsuario=null;
+                rsUsuario = null;
                 rsUsuario = stmUsuario.executeQuery();
-                if (rsUsuario.next()) {
+                if (rsUsuario.next() && resultado != null) {
                     resultado.setComision(Float.parseFloat(rsUsuario.getString("valor")));
                 }
             } catch (SQLException e) {
@@ -463,7 +447,7 @@ public class DAOUsuarios extends AbstractDAO {
         Connection con;
         PreparedStatement stmUsuarios = null;
         con = super.getConexion();
-        
+
         System.out.println(u.getClave());
 
         try {
@@ -541,7 +525,7 @@ public class DAOUsuarios extends AbstractDAO {
             }
         }
     }
-    
+
     public void modificarCuentaInversor(InversorUsuario usuario) {
         Connection con;
         PreparedStatement stmUsuarios = null;
@@ -604,10 +588,10 @@ public class DAOUsuarios extends AbstractDAO {
                     + "set fondosDisponiblesCuenta = 0.0 "
                     + "where idUsuario = ? "
                     + "and 0 = (SELECT COUNT(p.idUsuario2) "
-                        + "FROM poseerparticipacionesinversor as p, inversorUsuario as i "
-                        + "WHERE i.idUsuario = ? "
-                        + "and i.idUsuario = p.idUsuario1 "
-                        + "and p.numparticipaciones <> 0 )");
+                    + "FROM poseerparticipacionesinversor as p, inversorUsuario as i "
+                    + "WHERE i.idUsuario = ? "
+                    + "and i.idUsuario = p.idUsuario1 "
+                    + "and p.numparticipaciones <> 0 )");
 
             stmUsuarios.setString(1, id);
             stmUsuarios.setString(2, id);
@@ -616,10 +600,10 @@ public class DAOUsuarios extends AbstractDAO {
             try {
                 stmUsuarios = con.prepareStatement("delete from inversorUsuario "
                         + "where idUsuario = ? and 0 = (SELECT COUNT(p.idUsuario2) "
-                            + "FROM poseerparticipacionesinversor as p, inversorUsuario as i "
-                            + "WHERE i.idUsuario = ? "
-                            + "and i.idUsuario = p.idUsuario1 "
-                            + "and p.numparticipaciones <> 0 )");
+                        + "FROM poseerparticipacionesinversor as p, inversorUsuario as i "
+                        + "WHERE i.idUsuario = ? "
+                        + "and i.idUsuario = p.idUsuario1 "
+                        + "and p.numparticipaciones <> 0 )");
 
                 stmUsuarios.setString(1, id);
                 stmUsuarios.setString(2, id);
@@ -650,10 +634,10 @@ public class DAOUsuarios extends AbstractDAO {
                     + "set fondosDisponiblesCuenta = 0.0 "
                     + "where idUsuario = ? "
                     + "and 0 = (SELECT COUNT(p.idUsuario2) "
-                        + "FROM poseerparticipacionesempresa as p, empresaUsuario as i "
-                        + "WHERE i.idUsuario = ? "
-                        + "and i.idUsuario = p.idUsuario1 "
-                        + "and p.numparticipaciones <> 0 )");
+                    + "FROM poseerparticipacionesempresa as p, empresaUsuario as i "
+                    + "WHERE i.idUsuario = ? "
+                    + "and i.idUsuario = p.idUsuario1 "
+                    + "and p.numparticipaciones <> 0 )");
 
             stmUsuarios.setString(1, id);
             stmUsuarios.setString(2, id);
@@ -662,10 +646,10 @@ public class DAOUsuarios extends AbstractDAO {
             try {
                 stmUsuarios = con.prepareStatement("delete from empresaUsuario "
                         + "where idUsuario = ? and 0 = (SELECT COUNT(p.idUsuario2) "
-                            + "FROM poseerparticipacionesempresa as p, empresaUsuario as i "
-                            + "WHERE i.idUsuario = ? "
-                            + "and i.idUsuario = p.idUsuario1 "
-                            + "and p.numparticipaciones <> 0 )");
+                        + "FROM poseerparticipacionesempresa as p, empresaUsuario as i "
+                        + "WHERE i.idUsuario = ? "
+                        + "and i.idUsuario = p.idUsuario1 "
+                        + "and p.numparticipaciones <> 0 )");
 
                 stmUsuarios.setString(1, id);
                 stmUsuarios.setString(2, id);
@@ -778,7 +762,7 @@ public class DAOUsuarios extends AbstractDAO {
             }
         }
     }
-    
+
     public ArrayList<String> getEmpresas() {
         ArrayList<String> resultado = new ArrayList<String>();
         Connection con;

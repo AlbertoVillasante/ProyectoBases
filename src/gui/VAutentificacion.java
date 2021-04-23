@@ -10,6 +10,7 @@ public class VAutentificacion extends javax.swing.JDialog {
     VPortada vp;
     MenuDeUsuario mu;
     VRegulador vr;
+    VAviso va;
     Color prueba = new Color(60, 63, 65);
     Color prueba1 = new Color(78, 82, 85);
 
@@ -50,6 +51,7 @@ public class VAutentificacion extends javax.swing.JDialog {
         etiquetaFallo = new javax.swing.JLabel();
         textoClave = new javax.swing.JPasswordField();
         btnRegistro = new javax.swing.JButton();
+        Noticias = new javax.swing.JButton();
 
         javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
         jDialog1.getContentPane().setLayout(jDialog1Layout);
@@ -119,6 +121,15 @@ public class VAutentificacion extends javax.swing.JDialog {
             }
         });
 
+        Noticias.setBackground(new java.awt.Color(50, 50, 50));
+        Noticias.setForeground(new java.awt.Color(187, 187, 188));
+        Noticias.setText("Últimas noticias de nuestro ecosistema");
+        Noticias.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                NoticiasActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -126,6 +137,10 @@ public class VAutentificacion extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(etiquetaFallo)
+                        .addGap(50, 50, 50))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
@@ -143,12 +158,9 @@ public class VAutentificacion extends javax.swing.JDialog {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(btnAceptar)
                                 .addGap(18, 18, 18)
-                                .addComponent(btnCancelar)))
-                        .addGap(0, 27, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(etiquetaFallo)
-                        .addGap(50, 50, 50))))
+                                .addComponent(btnCancelar))
+                            .addComponent(Noticias, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 46, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -168,6 +180,8 @@ public class VAutentificacion extends javax.swing.JDialog {
                     .addComponent(btnRegistro)
                     .addComponent(btnAceptar)
                     .addComponent(btnCancelar))
+                .addGap(18, 18, 18)
+                .addComponent(Noticias)
                 .addContainerGap())
         );
 
@@ -182,12 +196,15 @@ public class VAutentificacion extends javax.swing.JDialog {
                 this.dispose();
                 vp.dispose();
                 vp.setVisible(false);
-                if (u.getTipoUsuario().name().equals("Normal")) {
-                    mu = new MenuDeUsuario(fa,u,null);
+                if (u.getTipoUsuario().name().equals("Normal") || u.getTipoUsuario().name().equals("PendBaja")) {
+                    mu = new MenuDeUsuario(fa, u, null);
                     mu.setVisible(true);
                 } else if (u.getTipoUsuario().name().equals("Regulador")) {
-                    vr = new VRegulador(fa,u,null);
+                    vr = new VRegulador(fa, u, null);
                     vr.setVisible(true);
+                } else if (u.getTipoUsuario().name().equals("PendAlta")) {
+                    va  = new VAviso("El usuario introducido todavía no ha sido validado por el regulador\n");
+                    va.setVisible(true);
                 }
             } else {
                 etiquetaFallo.setVisible(true);
@@ -198,12 +215,15 @@ public class VAutentificacion extends javax.swing.JDialog {
                 this.dispose();
                 vp.dispose();
                 vp.setVisible(false);
-                if (u.getTipoUsuario().name().equals("Normal")) {
-                    mu = new MenuDeUsuario(fa,null,u);
+                if (u.getTipoUsuario().name().equals("Normal") || u.getTipoUsuario().name().equals("PendBaja")) {
+                    mu = new MenuDeUsuario(fa, null, u);
                     mu.setVisible(true);
                 } else if (u.getTipoUsuario().name().equals("Regulador")) {
-                    vr = new VRegulador(fa,null,u);
+                    vr = new VRegulador(fa, null, u);
                     vr.setVisible(true);
+                } else if (u.getTipoUsuario().name().equals("PendAlta")) {
+                    va  = new VAviso("El usuario introducido todavía no ha sido validado por el regulador\n");
+                    va.setVisible(true);
                 }
             } else {
                 etiquetaFallo.setVisible(true);
@@ -224,12 +244,15 @@ public class VAutentificacion extends javax.swing.JDialog {
                     this.dispose();
                     vp.dispose();
                     vp.setVisible(false);
-                    if (u.getTipoUsuario().name().equals("Normal")) {
-                        mu = new MenuDeUsuario(fa,u,null);
+                    if (u.getTipoUsuario().name().equals("Normal")|| u.getTipoUsuario().name().equals("PendBaja")) {
+                        mu = new MenuDeUsuario(fa, u, null);
                         mu.setVisible(true);
                     } else if (u.getTipoUsuario().name().equals("Regulador")) {
-                        vr = new VRegulador(fa,u,null);
+                        vr = new VRegulador(fa, u, null);
                         vr.setVisible(true);
+                    } else if (u.getTipoUsuario().name().equals("PendAlta")) {
+                        va  = new VAviso("El usuario introducido todavía no ha sido validado por el regulador\n");
+                        va.setVisible(true);
                     }
                 } else {
                     etiquetaFallo.setVisible(true);
@@ -240,12 +263,15 @@ public class VAutentificacion extends javax.swing.JDialog {
                     this.dispose();
                     vp.dispose();
                     vp.setVisible(false);
-                    if (u.getTipoUsuario().name().equals("Normal")) {
-                        mu = new MenuDeUsuario(fa,null,u);
+                    if (u.getTipoUsuario().name().equals("Normal")|| u.getTipoUsuario().name().equals("PendBaja")) {
+                        mu = new MenuDeUsuario(fa, null, u);
                         mu.setVisible(true);
                     } else if (u.getTipoUsuario().name().equals("Regulador")) {
-                        vr = new VRegulador(fa,null,u);
+                        vr = new VRegulador(fa, null, u);
                         vr.setVisible(true);
+                    } else if (u.getTipoUsuario().name().equals("PendAlta")) {
+                        va  = new VAviso("El usuario introducido todavía no ha sido validado por el regulador\n");
+                        va.setVisible(true);
                     }
                 } else {
                     etiquetaFallo.setVisible(true);
@@ -263,12 +289,15 @@ public class VAutentificacion extends javax.swing.JDialog {
                     this.dispose();
                     vp.dispose();
                     vp.setVisible(false);
-                    if (u.getTipoUsuario().name().equals("Normal")) {
-                        mu = new MenuDeUsuario(fa,u,null);
+                    if (u.getTipoUsuario().name().equals("Normal") || u.getTipoUsuario().name().equals("PendBaja")) {
+                        mu = new MenuDeUsuario(fa, u, null);
                         mu.setVisible(true);
                     } else if (u.getTipoUsuario().name().equals("Regulador")) {
-                        vr = new VRegulador(fa,u,null);
+                        vr = new VRegulador(fa, u, null);
                         vr.setVisible(true);
+                    } else if (u.getTipoUsuario().name().equals("PendAlta")) {
+                        va  = new VAviso("El usuario introducido todavía no ha sido validado por el regulador\n");
+                        va.setVisible(true);
                     }
                 } else {
                     etiquetaFallo.setVisible(true);
@@ -279,12 +308,16 @@ public class VAutentificacion extends javax.swing.JDialog {
                     this.dispose();
                     vp.dispose();
                     vp.setVisible(false);
-                    if (u.getTipoUsuario().name().equals("Normal")) {
-                        mu = new MenuDeUsuario(fa,null,u);
+                    if (u.getTipoUsuario().name().equals("Normal")|| u.getTipoUsuario().name().equals("PendBaja")) {
+                        mu = new MenuDeUsuario(fa, null, u);
                         mu.setVisible(true);
                     } else if (u.getTipoUsuario().name().equals("Regulador")) {
-                        vr = new VRegulador(fa,null,u);
+                        vr = new VRegulador(fa, null, u);
                         vr.setVisible(true);
+                    }
+                    else if (u.getTipoUsuario().name().equals("PendAlta")) {
+                        va  = new VAviso("El usuario introducido todavía no ha sido validado por el regulador\n");
+                        va.setVisible(true);
                     }
                 } else {
                     etiquetaFallo.setVisible(true);
@@ -295,16 +328,23 @@ public class VAutentificacion extends javax.swing.JDialog {
 
     private void btnRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistroActionPerformed
         this.dispose();
-        fa.nuevoUsuario(true,null,null);
+        fa.nuevoUsuario(true, null, null);
         vp.dispose();
         vp.setVisible(false);
     }//GEN-LAST:event_btnRegistroActionPerformed
+
+    private void NoticiasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NoticiasActionPerformed
+        fa.nuevaNoticia();
+        this.dispose();
+        vp.dispose();
+    }//GEN-LAST:event_NoticiasActionPerformed
 
     /**
      * @param args the command line arguments
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Noticias;
     private javax.swing.JButton btnAceptar;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnRegistro;

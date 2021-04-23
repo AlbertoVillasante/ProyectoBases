@@ -46,6 +46,7 @@ public class VPortada extends javax.swing.JFrame {
         });
 
         jLabel1.setFont(new java.awt.Font("Ubuntu", 2, 15)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(187, 187, 188));
         jLabel1.setText("VERSION 1.0.0 updated on April 2021");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -62,7 +63,7 @@ public class VPortada extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(249, Short.MAX_VALUE)
+                .addContainerGap(339, Short.MAX_VALUE)
                 .addComponent(botonEstadisticas, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel1)

@@ -7,7 +7,9 @@ package gui;
 
 import aplicacion.FachadaAplicacion;
 import java.awt.Color;
+import java.sql.Date;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 /**
@@ -109,6 +111,8 @@ public class VBeneficios extends javax.swing.JDialog {
         tablaBeneficios.setModel(new ModeloTablaBeneficios());
         jScrollPane1.setViewportView(tablaBeneficios);
 
+        cuadroFechaPago.setMinSelectableDate(Date.valueOf(LocalDate.now()));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -190,9 +194,9 @@ public class VBeneficios extends javax.swing.JDialog {
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
         //comprobaciones
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String date = sdf.format(cuadroFechaPago.getDate());
-        fa.altaPagoBeneficios(date, Float.parseFloat(cuadroBeneficio.getText()), Integer.parseInt(numPart.getValue().toString()), btnSelector.getSelectedItem().toString());
+        fa.altaPagoBeneficios(date, Double.parseDouble(cuadroBeneficio.getText()), btnSelector.getSelectedItem().toString(),Integer.parseInt(numPart.getValue().toString()));
         actualizarTablaBeneficios();
     }//GEN-LAST:event_btnAceptarActionPerformed
 

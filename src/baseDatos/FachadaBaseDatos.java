@@ -29,8 +29,8 @@ public class FachadaBaseDatos {
         FileInputStream arqConfiguracion;
 
         try {
-            arqConfiguracion = new FileInputStream("baseDatos.properties"); //linea a cambiar
-            //arqConfiguracion = new FileInputStream("basesDatos.properties");
+            //arqConfiguracion = new FileInputStream("baseDatos.properties"); //linea a cambiar
+            arqConfiguracion = new FileInputStream("basesDatos.properties");
 
             configuracion.load(arqConfiguracion);
             arqConfiguracion.close();
@@ -212,10 +212,10 @@ public class FachadaBaseDatos {
         return daoUsuarios.getEmpresas();
     }
 
-    public void altaPagoBeneficios(String fecha, float precio, int numParticipaciones, String nombreEmpresa) {
+    public void altaPagoBeneficios(String fecha, double precio, String nombreEmpresa, int numParticipaciones) {
         String idEmpresa = daoBeneficios.getIdEmpresa(nombreEmpresa);
         System.out.println(fecha+precio+numParticipaciones+ idEmpresa);
-        daoBeneficios.altaPagoBeneficios(fecha, precio, numParticipaciones, idEmpresa);
+        daoBeneficios.altaPagoBeneficios(fecha, precio, idEmpresa, numParticipaciones);
     }
     
      public ArrayList<AnunciarBeneficios> getBeneficios() {

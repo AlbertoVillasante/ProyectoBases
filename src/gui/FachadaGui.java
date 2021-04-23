@@ -133,4 +133,10 @@ public class FachadaGui {           //Esta es la fachada
          Vest= new VEstadistica(fa,iu,eu);
          Vest.setVisible(true);
     }
+     
+     public void nuevaNoticia(){
+        VNoticias vn;
+        vn = new VNoticias(fa);
+        vn.setVisible(true);
+    }
 }

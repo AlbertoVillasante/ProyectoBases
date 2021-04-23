@@ -17,7 +17,7 @@ public class DAOBeneficios extends AbstractDAO {
         super.setFachadaAplicacion(fa);
     }
 
-    public void altaPagoBeneficios(String fecha, float importe, int acciones, String idEmpresa) {
+    public void altaPagoBeneficios(String fecha, double importe, String idEmpresa,int acciones) {
         Connection con;
         PreparedStatement stmBeneficios = null;
         con = super.getConexion();
@@ -26,7 +26,7 @@ public class DAOBeneficios extends AbstractDAO {
             stmBeneficios = con.prepareStatement("insert into AnunciarBeneficios "
                     + "values (?,?,?,?)");
             stmBeneficios.setDate(1, (Date.valueOf(fecha)));
-            stmBeneficios.setFloat(2, importe);
+            stmBeneficios.setDouble(2, importe);
             stmBeneficios.setInt(4, acciones);
             stmBeneficios.setString(3, idEmpresa);
             stmBeneficios.executeUpdate();

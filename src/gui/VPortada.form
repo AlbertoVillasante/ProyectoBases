@@ -26,7 +26,7 @@
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace pref="43" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
-                  <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel1" alignment="1" min="-2" max="-2" attributes="0"/>
                   <Component id="botonEstadisticas" min="-2" pref="686" max="-2" attributes="1"/>
               </Group>
               <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
@@ -36,7 +36,7 @@
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
-              <EmptySpace pref="249" max="32767" attributes="0"/>
+              <EmptySpace pref="339" max="32767" attributes="0"/>
               <Component id="botonEstadisticas" min="-2" pref="320" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
@@ -63,6 +63,9 @@
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Ubuntu" size="15" style="2"/>
+        </Property>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="bc" green="bb" red="bb" type="rgb"/>
         </Property>
         <Property name="text" type="java.lang.String" value="VERSION 1.0.0 updated on April 2021"/>
       </Properties>

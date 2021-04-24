@@ -9,6 +9,8 @@ import aplicacion.EmpresaUsuario;
 import aplicacion.FachadaAplicacion;
 import aplicacion.InversorUsuario;
 import java.awt.Color;
+import java.text.DecimalFormat;
+import java.util.Locale;
 
 /**
  *
@@ -19,9 +21,15 @@ public class VEstadistica extends javax.swing.JDialog {
     FachadaAplicacion fa;
     Color prueba = new Color(60, 63, 65);
     Color prueba1 = new Color(78, 82, 85);
+    EmpresaUsuario eu;
+    InversorUsuario iu;
 
     /**
      * Creates new form VEstadistica
+     *
+     * @param fa
+     * @param iu
+     * @param eu
      */
     public VEstadistica(FachadaAplicacion fa, InversorUsuario iu, EmpresaUsuario eu) {
         this.fa = fa;
@@ -30,7 +38,28 @@ public class VEstadistica extends javax.swing.JDialog {
         aceptar.setBackground(prueba1);
         textPartTot.setBackground(prueba1);
         TextFond.setBackground(prueba1);
-        jTable1.setBackground(prueba1);
+        tablaEstadisticas.setBackground(prueba1);
+        TextFondosRetenciones.setBackground(prueba1);
+        textPartTot1.setBackground(prueba1);
+        if (iu != null) {
+            this.iu = iu;
+            TextFondosRetenciones.setVisible(false);
+            textPartTot1.setVisible(false);
+            jLabel6.setVisible(false);
+            jLabel5.setVisible(false);
+            jLabel4.setVisible(false);
+            textPartTot.setVisible(false);
+            jLabel2.setVisible(false);
+            TextFond.setText(String.valueOf(Math.round(iu.getFondosDisponiblesCuenta() * 100.0) / 100.0));
+        }
+        if (eu != null) {
+            this.eu = eu;
+            TextFondosRetenciones.setText(convertir(fa.getSaldoRetenciones(eu.getIdUsuario())));
+            TextFond.setText(String.valueOf(Math.round(eu.getFondosDisponiblesCuenta() * 100.0) / 100.0));
+            textPartTot.setText(String.valueOf(eu.getnParticipaciones()));
+            textPartTot1.setText(Integer.toString(fa.getParticipacionesRetenciones(eu.getIdUsuario())));
+        }
+        actualizarTablaEstadisticas();
     }
 
     /**
@@ -43,7 +72,7 @@ public class VEstadistica extends javax.swing.JDialog {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tablaEstadisticas = new javax.swing.JTable();
         aceptar = new javax.swing.JButton();
         cancelar = new javax.swing.JButton();
         textPartTot = new javax.swing.JTextField();
@@ -51,22 +80,17 @@ public class VEstadistica extends javax.swing.JDialog {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        TextFondosRetenciones = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        textPartTot1 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jTable1.setForeground(new java.awt.Color(187, 187, 188));
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
-            },
-            new String [] {
-                "Empresa", "Nº participaciones"
-            }
-        ));
-        jScrollPane1.setViewportView(jTable1);
+        tablaEstadisticas.setForeground(new java.awt.Color(187, 187, 188));
+        tablaEstadisticas.setModel(new ModeloTablaEstadisticas());
+        jScrollPane1.setViewportView(tablaEstadisticas);
 
         aceptar.setForeground(new java.awt.Color(187, 187, 188));
         aceptar.setText("Aceptar");
@@ -93,6 +117,24 @@ public class VEstadistica extends javax.swing.JDialog {
         jLabel3.setForeground(new java.awt.Color(187, 187, 188));
         jLabel3.setText("Fondos disponibles cuenta:");
 
+        jLabel4.setForeground(new java.awt.Color(187, 187, 188));
+        jLabel4.setText("€");
+
+        jLabel5.setForeground(new java.awt.Color(187, 187, 188));
+        jLabel5.setText("Fondos tras retenciones:");
+
+        TextFondosRetenciones.setForeground(new java.awt.Color(187, 187, 188));
+        TextFondosRetenciones.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TextFondosRetencionesActionPerformed(evt);
+            }
+        });
+
+        jLabel6.setForeground(new java.awt.Color(187, 187, 188));
+        jLabel6.setText("Nº participaciones tras retenciones:");
+
+        textPartTot1.setForeground(new java.awt.Color(187, 187, 188));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -105,14 +147,27 @@ public class VEstadistica extends javax.swing.JDialog {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(textPartTot)
-                                    .addComponent(TextFond, javax.swing.GroupLayout.DEFAULT_SIZE, 213, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel1))
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3))
-                        .addContainerGap(45, Short.MAX_VALUE))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(textPartTot1, javax.swing.GroupLayout.DEFAULT_SIZE, 247, Short.MAX_VALUE)
+                                        .addGap(70, 70, 70))
+                                    .addComponent(jLabel5)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(TextFond, javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(TextFondosRetenciones))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel4)
+                                            .addComponent(jLabel1))))
+                                .addGap(30, 30, 30))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel3)
+                                    .addComponent(textPartTot, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel6))
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(aceptar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -124,23 +179,32 @@ public class VEstadistica extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(86, 86, 86)
                         .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(textPartTot, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addGap(10, 10, 10)
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(textPartTot1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel3)
-                        .addGap(12, 12, 12)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(TextFond, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1))))
+                            .addComponent(jLabel1))
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(TextFondosRetenciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4)))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(aceptar)
                     .addComponent(cancelar))
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addGap(30, 30, 30))
         );
 
         pack();
@@ -150,16 +214,36 @@ public class VEstadistica extends javax.swing.JDialog {
         this.dispose();
     }//GEN-LAST:event_cancelarActionPerformed
 
+    private void TextFondosRetencionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextFondosRetencionesActionPerformed
+
+
+    }//GEN-LAST:event_TextFondosRetencionesActionPerformed
+    public static String convertir(double val) {
+        Locale.setDefault(Locale.US);
+        DecimalFormat num = new DecimalFormat("#,###.00");
+        return num.format(val);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField TextFond;
+    private javax.swing.JTextField TextFondosRetenciones;
     private javax.swing.JButton aceptar;
     private javax.swing.JButton cancelar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tablaEstadisticas;
     private javax.swing.JTextField textPartTot;
+    private javax.swing.JTextField textPartTot1;
     // End of variables declaration//GEN-END:variables
+
+    private void actualizarTablaEstadisticas() {
+        ModeloTablaEstadisticas m;
+        m = (ModeloTablaEstadisticas) tablaEstadisticas.getModel();
+        m.setFilas(fa.actualizarTablaEstadisticas(iu, eu));
+    }
 }

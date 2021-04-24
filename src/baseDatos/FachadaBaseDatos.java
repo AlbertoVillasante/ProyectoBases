@@ -5,6 +5,7 @@ import aplicacion.Ejemplar;
 import aplicacion.InversorUsuario;
 import aplicacion.Categoria;
 import aplicacion.EmpresaUsuario;
+import aplicacion.Estadisticas;
 import aplicacion.Libro;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -214,59 +215,76 @@ public class FachadaBaseDatos {
 
     public void altaPagoBeneficios(String fecha, double precio, String nombreEmpresa, int numParticipaciones) {
         String idEmpresa = daoBeneficios.getIdEmpresa(nombreEmpresa);
-        System.out.println(fecha+precio+numParticipaciones+ idEmpresa);
+        System.out.println(fecha + precio + numParticipaciones + idEmpresa);
         daoBeneficios.altaPagoBeneficios(fecha, precio, idEmpresa, numParticipaciones);
     }
-    
-     public ArrayList<AnunciarBeneficios> getBeneficios() {
+
+    public ArrayList<AnunciarBeneficios> getBeneficios() {
         return daoBeneficios.getBeneficios();
     }
-     
-    public java.util.List<InversorUsuario> mostrarUsuarioInvPend(){
+
+    public java.util.List<InversorUsuario> mostrarUsuarioInvPend() {
         return daoUsuarios.mostrarUsuarioInvPend();
     }
-    
-    public java.util.List<EmpresaUsuario> mostrarUsuarioEmprPend(){
+
+    public java.util.List<EmpresaUsuario> mostrarUsuarioEmprPend() {
         return daoUsuarios.mostrarUsuarioEmprPend();
     }
-    
-    public void registroInversor(InversorUsuario inversor){
+
+    public void registroInversor(InversorUsuario inversor) {
         daoUsuarios.registroInversor(inversor);
     }
-    
-    public void registroEmpresa(EmpresaUsuario empresa){
+
+    public void registroEmpresa(EmpresaUsuario empresa) {
         daoUsuarios.registroEmpresa(empresa);
     }
-    
+
     public void modificarUsuarioEmpresa(EmpresaUsuario u) {
         daoUsuarios.modificarUsuarioEmpresa(u);
     }
-    
+
     public void modificarUsuarioInversor(InversorUsuario u) {
         daoUsuarios.modificarUsuarioInversor(u);
     }
-    
-    public void solicitarBajaInversor(String id){
+
+    public void solicitarBajaInversor(String id) {
         daoUsuarios.solicitarBajaInversor(id);
     }
-    
-    public void solicitarBajaEmpresa(String id){
+
+    public void solicitarBajaEmpresa(String id) {
         daoUsuarios.solicitarBajaEmpresa(id);
     }
-    
+
     public void confirmarBajaInversor(String id) {
         daoUsuarios.confirmarBajaInversor(id);
     }
-    
+
     public void confirmarBajaEmpresa(String id) {
         daoUsuarios.confirmarBajaEmpresa(id);
     }
-    
-    public void modificarCuentaEmpresa(EmpresaUsuario usuario){
+
+    public void modificarCuentaEmpresa(EmpresaUsuario usuario) {
         daoUsuarios.modificarCuentaEmpresa(usuario);
     }
-    
-    public void modificarCuentaInversor(InversorUsuario usuario){
+
+    public void modificarCuentaInversor(InversorUsuario usuario) {
         daoUsuarios.modificarCuentaInversor(usuario);
+    }
+
+    public float getSaldoRetenciones(String id) {
+        return daoBeneficios.getSaldoRetenciones(id);
+    }
+
+    public int getParticipacionesRetenciones(String id) {
+        return daoBeneficios.getParticipacionesRetenciones(id);
+    }
+
+    public ArrayList<Estadisticas> actualizarTablaEstadisticas(InversorUsuario iu, EmpresaUsuario eu) {
+        if (iu != null) {
+            return daoUsuarios.actualizarTablaEstadisticasInversor(iu.getIdUsuario());
+        }
+        else {
+            return daoUsuarios.actualizarTablaEstadisticasEmpresa(eu.getIdUsuario());
+        }
     }
 }

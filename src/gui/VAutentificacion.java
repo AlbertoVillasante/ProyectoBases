@@ -198,9 +198,11 @@ public class VAutentificacion extends javax.swing.JDialog {
                 vp.setVisible(false);
                 if (u.getTipoUsuario().name().equals("Normal") || u.getTipoUsuario().name().equals("PendBaja")) {
                     mu = new MenuDeUsuario(fa, u, null);
+                    mu.setLocation(0, 0);
                     mu.setVisible(true);
                 } else if (u.getTipoUsuario().name().equals("Regulador")) {
                     vr = new VRegulador(fa, u, null);
+                    vr.setLocation(0, 0);
                     vr.setVisible(true);
                 } else if (u.getTipoUsuario().name().equals("PendAlta")) {
                     va  = new VAviso("El usuario introducido todavía no ha sido validado por el regulador\n");
@@ -217,9 +219,11 @@ public class VAutentificacion extends javax.swing.JDialog {
                 vp.setVisible(false);
                 if (u.getTipoUsuario().name().equals("Normal") || u.getTipoUsuario().name().equals("PendBaja")) {
                     mu = new MenuDeUsuario(fa, null, u);
+                    mu.setLocation(0, 0);
                     mu.setVisible(true);
                 } else if (u.getTipoUsuario().name().equals("Regulador")) {
                     vr = new VRegulador(fa, null, u);
+                    vr.setLocation(0, 0);
                     vr.setVisible(true);
                 } else if (u.getTipoUsuario().name().equals("PendAlta")) {
                     va  = new VAviso("El usuario introducido todavía no ha sido validado por el regulador\n");
@@ -244,11 +248,13 @@ public class VAutentificacion extends javax.swing.JDialog {
                     this.dispose();
                     vp.dispose();
                     vp.setVisible(false);
-                    if (u.getTipoUsuario().name().equals("Normal")|| u.getTipoUsuario().name().equals("PendBaja")) {
+                    if (u.getTipoUsuario().name().equals("Normal") || u.getTipoUsuario().name().equals("PendBaja")) {
                         mu = new MenuDeUsuario(fa, u, null);
+                        mu.setLocation(0, 0);
                         mu.setVisible(true);
                     } else if (u.getTipoUsuario().name().equals("Regulador")) {
                         vr = new VRegulador(fa, u, null);
+                        vr.setLocation(0, 0);
                         vr.setVisible(true);
                     } else if (u.getTipoUsuario().name().equals("PendAlta")) {
                         va  = new VAviso("El usuario introducido todavía no ha sido validado por el regulador\n");
@@ -263,11 +269,13 @@ public class VAutentificacion extends javax.swing.JDialog {
                     this.dispose();
                     vp.dispose();
                     vp.setVisible(false);
-                    if (u.getTipoUsuario().name().equals("Normal")|| u.getTipoUsuario().name().equals("PendBaja")) {
+                    if (u.getTipoUsuario().name().equals("Normal") || u.getTipoUsuario().name().equals("PendBaja")) {
                         mu = new MenuDeUsuario(fa, null, u);
+                        mu.setLocation(0, 0);
                         mu.setVisible(true);
                     } else if (u.getTipoUsuario().name().equals("Regulador")) {
                         vr = new VRegulador(fa, null, u);
+                        vr.setLocation(0, 0);
                         vr.setVisible(true);
                     } else if (u.getTipoUsuario().name().equals("PendAlta")) {
                         va  = new VAviso("El usuario introducido todavía no ha sido validado por el regulador\n");
@@ -291,9 +299,11 @@ public class VAutentificacion extends javax.swing.JDialog {
                     vp.setVisible(false);
                     if (u.getTipoUsuario().name().equals("Normal") || u.getTipoUsuario().name().equals("PendBaja")) {
                         mu = new MenuDeUsuario(fa, u, null);
+                        mu.setLocation(0, 0);
                         mu.setVisible(true);
                     } else if (u.getTipoUsuario().name().equals("Regulador")) {
                         vr = new VRegulador(fa, u, null);
+                        vr.setLocation(0, 0);
                         vr.setVisible(true);
                     } else if (u.getTipoUsuario().name().equals("PendAlta")) {
                         va  = new VAviso("El usuario introducido todavía no ha sido validado por el regulador\n");
@@ -308,14 +318,15 @@ public class VAutentificacion extends javax.swing.JDialog {
                     this.dispose();
                     vp.dispose();
                     vp.setVisible(false);
-                    if (u.getTipoUsuario().name().equals("Normal")|| u.getTipoUsuario().name().equals("PendBaja")) {
+                    if (u.getTipoUsuario().name().equals("Normal") || u.getTipoUsuario().name().equals("PendBaja")) {
                         mu = new MenuDeUsuario(fa, null, u);
+                        mu.setLocation(0, 0);
                         mu.setVisible(true);
                     } else if (u.getTipoUsuario().name().equals("Regulador")) {
                         vr = new VRegulador(fa, null, u);
+                        vr.setLocation(0, 0);
                         vr.setVisible(true);
-                    }
-                    else if (u.getTipoUsuario().name().equals("PendAlta")) {
+                    } else if (u.getTipoUsuario().name().equals("PendAlta")) {
                         va  = new VAviso("El usuario introducido todavía no ha sido validado por el regulador\n");
                         va.setVisible(true);
                     }

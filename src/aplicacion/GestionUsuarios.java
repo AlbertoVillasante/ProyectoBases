@@ -40,8 +40,8 @@ public class GestionUsuarios {
         }
     }
 
-    public void nuevoUsuario(boolean c,InversorUsuario iu, EmpresaUsuario eu) {
-        fgui.nuevoUsuario(c,iu,eu);
+    public void nuevoUsuario(boolean c, InversorUsuario iu, EmpresaUsuario eu) {
+        fgui.nuevoUsuario(c, iu, eu);
     }
 
     public void nuevaSolicitud() {
@@ -53,86 +53,90 @@ public class GestionUsuarios {
     }
 
     public void configuracionRegulador(InversorUsuario iu, EmpresaUsuario eu) {
-        fgui.configuracionRegulador(iu,eu);
+        fgui.configuracionRegulador(iu, eu);
     }
-    
-     public void nuevaEstadistica(InversorUsuario iu, EmpresaUsuario eu) {
+
+    public void nuevaEstadistica(InversorUsuario iu, EmpresaUsuario eu) {
         fgui.nuevaEstadistica(iu, eu);
     }
-    
+
     public void actualizarComision(float comision) {
         fbd.actualizarComision(comision);
     }
-    
-    public void insertarUsuarioInversor(InversorUsuario u){
+
+    public void insertarUsuarioInversor(InversorUsuario u) {
         fbd.insertarUsuarioInversor(u);
     }
-    
-    public void insertarUsuarioEmpresa(EmpresaUsuario u){
+
+    public void insertarUsuarioEmpresa(EmpresaUsuario u) {
         fbd.insertarUsuarioEmpresa(u);
     }
-    
-    public int comprobarIdInversor(String id){
+
+    public int comprobarIdInversor(String id) {
         return fbd.comprobarIdInversor(id);
     }
-    
-    public int comprobarIdEmpresa(String id){
+
+    public int comprobarIdEmpresa(String id) {
         return fbd.comprobarIdEmpresa(id);
     }
-    
-      public ArrayList<String> getEmpresas() {
+
+    public ArrayList<String> getEmpresas() {
         return fbd.getEmpresas();
     }
-      
-    public java.util.List<InversorUsuario> mostrarUsuarioInvPend(){
+
+    public java.util.List<InversorUsuario> mostrarUsuarioInvPend() {
         return fbd.mostrarUsuarioInvPend();
     }
-    
-    public java.util.List<EmpresaUsuario> mostrarUsuarioEmprPend(){
+
+    public java.util.List<EmpresaUsuario> mostrarUsuarioEmprPend() {
         return fbd.mostrarUsuarioEmprPend();
     }
-    
-    public void registroInversor(InversorUsuario inversor){
+
+    public void registroInversor(InversorUsuario inversor) {
         fbd.registroInversor(inversor);
     }
-    
-    public void registroEmpresa(EmpresaUsuario empresa){
+
+    public void registroEmpresa(EmpresaUsuario empresa) {
         fbd.registroEmpresa(empresa);
     }
-    
+
     public void modificarUsuarioEmpresa(EmpresaUsuario u) {
         fbd.modificarUsuarioEmpresa(u);
     }
-    
+
     public void modificarUsuarioInversor(InversorUsuario u) {
         fbd.modificarUsuarioInversor(u);
     }
-    
-    public void solicitarBajaInversor(String id){
+
+    public void solicitarBajaInversor(String id) {
         fbd.solicitarBajaInversor(id);
     }
-    
-    public void solicitarBajaEmpresa(String id){
+
+    public void solicitarBajaEmpresa(String id) {
         fbd.solicitarBajaEmpresa(id);
     }
-    
+
     public void confirmarBajaInversor(String id) {
         fbd.confirmarBajaInversor(id);
     }
-    
+
     public void confirmarBajaEmpresa(String id) {
         fbd.confirmarBajaEmpresa(id);
     }
-    
-    public void modificarCuentaEmpresa(EmpresaUsuario usuario){
+
+    public void modificarCuentaEmpresa(EmpresaUsuario usuario) {
         fbd.modificarCuentaEmpresa(usuario);
     }
-    
-    public void modificarCuentaInversor(InversorUsuario usuario){
+
+    public void modificarCuentaInversor(InversorUsuario usuario) {
         fbd.modificarCuentaInversor(usuario);
     }
+
+     public ArrayList<Estadisticas> actualizarTablaEstadisticas(InversorUsuario iu, EmpresaUsuario eu) {
+        return fbd.actualizarTablaEstadisticas(iu,eu);
+    }
 }
-    /*  //Comentado para que no de error
+/*  //Comentado para que no de error
     public java.util.List<EmpresaUsuario> obtenerUsuarios(String idUsuario, String nombreUsuario) {
         return fbd.consultarListaUsuarios(idUsuario, nombreUsuario);
     }
@@ -153,5 +157,4 @@ public class GestionUsuarios {
     public java.util.List<EmpresaUsuario> obtenerUsuariosPrestamo(String idUsuario, String nombreUsuario) {
         return fbd.consultarListaUsuariosPrestamo(idUsuario, nombreUsuario);
     }
-     */
-
+ */

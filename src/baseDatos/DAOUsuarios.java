@@ -1,6 +1,7 @@
 package baseDatos;
 
 import aplicacion.EmpresaUsuario;
+import aplicacion.Estadisticas;
 import aplicacion.InversorUsuario;
 import aplicacion.TipoUsuario;
 import java.sql.*;
@@ -94,7 +95,7 @@ public class DAOUsuarios extends AbstractDAO {
         con = this.getConexion();
 
         try {
-            stmUsuario = con.prepareStatement("select idUsuario, clave, nombre, apellido1, apellido2, direccion, telefono, tipoUsuario "
+            stmUsuario = con.prepareStatement("select * "
                     + "from inversorUsuario "
                     //+ "where idUsuario = ? and clave = ? and tipoUsuario != ?");
                     + "where idUsuario = ? and clave = ?");
@@ -106,6 +107,7 @@ public class DAOUsuarios extends AbstractDAO {
                 resultado = new InversorUsuario(rsUsuario.getString("idUsuario"), rsUsuario.getString("clave"),
                         rsUsuario.getString("nombre"), rsUsuario.getString("apellido1"), rsUsuario.getString("apellido2"), rsUsuario.getString("direccion"),
                         rsUsuario.getString("telefono"), TipoUsuario.valueOf(rsUsuario.getString("tipoUsuario")));
+                resultado.setFondosDisponiblesCuenta(rsUsuario.getFloat("fondosDisponiblesCuenta"));
             }
             try {
                 stmUsuario = null;                                  //Cuidado con pendAlta --> nullPointer
@@ -162,6 +164,8 @@ public class DAOUsuarios extends AbstractDAO {
                         rsUsuario.getString("nombreComercial"), rsUsuario.getString("direccion"),
                         rsUsuario.getString("telefono"), TipoUsuario.valueOf(rsUsuario.getString("tipoUsuario")));
                 resultado.setnParticipaciones(Integer.parseInt(rsUsuario.getString("numeroParticipaciones")));
+                resultado.setFondosDisponiblesCuenta(rsUsuario.getFloat("fondosDisponiblesCuenta"));
+
             }
             try {
                 stmUsuario = null;
@@ -788,6 +792,76 @@ public class DAOUsuarios extends AbstractDAO {
         } finally {
             try {
                 stmPrestamos.close();
+            } catch (SQLException e) {
+                System.out.println("Imposible cerrar cursores");
+            }
+        }
+        return resultado;
+    }
+
+    public ArrayList<Estadisticas> actualizarTablaEstadisticasInversor(String id) {
+        ArrayList<Estadisticas> resultado = new ArrayList<Estadisticas>();
+        Estadisticas est;
+        Connection con;
+        PreparedStatement stmEstadistica = null;
+        ResultSet rsEstadistica;
+        String consulta;
+
+        con = this.getConexion();
+
+        try {
+            consulta = "select * "
+                    + "from poseerparticipacionesinversor as ppi "
+                    + "where ppi.idusuario1 = ?";
+
+            stmEstadistica = con.prepareStatement(consulta);
+            stmEstadistica.setString(1, id);
+            rsEstadistica = stmEstadistica.executeQuery();
+            while (rsEstadistica.next()) {
+                est = new Estadisticas(rsEstadistica.getInt("numParticipaciones"), rsEstadistica.getString("idUsuario1"));
+                resultado.add(est);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        } finally {
+            try {
+                stmEstadistica.close();
+            } catch (SQLException e) {
+                System.out.println("Imposible cerrar cursores");
+            }
+        }
+        return resultado;
+    }
+
+    public ArrayList<Estadisticas> actualizarTablaEstadisticasEmpresa(String id) {
+        ArrayList<Estadisticas> resultado = new ArrayList<Estadisticas>();
+        Estadisticas est;
+        Connection con;
+        PreparedStatement stmEstadistica = null;
+        ResultSet rsEstadistica;
+        String consulta;
+
+        con = this.getConexion();
+
+        try {
+            consulta = "select * "
+                    + "from poseerparticipacionesempresa as ppe "
+                    + "where ppe.idusuario1 = ?";
+
+            stmEstadistica = con.prepareStatement(consulta);
+            stmEstadistica.setString(1, id);
+            rsEstadistica = stmEstadistica.executeQuery();
+            while (rsEstadistica.next()) {
+                est = new Estadisticas(rsEstadistica.getInt("numParticipaciones"), rsEstadistica.getString("idUsuario1"));
+                resultado.add(est);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        } finally {
+            try {
+                stmEstadistica.close();
             } catch (SQLException e) {
                 System.out.println("Imposible cerrar cursores");
             }

@@ -28,6 +28,7 @@ public class FachadaGui {           //Esta es la fachada
         VAutentificacion va;
         va  = new VAutentificacion(fa, vp);
         va.setLocation(185, 80);
+        vp.setLocation(0, 0);
         vp.setVisible(true);
         va.setVisible(true);
     }
@@ -76,10 +77,10 @@ public class FachadaGui {           //Esta es la fachada
         vvp = new VPrestamos(vp, true, fa, e);
         vvp.setVisible(true);
     }*/
-    public void nuevoBeneficio() {
+    public void nuevoBeneficio(InversorUsuario iu, EmpresaUsuario eu) {
         VBeneficios vb;
 
-        vb = new VBeneficios(fa);
+        vb = new VBeneficios(fa, iu, eu);
         vb.setVisible(true);
 
     }
@@ -87,7 +88,7 @@ public class FachadaGui {           //Esta es la fachada
     public void nuevasParticipaciones(EmpresaUsuario eu) {
         VParticipaciones vpart;
 
-        vpart = new VParticipaciones(fa,eu);
+        vpart = new VParticipaciones(fa, eu);
         vpart.setVisible(true);
 
     }
@@ -99,10 +100,10 @@ public class FachadaGui {           //Esta es la fachada
         va.setVisible(true);
     }
 
-    public void nuevoUsuario(boolean c,InversorUsuario iu, EmpresaUsuario eu) {
+    public void nuevoUsuario(boolean c, InversorUsuario iu, EmpresaUsuario eu) {
         VUsuario vu;
 
-        vu = new VUsuario(fa,c,iu,eu);
+        vu = new VUsuario(fa, c, iu, eu);
         vu.setVisible(true);
     }
 
@@ -123,18 +124,18 @@ public class FachadaGui {           //Esta es la fachada
     public void configuracionRegulador(InversorUsuario iu, EmpresaUsuario eu) {
         VConfiguracionRegulador vc;
 
-        vc = new VConfiguracionRegulador(fa,iu,eu);
+        vc = new VConfiguracionRegulador(fa, iu, eu);
         vc.setVisible(true);
     }
-    
-     public void nuevaEstadistica(InversorUsuario iu, EmpresaUsuario eu) {
-         VEstadistica Vest;
-         
-         Vest= new VEstadistica(fa,iu,eu);
-         Vest.setVisible(true);
+
+    public void nuevaEstadistica(InversorUsuario iu, EmpresaUsuario eu) {
+        VEstadistica Vest;
+
+        Vest = new VEstadistica(fa, iu, eu);
+        Vest.setVisible(true);
     }
-     
-     public void nuevaNoticia(){
+
+    public void nuevaNoticia() {
         VNoticias vn;
         vn = new VNoticias(fa);
         vn.setVisible(true);

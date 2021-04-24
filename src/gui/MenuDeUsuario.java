@@ -213,11 +213,11 @@ public class MenuDeUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_botonConfiguracionActionPerformed
 
     private void botonBeneficiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBeneficiosActionPerformed
-        fa.nuevoBeneficio();
+        fa.nuevoBeneficio(iu, eu);
     }//GEN-LAST:event_botonBeneficiosActionPerformed
 
     private void botonEstadisticasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEstadisticasActionPerformed
-        fa.nuevaEstadistica(iu,eu);
+        fa.nuevaEstadistica(iu, eu);
     }//GEN-LAST:event_botonEstadisticasActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
@@ -228,6 +228,7 @@ public class MenuDeUsuario extends javax.swing.JFrame {
         this.dispose();
         VPortada vp = new VPortada(fa);
         VAutentificacion va=  new VAutentificacion(fa, vp);
+        vp.setLocation(0, 0);
         vp.setVisible(true);
         va.setLocation(185, 80);
         va.setVisible(true);

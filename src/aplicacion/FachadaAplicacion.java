@@ -13,7 +13,7 @@ public class FachadaAplicacion {
     GestionBeneficios gb;
     GestionParticipaciones gpart;
     GestionNoticias gn;
-    
+
     public FachadaAplicacion() {
         fgui = new gui.FachadaGui(this);
         fbd = new baseDatos.FachadaBaseDatos(this);
@@ -22,7 +22,7 @@ public class FachadaAplicacion {
         gc = new GestionCategorias(fgui, fbd);
         gb = new GestionBeneficios(fgui, fbd);
         gpart = new GestionParticipaciones(fgui, fbd);
-        gn = new GestionNoticias(fgui,fbd);
+        gn = new GestionNoticias(fgui, fbd);
     }
 
     public static void main(String args[]) {
@@ -94,19 +94,19 @@ public class FachadaAplicacion {
     public int comprobarIdEmpresa(String id) {
         return gu.comprobarIdEmpresa(id);
     }
-    
-    public java.util.List<InversorUsuario> mostrarUsuarioInvPend(){
+
+    public java.util.List<InversorUsuario> mostrarUsuarioInvPend() {
         return gu.mostrarUsuarioInvPend();
     }
-    
-    public java.util.List<EmpresaUsuario> mostrarUsuarioEmprPend(){
+
+    public java.util.List<EmpresaUsuario> mostrarUsuarioEmprPend() {
         return gu.mostrarUsuarioEmprPend();
     }
-    
+
     public void modificarUsuarioEmpresa(EmpresaUsuario u) {
         gu.modificarUsuarioEmpresa(u);
     }
-    
+
     public void modificarUsuarioInversor(InversorUsuario u) {
         gu.modificarUsuarioInversor(u);
     }
@@ -158,8 +158,8 @@ public class FachadaAplicacion {
     /* public Integer DiasFaltanParaVencer(Integer libro, Integer ejemplar) {
         return gp.DiasFaltanParaVencer(libro, ejemplar);
     }*/
-    public void nuevoBeneficio() {
-        gb.nuevoBeneficio();
+    public void nuevoBeneficio(InversorUsuario iu, EmpresaUsuario eu) {
+        gb.nuevoBeneficio(iu, eu);
     }
 
     public void nuevasParticipaciones(EmpresaUsuario eu) {
@@ -193,53 +193,64 @@ public class FachadaAplicacion {
     public void nuevaEstadistica(InversorUsuario iu, EmpresaUsuario eu) {
         gu.nuevaEstadistica(iu, eu);
     }
-    
+
     public ArrayList<String> getEmpresas() {
         return gu.getEmpresas();
     }
-    
-     public ArrayList<AnunciarBeneficios> getBeneficios() {
+
+    public ArrayList<AnunciarBeneficios> getBeneficios() {
         return gb.getBeneficios();
     }
-    
-    public void altaPagoBeneficios(String fecha, double precio, String nombreEmpresa, int numParticipaciones){
-        gb.altaPagoBeneficios(fecha,precio,nombreEmpresa,numParticipaciones);
+
+    public void altaPagoBeneficios(String fecha, double precio, String nombreEmpresa, int numParticipaciones) {
+        gb.altaPagoBeneficios(fecha, precio, nombreEmpresa, numParticipaciones);
     }
-    
-    public void registroInversor(InversorUsuario inversor){
+
+    public void registroInversor(InversorUsuario inversor) {
         gu.registroInversor(inversor);
     }
-    
-    public void registroEmpresa(EmpresaUsuario empresa){
+
+    public void registroEmpresa(EmpresaUsuario empresa) {
         gu.registroEmpresa(empresa);
     }
-    
-    public void solicitarBajaInversor(String id){
+
+    public void solicitarBajaInversor(String id) {
         gu.solicitarBajaInversor(id);
     }
-    
-    public void solicitarBajaEmpresa(String id){
+
+    public void solicitarBajaEmpresa(String id) {
         gu.solicitarBajaEmpresa(id);
     }
-    
+
     public void confirmarBajaInversor(String id) {
         gu.confirmarBajaInversor(id);
     }
-    
+
     public void confirmarBajaEmpresa(String id) {
         gu.confirmarBajaEmpresa(id);
     }
-    
-    public void modificarCuentaEmpresa(EmpresaUsuario usuario){
+
+    public void modificarCuentaEmpresa(EmpresaUsuario usuario) {
         gu.modificarCuentaEmpresa(usuario);
     }
-    
-    public void modificarCuentaInversor(InversorUsuario usuario){
+
+    public void modificarCuentaInversor(InversorUsuario usuario) {
         gu.modificarCuentaInversor(usuario);
     }
-    
-     public void nuevaNoticia(){
+
+    public void nuevaNoticia() {
         gn.nuevaNoticia();
     }
-    
+
+    public float getSaldoRetenciones(String id) {
+        return gb.getSaldoRetenciones(id);
+    }
+
+    public int getParticipacionesRetenciones(String id) {
+        return gb.getParticipacionesRetenciones(id);
+    }
+
+    public ArrayList<Estadisticas> actualizarTablaEstadisticas(InversorUsuario iu, EmpresaUsuario eu) {
+        return gu.actualizarTablaEstadisticas(iu, eu);
+    }
 }

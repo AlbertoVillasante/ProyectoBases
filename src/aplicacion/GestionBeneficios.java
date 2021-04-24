@@ -1,4 +1,3 @@
-
 package aplicacion;
 
 import gui.FachadaGui;
@@ -18,14 +17,24 @@ public class GestionBeneficios {
         this.fgui = fgui;
         this.fbd = fbd;
     }
-    
-    public void nuevoBeneficio(){
-         fgui.nuevoBeneficio();
+
+    public void nuevoBeneficio(InversorUsuario iu, EmpresaUsuario eu) {
+        fgui.nuevoBeneficio(iu,eu);
     }
-     public void altaPagoBeneficios(String fecha, double precio, String nombreEmpresa, int numParticipaciones){
-        fbd.altaPagoBeneficios(fecha,precio,nombreEmpresa,numParticipaciones);
+
+    public void altaPagoBeneficios(String fecha, double precio, String nombreEmpresa, int numParticipaciones) {
+        fbd.altaPagoBeneficios(fecha, precio, nombreEmpresa, numParticipaciones);
     }
-      public ArrayList<AnunciarBeneficios> getBeneficios() {
+
+    public ArrayList<AnunciarBeneficios> getBeneficios() {
         return fbd.getBeneficios();
+    }
+
+    public float getSaldoRetenciones(String id) {
+        return fbd.getSaldoRetenciones(id);
+    }
+    
+    public int getParticipacionesRetenciones(String id) {
+        return fbd.getParticipacionesRetenciones(id);
     }
 }

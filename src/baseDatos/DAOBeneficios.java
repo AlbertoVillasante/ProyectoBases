@@ -17,7 +17,7 @@ public class DAOBeneficios extends AbstractDAO {
         super.setFachadaAplicacion(fa);
     }
 
-    public void altaPagoBeneficios(String fecha, double importe, String idEmpresa,int acciones) {
+    public void altaPagoBeneficios(String fecha, double importe, String idEmpresa, int acciones) {
         Connection con;
         PreparedStatement stmBeneficios = null;
         con = super.getConexion();
@@ -87,9 +87,9 @@ public class DAOBeneficios extends AbstractDAO {
                     + "where e.idUsuario = b.idEmpresa");
             beneficios = stmBeneficios.executeQuery();
             while (beneficios.next()) {
-                a= new AnunciarBeneficios(beneficios.getString("fechaAnuncioPago"),
-                        beneficios.getFloat("importe"),beneficios.getInt("numParticipaciones") , beneficios.getString("idEmpresa"));
-                        a.setNombreEmpresa(beneficios.getString("nombreComercial"));
+                a = new AnunciarBeneficios(beneficios.getString("fechaAnuncioPago"),
+                        beneficios.getFloat("importe"), beneficios.getInt("numParticipaciones"), beneficios.getString("idEmpresa"));
+                a.setNombreEmpresa(beneficios.getString("nombreComercial"));
                 resultado.add(a);
             }
 
@@ -105,5 +105,70 @@ public class DAOBeneficios extends AbstractDAO {
         }
         return resultado;
     }
+
+    public float getSaldoRetenciones( String id) {
+        Connection con;
+        PreparedStatement stmSaldo = null;
+        con = super.getConexion();
+        float saldo = 0;
+        ResultSet saldoFinal;
+
+        try {
+            stmSaldo = con.prepareStatement("select eu.fondosDisponiblesCuenta - sum(ab.importe*eu.numeroParticipaciones) as dineroFinal "
+                    + "from EmpresaUsuario as eu,AnunciarBeneficios as ab "
+                    + "where ab.idEmpresa = ? and eu.idUsuario = ab.idEmpresa "
+                    + "group by eu.idUsuario");
+            
+            stmSaldo.setString(1, id);
+            saldoFinal = stmSaldo.executeQuery();
+            if (saldoFinal.next()) {
+                saldo = saldoFinal.getFloat("dineroFinal");
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        } finally {
+            try {
+                stmSaldo.close();
+            } catch (SQLException e) {
+                System.out.println("Imposible cerrar cursores");
+            }
+        }
+        return saldo;
+    }
+    
+    public int getParticipacionesRetenciones( String id) {
+        Connection con;
+        PreparedStatement stmSaldo = null;
+        con = super.getConexion();
+        int participaciones = 0;
+        ResultSet participacionesFinal;
+
+        try {
+            stmSaldo = con.prepareStatement("select eu.numeroParticipaciones - sum(ab.numParticipaciones) * (sum(ppi.numparticipaciones) + sum(ppe.numparticipaciones)) as participacionesFinales "
+                    + "from EmpresaUsuario as eu,AnunciarBeneficios as ab,poseerparticipacionesinversor as ppi, poseerparticipacionesempresa ppe "
+                    + "where ab.idEmpresa = ? and eu.idUsuario = ab.idEmpresa  and  eu.idUsuario = ppi.idusuario2 and eu.idUsuario = ppe.idusuario2 "
+                    + "group by eu.idUsuario");
+            
+            stmSaldo.setString(1, id);
+            participacionesFinal = stmSaldo.executeQuery();
+            if (participacionesFinal.next()) {
+                participaciones = participacionesFinal.getInt("participacionesFinales");
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        } finally {
+            try {
+                stmSaldo.close();
+            } catch (SQLException e) {
+                System.out.println("Imposible cerrar cursores");
+            }
+        }
+        return participaciones;
+    }
+    
 
 }

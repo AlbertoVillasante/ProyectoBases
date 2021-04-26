@@ -241,6 +241,10 @@ public class FachadaAplicacion {
     public void nuevaNoticia() {
         gn.nuevaNoticia();
     }
+    
+    public void nuevoNoticiero(String tiponoticia) {
+        gn.nuevoNoticiero(tiponoticia);
+    }
 
     public float getSaldoRetenciones(String id) {
         return gb.getSaldoRetenciones(id);

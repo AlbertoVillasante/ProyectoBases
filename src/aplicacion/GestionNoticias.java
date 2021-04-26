@@ -25,5 +25,9 @@ public class GestionNoticias {
     public void nuevaNoticia(){
         fgui.nuevaNoticia();
     }
+    
+    public void nuevoNoticiero(String tiponoticia){
+        fgui.nuevoNoticiero(tiponoticia);
+    }
 
 }

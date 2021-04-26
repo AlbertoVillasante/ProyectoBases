@@ -140,4 +140,10 @@ public class FachadaGui {           //Esta es la fachada
         vn = new VNoticias(fa);
         vn.setVisible(true);
     }
+    
+    public void nuevoNoticiero(String tiponoticia) {
+        VNoticiero vn;
+        vn = new VNoticiero(fa,tiponoticia);
+        vn.setVisible(true);
+    }
 }

@@ -33,8 +33,18 @@ public class VBeneficios extends javax.swing.JDialog {
     public VBeneficios(aplicacion.FachadaAplicacion fa, InversorUsuario iu, EmpresaUsuario eu) {
         initComponents();
         this.fa = fa;
-        this.iu = iu;
-        this.eu = eu;
+        if (iu != null) {
+            this.iu = iu;
+            cuadroFechaPago.setEnabled(false);
+            numPart.setEnabled(false);
+            cuadroBeneficio.setEnabled(false);
+            btnPagar.setEnabled(false);
+            btnAceptar.setEnabled(false);
+        }
+        if (eu != null) {
+            this.eu = eu;
+        }
+
         this.getContentPane().setBackground(prueba);
         actualizarTablaBeneficios();
         btnSelector.setBackground(prueba1);
@@ -51,6 +61,8 @@ public class VBeneficios extends javax.swing.JDialog {
         for (String i : empresas) {
             btnSelector.addItem(i);
         }
+        error.setVisible(false);
+
     }
 
     /**
@@ -77,6 +89,7 @@ public class VBeneficios extends javax.swing.JDialog {
         cuadroFechaPago = new com.toedter.calendar.JDateChooser();
         textoEstadísticas = new javax.swing.JLabel();
         estadisticas = new javax.swing.JButton();
+        error = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -113,6 +126,8 @@ public class VBeneficios extends javax.swing.JDialog {
         btnBuscar.setForeground(new java.awt.Color(187, 187, 188));
         btnBuscar.setText("Buscar");
 
+        numPart.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
+
         jLabel3.setForeground(new java.awt.Color(187, 187, 188));
         jLabel3.setText("Número de Participaciones:");
 
@@ -135,6 +150,11 @@ public class VBeneficios extends javax.swing.JDialog {
             }
         });
 
+        error.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
+        error.setForeground(new java.awt.Color(187, 50, 50));
+        error.setText("Datos inconsistentes");
+        error.setFocusable(false);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -153,10 +173,10 @@ public class VBeneficios extends javax.swing.JDialog {
                                 .addComponent(btnSelector, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(btnAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(160, 160, 160)
-                                .addComponent(textoEstadísticas)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(estadisticas))))
+                                .addGap(53, 53, 53)
+                                .addComponent(error)
+                                .addGap(58, 58, 58)
+                                .addComponent(textoEstadísticas))))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(jLabel3)
@@ -173,11 +193,16 @@ public class VBeneficios extends javax.swing.JDialog {
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(cuadroBeneficio, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
                                 .addComponent(cuadroFechaPago, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
-                .addGap(30, 30, 30))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(115, 115, 115)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(44, 44, 44)
+                        .addComponent(estadisticas)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton1)))
+                .addGap(40, 40, 40))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -208,7 +233,8 @@ public class VBeneficios extends javax.swing.JDialog {
                     .addComponent(btnAceptar)
                     .addComponent(jButton1)
                     .addComponent(textoEstadísticas)
-                    .addComponent(estadisticas))
+                    .addComponent(estadisticas)
+                    .addComponent(error))
                 .addGap(26, 26, 26))
         );
 
@@ -221,10 +247,29 @@ public class VBeneficios extends javax.swing.JDialog {
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
         //comprobaciones
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        String date = sdf.format(cuadroFechaPago.getDate());
-        fa.altaPagoBeneficios(date, Double.parseDouble(cuadroBeneficio.getText()), btnSelector.getSelectedItem().toString(), Integer.parseInt(numPart.getValue().toString()));
-        actualizarTablaBeneficios();
+        if (!btnSelector.getSelectedItem().toString().equals(eu.getNombreComercial())) {
+            VAviso va;
+            va=new   VAviso("Esa empresa no es de su propiedad.\nAcción no disponible");
+            va.setVisible(true);
+        } else {
+            if (cuadroBeneficio.getText().equals("")) {
+                cuadroBeneficio.setText("0");
+            }
+
+            if (Integer.parseInt(numPart.getValue().toString())==0 && Double.parseDouble(cuadroBeneficio.getText()) <= 0) {
+                error.setVisible(true);
+            } else {
+                if (cuadroFechaPago.getDate() == null) {
+                    error.setVisible(true);
+                } else {
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                    String date = sdf.format(cuadroFechaPago.getDate());
+                    fa.altaPagoBeneficios(date, Double.parseDouble(cuadroBeneficio.getText()), btnSelector.getSelectedItem().toString(), Integer.parseInt(numPart.getValue().toString()));
+                    actualizarTablaBeneficios();
+                    error.setVisible(false);
+                }
+            }
+        }
     }//GEN-LAST:event_btnAceptarActionPerformed
 
     private void estadisticasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_estadisticasActionPerformed
@@ -239,6 +284,7 @@ public class VBeneficios extends javax.swing.JDialog {
     private javax.swing.JComboBox btnSelector;
     private javax.swing.JTextField cuadroBeneficio;
     private com.toedter.calendar.JDateChooser cuadroFechaPago;
+    private javax.swing.JLabel error;
     private javax.swing.JButton estadisticas;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;

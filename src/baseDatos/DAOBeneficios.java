@@ -114,10 +114,10 @@ public class DAOBeneficios extends AbstractDAO {
         ResultSet saldoFinal;
 
         try {
-            stmSaldo = con.prepareStatement("select eu.fondosDisponiblesCuenta - sum(ab.importe*eu.numeroParticipaciones) as dineroFinal "
-                    + "from EmpresaUsuario as eu,AnunciarBeneficios as ab "
-                    + "where ab.idEmpresa = ? and eu.idUsuario = ab.idEmpresa "
-                    + "group by eu.idUsuario");
+            stmSaldo = con.prepareStatement("select eu.fondosdisponiblescuenta - sum(distinct ab.importe) * (sum( distinct ppi.numparticipaciones) + sum(distinct ppe.numparticipaciones)) as dinerosFinales\n" +
+"from EmpresaUsuario as eu,AnunciarBeneficios as ab,poseerparticipacionesinversor as ppi, poseerparticipacionesempresa ppe\n" +
+"where eu.idUsuario= ab.idEmpresa and ab.idEmpresa= '1' and ((ab.idEmpresa = ppi.idUsuario2 and ab.idEmpresa != ppi.idUsuario1) and (ab.idEmpresa = ppe.idUsuario2 and ab.idEmpresa != ppe.idUsuario1))\n" +
+"group by eu.idUsuario;");
             
             stmSaldo.setString(1, id);
             saldoFinal = stmSaldo.executeQuery();
@@ -146,10 +146,10 @@ public class DAOBeneficios extends AbstractDAO {
         ResultSet participacionesFinal;
 
         try {
-            stmSaldo = con.prepareStatement("select eu.numeroParticipaciones - sum(ab.numParticipaciones) * (sum(ppi.numparticipaciones) + sum(ppe.numparticipaciones)) as participacionesFinales "
-                    + "from EmpresaUsuario as eu,AnunciarBeneficios as ab,poseerparticipacionesinversor as ppi, poseerparticipacionesempresa ppe "
-                    + "where ab.idEmpresa = ? and eu.idUsuario = ab.idEmpresa  and  eu.idUsuario = ppi.idusuario2 and eu.idUsuario = ppe.idusuario2 "
-                    + "group by eu.idUsuario");
+            stmSaldo = con.prepareStatement("select eu.numeroParticipaciones - sum(distinct ab.numParticipaciones) * (sum( distinct ppi.numparticipaciones) + sum(distinct ppe.numparticipaciones)) as participacionesFinales\n" +
+"from EmpresaUsuario as eu,AnunciarBeneficios as ab,poseerparticipacionesinversor as ppi, poseerparticipacionesempresa ppe\n" +
+"where eu.idUsuario= ab.idEmpresa and ab.idEmpresa= '1' and ((ab.idEmpresa = ppi.idUsuario2 and ab.idEmpresa != ppi.idUsuario1) and (ab.idEmpresa = ppe.idUsuario2 and ab.idEmpresa != ppe.idUsuario1))\n" +
+"group by eu.idUsuario;");
             
             stmSaldo.setString(1, id);
             participacionesFinal = stmSaldo.executeQuery();
@@ -168,6 +168,32 @@ public class DAOBeneficios extends AbstractDAO {
             }
         }
         return participaciones;
+    }
+    
+    public void bajaAnuncioBeneficios(String fecha, String idEmpresa){
+    
+        Connection con;
+        PreparedStatement stmBeneficios = null;
+        con = super.getConexion();
+
+        try {
+            stmBeneficios = con.prepareStatement("delete "
+                    + "from anunciarbeneficios "
+                    + "where fechaanunciopago = ? and idEmpresa = ? ");
+            stmBeneficios.setDate(1, (Date.valueOf(fecha)));
+            stmBeneficios.setString(2, idEmpresa);
+            stmBeneficios.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        } finally {
+            try {
+                stmBeneficios.close();
+            } catch (SQLException e) {
+                System.out.println("Imposible cerrar cursores");
+            }
+        }
     }
     
 

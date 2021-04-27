@@ -85,11 +85,6 @@ public class VNoticias extends javax.swing.JDialog {
         jButton1.setForeground(new java.awt.Color(187, 187, 188));
         jButton1.setText("ÚLTIMAS NOTICIAS");
         jButton1.setEnabled(false);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
 
         jLabel1.setForeground(new java.awt.Color(187, 187, 188));
         jLabel1.setText("_____________________________________");
@@ -218,19 +213,15 @@ public class VNoticias extends javax.swing.JDialog {
     }//GEN-LAST:event_volverActionPerformed
 
     private void botonBeneficiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBeneficiosActionPerformed
-        fa.nuevoNoticiero("Anuncios de beneficios");
+        fa.nuevoNoticiero("ANUNCIOS DE BENEFICIOS");
     }//GEN-LAST:event_botonBeneficiosActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     private void genteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_genteActionPerformed
-        fa.nuevoNoticiero("Anuncios de altas y bajas");
+        fa.nuevoNoticiero("ANUNCIOS DE ALTAS Y BAJAS");
     }//GEN-LAST:event_genteActionPerformed
 
     private void participacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_participacionesActionPerformed
-        fa.nuevoNoticiero("Anuncios de participaciones");
+        fa.nuevoNoticiero("ANUNCIOS DE PARTICIPACIONES");
     }//GEN-LAST:event_participacionesActionPerformed
 
 

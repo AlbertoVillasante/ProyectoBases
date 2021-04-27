@@ -205,7 +205,7 @@ public class MenuDeUsuario extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonParticipacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonParticipacionesActionPerformed
-        fa.nuevasParticipaciones(eu);
+        fa.nuevasParticipaciones(eu, iu);
     }//GEN-LAST:event_botonParticipacionesActionPerformed
 
     private void botonConfiguracionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonConfiguracionActionPerformed

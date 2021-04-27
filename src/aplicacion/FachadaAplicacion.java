@@ -162,8 +162,8 @@ public class FachadaAplicacion {
         gb.nuevoBeneficio(iu, eu);
     }
 
-    public void nuevasParticipaciones(EmpresaUsuario eu) {
-        gpart.nuevasParticipaciones(eu);
+    public void nuevasParticipaciones(EmpresaUsuario eu, InversorUsuario iu) {
+        gpart.nuevasParticipaciones(eu, iu);
     }
 
     public void nuevaSolicitud() {
@@ -256,5 +256,17 @@ public class FachadaAplicacion {
 
     public ArrayList<Estadisticas> actualizarTablaEstadisticas(InversorUsuario iu, EmpresaUsuario eu) {
         return gu.actualizarTablaEstadisticas(iu, eu);
+    }
+    
+    public ArrayList<String> getEmpresasInv(String id) {
+        return gu.getEmpresasInv(id);
+    }
+    
+    public ArrayList<String> getEmpresasEmpr(String id) {
+        return gu.getEmpresasEmpr(id);
+    }
+    
+    public java.util.List<Venta> mostrarVentas(){
+        return gpart.mostrarVentas();
     }
 }

@@ -18,8 +18,8 @@ public class GestionParticipaciones {
         this.fbd = fbd;
     }
 
-   public void nuevasParticipaciones(EmpresaUsuario eu){
-         fgui.nuevasParticipaciones(eu);
+   public void nuevasParticipaciones(EmpresaUsuario eu, InversorUsuario iu){
+         fgui.nuevasParticipaciones(eu, iu);
     }
    
     public void altaParticipacionesEmpresa(int participaciones, String id) {
@@ -28,5 +28,9 @@ public class GestionParticipaciones {
     
     public void bajaParticipacionesEmpresa(int participaciones, String id) {
         fbd.bajaParticipacionesEmpresa(participaciones, id);
+    }
+    
+    public java.util.List<Venta> mostrarVentas(){
+        return fbd.mostrarVentas();
     }
 }

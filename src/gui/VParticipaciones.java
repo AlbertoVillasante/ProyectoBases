@@ -6,7 +6,10 @@
 package gui;
 
 import aplicacion.EmpresaUsuario;
+import aplicacion.FachadaAplicacion;
+import aplicacion.InversorUsuario;
 import java.awt.Color;
+import java.util.ArrayList;
 import java.util.Locale;
 import javax.swing.JPanel;
 
@@ -20,24 +23,26 @@ public class VParticipaciones extends javax.swing.JDialog {
     Color prueba = new Color(60, 63, 65);
     Color prueba1 = new Color(78, 82, 85);
     EmpresaUsuario eu;
+    InversorUsuario iu;
     VAviso va;
 
     /**
      * Creates new form VParticipaciones
      */
-    public VParticipaciones(aplicacion.FachadaAplicacion fa, EmpresaUsuario eu) {
+    public VParticipaciones(aplicacion.FachadaAplicacion fa, EmpresaUsuario eu, InversorUsuario iu) {
         initComponents();
-        if (eu == null) {
-            participacionesPanel.setSelectedIndex(1);
-            participacionesPanel.setEnabled(false);
-        } else {
+        if (eu != null) {
             carteraText.setText(String.valueOf(eu.getnParticipaciones()));
             this.eu = eu;
+        } else {
+            participacionesPanel.setSelectedIndex(1);
+            participacionesPanel.setEnabled(false);
+            this.iu=iu;
         }
         this.getContentPane().setBackground(prueba);
         saldoText.setBackground(prueba1);
-        jComboBox2.setBackground(prueba1);
-        jComboBox1.setBackground(prueba1);
+        selectorCV.setBackground(prueba1);
+        btnEmpresas.setBackground(prueba1);
         nParticipacionesText.setBackground(prueba1);
         precioText.setBackground(prueba1);
         comisionText.setBackground(prueba1);
@@ -53,13 +58,28 @@ public class VParticipaciones extends javax.swing.JDialog {
         aceptarButton1.setBackground(prueba1);
         compraventaPanel.setBackground(prueba);
         altabajaPanel.setBackground(prueba);
-        jTable2.setBackground(prueba1);
-        jTable2.setSelectionBackground(prueba1);
+        tablaParticipacionesVenta.setBackground(prueba1);
+        tablaParticipacionesVenta.setSelectionBackground(prueba1);
         participacionesPanel.setBackgroundAt(0, prueba);
         participacionesPanel.setBackgroundAt(1, prueba);
         buttonGroup8.add(Baja);
         buttonGroup8.add(Alta);
         this.fa = fa;
+        
+        
+        if(eu != null){
+            ArrayList<String> empresas = fa.getEmpresasEmpr(eu.getIdUsuario());
+            for (String i : empresas) {
+                btnEmpresas.addItem(i);
+            }
+        }else{
+            ArrayList<String> empresas = fa.getEmpresasInv(iu.getIdUsuario());
+            for (String i : empresas) {
+                btnEmpresas.addItem(i);
+            }
+        }
+        
+        mostrarVentas();
     }
 
     /**
@@ -96,8 +116,8 @@ public class VParticipaciones extends javax.swing.JDialog {
         saldoLabel = new javax.swing.JLabel();
         saldoText = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox();
-        jComboBox2 = new javax.swing.JComboBox();
+        btnEmpresas = new javax.swing.JComboBox();
+        selectorCV = new javax.swing.JComboBox();
         nparticipacionesLabel = new javax.swing.JLabel();
         nParticipacionesText = new javax.swing.JTextField();
         precioLabel = new javax.swing.JLabel();
@@ -107,7 +127,7 @@ public class VParticipaciones extends javax.swing.JDialog {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        tablaParticipacionesVenta = new javax.swing.JTable();
         aceptarButton = new javax.swing.JButton();
         buscarButton = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
@@ -248,16 +268,20 @@ public class VParticipaciones extends javax.swing.JDialog {
         jLabel1.setForeground(new java.awt.Color(187, 187, 188));
         jLabel1.setText("€ ");
 
-        jComboBox1.setForeground(new java.awt.Color(187, 187, 188));
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        btnEmpresas.setForeground(new java.awt.Color(187, 187, 188));
+        btnEmpresas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                btnEmpresasActionPerformed(evt);
             }
         });
 
-        jComboBox2.setForeground(new java.awt.Color(187, 187, 188));
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Comprar", "Vender" }));
+        selectorCV.setForeground(new java.awt.Color(187, 187, 188));
+        selectorCV.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Comprar", "Vender" }));
+        selectorCV.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                selectorCVActionPerformed(evt);
+            }
+        });
 
         nparticipacionesLabel.setForeground(new java.awt.Color(187, 187, 188));
         nparticipacionesLabel.setText("Número de participaciones:");
@@ -290,27 +314,9 @@ public class VParticipaciones extends javax.swing.JDialog {
         jLabel3.setForeground(new java.awt.Color(187, 187, 188));
         jLabel3.setText("%");
 
-        jTable2.setForeground(new java.awt.Color(187, 187, 188));
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane2.setViewportView(jTable2);
+        tablaParticipacionesVenta.setForeground(new java.awt.Color(187, 187, 188));
+        tablaParticipacionesVenta.setModel(new ModeloTablaParticipaciones());
+        jScrollPane2.setViewportView(tablaParticipacionesVenta);
 
         aceptarButton.setForeground(new java.awt.Color(187, 187, 188));
         aceptarButton.setText("Aceptar");
@@ -355,8 +361,8 @@ public class VParticipaciones extends javax.swing.JDialog {
                                         .addGap(14, 14, 14)
                                         .addComponent(jLabel3))))
                             .addGroup(compraventaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jComboBox2, javax.swing.GroupLayout.Alignment.LEADING, 0, 112, Short.MAX_VALUE))))
+                                .addComponent(btnEmpresas, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(selectorCV, javax.swing.GroupLayout.Alignment.LEADING, 0, 112, Short.MAX_VALUE))))
                     .addGroup(compraventaPanelLayout.createSequentialGroup()
                         .addGap(27, 27, 27)
                         .addComponent(saldoLabel)
@@ -385,9 +391,9 @@ public class VParticipaciones extends javax.swing.JDialog {
                         .addComponent(saldoText, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(saldoLabel, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(selectorCV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnEmpresas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(12, 12, 12)
                 .addGroup(compraventaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(nparticipacionesLabel)
@@ -470,9 +476,9 @@ public class VParticipaciones extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_nParticipacionesTextActionPerformed
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+    private void btnEmpresasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEmpresasActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    }//GEN-LAST:event_btnEmpresasActionPerformed
 
     private void saldoTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saldoTextActionPerformed
         // TODO add your handling code here:
@@ -517,6 +523,10 @@ public class VParticipaciones extends javax.swing.JDialog {
         //this.dispose();
     }//GEN-LAST:event_aceptarButton1ActionPerformed
 
+    private void selectorCVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectorCVActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_selectorCVActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -527,6 +537,7 @@ public class VParticipaciones extends javax.swing.JDialog {
     private javax.swing.JButton aceptarButton;
     private javax.swing.JButton aceptarButton1;
     private javax.swing.JPanel altabajaPanel;
+    private javax.swing.JComboBox btnEmpresas;
     private javax.swing.JButton btnSalir;
     private javax.swing.JButton buscarButton;
     private javax.swing.ButtonGroup buttonGroup1;
@@ -542,15 +553,12 @@ public class VParticipaciones extends javax.swing.JDialog {
     private javax.swing.JLabel comisionLabel;
     private javax.swing.JTextField comisionText;
     private javax.swing.JPanel compraventaPanel;
-    private javax.swing.JComboBox jComboBox1;
-    private javax.swing.JComboBox jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
     private java.awt.Label msNoParticipaciones;
     private java.awt.Label msjObligatorio;
     private javax.swing.JTextField nParticipacionesText;
@@ -562,5 +570,26 @@ public class VParticipaciones extends javax.swing.JDialog {
     private javax.swing.JTextField precioText;
     private javax.swing.JLabel saldoLabel;
     private javax.swing.JTextField saldoText;
+    private javax.swing.JComboBox selectorCV;
+    private javax.swing.JTable tablaParticipacionesVenta;
     // End of variables declaration//GEN-END:variables
+    
+    public void mostrarVentas(){
+        ModeloTablaParticipaciones m;
+        m=(ModeloTablaParticipaciones) tablaParticipacionesVenta.getModel();
+        m.setFilas(fa.mostrarVentas());
+        if (m.getRowCount() > 0) {
+            tablaParticipacionesVenta.setRowSelectionInterval(0, 0);
+            aceptarButton.setEnabled(true);
+        }else{
+            if(selectorCV.getSelectedIndex()==0){ //Comprar
+                aceptarButton.setEnabled(false);
+            }else{ //Vender
+                aceptarButton.setEnabled(true);
+            }
+        }
+    }
+
+
+
 }

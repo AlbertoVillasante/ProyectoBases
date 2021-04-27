@@ -7,6 +7,7 @@ import aplicacion.Categoria;
 import aplicacion.EmpresaUsuario;
 import aplicacion.Estadisticas;
 import aplicacion.Libro;
+import aplicacion.Venta;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -30,8 +31,8 @@ public class FachadaBaseDatos {
         FileInputStream arqConfiguracion;
 
         try {
-            //arqConfiguracion = new FileInputStream("baseDatos.properties"); //linea a cambiar
-            arqConfiguracion = new FileInputStream("basesDatos.properties");
+            arqConfiguracion = new FileInputStream("baseDatos.properties"); //linea a cambiar
+            //arqConfiguracion = new FileInputStream("basesDatos.properties");
 
             configuracion.load(arqConfiguracion);
             arqConfiguracion.close();
@@ -286,5 +287,17 @@ public class FachadaBaseDatos {
         else {
             return daoUsuarios.actualizarTablaEstadisticasEmpresa(eu.getIdUsuario());
         }
+    }
+    
+    public ArrayList<String> getEmpresasInv(String id) {
+        return daoUsuarios.getEmpresasInv(id);
+    }
+    
+    public ArrayList<String> getEmpresasEmpr(String id) {
+        return daoUsuarios.getEmpresasEmpr(id);
+    }
+    
+    public java.util.List<Venta> mostrarVentas(){
+        return daoParticipaciones.mostrarVentas();
     }
 }

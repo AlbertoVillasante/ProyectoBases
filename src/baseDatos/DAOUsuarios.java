@@ -868,4 +868,73 @@ public class DAOUsuarios extends AbstractDAO {
         }
         return resultado;
     }
+    
+    public ArrayList<String> getEmpresasInv(String id) {
+        ArrayList<String> resultado = new ArrayList<String>();
+        Connection con;
+        PreparedStatement stmPrestamos = null;
+        ResultSet rsPrestamos;
+        String consulta;
+
+        con = this.getConexion();
+
+        try {
+            consulta = "select distinct e.nombreComercial " 
+                      + "from empresausuario as e, poseerparticipacionesinversor as p " 
+                       +"WHERE e.idusuario=p.idusuario2 and p.idusuario1 = ? and p.numparticipaciones <> 0 " 
+                       +"order by e.nombreComercial ";
+            
+            stmPrestamos = con.prepareStatement(consulta);
+            stmPrestamos.setString(1, id);
+            rsPrestamos = stmPrestamos.executeQuery();
+            while (rsPrestamos.next()) {
+                resultado.add(rsPrestamos.getString("nombreComercial"));
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        } finally {
+            try {
+                stmPrestamos.close();
+            } catch (SQLException e) {
+                System.out.println("Imposible cerrar cursores");
+            }
+        }
+        return resultado;
+    }
+    
+    public ArrayList<String> getEmpresasEmpr(String id) {
+        ArrayList<String> resultado = new ArrayList<String>();
+        Connection con;
+        PreparedStatement stmPrestamos = null;
+        ResultSet rsPrestamos;
+        String consulta;
+
+        con = this.getConexion();
+
+        try {
+            consulta = "select distinct e.nombreComercial " 
+                      + "from empresausuario as e, poseerparticipacionesempresa as p " 
+                       +"where e.idusuario=p.idusuario2 and p.idusuario2 = ? and p.numparticipaciones <> 0 " 
+                       +"order by e.nombreComercial";
+            
+            stmPrestamos = con.prepareStatement(consulta);
+            stmPrestamos.setString(1, id);
+            rsPrestamos = stmPrestamos.executeQuery();
+            while (rsPrestamos.next()) {
+                resultado.add(rsPrestamos.getString("nombreComercial"));
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        } finally {
+            try {
+                stmPrestamos.close();
+            } catch (SQLException e) {
+                System.out.println("Imposible cerrar cursores");
+            }
+        }
+        return resultado;
+    }
+    
 }

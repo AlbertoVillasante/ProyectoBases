@@ -135,6 +135,14 @@ public class GestionUsuarios {
      public ArrayList<Estadisticas> actualizarTablaEstadisticas(InversorUsuario iu, EmpresaUsuario eu) {
         return fbd.actualizarTablaEstadisticas(iu,eu);
     }
+     
+    public ArrayList<String> getEmpresasInv(String id) {
+        return fbd.getEmpresasInv(id);
+    }
+    
+    public ArrayList<String> getEmpresasEmpr(String id) {
+        return fbd.getEmpresasEmpr(id);
+    }
 }
 /*  //Comentado para que no de error
     public java.util.List<EmpresaUsuario> obtenerUsuarios(String idUsuario, String nombreUsuario) {

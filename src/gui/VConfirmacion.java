@@ -8,13 +8,13 @@ public class VConfirmacion extends javax.swing.JDialog {
     Color prueba1 = new Color(78, 82, 85);
     Color prueba2 = new Color(255, 255, 255);
 
-    public VConfirmacion(String txtExcepcion) {
+    public VConfirmacion(String pago) {
         initComponents();
         this.getContentPane().setBackground(prueba);
-        textoExcepcion.setBackground(prueba1);
+        textoConfirmacion.setBackground(prueba1);
         btnCerrar.setBackground(prueba1);
-        textoExcepcion.setForeground(prueba2);
-        textoExcepcion.setText(txtExcepcion);
+        textoConfirmacion.setForeground(prueba2);
+        textoConfirmacion.setText("Se ha realizado un pago de: "+pago+" €");
         aviso.setBackground(prueba);
         this.addWindowListener(new java.awt.event.WindowAdapter() {
 
@@ -36,7 +36,7 @@ public class VConfirmacion extends javax.swing.JDialog {
 
         btnCerrar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        textoExcepcion = new javax.swing.JTextArea();
+        textoConfirmacion = new javax.swing.JTextArea();
         aviso = new java.awt.Label();
         jTextField1 = new javax.swing.JTextField();
 
@@ -50,10 +50,10 @@ public class VConfirmacion extends javax.swing.JDialog {
             }
         });
 
-        textoExcepcion.setColumns(20);
-        textoExcepcion.setForeground(new java.awt.Color(244, 44, 44));
-        textoExcepcion.setRows(5);
-        jScrollPane1.setViewportView(textoExcepcion);
+        textoConfirmacion.setColumns(20);
+        textoConfirmacion.setForeground(new java.awt.Color(244, 44, 44));
+        textoConfirmacion.setRows(5);
+        jScrollPane1.setViewportView(textoConfirmacion);
 
         aviso.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
         aviso.setForeground(new java.awt.Color(0, 0, 0));
@@ -122,6 +122,6 @@ public class VConfirmacion extends javax.swing.JDialog {
     private javax.swing.JButton btnCerrar;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextArea textoExcepcion;
+    private javax.swing.JTextArea textoConfirmacion;
     // End of variables declaration//GEN-END:variables
 }

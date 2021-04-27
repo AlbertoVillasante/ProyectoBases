@@ -13,19 +13,17 @@ import javax.swing.ImageIcon;
  * @author alumnogreibd
  */
 public class VNoticiero extends javax.swing.JDialog {
-    String noticia;
     Color prueba = new Color(60, 63, 65);
     Color prueba1 = new Color(78, 82, 85);
     aplicacion.FachadaAplicacion fa;
     
     public VNoticiero(aplicacion.FachadaAplicacion fa, String tiponoticia) {
-        noticia = tiponoticia;
         initComponents();
         this.getContentPane().setBackground(prueba);
-        titulo.setText(noticia);
-        if(noticia.equals("ANUNCIOS DE BENEFICIOS")) fotoNoticia.setIcon(new ImageIcon(getClass().getResource("/gui/Beneficios.png")));
-        if(noticia.equals("ANUNCIOS DE ALTAS Y BAJAS")) fotoNoticia.setIcon(new ImageIcon(getClass().getResource("/gui/gente.png")));
-        if(noticia.equals("ANUNCIOS DE PARTICIPACIONES")) fotoNoticia.setIcon(new ImageIcon(getClass().getResource("/gui/participaciones.png")));
+        titulo.setText(tiponoticia);
+        if(tiponoticia.equals("ANUNCIOS DE BENEFICIOS")) fotoNoticia.setIcon(new ImageIcon(getClass().getResource("/gui/Beneficios.png")));
+        if(tiponoticia.equals("ANUNCIOS DE ALTAS Y BAJAS")) fotoNoticia.setIcon(new ImageIcon(getClass().getResource("/gui/gente.png")));
+        if(tiponoticia.equals("ANUNCIOS DE PARTICIPACIONES")) fotoNoticia.setIcon(new ImageIcon(getClass().getResource("/gui/participaciones.png")));
     }
 
     /**

@@ -221,5 +221,57 @@ public class DAOParticipaciones extends AbstractDAO {
         }
         return resultado;
     }
+    
+    public void ofertaVentaInv(Venta v){
+        Connection con;
+        PreparedStatement stmOferta = null;
+        con = super.getConexion();
+
+        try {
+            stmOferta = con.prepareStatement("INSERT INTO ofertaparticipacionesventainversor VALUES (?, now(), ?, ?, ?)");
+
+            stmOferta.setFloat(1, v.getPrecio());
+            stmOferta.setInt(2, v.getNparticipaciones());
+            stmOferta.setString(3, v.getIdVendedor());
+            stmOferta.setString(4, v.getIdEmpresa());
+            stmOferta.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        } finally {
+            try {
+                stmOferta.close();
+            } catch (SQLException e) {
+                System.out.println("Imposible cerrar cursores");
+            }
+        }
+    }
+    
+    public void ofertaVentaEmpr(Venta v){
+        Connection con;
+        PreparedStatement stmOferta = null;
+        con = super.getConexion();
+
+        try {
+            stmOferta = con.prepareStatement("INSERT INTO ofertaparticipacionesventaempresa VALUES (?, now(), ?, ?, ?)");
+
+            stmOferta.setFloat(1, v.getPrecio());
+            stmOferta.setInt(2, v.getNparticipaciones());
+            stmOferta.setString(3, v.getIdVendedor());
+            stmOferta.setString(4, v.getIdEmpresa());
+            stmOferta.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        } finally {
+            try {
+                stmOferta.close();
+            } catch (SQLException e) {
+                System.out.println("Imposible cerrar cursores");
+            }
+        }
+    }
+    
+    
 
 }

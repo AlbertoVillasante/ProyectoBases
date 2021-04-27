@@ -300,4 +300,12 @@ public class FachadaBaseDatos {
     public java.util.List<Venta> mostrarVentas(){
         return daoParticipaciones.mostrarVentas();
     }
+    
+    public void ofertaVentaInv(Venta v){
+        daoParticipaciones.ofertaVentaInv(v);
+    }
+    
+    public void ofertaVentaEmpr(Venta v){
+        daoParticipaciones.ofertaVentaEmpr(v);
+    }
 }

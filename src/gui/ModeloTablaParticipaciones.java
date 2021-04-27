@@ -92,7 +92,7 @@ public class ModeloTablaParticipaciones extends AbstractTableModel{
         fireTableDataChanged();
     }
 
-    public Venta obtenerUsuario(int i) {
+    public Venta obtenerVenta(int i) {
         return this.ventas.get(i);
     }
 

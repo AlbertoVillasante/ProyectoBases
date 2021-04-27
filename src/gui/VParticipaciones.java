@@ -8,7 +8,10 @@ package gui;
 import aplicacion.EmpresaUsuario;
 import aplicacion.FachadaAplicacion;
 import aplicacion.InversorUsuario;
+import aplicacion.Venta;
 import java.awt.Color;
+import static java.lang.Float.parseFloat;
+import static java.lang.Integer.parseInt;
 import java.util.ArrayList;
 import java.util.Locale;
 import javax.swing.JPanel;
@@ -30,7 +33,9 @@ public class VParticipaciones extends javax.swing.JDialog {
      * Creates new form VParticipaciones
      */
     public VParticipaciones(aplicacion.FachadaAplicacion fa, EmpresaUsuario eu, InversorUsuario iu) {
+        int i=0;
         initComponents();
+        
         if (eu != null) {
             carteraText.setText(String.valueOf(eu.getnParticipaciones()));
             this.eu = eu;
@@ -66,20 +71,15 @@ public class VParticipaciones extends javax.swing.JDialog {
         buttonGroup8.add(Alta);
         this.fa = fa;
         
+        mostrarVentas();
         
         if(eu != null){
-            ArrayList<String> empresas = fa.getEmpresasEmpr(eu.getIdUsuario());
-            for (String i : empresas) {
-                btnEmpresas.addItem(i);
-            }
+            saldoText.setText(String.valueOf(eu.getFondosDisponiblesCuenta()));
+            comisionText.setText(String.valueOf(eu.getComision()));
         }else{
-            ArrayList<String> empresas = fa.getEmpresasInv(iu.getIdUsuario());
-            for (String i : empresas) {
-                btnEmpresas.addItem(i);
-            }
+            saldoText.setText(String.valueOf(iu.getFondosDisponiblesCuenta()));
+            comisionText.setText(String.valueOf(iu.getComision()));
         }
-        
-        mostrarVentas();
     }
 
     /**
@@ -258,6 +258,7 @@ public class VParticipaciones extends javax.swing.JDialog {
         saldoLabel.setForeground(new java.awt.Color(187, 187, 188));
         saldoLabel.setText("saldo:");
 
+        saldoText.setEditable(false);
         saldoText.setForeground(new java.awt.Color(187, 187, 188));
         saldoText.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -299,6 +300,7 @@ public class VParticipaciones extends javax.swing.JDialog {
         comisionLabel.setForeground(new java.awt.Color(187, 187, 188));
         comisionLabel.setText("Comisión:");
 
+        comisionText.setEditable(false);
         comisionText.setForeground(new java.awt.Color(187, 187, 188));
 
         precioText.setForeground(new java.awt.Color(187, 187, 188));
@@ -320,6 +322,11 @@ public class VParticipaciones extends javax.swing.JDialog {
 
         aceptarButton.setForeground(new java.awt.Color(187, 187, 188));
         aceptarButton.setText("Aceptar");
+        aceptarButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                aceptarButtonActionPerformed(evt);
+            }
+        });
 
         buscarButton.setForeground(new java.awt.Color(187, 187, 188));
         buscarButton.setText("Buscar");
@@ -524,8 +531,39 @@ public class VParticipaciones extends javax.swing.JDialog {
     }//GEN-LAST:event_aceptarButton1ActionPerformed
 
     private void selectorCVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectorCVActionPerformed
-        // TODO add your handling code here:
+        int selec=selectorCV.getSelectedIndex();
+        
+        btnEmpresas.removeAllItems();
+        
+        if(selec == 0){ //Comprar
+            
+        }else{ //Vender
+                if(eu != null){
+                    ArrayList<String> empresas = fa.getEmpresasEmpr(eu.getIdUsuario());
+                    for (String i : empresas) {
+                        btnEmpresas.addItem(i);
+                    }
+                }else{
+                    ArrayList<String> empresas = fa.getEmpresasInv(iu.getIdUsuario());
+                    for (String i : empresas) {
+                        btnEmpresas.addItem(i);
+                    }
+                }
+        }
+
+
+// TODO add your handling code here:
     }//GEN-LAST:event_selectorCVActionPerformed
+
+    private void aceptarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aceptarButtonActionPerformed
+        if(selectorCV.getSelectedIndex() == 0){ //Comprar
+            
+        } else{
+            vender();
+            mostrarVentas();
+        }
+        // TODO add your handling code here:
+    }//GEN-LAST:event_aceptarButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -575,12 +613,20 @@ public class VParticipaciones extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
     
     public void mostrarVentas(){
+        int selec=selectorCV.getSelectedIndex(), i=0;
         ModeloTablaParticipaciones m;
         m=(ModeloTablaParticipaciones) tablaParticipacionesVenta.getModel();
         m.setFilas(fa.mostrarVentas());
         if (m.getRowCount() > 0) {
             tablaParticipacionesVenta.setRowSelectionInterval(0, 0);
             aceptarButton.setEnabled(true);
+            if(selec == 0){
+                i=tablaParticipacionesVenta.getSelectedRow();
+                Venta v=m.obtenerVenta(i);
+                nParticipacionesText.setText(v.getNparticipaciones().toString());
+                precioText.setText(v.getPrecio().toString());
+                
+            }
         }else{
             if(selectorCV.getSelectedIndex()==0){ //Comprar
                 aceptarButton.setEnabled(false);
@@ -588,6 +634,23 @@ public class VParticipaciones extends javax.swing.JDialog {
                 aceptarButton.setEnabled(true);
             }
         }
+    }
+    
+    public void vender(){
+        int i=0;
+        String id = null;
+        i=btnEmpresas.getSelectedIndex();
+        
+        
+        if(iu != null){
+            Venta v= new Venta(parseFloat(precioText.getText()), parseInt(nParticipacionesText.getText()), btnEmpresas.getItemAt(i).toString(), iu.getIdUsuario());
+            fa.ofertaVentaInv(v);
+        } else{
+            Venta v= new Venta(parseFloat(precioText.getText()), parseInt(nParticipacionesText.getText()), btnEmpresas.getItemAt(i).toString(), eu.getIdUsuario());
+            fa.ofertaVentaEmpr(v);
+        }
+        
+        
     }
 
 

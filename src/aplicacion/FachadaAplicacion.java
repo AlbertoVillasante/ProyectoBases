@@ -269,4 +269,12 @@ public class FachadaAplicacion {
     public java.util.List<Venta> mostrarVentas(){
         return gpart.mostrarVentas();
     }
+    
+    public void ofertaVentaInv(Venta v){
+        gpart.ofertaVentaInv(v);
+    }
+    
+    public void ofertaVentaEmpr(Venta v){
+        gpart.ofertaVentaEmpr(v);
+    }
 }

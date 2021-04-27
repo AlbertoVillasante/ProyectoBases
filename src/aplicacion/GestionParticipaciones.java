@@ -33,4 +33,12 @@ public class GestionParticipaciones {
     public java.util.List<Venta> mostrarVentas(){
         return fbd.mostrarVentas();
     }
+    
+    public void ofertaVentaInv(Venta v){
+        fbd.ofertaVentaInv(v);
+    }
+    
+    public void ofertaVentaEmpr(Venta v){
+        fbd.ofertaVentaEmpr(v);
+    }
 }

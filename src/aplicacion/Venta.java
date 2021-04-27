@@ -10,10 +10,10 @@ package aplicacion;
  * @author alumnogreibd
  */
 public class Venta {
-    Float precio;
-    Integer nparticipaciones;
-    String idEmpresa;
-    String idVendedor;
+    private Float precio;
+    private Integer nparticipaciones;
+    private String idEmpresa;
+    private String idVendedor;
 
     public Venta(Float precio, Integer nparticipaciones, String empr, String idVendedor) {
         this.precio = precio;

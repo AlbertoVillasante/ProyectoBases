@@ -308,4 +308,16 @@ public class FachadaBaseDatos {
     public void ofertaVentaEmpr(Venta v){
         daoParticipaciones.ofertaVentaEmpr(v);
     }
+
+    public boolean comprobarParticipacionesEmpresa(Venta v){
+        return daoParticipaciones.comprobarParticipacionesEmpresa(v);
+    }
+    
+    public boolean comprobarParticipacionesInversor(Venta v){
+        return daoParticipaciones.comprobarParticipacionesInversor(v);
+    }
+    
+    public String getIdEmpresa(String nombre){
+        return daoUsuarios.getIdEmpresa(nombre);
+    }
 }

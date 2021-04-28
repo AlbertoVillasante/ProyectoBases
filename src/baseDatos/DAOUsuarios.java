@@ -937,4 +937,34 @@ public class DAOUsuarios extends AbstractDAO {
         return resultado;
     }
     
+    public String getIdEmpresa(String nombre){
+        String resultado = null;
+        Connection con;
+        PreparedStatement stmEmpresa = null;
+        ResultSet rsEmpresa;
+        
+        con = this.getConexion();
+        try {
+            stmEmpresa = con.prepareStatement("select idUsuario "
+                                        + "from EmpresaUsuario "
+                                        + "where nombreComercial = ?");
+
+            stmEmpresa.setString(1, nombre);
+            rsEmpresa = stmEmpresa.executeQuery();
+            
+            if(rsEmpresa.next()){
+                resultado = rsEmpresa.getString("idUsuario");
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        } finally {
+            try {
+                stmEmpresa.close();
+            } catch (SQLException e) {
+                System.out.println("Imposible cerrar cursores");
+            }
+        }
+        return resultado;
+    }
 }

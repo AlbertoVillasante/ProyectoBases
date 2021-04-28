@@ -41,4 +41,12 @@ public class GestionParticipaciones {
     public void ofertaVentaEmpr(Venta v){
         fbd.ofertaVentaEmpr(v);
     }
+    
+    public boolean comprobarParticipacionesEmpresa(Venta v){
+        return fbd.comprobarParticipacionesEmpresa(v);
+    }
+    
+    public boolean comprobarParticipacionesInversor(Venta v){
+        return fbd.comprobarParticipacionesInversor(v);
+    }
 }

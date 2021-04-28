@@ -143,6 +143,10 @@ public class GestionUsuarios {
     public ArrayList<String> getEmpresasEmpr(String id) {
         return fbd.getEmpresasEmpr(id);
     }
+    
+    public String getIdEmpresa(String nombre){
+        return fbd.getIdEmpresa(nombre);
+    }
 }
 /*  //Comentado para que no de error
     public java.util.List<EmpresaUsuario> obtenerUsuarios(String idUsuario, String nombreUsuario) {

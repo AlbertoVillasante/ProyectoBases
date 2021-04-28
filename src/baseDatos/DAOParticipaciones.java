@@ -251,7 +251,7 @@ public class DAOParticipaciones extends AbstractDAO {
         Connection con;
         PreparedStatement stmOferta = null;
         con = super.getConexion();
-
+        
         try {
             stmOferta = con.prepareStatement("INSERT INTO ofertaparticipacionesventaempresa VALUES (?, now(), ?, ?, ?)");
 
@@ -272,6 +272,72 @@ public class DAOParticipaciones extends AbstractDAO {
         }
     }
     
+    public boolean comprobarParticipacionesEmpresa(Venta v){
+        Connection con;
+        PreparedStatement stmOferta = null;
+        con = super.getConexion();
+        boolean resultado = false;
+        ResultSet rsParticipaciones;
+        
+        con = this.getConexion();
+        
+        try {
+            stmOferta = con.prepareStatement("select * "
+                    + "from poseerparticipacionesempresa "
+                    + "where idUsuario1 = ? or idUsuario2 = ? and numparticipaciones >= ?");
+            stmOferta.setString(1, v.getIdVendedor());
+            stmOferta.setString(2, v.getIdEmpresa());
+            stmOferta.setInt(3, v.getNparticipaciones());
+            rsParticipaciones = stmOferta.executeQuery();
+            if (rsParticipaciones.next()) {
+                resultado = true;
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        } finally {
+            try {
+                stmOferta.close();
+            } catch (SQLException e) {
+                System.out.println("Imposible cerrar cursores");
+            }
+        }
+        
+        return resultado;
+    }
     
+    public boolean comprobarParticipacionesInversor(Venta v){
+        Connection con;
+        PreparedStatement stmOferta = null;
+        con = super.getConexion();
+        boolean resultado = false;
+        ResultSet rsParticipaciones;
+        
+        con = this.getConexion();
+        
+        try {
+            stmOferta = con.prepareStatement("select * "
+                    + "from poseerparticipacionesinversor "
+                    + "where idUsuario1 = ? or idUsuario2 = ? and numparticipaciones >= ?");
+            stmOferta.setString(1, v.getIdVendedor());
+            stmOferta.setString(2, v.getIdEmpresa());
+            stmOferta.setInt(3, v.getNparticipaciones());
+            rsParticipaciones = stmOferta.executeQuery();
+            if (rsParticipaciones.next()) {
+                resultado = true;
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        } finally {
+            try {
+                stmOferta.close();
+            } catch (SQLException e) {
+                System.out.println("Imposible cerrar cursores");
+            }
+        }
+        
+        return resultado;
+    }
 
 }

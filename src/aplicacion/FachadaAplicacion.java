@@ -277,4 +277,16 @@ public class FachadaAplicacion {
     public void ofertaVentaEmpr(Venta v){
         gpart.ofertaVentaEmpr(v);
     }
+    
+    public boolean comprobarParticipacionesEmpresa(Venta v){
+        return gpart.comprobarParticipacionesEmpresa(v);
+    }
+    
+    public boolean comprobarParticipacionesInversor(Venta v){
+        return gpart.comprobarParticipacionesInversor(v);
+    }
+    
+    public String getIdEmpresa(String nombre){
+        return gu.getIdEmpresa(nombre);
+    }
 }

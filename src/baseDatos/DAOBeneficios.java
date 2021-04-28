@@ -43,36 +43,6 @@ public class DAOBeneficios extends AbstractDAO {
         }
     }
 
-    public String getIdEmpresa(String nombre) {
-        Connection con;
-        PreparedStatement stmBeneficios = null;
-        con = super.getConexion();
-        String idUsuario = null;
-        ResultSet usuario;
-
-        try {
-            stmBeneficios = con.prepareStatement("select EmpresaUsuario.idUsuario "
-                    + "from EmpresaUsuario "
-                    + "where EmpresaUsuario.nombreComercial=?");
-            stmBeneficios.setString(1, nombre);
-            usuario = stmBeneficios.executeQuery();
-            if (usuario.next()) {
-                idUsuario = usuario.getString("IdUsuario");
-            }
-
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
-        } finally {
-            try {
-                stmBeneficios.close();
-            } catch (SQLException e) {
-                System.out.println("Imposible cerrar cursores");
-            }
-        }
-        return idUsuario;
-    }
-
     public ArrayList<AnunciarBeneficios> getBeneficios() {
         Connection con;
         PreparedStatement stmBeneficios = null;

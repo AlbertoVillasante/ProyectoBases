@@ -806,6 +806,7 @@ public class DAOUsuarios extends AbstractDAO {
         PreparedStatement stmEstadistica = null;
         ResultSet rsEstadistica;
         String consulta;
+        String aux;
 
         con = this.getConexion();
 
@@ -818,7 +819,8 @@ public class DAOUsuarios extends AbstractDAO {
             stmEstadistica.setString(1, id);
             rsEstadistica = stmEstadistica.executeQuery();
             while (rsEstadistica.next()) {
-                est = new Estadisticas(rsEstadistica.getInt("numParticipaciones"), rsEstadistica.getString("idUsuario1"));
+                aux = getnombreEmpresa(rsEstadistica.getString("idUsuario2"));
+                est = new Estadisticas(rsEstadistica.getInt("numParticipaciones"), aux);
                 resultado.add(est);
             }
         } catch (SQLException e) {
@@ -841,6 +843,7 @@ public class DAOUsuarios extends AbstractDAO {
         PreparedStatement stmEstadistica = null;
         ResultSet rsEstadistica;
         String consulta;
+        String aux;
 
         con = this.getConexion();
 
@@ -853,7 +856,8 @@ public class DAOUsuarios extends AbstractDAO {
             stmEstadistica.setString(1, id);
             rsEstadistica = stmEstadistica.executeQuery();
             while (rsEstadistica.next()) {
-                est = new Estadisticas(rsEstadistica.getInt("numParticipaciones"), rsEstadistica.getString("idUsuario1"));
+                aux = getnombreEmpresa(rsEstadistica.getString("idUsuario2"));
+                est = new Estadisticas(rsEstadistica.getInt("numParticipaciones"), aux);
                 resultado.add(est);
             }
         } catch (SQLException e) {
@@ -868,7 +872,7 @@ public class DAOUsuarios extends AbstractDAO {
         }
         return resultado;
     }
-    
+
     public ArrayList<String> getEmpresasInv(String id) {
         ArrayList<String> resultado = new ArrayList<String>();
         Connection con;
@@ -879,11 +883,11 @@ public class DAOUsuarios extends AbstractDAO {
         con = this.getConexion();
 
         try {
-            consulta = "select distinct e.nombreComercial " 
-                      + "from empresausuario as e, poseerparticipacionesinversor as p " 
-                       +"WHERE e.idusuario=p.idusuario2 and p.idusuario1 = ? and p.numparticipaciones <> 0 " 
-                       +"order by e.nombreComercial ";
-            
+            consulta = "select distinct e.nombreComercial "
+                    + "from empresausuario as e, poseerparticipacionesinversor as p "
+                    + "WHERE e.idusuario=p.idusuario2 and p.idusuario1 = ? and p.numparticipaciones <> 0 "
+                    + "order by e.nombreComercial ";
+
             stmPrestamos = con.prepareStatement(consulta);
             stmPrestamos.setString(1, id);
             rsPrestamos = stmPrestamos.executeQuery();
@@ -902,7 +906,7 @@ public class DAOUsuarios extends AbstractDAO {
         }
         return resultado;
     }
-    
+
     public ArrayList<String> getEmpresasEmpr(String id) {
         ArrayList<String> resultado = new ArrayList<String>();
         Connection con;
@@ -913,11 +917,11 @@ public class DAOUsuarios extends AbstractDAO {
         con = this.getConexion();
 
         try {
-            consulta = "select distinct e.nombreComercial " 
-                      + "from empresausuario as e, poseerparticipacionesempresa as p " 
-                       +"where e.idusuario=p.idusuario2 and p.idusuario2 = ? and p.numparticipaciones <> 0 " 
-                       +"order by e.nombreComercial";
-            
+            consulta = "select distinct e.nombreComercial "
+                    + "from empresausuario as e, poseerparticipacionesempresa as p "
+                    + "where e.idusuario=p.idusuario2 and p.idusuario2 = ? and p.numparticipaciones <> 0 "
+                    + "order by e.nombreComercial";
+
             stmPrestamos = con.prepareStatement(consulta);
             stmPrestamos.setString(1, id);
             rsPrestamos = stmPrestamos.executeQuery();
@@ -936,24 +940,55 @@ public class DAOUsuarios extends AbstractDAO {
         }
         return resultado;
     }
-    
-    public String getIdEmpresa(String nombre){
+
+    public String getIdEmpresa(String nombre) {
         String resultado = null;
         Connection con;
         PreparedStatement stmEmpresa = null;
         ResultSet rsEmpresa;
-        
+
         con = this.getConexion();
         try {
             stmEmpresa = con.prepareStatement("select idUsuario "
-                                        + "from EmpresaUsuario "
-                                        + "where nombreComercial = ?");
+                    + "from EmpresaUsuario "
+                    + "where nombreComercial = ?");
 
             stmEmpresa.setString(1, nombre);
             rsEmpresa = stmEmpresa.executeQuery();
-            
-            if(rsEmpresa.next()){
+
+            if (rsEmpresa.next()) {
                 resultado = rsEmpresa.getString("idUsuario");
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        } finally {
+            try {
+                stmEmpresa.close();
+            } catch (SQLException e) {
+                System.out.println("Imposible cerrar cursores");
+            }
+        }
+        return resultado;
+    }
+
+    public String getnombreEmpresa(String id) {
+        String resultado = null;
+        Connection con;
+        PreparedStatement stmEmpresa = null;
+        ResultSet rsEmpresa;
+
+        con = this.getConexion();
+        try {
+            stmEmpresa = con.prepareStatement("select nombreComercial "
+                    + "from EmpresaUsuario "
+                    + "where idUsuario = ?");
+
+            stmEmpresa.setString(1, id);
+            rsEmpresa = stmEmpresa.executeQuery();
+
+            if (rsEmpresa.next()) {
+                resultado = rsEmpresa.getString("nombreComercial");
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());

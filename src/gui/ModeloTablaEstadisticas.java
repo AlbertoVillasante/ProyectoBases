@@ -41,10 +41,10 @@ public class ModeloTablaEstadisticas extends AbstractTableModel {
 
         switch (col) {
             case 0:
-                clase = java.lang.Integer.class;
+                clase = java.lang.String.class;
                 break;
             case 1:
-                clase = java.lang.String.class;
+                clase = java.lang.Integer.class;
                 break;
         }
 

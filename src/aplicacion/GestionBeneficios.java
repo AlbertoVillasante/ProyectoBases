@@ -25,6 +25,10 @@ public class GestionBeneficios {
     public void altaPagoBeneficios(String fecha, double precio, String nombreEmpresa, int numParticipaciones) {
         fbd.altaPagoBeneficios(fecha, precio, nombreEmpresa, numParticipaciones);
     }
+    
+    public void bajaAnuncioBeneficios(String fecha, String nombreEmpresa){
+        fbd.bajaAnuncioBeneficios(fecha, nombreEmpresa);
+    }
 
     public ArrayList<AnunciarBeneficios> getBeneficios() {
         return fbd.getBeneficios();

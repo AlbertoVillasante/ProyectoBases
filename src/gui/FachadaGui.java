@@ -85,6 +85,14 @@ public class FachadaGui {           //Esta es la fachada
 
     }
 
+    public void nuevoBajaBeneficio(InversorUsuario iu, EmpresaUsuario eu) {
+        VBajaBeneficios vb;
+
+        vb = new VBajaBeneficios(fa, iu, eu);
+        vb.setVisible(true);
+
+    }
+    
     public void nuevasParticipaciones(EmpresaUsuario eu, InversorUsuario iu) {
         VParticipaciones vpart;
 

@@ -59,6 +59,9 @@
               <Connection code="new ModeloTablaBeneficios()" type="code"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tablaBeneficiosMouseClicked"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

@@ -240,6 +240,8 @@ public class VRegulador extends javax.swing.JFrame {
 
     private void btnBajaBeneficiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBajaBeneficiosActionPerformed
         // TODO add your handling code here:
+        //fgui.
+        //nuevoBajaBeneficio
     }//GEN-LAST:event_btnBajaBeneficiosActionPerformed
 
     /**

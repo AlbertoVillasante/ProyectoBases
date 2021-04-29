@@ -219,6 +219,11 @@ public class FachadaBaseDatos {
         System.out.println(fecha + precio + numParticipaciones + idEmpresa);
         daoBeneficios.altaPagoBeneficios(fecha, precio, idEmpresa, numParticipaciones);
     }
+    
+    public void bajaAnuncioBeneficios(String fecha, String nombreEmpresa){
+    String idEmpresa = daoUsuarios.getIdEmpresa(nombreEmpresa);
+        daoBeneficios.bajaAnuncioBeneficios(fecha, idEmpresa);
+    }
 
     public ArrayList<AnunciarBeneficios> getBeneficios() {
         return daoBeneficios.getBeneficios();

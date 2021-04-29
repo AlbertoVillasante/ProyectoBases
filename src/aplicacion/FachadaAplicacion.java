@@ -205,6 +205,10 @@ public class FachadaAplicacion {
     public void altaPagoBeneficios(String fecha, double precio, String nombreEmpresa, int numParticipaciones) {
         gb.altaPagoBeneficios(fecha, precio, nombreEmpresa, numParticipaciones);
     }
+    
+    public void bajaAnuncioBeneficios(String fecha, String nombreEmpresa){
+        gb.bajaAnuncioBeneficios(fecha, nombreEmpresa);
+    }
 
     public void registroInversor(InversorUsuario inversor) {
         gu.registroInversor(inversor);

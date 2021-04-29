@@ -5,18 +5,22 @@
  */
 package gui;
 
+import aplicacion.EmpresaUsuario;
+import aplicacion.InversorUsuario;
+
 /**
  *
  * @author alumnogreibd
  */
 public class VBajaBeneficios extends javax.swing.JDialog {
 
+    aplicacion.FachadaAplicacion fa;
     /**
      * Creates new form BajaBeneficios
      */
-    public VBajaBeneficios(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
-        initComponents();
+    
+    public VBajaBeneficios(aplicacion.FachadaAplicacion fa, InversorUsuario iu, EmpresaUsuario eu){
+        this.fa = fa;
     }
 
     /**
@@ -35,6 +39,11 @@ public class VBajaBeneficios extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         tablaBeneficios.setModel(new ModeloTablaBeneficios());
+        tablaBeneficios.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablaBeneficiosMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tablaBeneficios);
 
         btnBaja.setText("Confirmar baja");
@@ -73,10 +82,16 @@ public class VBajaBeneficios extends javax.swing.JDialog {
         ModeloTablaBeneficios m;
         m = (ModeloTablaBeneficios) tablaBeneficios.getModel();
         String nombreEmpresa = (String)m.getValueAt(tablaBeneficios.getSelectedRow(), 2);
-        // Acordar de cambiar esto a id
-        //fa.bajabeneficios(pasarle el id de la empresa y la fecha);
-        //fechaanunciopago, idempresa
+        String fecha = (String) m.getValueAt(tablaBeneficios.getSelectedRow(), 1);
+        fa.bajaAnuncioBeneficios(fecha, nombreEmpresa);
+        
+ 
     }//GEN-LAST:event_btnBajaActionPerformed
+
+    private void tablaBeneficiosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaBeneficiosMouseClicked
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_tablaBeneficiosMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBaja;

@@ -21,6 +21,8 @@ public class VBajaBeneficios extends javax.swing.JDialog {
     
     public VBajaBeneficios(aplicacion.FachadaAplicacion fa, InversorUsuario iu, EmpresaUsuario eu){
         this.fa = fa;
+        this.initComponents();
+        actualizarTablaBeneficios();
     }
 
     /**
@@ -98,4 +100,11 @@ public class VBajaBeneficios extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tablaBeneficios;
     // End of variables declaration//GEN-END:variables
+
+  private void actualizarTablaBeneficios() {
+        ModeloTablaBeneficios m;
+        m = (ModeloTablaBeneficios) tablaBeneficios.getModel();
+        m.setFilas(fa.getBeneficios());
+    }
 }
+

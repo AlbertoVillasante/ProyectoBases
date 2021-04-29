@@ -84,10 +84,10 @@ public class DAOBeneficios extends AbstractDAO {
         ResultSet saldoFinal;
 
         try {
-            stmSaldo = con.prepareStatement("select eu.fondosdisponiblescuenta - sum(distinct ab.importe) * (sum( distinct ppi.numparticipaciones) + sum(distinct ppe.numparticipaciones)) as dineroFinal" +
-                "from EmpresaUsuario as eu,AnunciarBeneficios as ab,poseerparticipacionesinversor as ppi, poseerparticipacionesempresa ppe" +
-                "where eu.idUsuario= ab.idEmpresa and ab.idEmpresa= ? and ((ab.idEmpresa = ppi.idUsuario2 and ab.idEmpresa != ppi.idUsuario1) and (ab.idEmpresa = ppe.idUsuario2 and ab.idEmpresa != ppe.idUsuario1))" +
-                "group by eu.idUsuario;");
+            stmSaldo = con.prepareStatement("select eu.fondosdisponiblescuenta - sum(distinct ab.importe) * (sum( distinct ppi.numparticipaciones) + sum(distinct ppe.numparticipaciones)) as dineroFinal " +
+                "from EmpresaUsuario as eu,AnunciarBeneficios as ab,poseerparticipacionesinversor as ppi, poseerparticipacionesempresa ppe " +
+                "where eu.idUsuario= ab.idEmpresa and ab.idEmpresa= ? and ((ab.idEmpresa = ppi.idUsuario2 and ab.idEmpresa != ppi.idUsuario1) and (ab.idEmpresa = ppe.idUsuario2 and ab.idEmpresa != ppe.idUsuario1)) " +
+                "group by eu.idUsuario");
             
             stmSaldo.setString(1, id);
             saldoFinal = stmSaldo.executeQuery();
@@ -116,10 +116,10 @@ public class DAOBeneficios extends AbstractDAO {
         ResultSet participacionesFinal;
 
         try {
-            stmSaldo = con.prepareStatement("select eu.numeroParticipaciones - sum(distinct ab.numParticipaciones) * (sum( distinct ppi.numparticipaciones) + sum(distinct ppe.numparticipaciones)) as participacionesFinales" +
-                "from EmpresaUsuario as eu,AnunciarBeneficios as ab,poseerparticipacionesinversor as ppi, poseerparticipacionesempresa ppe" +
-                "where eu.idUsuario= ab.idEmpresa and ab.idEmpresa= ? and ((ab.idEmpresa = ppi.idUsuario2 and ab.idEmpresa != ppi.idUsuario1) and (ab.idEmpresa = ppe.idUsuario2 and ab.idEmpresa != ppe.idUsuario1))" +
-                "group by eu.idUsuario;");
+            stmSaldo = con.prepareStatement("select eu.numeroParticipaciones - sum(distinct ab.numParticipaciones) * (sum( distinct ppi.numparticipaciones) + sum(distinct ppe.numparticipaciones)) as participacionesFinales " +
+                "from EmpresaUsuario as eu,AnunciarBeneficios as ab,poseerparticipacionesinversor as ppi, poseerparticipacionesempresa ppe " +
+                "where eu.idUsuario= ab.idEmpresa and ab.idEmpresa= ? and ((ab.idEmpresa = ppi.idUsuario2 and ab.idEmpresa != ppi.idUsuario1) and (ab.idEmpresa = ppe.idUsuario2 and ab.idEmpresa != ppe.idUsuario1)) " +
+                "group by eu.idUsuario");
             
             stmSaldo.setString(1, id);
             participacionesFinal = stmSaldo.executeQuery();

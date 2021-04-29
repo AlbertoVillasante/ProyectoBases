@@ -161,6 +161,10 @@ public class FachadaAplicacion {
     public void nuevoBeneficio(InversorUsuario iu, EmpresaUsuario eu) {
         gb.nuevoBeneficio(iu, eu);
     }
+    
+    public void nuevoBajaBeneficio(InversorUsuario iu, EmpresaUsuario eu){
+        gb.nuevoBajaBeneficio(iu, eu);
+    }
 
     public void nuevasParticipaciones(EmpresaUsuario eu, InversorUsuario iu) {
         gpart.nuevasParticipaciones(eu, iu);

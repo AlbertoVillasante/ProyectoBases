@@ -21,6 +21,9 @@ public class GestionBeneficios {
     public void nuevoBeneficio(InversorUsuario iu, EmpresaUsuario eu) {
         fgui.nuevoBeneficio(iu,eu);
     }
+    public void nuevoBajaBeneficio(InversorUsuario iu, EmpresaUsuario eu){
+        fgui.nuevoBajaBeneficio(iu, eu);
+    }
 
     public void altaPagoBeneficios(String fecha, double precio, String nombreEmpresa, int numParticipaciones) {
         fbd.altaPagoBeneficios(fecha, precio, nombreEmpresa, numParticipaciones);

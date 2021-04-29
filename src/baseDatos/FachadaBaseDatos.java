@@ -325,4 +325,20 @@ public class FachadaBaseDatos {
     public String getIdEmpresa(String nombre){
         return daoUsuarios.getIdEmpresa(nombre);
     }
+    
+    public int numParticipacionesInvEmpr(String idUsuario, String idEmpresa){
+        return daoParticipaciones.numParticipacionesInvEmpr(idUsuario, idEmpresa);
+    }
+    
+    public int numParticipacionesEmprEmpr(String idUsuario, String idEmpresa){
+        return daoParticipaciones.numParticipacionesEmprEmpr(idUsuario, idEmpresa);
+    }
+    
+    public int partInvBloq(String id){
+        return daoParticipaciones.partInvBloq(id);
+    }
+    
+    public int partEmprBloq(String id){
+        return daoParticipaciones.partEmprBloq(id);
+    }
 }

@@ -49,4 +49,20 @@ public class GestionParticipaciones {
     public boolean comprobarParticipacionesInversor(Venta v){
         return fbd.comprobarParticipacionesInversor(v);
     }
+    
+    public int numParticipacionesInvEmpr(String idUsuario, String idEmpresa){
+        return fbd.numParticipacionesInvEmpr(idUsuario, idEmpresa);
+    }
+    
+    public int numParticipacionesEmprEmpr(String idUsuario, String idEmpresa){
+        return fbd.numParticipacionesEmprEmpr(idUsuario, idEmpresa);
+    }
+    
+    public int partInvBloq(String id){
+        return fbd.partInvBloq(id);
+    }
+    
+    public int partEmprBloq(String id){
+        return fbd.partEmprBloq(id);
+    }
 }

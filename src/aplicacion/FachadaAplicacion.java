@@ -297,4 +297,20 @@ public class FachadaAplicacion {
     public String getIdEmpresa(String nombre){
         return gu.getIdEmpresa(nombre);
     }
+    
+    public int numParticipacionesInvEmpr(String idUsuario, String idEmpresa){
+        return gpart.numParticipacionesInvEmpr(idUsuario, idEmpresa);
+    }
+    
+    public int numParticipacionesEmprEmpr(String idUsuario, String idEmpresa){
+        return gpart.numParticipacionesEmprEmpr(idUsuario, idEmpresa);
+    }
+    
+    public int partInvBloq(String id){
+        return gpart.partInvBloq(id);
+    }
+    
+    public int partEmprBloq(String id){
+        return gpart.partEmprBloq(id);
+    }
 }

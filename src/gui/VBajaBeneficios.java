@@ -23,6 +23,7 @@ public class VBajaBeneficios extends javax.swing.JDialog {
         this.fa = fa;
         this.initComponents();
         actualizarTablaBeneficios();
+        btnBaja.setEnabled(false);
     }
 
     /**
@@ -83,16 +84,17 @@ public class VBajaBeneficios extends javax.swing.JDialog {
         // TODO add your handling code here:
         ModeloTablaBeneficios m;
         m = (ModeloTablaBeneficios) tablaBeneficios.getModel();
-        String nombreEmpresa = (String)m.getValueAt(tablaBeneficios.getSelectedRow(), 2);
-        String fecha = (String) m.getValueAt(tablaBeneficios.getSelectedRow(), 1);
+        String nombreEmpresa = (String)m.getValueAt(tablaBeneficios.getSelectedRow(), 1);
+        String fecha = (String) m.getValueAt(tablaBeneficios.getSelectedRow(), 0);
         fa.bajaAnuncioBeneficios(fecha, nombreEmpresa);
         
+        actualizarTablaBeneficios();
  
     }//GEN-LAST:event_btnBajaActionPerformed
 
     private void tablaBeneficiosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaBeneficiosMouseClicked
         // TODO add your handling code here:
-        
+        btnBaja.setEnabled(true);
     }//GEN-LAST:event_tablaBeneficiosMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

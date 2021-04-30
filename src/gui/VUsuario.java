@@ -562,7 +562,7 @@ public class VUsuario extends javax.swing.JDialog {
         if (tipo_usr.getSelectedIndex() == 1) {
             if (!btnUsuario.getText().equals("") && !btnUsuario.getText().equals("DNI / NIF") && !btnDireccion.getText().equals("")
                     && !btnClave1.getText().equals("") && !btnTelefono.getText().equals("")
-                    && btnEmpresa.getText().equals("")) {
+                    && !btnEmpresa.getText().equals("")) {
                 obligatorioTexto.setEnabled(false);
             }
         }

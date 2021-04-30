@@ -125,8 +125,13 @@ public class VBeneficios extends javax.swing.JDialog {
 
         btnBuscar.setForeground(new java.awt.Color(187, 187, 188));
         btnBuscar.setText("Buscar");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
 
-        numPart.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
+        numPart.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(0), Integer.valueOf(0), null, Integer.valueOf(1)));
 
         jLabel3.setForeground(new java.awt.Color(187, 187, 188));
         jLabel3.setText("Número de Participaciones:");
@@ -285,6 +290,13 @@ public class VBeneficios extends javax.swing.JDialog {
     private void estadisticasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_estadisticasActionPerformed
         ve = new VEstadistica(fa, iu, eu);
         ve.setVisible(true);    }//GEN-LAST:event_estadisticasActionPerformed
+
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        // TODO add your handling code here:
+        ModeloTablaBeneficios m;
+        m = (ModeloTablaBeneficios) tablaBeneficios.getModel();
+        m.setFilas(fa.getBeneficiosEmpresa(fa.getIdEmpresa(btnSelector.getSelectedItem().toString())));
+    }//GEN-LAST:event_btnBuscarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

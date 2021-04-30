@@ -76,7 +76,42 @@ public class DAOBeneficios extends AbstractDAO {
         return resultado;
     }
 
-    public float getSaldoRetenciones( String id) {
+    public ArrayList<AnunciarBeneficios> getBeneficiosEmpresa(String idEmpresa) {
+        Connection con;
+        PreparedStatement stmBeneficios = null;
+        con = super.getConexion();
+        ArrayList<AnunciarBeneficios> resultado = new ArrayList<AnunciarBeneficios>();
+        ResultSet beneficios;
+        AnunciarBeneficios a;
+
+        try {
+            stmBeneficios = con.prepareStatement("select b.*,e.nombreComercial "
+                    + "from EmpresaUsuario as e, AnunciarBeneficios as b "
+                    + "where e.idUsuario = b.idEmpresa "
+                    + "and b.idEmpresa = ?");
+            stmBeneficios.setString(1, idEmpresa);
+            beneficios = stmBeneficios.executeQuery();
+            while (beneficios.next()) {
+                a = new AnunciarBeneficios(beneficios.getString("fechaAnuncioPago"),
+                        beneficios.getFloat("importe"), beneficios.getInt("numParticipaciones"), beneficios.getString("idEmpresa"));
+                a.setNombreEmpresa(beneficios.getString("nombreComercial"));
+                resultado.add(a);
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        } finally {
+            try {
+                stmBeneficios.close();
+            } catch (SQLException e) {
+                System.out.println("Imposible cerrar cursores");
+            }
+        }
+        return resultado;
+    }
+    
+    public float getSaldoRetenciones(String id) {
         Connection con;
         PreparedStatement stmSaldo = null;
         con = super.getConexion();
@@ -108,7 +143,7 @@ public class DAOBeneficios extends AbstractDAO {
         return saldo;
     }
     
-    public int getParticipacionesRetenciones( String id) {
+    public int getParticipacionesRetenciones(String id) {
         Connection con;
         PreparedStatement stmSaldo = null;
         con = super.getConexion();

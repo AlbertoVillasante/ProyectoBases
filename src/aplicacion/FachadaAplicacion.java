@@ -205,7 +205,11 @@ public class FachadaAplicacion {
     public ArrayList<AnunciarBeneficios> getBeneficios() {
         return gb.getBeneficios();
     }
-
+    
+    public ArrayList<AnunciarBeneficios> getBeneficiosEmpresa(String idEmpresa) {
+        return gb.getBeneficiosEmpresa(idEmpresa);
+    }
+    
     public void altaPagoBeneficios(String fecha, double precio, String nombreEmpresa, int numParticipaciones) {
         gb.altaPagoBeneficios(fecha, precio, nombreEmpresa, numParticipaciones);
     }

@@ -228,6 +228,10 @@ public class FachadaBaseDatos {
     public ArrayList<AnunciarBeneficios> getBeneficios() {
         return daoBeneficios.getBeneficios();
     }
+    
+    public ArrayList<AnunciarBeneficios> getBeneficiosEmpresa(String idEmpresa) {
+        return daoBeneficios.getBeneficiosEmpresa(idEmpresa);
+    }
 
     public java.util.List<InversorUsuario> mostrarUsuarioInvPend() {
         return daoUsuarios.mostrarUsuarioInvPend();

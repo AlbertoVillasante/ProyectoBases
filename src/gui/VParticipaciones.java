@@ -746,16 +746,24 @@ public class VParticipaciones extends javax.swing.JDialog {
         int i=0;
         String id = null;
         i=btnEmpresas.getSelectedIndex();
-        
+        VAviso va = new VAviso("¡No puedes vender más!");
         
         if(iu != null){
             Venta v= new Venta(parseFloat(precioText.getText()), parseInt(nParticipacionesText.getText()), fa.getIdEmpresa(btnEmpresas.getItemAt(i).toString()), iu.getIdUsuario());
-            if(fa.comprobarParticipacionesInversor(v))
+            if(fa.comprobarParticipacionesInversor(v)){
                 fa.ofertaVentaInv(v);
+            } else{
+                va.setVisible(true);
+            }
+                
         } else{
             Venta v= new Venta(parseFloat(precioText.getText()), parseInt(nParticipacionesText.getText()), fa.getIdEmpresa(btnEmpresas.getItemAt(i).toString()), eu.getIdUsuario());
-            if(fa.comprobarParticipacionesEmpresa(v))
+            if(fa.comprobarParticipacionesEmpresa(v)){
                 fa.ofertaVentaEmpr(v);
+            } else{
+                va.setVisible(true);
+            }
+                
         }
         
         

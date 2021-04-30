@@ -58,6 +58,12 @@ public class VEstadistica extends javax.swing.JDialog {
             TextFond.setText(String.valueOf(Math.round(eu.getFondosDisponiblesCuenta() * 100.0) / 100.0));
             textPartTot.setText(String.valueOf(eu.getnParticipaciones()));
             textPartTot1.setText(Integer.toString(fa.getParticipacionesRetenciones(eu.getIdUsuario())));
+            if(fa.getSaldoRetenciones(eu.getIdUsuario()) < 0){
+                TextFondosRetenciones.setForeground(new Color(255, 0, 0));
+            }
+            if(fa.getParticipacionesRetenciones(eu.getIdUsuario()) < 0){
+                textPartTot1.setForeground(new Color(255, 0, 0));
+            }
         }
         actualizarTablaEstadisticas();
     }

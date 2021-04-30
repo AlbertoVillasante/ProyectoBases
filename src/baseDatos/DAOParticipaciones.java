@@ -284,7 +284,7 @@ public class DAOParticipaciones extends AbstractDAO {
         try {
             stmOferta = con.prepareStatement("select * "
                     + "from poseerparticipacionesempresa "
-                    + "where idUsuario1 = ? or idUsuario2 = ? and numparticipaciones >= ?");
+                    + "where idUsuario1 = ? and idUsuario2 = ? and numparticipaciones >= ?");
             stmOferta.setString(1, v.getIdVendedor());
             stmOferta.setString(2, v.getIdEmpresa());
             stmOferta.setInt(3, v.getNparticipaciones());
@@ -318,7 +318,7 @@ public class DAOParticipaciones extends AbstractDAO {
         try {
             stmOferta = con.prepareStatement("select * "
                     + "from poseerparticipacionesinversor "
-                    + "where idUsuario1 = ? or idUsuario2 = ? and numparticipaciones >= ?");
+                    + "where idUsuario1 = ? and idUsuario2 = ? and numparticipaciones >= ?");
             stmOferta.setString(1, v.getIdVendedor());
             stmOferta.setString(2, v.getIdEmpresa());
             stmOferta.setInt(3, v.getNparticipaciones());

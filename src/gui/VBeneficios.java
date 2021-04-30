@@ -258,13 +258,20 @@ public class VBeneficios extends javax.swing.JDialog {
             if (cuadroBeneficio.getText().equals("")) {
                 cuadroBeneficio.setText("0");
             }
-
             if (Integer.parseInt(numPart.getValue().toString())==0 && Double.parseDouble(cuadroBeneficio.getText()) <= 0) {
                 error.setVisible(true);
             } else {
                 if (cuadroFechaPago.getDate() == null) {
                     error.setVisible(true);
-                } else {
+                }
+                if(fa.getSaldoRetenciones(eu.getIdUsuario()) < 0){
+                    error.setText("Saldo insuficiente para completar la transacción");
+                    error.setVisible(true);
+                }
+                if(fa.getParticipacionesRetenciones(eu.getIdUsuario()) < 0){
+                    error.setText("Participaciones insuficientes para completar la transacción");
+                    error.setVisible(true); 
+                }else {
                     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
                     String date = sdf.format(cuadroFechaPago.getDate());
                     fa.altaPagoBeneficios(date, Double.parseDouble(cuadroBeneficio.getText()), btnSelector.getSelectedItem().toString(), Integer.parseInt(numPart.getValue().toString()));

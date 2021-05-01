@@ -228,6 +228,10 @@ public class FachadaBaseDatos {
     public ArrayList<AnunciarBeneficios> getBeneficios() {
         return daoBeneficios.getBeneficios();
     }
+    
+    public ArrayList<AnunciarBeneficios> getBeneficiosEmpresa(String idEmpresa) {
+        return daoBeneficios.getBeneficiosEmpresa(idEmpresa);
+    }
 
     public java.util.List<InversorUsuario> mostrarUsuarioInvPend() {
         return daoUsuarios.mostrarUsuarioInvPend();
@@ -324,5 +328,21 @@ public class FachadaBaseDatos {
     
     public String getIdEmpresa(String nombre){
         return daoUsuarios.getIdEmpresa(nombre);
+    }
+    
+    public int numParticipacionesInvEmpr(String idUsuario, String idEmpresa){
+        return daoParticipaciones.numParticipacionesInvEmpr(idUsuario, idEmpresa);
+    }
+    
+    public int numParticipacionesEmprEmpr(String idUsuario, String idEmpresa){
+        return daoParticipaciones.numParticipacionesEmprEmpr(idUsuario, idEmpresa);
+    }
+    
+    public int partInvBloq(String id){
+        return daoParticipaciones.partInvBloq(id);
+    }
+    
+    public int partEmprBloq(String id){
+        return daoParticipaciones.partEmprBloq(id);
     }
 }

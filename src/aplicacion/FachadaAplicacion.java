@@ -205,7 +205,11 @@ public class FachadaAplicacion {
     public ArrayList<AnunciarBeneficios> getBeneficios() {
         return gb.getBeneficios();
     }
-
+    
+    public ArrayList<AnunciarBeneficios> getBeneficiosEmpresa(String idEmpresa) {
+        return gb.getBeneficiosEmpresa(idEmpresa);
+    }
+    
     public void altaPagoBeneficios(String fecha, double precio, String nombreEmpresa, int numParticipaciones) {
         gb.altaPagoBeneficios(fecha, precio, nombreEmpresa, numParticipaciones);
     }
@@ -296,5 +300,21 @@ public class FachadaAplicacion {
     
     public String getIdEmpresa(String nombre){
         return gu.getIdEmpresa(nombre);
+    }
+    
+    public int numParticipacionesInvEmpr(String idUsuario, String idEmpresa){
+        return gpart.numParticipacionesInvEmpr(idUsuario, idEmpresa);
+    }
+    
+    public int numParticipacionesEmprEmpr(String idUsuario, String idEmpresa){
+        return gpart.numParticipacionesEmprEmpr(idUsuario, idEmpresa);
+    }
+    
+    public int partInvBloq(String id){
+        return gpart.partInvBloq(id);
+    }
+    
+    public int partEmprBloq(String id){
+        return gpart.partEmprBloq(id);
     }
 }

@@ -247,7 +247,7 @@ public class DAOUsuarios extends AbstractDAO {
         con = super.getConexion();
 
         try {
-            stmUsuario = con.prepareStatement("insert into empresaUsuario(idUsuario, clave, nombre, direccion, telefono, tipoUsuario) "
+            stmUsuario = con.prepareStatement("insert into empresaUsuario(idUsuario, clave, nombreComercial, direccion, telefono, tipoUsuario) "
                     + "values (?,?,?,?,?,?)");
             stmUsuario.setString(1, u.getIdUsuario());
             stmUsuario.setString(2, u.getClave());

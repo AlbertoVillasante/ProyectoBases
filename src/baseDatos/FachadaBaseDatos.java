@@ -353,4 +353,12 @@ public class FachadaBaseDatos {
     public void borrarVentaEmpr(OfertaParticipaciones v){
         daoParticipaciones.borrarVentaEmpr(v);
     }
+    
+    public String getnombreInversor(String id) {
+        return daoUsuarios.getnombreInversor(id);
+    }
+    
+    public String getnombreEmpresa(String id) {
+        return daoUsuarios.getnombreEmpresa(id);
+    }
 }

@@ -147,6 +147,14 @@ public class GestionUsuarios {
     public String getIdEmpresa(String nombre){
         return fbd.getIdEmpresa(nombre);
     }
+    
+    public String getnombreInversor(String id) {
+        return fbd.getnombreInversor(id);
+    }
+    
+    public String getnombreEmpresa(String id) {
+        return fbd.getnombreEmpresa(id);
+    }
 }
 /*  //Comentado para que no de error
     public java.util.List<EmpresaUsuario> obtenerUsuarios(String idUsuario, String nombreUsuario) {

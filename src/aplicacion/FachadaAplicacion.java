@@ -325,4 +325,12 @@ public class FachadaAplicacion {
     public void borrarVentaEmpr(OfertaParticipaciones v){
         gpart.borrarVentaEmpr(v);
     }
+    
+    public String getnombreInversor(String id) {
+        return gu.getnombreInversor(id);
+    }
+    
+    public String getnombreEmpresa(String id) {
+        return gu.getnombreEmpresa(id);
+    }
 }

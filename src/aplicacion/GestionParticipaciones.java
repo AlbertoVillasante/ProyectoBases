@@ -30,23 +30,23 @@ public class GestionParticipaciones {
         fbd.bajaParticipacionesEmpresa(participaciones, id);
     }
     
-    public java.util.List<Venta> mostrarVentas(){
+    public java.util.List<OfertaParticipaciones> mostrarVentas(){
         return fbd.mostrarVentas();
     }
     
-    public void ofertaVentaInv(Venta v){
+    public void ofertaVentaInv(OfertaParticipaciones v){
         fbd.ofertaVentaInv(v);
     }
     
-    public void ofertaVentaEmpr(Venta v){
+    public void ofertaVentaEmpr(OfertaParticipaciones v){
         fbd.ofertaVentaEmpr(v);
     }
     
-    public boolean comprobarParticipacionesEmpresa(Venta v){
+    public boolean comprobarParticipacionesEmpresa(OfertaParticipaciones v){
         return fbd.comprobarParticipacionesEmpresa(v);
     }
     
-    public boolean comprobarParticipacionesInversor(Venta v){
+    public boolean comprobarParticipacionesInversor(OfertaParticipaciones v){
         return fbd.comprobarParticipacionesInversor(v);
     }
     
@@ -58,11 +58,19 @@ public class GestionParticipaciones {
         return fbd.numParticipacionesEmprEmpr(idUsuario, idEmpresa);
     }
     
-    public int partInvBloq(String id){
-        return fbd.partInvBloq(id);
+    public int partInvBloq(String idUser, String idEmpr){
+        return fbd.partInvBloq(idUser, idEmpr);
     }
     
-    public int partEmprBloq(String id){
-        return fbd.partEmprBloq(id);
+    public int partEmprBloq(String idUser, String idEmpr){
+        return fbd.partEmprBloq(idUser, idEmpr);
+    }
+    
+    public void borrarVentaInv(OfertaParticipaciones v){
+        fbd.borrarVentaInv(v);
+    }
+    
+    public void borrarVentaEmpr(OfertaParticipaciones v){
+        fbd.borrarVentaEmpr(v);
     }
 }

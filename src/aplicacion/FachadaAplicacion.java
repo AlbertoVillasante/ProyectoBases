@@ -278,23 +278,23 @@ public class FachadaAplicacion {
         return gu.getEmpresasEmpr(id);
     }
     
-    public java.util.List<Venta> mostrarVentas(){
+    public java.util.List<OfertaParticipaciones> mostrarVentas(){
         return gpart.mostrarVentas();
     }
     
-    public void ofertaVentaInv(Venta v){
+    public void ofertaVentaInv(OfertaParticipaciones v){
         gpart.ofertaVentaInv(v);
     }
     
-    public void ofertaVentaEmpr(Venta v){
+    public void ofertaVentaEmpr(OfertaParticipaciones v){
         gpart.ofertaVentaEmpr(v);
     }
     
-    public boolean comprobarParticipacionesEmpresa(Venta v){
+    public boolean comprobarParticipacionesEmpresa(OfertaParticipaciones v){
         return gpart.comprobarParticipacionesEmpresa(v);
     }
     
-    public boolean comprobarParticipacionesInversor(Venta v){
+    public boolean comprobarParticipacionesInversor(OfertaParticipaciones v){
         return gpart.comprobarParticipacionesInversor(v);
     }
     
@@ -310,11 +310,19 @@ public class FachadaAplicacion {
         return gpart.numParticipacionesEmprEmpr(idUsuario, idEmpresa);
     }
     
-    public int partInvBloq(String id){
-        return gpart.partInvBloq(id);
+    public int partInvBloq(String id, String id2){
+        return gpart.partInvBloq(id, id2);
     }
     
-    public int partEmprBloq(String id){
-        return gpart.partEmprBloq(id);
+    public int partEmprBloq(String id, String id2){
+        return gpart.partEmprBloq(id, id2);
+    }
+    
+    public void borrarVentaInv(OfertaParticipaciones v){
+        gpart.borrarVentaInv(v);
+    }
+    
+    public void borrarVentaEmpr(OfertaParticipaciones v){
+        gpart.borrarVentaEmpr(v);
     }
 }

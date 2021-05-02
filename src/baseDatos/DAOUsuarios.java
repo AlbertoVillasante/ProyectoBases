@@ -919,7 +919,7 @@ public class DAOUsuarios extends AbstractDAO {
         try {
             consulta = "select distinct e.nombreComercial "
                     + "from empresausuario as e, poseerparticipacionesempresa as p "
-                    + "where e.idusuario=p.idusuario2 and p.idusuario2 = ? and p.numparticipaciones <> 0 "
+                    + "where e.idusuario=p.idusuario2 and p.idusuario1 = ? and p.numparticipaciones <> 0 "
                     + "order by e.nombreComercial";
 
             stmPrestamos = con.prepareStatement(consulta);

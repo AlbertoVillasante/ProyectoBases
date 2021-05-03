@@ -35,6 +35,7 @@ public class VParticipaciones extends javax.swing.JDialog {
      */
     public VParticipaciones(aplicacion.FachadaAplicacion fa, EmpresaUsuario eu, InversorUsuario iu) {
         initComponents();
+        colores();
 
         if (eu != null) {
             carteraText.setText(String.valueOf(eu.getnParticipaciones()));
@@ -44,34 +45,7 @@ public class VParticipaciones extends javax.swing.JDialog {
             participacionesPanel.setEnabled(false);
             this.iu = iu;
         }
-        this.getContentPane().setBackground(prueba);
-        saldoText.setBackground(prueba1);
-        selectorCV.setBackground(prueba1);
-        btnEmpresas.setBackground(prueba1);
-        nParticipacionesText.setBackground(prueba1);
-        partPropText.setBackground(prueba1);
-        partBloqText.setBackground(prueba1);
-        precioText.setBackground(prueba1);
-        comisionText.setBackground(prueba1);
-        carteraText.setBackground(prueba1);
-        carteraText.setEditable(false);
-        numeroText.setBackground(prueba1);
-        msNoParticipaciones.setBackground(prueba);
-        msjObligatorio.setBackground(prueba);
-        buscarButton.setBackground(prueba1);
-        eliminarBtn.setBackground(prueba1);
-        Alta.setBackground(prueba);
-        Baja.setBackground(prueba);
-        aceptarButton.setBackground(prueba1);
-        aceptarButton1.setBackground(prueba1);
-        compraventaPanel.setBackground(prueba);
-        altabajaPanel.setBackground(prueba);
-        tablaParticipacionesVenta.setBackground(prueba1);
-        tablaParticipacionesVenta.setSelectionBackground(prueba1);
-        participacionesPanel.setBackgroundAt(0, prueba);
-        participacionesPanel.setBackgroundAt(1, prueba);
-        buttonGroup8.add(Baja);
-        buttonGroup8.add(Alta);
+       
         ArrayList<String> empresas = fa.getEmpresas(); //cogemos todas las empresas
         for (String e : empresas) {
             btnEmpresas.addItem(e);
@@ -79,10 +53,6 @@ public class VParticipaciones extends javax.swing.JDialog {
         this.fa = fa;
 
         mostrarVentas();
-        
-        jLabel4.setVisible(false);
-        jLabel6.setVisible(false);
-        jLabel7.setVisible(false);
 
         if (eu != null) {
             saldoText.setText(String.valueOf(convertir(eu.getFondosDisponiblesCuenta())));
@@ -971,6 +941,40 @@ public class VParticipaciones extends javax.swing.JDialog {
         }
         VAvisoCorrecto compraEfectuada = new VAvisoCorrecto("Compra realizada con éxito");
         compraEfectuada.setVisible(true);
+    }
+    
+    private void colores(){
+         this.getContentPane().setBackground(prueba);
+        saldoText.setBackground(prueba1);
+        selectorCV.setBackground(prueba1);
+        btnEmpresas.setBackground(prueba1);
+        nParticipacionesText.setBackground(prueba1);
+        partPropText.setBackground(prueba1);
+        partBloqText.setBackground(prueba1);
+        precioText.setBackground(prueba1);
+        comisionText.setBackground(prueba1);
+        carteraText.setBackground(prueba1);
+        carteraText.setEditable(false);
+        numeroText.setBackground(prueba1);
+        msNoParticipaciones.setBackground(prueba);
+        msjObligatorio.setBackground(prueba);
+        buscarButton.setBackground(prueba1);
+        eliminarBtn.setBackground(prueba1);
+        Alta.setBackground(prueba);
+        Baja.setBackground(prueba);
+        aceptarButton.setBackground(prueba1);
+        aceptarButton1.setBackground(prueba1);
+        compraventaPanel.setBackground(prueba);
+        altabajaPanel.setBackground(prueba);
+        tablaParticipacionesVenta.setBackground(prueba1);
+        tablaParticipacionesVenta.setSelectionBackground(prueba1);
+        participacionesPanel.setBackgroundAt(0, prueba);
+        participacionesPanel.setBackgroundAt(1, prueba);
+        buttonGroup8.add(Baja);
+        buttonGroup8.add(Alta);
+        jLabel4.setVisible(false);
+        jLabel6.setVisible(false);
+        jLabel7.setVisible(false);
     }
 
 }

@@ -344,16 +344,16 @@
                                       </Group>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                          <Component id="nParticipacionesText" max="32767" attributes="0"/>
-                                          <Component id="partPropText" max="32767" attributes="0"/>
-                                          <Component id="partBloqText" alignment="0" min="-2" pref="38" max="-2" attributes="0"/>
+                                          <Component id="partPropText" pref="76" max="32767" attributes="0"/>
+                                          <Component id="partBloqText" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="nParticipacionesText" alignment="0" max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
                           </Group>
                           <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="39" max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="jScrollPane2" min="-2" pref="264" max="-2" attributes="0"/>
                           <Group type="102" attributes="0">

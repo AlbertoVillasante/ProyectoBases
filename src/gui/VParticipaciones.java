@@ -40,12 +40,16 @@ public class VParticipaciones extends javax.swing.JDialog {
         if (eu != null) {
             carteraText.setText(String.valueOf(eu.getnParticipaciones()));
             this.eu = eu;
+            partBloqText.setVisible(true);
+            jLabel8.setVisible(true);
         } else {
             participacionesPanel.setSelectedIndex(1);
             participacionesPanel.setEnabled(false);
+            partBloqText.setVisible(false);
+            jLabel8.setVisible(false);
             this.iu = iu;
         }
-       
+
         ArrayList<String> empresas = fa.getEmpresas(); //cogemos todas las empresas
         for (String e : empresas) {
             btnEmpresas.addItem(e);
@@ -416,11 +420,11 @@ public class VParticipaciones extends javax.swing.JDialog {
                                     .addComponent(jLabel8))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(compraventaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(nParticipacionesText)
-                                    .addComponent(partPropText)
-                                    .addComponent(partBloqText, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                    .addComponent(partPropText, javax.swing.GroupLayout.DEFAULT_SIZE, 76, Short.MAX_VALUE)
+                                    .addComponent(partBloqText)
+                                    .addComponent(nParticipacionesText)))))
                     .addComponent(jLabel4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+                .addGap(27, 27, 27)
                 .addGroup(compraventaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(compraventaPanelLayout.createSequentialGroup()
@@ -767,7 +771,7 @@ public class VParticipaciones extends javax.swing.JDialog {
         int i;
         String id = null;
         i = btnEmpresas.getSelectedIndex();
-        VAviso avisoVenta  = new VAviso("¡No puedes vender más!");
+        VAviso avisoVenta = new VAviso("¡No puedes vender más!");
 
         if (iu != null) {
             OfertaParticipaciones v = new OfertaParticipaciones(parseFloat(precioText.getText()), parseInt(nParticipacionesText.getText()), fa.getIdEmpresa(btnEmpresas.getItemAt(i).toString()), iu.getIdUsuario());
@@ -817,7 +821,7 @@ public class VParticipaciones extends javax.swing.JDialog {
         m = (ModeloTablaParticipaciones) tablaParticipacionesVenta.getModel();
         i = tablaParticipacionesVenta.getSelectedRow();
         OfertaParticipaciones v = m.obtenerVenta(i);
-        VAviso eliminarOfertas  = new VAviso("¡No puedes eliminar ofertas que no sean de tu propiedad!");
+        VAviso eliminarOfertas = new VAviso("¡No puedes eliminar ofertas que no sean de tu propiedad!");
 
         if (iu != null) {
             if (iu.getIdUsuario().equals(v.getIdUsuario1())) {
@@ -942,9 +946,9 @@ public class VParticipaciones extends javax.swing.JDialog {
         VAvisoCorrecto compraEfectuada = new VAvisoCorrecto("Compra realizada con éxito");
         compraEfectuada.setVisible(true);
     }
-    
-    private void colores(){
-         this.getContentPane().setBackground(prueba);
+
+    private void colores() {
+        this.getContentPane().setBackground(prueba);
         saldoText.setBackground(prueba1);
         selectorCV.setBackground(prueba1);
         btnEmpresas.setBackground(prueba1);

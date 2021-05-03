@@ -1011,7 +1011,7 @@ public class DAOUsuarios extends AbstractDAO {
 
         con = this.getConexion();
         try {
-            stmUsuario = con.prepareStatement("select (fondosDisponiblesCuenta / fondosInicialesCuenta) as rendimiento " +
+            stmUsuario = con.prepareStatement("select ((fondosDisponiblesCuenta-fondosInicialesCuenta) / fondosInicialesCuenta) as rendimiento " +
                 "from inversorUsuario where "
               + "fondosInicialesCuenta <>0 and  idUsuario = ?");
 
@@ -1034,7 +1034,7 @@ public class DAOUsuarios extends AbstractDAO {
         return rendimiento * 100;
     }
     
-        public double getRendimientoEmpresa(String idUsuario){
+    public double getRendimientoEmpresa(String idUsuario){
         double rendimiento = 1.0;
         Connection con;
         PreparedStatement stmUsuario = null;
@@ -1042,7 +1042,7 @@ public class DAOUsuarios extends AbstractDAO {
 
         con = this.getConexion();
         try {
-            stmUsuario = con.prepareStatement("select (fondosDisponiblesCuenta / fondosInicialesCuenta) as rendimiento " +
+            stmUsuario = con.prepareStatement("select ((fondosDisponiblesCuenta-fondosInicialesCuenta) / fondosInicialesCuenta)  as rendimiento " +
                 "from empresaUsuario where "
               + "fondosInicialesCuenta <>0 and  idUsuario = ?");
 

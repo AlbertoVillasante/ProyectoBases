@@ -14,22 +14,18 @@ import javax.swing.UnsupportedLookAndFeelException;
 public class FachadaGui {           //Esta es la fachada
 
     aplicacion.FachadaAplicacion fa;
-    VPortada vp;
 
     public FachadaGui(aplicacion.FachadaAplicacion fa) {
         try {
             this.fa = fa;
-            this.vp = new VPortada(fa);
         } catch (Exception ex) {
         }
     }
 
     public void iniciaVista() {
         VAutentificacion va;
-        va  = new VAutentificacion(fa, vp);
+        va  = new VAutentificacion(fa);
         va.setLocation(185, 80);
-        vp.setLocation(0, 0);
-        vp.setVisible(true);
         va.setVisible(true);
     }
 
@@ -92,7 +88,7 @@ public class FachadaGui {           //Esta es la fachada
         vb.setVisible(true);
 
     }
-    
+
     public void nuevasParticipaciones(EmpresaUsuario eu, InversorUsuario iu) {
         VParticipaciones vpart;
 
@@ -148,10 +144,10 @@ public class FachadaGui {           //Esta es la fachada
         vn = new VNoticias(fa);
         vn.setVisible(true);
     }
-    
+
     public void nuevoNoticiero(String tiponoticia) {
         VNoticiero vn;
-        vn = new VNoticiero(fa,tiponoticia);
+        vn = new VNoticiero(fa, tiponoticia);
         vn.setVisible(true);
     }
 }

@@ -40,6 +40,7 @@ public class VEstadistica extends javax.swing.JDialog {
         TextFond.setBackground(prueba1);
         tablaEstadisticas.setBackground(prueba1);
         TextFondosRetenciones.setBackground(prueba1);
+        rendimientoText.setBackground(prueba1);
         textPartTot1.setBackground(prueba1);
         if (iu != null) {
             this.iu = iu;
@@ -157,6 +158,8 @@ public class VEstadistica extends javax.swing.JDialog {
         rendimientoLabel.setForeground(new java.awt.Color(187, 187, 188));
         rendimientoLabel.setText("Rendimiento:");
 
+        rendimientoText.setForeground(new java.awt.Color(187, 187, 188));
+
         porcentajeLabel.setForeground(new java.awt.Color(187, 187, 188));
         porcentajeLabel.setText("%");
 
@@ -199,9 +202,9 @@ public class VEstadistica extends javax.swing.JDialog {
                             .addComponent(jLabel6)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(rendimientoLabel)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(rendimientoText, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGap(12, 12, 12)
+                                .addComponent(rendimientoText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(porcentajeLabel)))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );

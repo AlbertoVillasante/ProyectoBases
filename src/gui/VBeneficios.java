@@ -131,7 +131,7 @@ public class VBeneficios extends javax.swing.JDialog {
             }
         });
 
-        numPart.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(0), Integer.valueOf(0), null, Integer.valueOf(1)));
+        numPart.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
 
         jLabel3.setForeground(new java.awt.Color(187, 187, 188));
         jLabel3.setText("Número de Participaciones:");

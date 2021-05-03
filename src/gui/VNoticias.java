@@ -205,9 +205,7 @@ public class VNoticias extends javax.swing.JDialog {
 
     private void volverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_volverActionPerformed
         this.dispose();
-        VPortada vp = new VPortada(fa);
-        VAutentificacion va=  new VAutentificacion(fa, vp);
-        vp.setVisible(true);
+        VAutentificacion va=  new VAutentificacion(fa);
         va.setLocation(185, 80);
         va.setVisible(true);
     }//GEN-LAST:event_volverActionPerformed

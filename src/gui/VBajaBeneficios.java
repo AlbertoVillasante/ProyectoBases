@@ -7,6 +7,7 @@ package gui;
 
 import aplicacion.EmpresaUsuario;
 import aplicacion.InversorUsuario;
+import java.awt.Color;
 
 /**
  *
@@ -15,13 +16,21 @@ import aplicacion.InversorUsuario;
 public class VBajaBeneficios extends javax.swing.JDialog {
 
     aplicacion.FachadaAplicacion fa;
+    
+
+    Color prueba = new Color(60, 63, 65);
+    Color prueba1 = new Color(78, 82, 85);
+
     /**
      * Creates new form BajaBeneficios
      */
-    
-    public VBajaBeneficios(aplicacion.FachadaAplicacion fa, InversorUsuario iu, EmpresaUsuario eu){
+
+    public VBajaBeneficios(aplicacion.FachadaAplicacion fa, InversorUsuario iu, EmpresaUsuario eu) {
         this.fa = fa;
         this.initComponents();
+        this.getContentPane().setBackground(prueba);
+        btnBaja.setBackground(prueba1);
+
         actualizarTablaBeneficios();
         btnBaja.setEnabled(false);
     }
@@ -49,7 +58,9 @@ public class VBajaBeneficios extends javax.swing.JDialog {
         });
         jScrollPane1.setViewportView(tablaBeneficios);
 
+        btnBaja.setForeground(new java.awt.Color(187, 187, 188));
         btnBaja.setText("Confirmar baja");
+        btnBaja.setFocusable(false);
         btnBaja.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBajaActionPerformed(evt);
@@ -84,12 +95,12 @@ public class VBajaBeneficios extends javax.swing.JDialog {
         // TODO add your handling code here:
         ModeloTablaBeneficios m;
         m = (ModeloTablaBeneficios) tablaBeneficios.getModel();
-        String nombreEmpresa = (String)m.getValueAt(tablaBeneficios.getSelectedRow(), 1);
+        String nombreEmpresa = (String) m.getValueAt(tablaBeneficios.getSelectedRow(), 1);
         String fecha = (String) m.getValueAt(tablaBeneficios.getSelectedRow(), 0);
         fa.bajaAnuncioBeneficios(fecha, nombreEmpresa);
-        
+
         actualizarTablaBeneficios();
- 
+
     }//GEN-LAST:event_btnBajaActionPerformed
 
     private void tablaBeneficiosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaBeneficiosMouseClicked
@@ -103,10 +114,9 @@ public class VBajaBeneficios extends javax.swing.JDialog {
     private javax.swing.JTable tablaBeneficios;
     // End of variables declaration//GEN-END:variables
 
-  private void actualizarTablaBeneficios() {
+    private void actualizarTablaBeneficios() {
         ModeloTablaBeneficios m;
         m = (ModeloTablaBeneficios) tablaBeneficios.getModel();
         m.setFilas(fa.getBeneficios());
     }
 }
-

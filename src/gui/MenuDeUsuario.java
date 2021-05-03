@@ -60,6 +60,7 @@ public class MenuDeUsuario extends javax.swing.JFrame {
 
         botonParticipaciones.setBackground(new java.awt.Color(255, 255, 255));
         botonParticipaciones.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/stonks.jpeg"))); // NOI18N
+        botonParticipaciones.setFocusable(false);
         botonParticipaciones.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonParticipacionesActionPerformed(evt);
@@ -74,6 +75,7 @@ public class MenuDeUsuario extends javax.swing.JFrame {
         botonConfiguracion.setForeground(new java.awt.Color(255, 255, 255));
         botonConfiguracion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/rueda(1).jpeg"))); // NOI18N
         botonConfiguracion.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        botonConfiguracion.setFocusable(false);
         botonConfiguracion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonConfiguracionActionPerformed(evt);
@@ -86,6 +88,7 @@ public class MenuDeUsuario extends javax.swing.JFrame {
 
         botonBeneficios.setBackground(new java.awt.Color(255, 255, 255));
         botonBeneficios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/dolar.jpeg"))); // NOI18N
+        botonBeneficios.setFocusable(false);
         botonBeneficios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonBeneficiosActionPerformed(evt);
@@ -98,6 +101,7 @@ public class MenuDeUsuario extends javax.swing.JFrame {
 
         botonEstadisticas.setBackground(new java.awt.Color(255, 255, 255));
         botonEstadisticas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/Estadistica.jpeg"))); // NOI18N
+        botonEstadisticas.setFocusable(false);
         botonEstadisticas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonEstadisticasActionPerformed(evt);
@@ -115,6 +119,7 @@ public class MenuDeUsuario extends javax.swing.JFrame {
         btnSalir.setBackground(new java.awt.Color(180, 22, 45));
         btnSalir.setForeground(new java.awt.Color(0, 0, 0));
         btnSalir.setText("Salir");
+        btnSalir.setFocusable(false);
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSalirActionPerformed(evt);
@@ -124,6 +129,7 @@ public class MenuDeUsuario extends javax.swing.JFrame {
         btnCerrarSesion.setBackground(new java.awt.Color(153, 153, 153));
         btnCerrarSesion.setForeground(new java.awt.Color(187, 187, 188));
         btnCerrarSesion.setText("Cerrar sesión");
+        btnCerrarSesion.setFocusable(false);
         btnCerrarSesion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCerrarSesionActionPerformed(evt);
@@ -226,10 +232,7 @@ public class MenuDeUsuario extends javax.swing.JFrame {
 
     private void btnCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarSesionActionPerformed
         this.dispose();
-        VPortada vp = new VPortada(fa);
-        VAutentificacion va=  new VAutentificacion(fa, vp);
-        vp.setLocation(0, 0);
-        vp.setVisible(true);
+        VAutentificacion va=  new VAutentificacion(fa);
         va.setLocation(185, 80);
         va.setVisible(true);
     }//GEN-LAST:event_btnCerrarSesionActionPerformed

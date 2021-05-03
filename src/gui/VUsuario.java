@@ -9,9 +9,9 @@ public class VUsuario extends javax.swing.JDialog {
 
     aplicacion.FachadaAplicacion fa;
     String id = null;
-    
-    EmpresaUsuario empu;
-    InversorUsuario invu;
+
+    EmpresaUsuario eu;
+    InversorUsuario iu;
 
     int CheckeoUsuario;
 
@@ -20,54 +20,10 @@ public class VUsuario extends javax.swing.JDialog {
 
     public VUsuario(aplicacion.FachadaAplicacion fa, boolean flag, InversorUsuario iu, EmpresaUsuario eu) {
         this.fa = fa;
-        this.empu = eu;
-        this.invu = iu;
+        this.eu = eu;
+        this.iu = iu;
         initComponents();
-        this.getContentPane().setBackground(prueba);
-        tipo_usr.setBackground(prueba1);
-        btnUsuario.setBackground(prueba1);
-        btnActualizar.setBackground(prueba1);
-        btnApellido1.setBackground(prueba1);
-        btnApellido2.setBackground(prueba1);
-        btnBaja.setBackground(prueba1);
-        btnDireccion.setBackground(prueba1);
-        btnClave1.setBackground(prueba1);
-        btnEmpresa.setBackground(prueba);
-        btnInversor.setBackground(prueba1);
-        btnRegistrar.setBackground(prueba1);
-        btnTelefono.setBackground(prueba1);
-        btnUsuario.setBackground(prueba1);
-        txtUsuarioNoDisponible.setEnabled(false);
-
-        if (flag) {
-            tipo_usr.setEnabled(true);
-            btnEmpresa.setEnabled(false);
-            obligatorio5.setEnabled(false);
-            nombreEmpresa.setEnabled(false);
-            obligatorioTexto.setEnabled(false);
-        } else {
-            tipo_usr.setEnabled(false);
-            tipo_usr.setForeground(prueba);
-            if (iu != null) {
-                tipo_usr.setSelectedIndex(0);
-                btnUsuario.setText(iu.getIdUsuario());
-                btnClave1.setText(iu.getClave());
-                btnDireccion.setText(iu.getDireccion());
-                btnTelefono.setText(iu.getTelefono());
-                btnInversor.setText(iu.getNombre());
-                btnApellido1.setText(iu.getApellido1());
-                btnApellido2.setText(iu.getApellido2());
-
-            }
-            if (eu != null) {
-                tipo_usr.setSelectedIndex(1);
-                btnUsuario.setText(eu.getIdUsuario());
-                btnClave1.setText(eu.getClave());
-                btnDireccion.setText(eu.getDireccion());
-                btnTelefono.setText(eu.getTelefono());
-                btnEmpresa.setText(eu.getNombreComercial());
-            }
-        }
+        ColoresYTextos(flag);
     }
 
     /*this.buscarUsuarios();*/
@@ -114,6 +70,7 @@ public class VUsuario extends javax.swing.JDialog {
         obligatorioTexto = new javax.swing.JLabel();
         txtUsuarioNoDisponible = new javax.swing.JLabel();
         btnClave1 = new javax.swing.JTextField();
+        volver = new javax.swing.JButton();
 
         jButton4.setText("Guardar");
 
@@ -184,6 +141,7 @@ public class VUsuario extends javax.swing.JDialog {
 
         btnActualizar.setForeground(new java.awt.Color(187, 187, 188));
         btnActualizar.setText("Actualizar");
+        btnActualizar.setFocusable(false);
         btnActualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnActualizarActionPerformed(evt);
@@ -192,6 +150,7 @@ public class VUsuario extends javax.swing.JDialog {
 
         btnRegistrar.setForeground(new java.awt.Color(187, 187, 188));
         btnRegistrar.setText("Registrarse");
+        btnRegistrar.setFocusable(false);
         btnRegistrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRegistrarActionPerformed(evt);
@@ -201,6 +160,7 @@ public class VUsuario extends javax.swing.JDialog {
         btnCancelar.setBackground(new java.awt.Color(180, 22, 45));
         btnCancelar.setForeground(new java.awt.Color(0, 0, 0));
         btnCancelar.setText("Cancelar");
+        btnCancelar.setFocusable(false);
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelarActionPerformed(evt);
@@ -263,6 +223,7 @@ public class VUsuario extends javax.swing.JDialog {
 
         btnBaja.setForeground(new java.awt.Color(187, 187, 188));
         btnBaja.setText("Solicitar baja");
+        btnBaja.setFocusable(false);
         btnBaja.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBajaActionPerformed(evt);
@@ -282,6 +243,16 @@ public class VUsuario extends javax.swing.JDialog {
             }
         });
 
+        volver.setBackground(new java.awt.Color(50, 50, 50));
+        volver.setForeground(new java.awt.Color(187, 187, 188));
+        volver.setText("Volver");
+        volver.setFocusable(false);
+        volver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                volverActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -289,6 +260,12 @@ public class VUsuario extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addGap(46, 46, 46)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnActualizar)
+                            .addComponent(txtUsuarioNoDisponible)
+                            .addComponent(obligatorioTexto))
+                        .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(obligatorio2)
@@ -331,7 +308,10 @@ public class VUsuario extends javax.swing.JDialog {
                                             .addComponent(btnApellido2, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(btnBaja)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(volver)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(btnBaja))
                                             .addGroup(layout.createSequentialGroup()
                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                                     .addComponent(nombreInversor)
@@ -352,13 +332,7 @@ public class VUsuario extends javax.swing.JDialog {
                                     .addComponent(apellido2))
                                 .addGap(69, 69, 69)
                                 .addComponent(btnApellido1, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(35, 35, 35))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnActualizar)
-                            .addComponent(txtUsuarioNoDisponible)
-                            .addComponent(obligatorioTexto))
-                        .addContainerGap())))
+                                .addGap(35, 35, 35))))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -367,7 +341,8 @@ public class VUsuario extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnBaja)
                     .addComponent(jLabel7)
-                    .addComponent(tipo_usr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tipo_usr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(volver))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(txtUsuarioNoDisponible)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -486,7 +461,7 @@ public class VUsuario extends javax.swing.JDialog {
         btnApellido2.setText("");
         btnInversor.setText("");
         tipo_usr.setSelectedIndex(0);*/
-        
+
         actualizarDatos();
 
         //btnBorrar.setEnabled(true);
@@ -612,6 +587,13 @@ public class VUsuario extends javax.swing.JDialog {
         this.dispose();
     }//GEN-LAST:event_btnBajaActionPerformed
 
+    private void volverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_volverActionPerformed
+        this.dispose();
+        VAutentificacion va=  new VAutentificacion(fa);
+        va.setLocation(185, 80);
+        va.setVisible(true);
+    }//GEN-LAST:event_volverActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel apellido1;
@@ -648,6 +630,7 @@ public class VUsuario extends javax.swing.JDialog {
     private javax.swing.JLabel obligatorioTexto;
     private javax.swing.JComboBox tipo_usr;
     private javax.swing.JLabel txtUsuarioNoDisponible;
+    private javax.swing.JButton volver;
     // End of variables declaration//GEN-END:variables
 
     /*public void buscarUsuarios() {
@@ -702,46 +685,99 @@ public class VUsuario extends javax.swing.JDialog {
             }
         }
     }
-    
-    public void actualizarDatos(){
-        if(this.invu != null){
-            this.invu.setNombre(btnInversor.getText());
-            this.invu.setApellido1(btnApellido1.getText());
-            this.invu.setApellido2(btnApellido2.getText());
-            this.invu.setClave(btnClave1.getText());
-            this.invu.setDireccion(btnDireccion.getText());
-            this.invu.setTelefono(btnTelefono.getText());
-            
-            fa.modificarUsuarioInversor(invu);
+
+    public void actualizarDatos() {
+        if (this.iu != null) {
+            this.iu.setNombre(btnInversor.getText());
+            this.iu.setApellido1(btnApellido1.getText());
+            this.iu.setApellido2(btnApellido2.getText());
+            this.iu.setClave(btnClave1.getText());
+            this.iu.setDireccion(btnDireccion.getText());
+            this.iu.setTelefono(btnTelefono.getText());
+
+            fa.modificarUsuarioInversor(iu);
             /*btnClave1.setText(invu.getClave());
             btnDireccion.setText(invu.getDireccion());
             btnTelefono.setText(invu.getTelefono());
             btnApellido1.setText(invu.getApellido1());
             btnApellido2.setText(invu.getApellido2());
             btnInversor.setText(invu.getNombre());*/
-        }
-        
-        else if(this.empu != null){
-            this.empu.setNombreComercial(btnEmpresa.getText());
-            this.empu.setClave(btnClave1.getText());
-            this.empu.setDireccion(btnDireccion.getText());
-            this.empu.setTelefono(btnTelefono.getText());
-            
-            fa.modificarUsuarioEmpresa(empu);
+        } else if (this.eu != null) {
+            this.eu.setNombreComercial(btnEmpresa.getText());
+            this.eu.setClave(btnClave1.getText());
+            this.eu.setDireccion(btnDireccion.getText());
+            this.eu.setTelefono(btnTelefono.getText());
+
+            fa.modificarUsuarioEmpresa(eu);
             /*btnClave1.setText(empu.getClave());
             btnDireccion.setText(empu.getDireccion());
             btnEmpresa.setText(empu.getNombreComercial());
             btnTelefono.setText(empu.getTelefono());*/
         }
     }
-    
-    public void solicitarBaja(){
-        if(this.invu != null){
-            fa.solicitarBajaInversor(invu.getIdUsuario());
+
+    public void solicitarBaja() {
+        if (this.iu != null) {
+            fa.solicitarBajaInversor(iu.getIdUsuario());
+        } else if (this.eu != null) {
+            fa.solicitarBajaEmpresa(eu.getIdUsuario());
         }
-        
-        else if(this.empu != null){
-            fa.solicitarBajaEmpresa(empu.getIdUsuario());
+    }
+
+    private void ColoresYTextos(boolean flag) {
+        this.getContentPane().setBackground(prueba);
+        tipo_usr.setBackground(prueba1);
+        btnUsuario.setBackground(prueba1);
+        btnActualizar.setBackground(prueba1);
+        btnApellido1.setBackground(prueba1);
+        btnApellido2.setBackground(prueba1);
+        btnBaja.setBackground(prueba1);
+        btnDireccion.setBackground(prueba1);
+        btnClave1.setBackground(prueba1);
+        btnEmpresa.setBackground(prueba);
+        btnInversor.setBackground(prueba1);
+        btnRegistrar.setBackground(prueba1);
+        btnTelefono.setBackground(prueba1);
+        btnUsuario.setBackground(prueba1);
+        txtUsuarioNoDisponible.setEnabled(false);
+
+        if (flag) { //REGISTRO
+            tipo_usr.setEnabled(true);
+            btnEmpresa.setEnabled(false);
+            obligatorio5.setEnabled(false);
+            nombreEmpresa.setEnabled(false);
+            obligatorioTexto.setEnabled(false);
+            btnBaja.setVisible(false);
+            btnRegistrar.setVisible(true);
+            btnActualizar.setVisible(false);
+            volver.setVisible(true);
+
+        } else { //MODIFICACIÓN
+            btnBaja.setVisible(true);
+            btnRegistrar.setVisible(false);
+            btnActualizar.setVisible(true);
+            tipo_usr.setEnabled(false);
+            volver.setVisible(false);
+            tipo_usr.setForeground(prueba);
+            if (iu != null) {
+                tipo_usr.setSelectedIndex(0);
+                btnUsuario.setText(iu.getIdUsuario());
+                btnClave1.setText(iu.getClave());
+                btnDireccion.setText(iu.getDireccion());
+                btnTelefono.setText(iu.getTelefono());
+                btnInversor.setText(iu.getNombre());
+                btnApellido1.setText(iu.getApellido1());
+                btnApellido2.setText(iu.getApellido2());
+
+            }
+            if (eu != null) {
+                tipo_usr.setSelectedIndex(1);
+                btnUsuario.setText(eu.getIdUsuario());
+                btnClave1.setText(eu.getClave());
+                btnDireccion.setText(eu.getDireccion());
+                btnTelefono.setText(eu.getTelefono());
+                btnEmpresa.setText(eu.getNombreComercial());
+            }
         }
     }
 }

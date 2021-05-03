@@ -352,9 +352,6 @@ public class FachadaAplicacion {
     public void moverParticipacionesParciales(OfertaParticipaciones oferta, String idUsuario, int participacionesRestantes){
         gpart.moverParticipacionesParciales(oferta,idUsuario,participacionesRestantes);
     }
-    
-    public String getnombreEmpresa(String id) {
-        return gu.getnombreEmpresa(id);
-    }
+ 
 
 }

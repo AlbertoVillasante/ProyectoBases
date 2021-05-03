@@ -231,10 +231,10 @@ public class DAOParticipaciones extends AbstractDAO {
         try {
             stmOferta = con.prepareStatement("INSERT INTO ofertaparticipacionesventainversor VALUES (?, now(), ?, ?, ?)");
 
-            stmOferta.setFloat(1, v.getPrecio());
-            stmOferta.setInt(2, v.getNparticipaciones());
-            stmOferta.setString(3, v.getIdVendedor());
-            stmOferta.setString(4, v.getIdEmpresa());
+            stmOferta.setDouble(1, v.getPrecioParticipacion());
+            stmOferta.setInt(2, v.getNumeroParticipaciones());
+            stmOferta.setString(3, v.getIdUsuario1());
+            stmOferta.setString(4, v.getIdUsuario2());
             stmOferta.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -256,10 +256,10 @@ public class DAOParticipaciones extends AbstractDAO {
         try {
             stmOferta = con.prepareStatement("INSERT INTO ofertaparticipacionesventaempresa VALUES (?, now(), ?, ?, ?)");
 
-            stmOferta.setFloat(1, v.getPrecio());
-            stmOferta.setInt(2, v.getNparticipaciones());
-            stmOferta.setString(3, v.getIdVendedor());
-            stmOferta.setString(4, v.getIdEmpresa());
+            stmOferta.setDouble(1, v.getPrecioParticipacion());
+            stmOferta.setInt(2, v.getNumeroParticipaciones());
+            stmOferta.setString(3, v.getIdUsuario1());
+            stmOferta.setString(4, v.getIdUsuario2());
             stmOferta.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -289,11 +289,11 @@ public class DAOParticipaciones extends AbstractDAO {
                     + "and (numparticipaciones - ?) >= (select COALESCE(sum(numeroparticipaciones), 0) "
                                                     + "from ofertaparticipacionesventaempresa "
                                                     + "where idusuario1 = ? and idusuario2 = ? )");
-            stmOferta.setString(1, v.getIdVendedor());
-            stmOferta.setString(2, v.getIdEmpresa());
-            stmOferta.setInt(3, v.getNparticipaciones());
-            stmOferta.setString(4, v.getIdVendedor());
-            stmOferta.setString(5, v.getIdEmpresa());
+            stmOferta.setString(1, v.getIdUsuario1());
+            stmOferta.setString(2, v.getIdUsuario2());
+            stmOferta.setInt(3, v.getNumeroParticipaciones());
+            stmOferta.setString(4, v.getIdUsuario1());
+            stmOferta.setString(5, v.getIdUsuario2());
             rsParticipaciones = stmOferta.executeQuery();
             if (rsParticipaciones.next()) {
                 resultado = true;
@@ -328,11 +328,11 @@ public class DAOParticipaciones extends AbstractDAO {
                     + "and (numparticipaciones - ?) >= (select COALESCE(sum(numeroparticipaciones), 0) "
                                                     + "from ofertaparticipacionesventainversor "
                                                     + "where idusuario1 = ? and idusuario2 = ? )");
-            stmOferta.setString(1, v.getIdVendedor());
-            stmOferta.setString(2, v.getIdEmpresa());
-            stmOferta.setInt(3, v.getNparticipaciones());
-            stmOferta.setString(4, v.getIdVendedor());
-            stmOferta.setString(5, v.getIdEmpresa());
+            stmOferta.setString(1, v.getIdUsuario1());
+            stmOferta.setString(2, v.getIdUsuario2());
+            stmOferta.setInt(3, v.getNumeroParticipaciones());
+            stmOferta.setString(4, v.getIdUsuario1());
+            stmOferta.setString(5, v.getIdUsuario2());
             rsParticipaciones = stmOferta.executeQuery();
             if (rsParticipaciones.next()) {
                 resultado = true;
@@ -500,12 +500,12 @@ public class DAOParticipaciones extends AbstractDAO {
                                        + "and fecha = (SELECT min(fecha) " 
                                                        + "FROM ofertaparticipacionesventainversor " 
                                                        + "WHERE precio = ? and numeroparticipaciones = ? and idusuario1 = ? and idusuario2 = ?)");
-        stmUsuario.setString(1, v.getIdVendedor());
-        stmUsuario.setString(2, v.getIdEmpresa());
-        stmUsuario.setFloat(3, v.getPrecio());
-        stmUsuario.setInt(4, v.getNparticipaciones());
-        stmUsuario.setString(5, v.getIdVendedor());
-        stmUsuario.setString(6, v.getIdEmpresa());
+        stmUsuario.setString(1, v.getIdUsuario1());
+        stmUsuario.setString(2, v.getIdUsuario2());
+        stmUsuario.setDouble(3, v.getPrecioParticipacion());
+        stmUsuario.setInt(4, v.getNumeroParticipaciones());
+        stmUsuario.setString(5, v.getIdUsuario1());
+        stmUsuario.setString(6, v.getIdUsuario2());
         rsUsuario=stmUsuario.executeQuery();
         } catch (SQLException e){
           System.out.println(e.getMessage());
@@ -528,12 +528,12 @@ public class DAOParticipaciones extends AbstractDAO {
                                        + "and fecha = (SELECT min(fecha) " 
                                                        + "FROM ofertaparticipacionesventaempresa " 
                                                        + "WHERE precio = ? and numeroparticipaciones = ? and idusuario1 = ? and idusuario2 = ?)");
-        stmUsuario.setString(1, v.getIdVendedor());
-        stmUsuario.setString(2, v.getIdEmpresa());
-        stmUsuario.setFloat(3, v.getPrecio());
-        stmUsuario.setInt(4, v.getNparticipaciones());
-        stmUsuario.setString(5, v.getIdVendedor());
-        stmUsuario.setString(6, v.getIdEmpresa());
+        stmUsuario.setString(1, v.getIdUsuario1());
+        stmUsuario.setString(2, v.getIdUsuario2());
+        stmUsuario.setDouble(3, v.getPrecioParticipacion());
+        stmUsuario.setInt(4, v.getNumeroParticipaciones());
+        stmUsuario.setString(5, v.getIdUsuario1());
+        stmUsuario.setString(6, v.getIdUsuario2());
         rsUsuario=stmUsuario.executeQuery();
         } catch (SQLException e){
           System.out.println(e.getMessage());

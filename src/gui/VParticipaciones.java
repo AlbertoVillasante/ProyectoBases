@@ -785,8 +785,8 @@ public class VParticipaciones extends javax.swing.JDialog {
             if(selec == 0){ //Comprar
                 i=tablaParticipacionesVenta.getSelectedRow();
                 OfertaParticipaciones v=m.obtenerVenta(i);
-                nParticipacionesText.setText(v.getNparticipaciones().toString());
-                precioText.setText(v.getPrecio().toString());
+                nParticipacionesText.setText(String.valueOf(v.getNumeroParticipaciones()));
+                precioText.setText(String.valueOf(v.getPrecioParticipacion()));
             } else{ //Vender
                 
             }
@@ -856,14 +856,14 @@ public class VParticipaciones extends javax.swing.JDialog {
         VAviso va = new VAviso("¡No puedes eliminar ofertas que no sean de tu propiedad!");
         
         if(iu != null){
-            if(iu.getIdUsuario().equals(v.getIdVendedor())){
+            if(iu.getIdUsuario().equals(v.getIdUsuario1())){
                 fa.borrarVentaInv(v);
             }else{
                 va.setVisible(true);
             }
             
         } else{
-            if(eu.getIdUsuario().equals(v.getIdVendedor())){
+            if(eu.getIdUsuario().equals(v.getIdUsuario1())){
                 fa.borrarVentaEmpr(v);
             } else{
                 va.setVisible(true);

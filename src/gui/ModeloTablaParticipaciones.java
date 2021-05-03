@@ -13,20 +13,21 @@ import aplicacion.FachadaAplicacion;
  *
  * @author alumnogreibd
  */
-public class ModeloTablaParticipaciones extends AbstractTableModel{
+public class ModeloTablaParticipaciones extends AbstractTableModel {
+
     FachadaAplicacion fa;
-    private java.util.List<OfertaParticipaciones> ventas;
+    private java.util.List<OfertaParticipaciones> ofertas;
 
     public ModeloTablaParticipaciones() {
-        this.ventas = new java.util.ArrayList<OfertaParticipaciones>();
+        this.ofertas = new java.util.ArrayList<OfertaParticipaciones>();
     }
 
     public int getColumnCount() {
-        return 3;
+        return 4;
     }
 
     public int getRowCount() {
-        return ventas.size();
+        return ofertas.size();
     }
 
     @Override
@@ -43,6 +44,8 @@ public class ModeloTablaParticipaciones extends AbstractTableModel{
             case 2:
                 nombre = "Vendedor";
                 break;
+            case 3:
+                nombre = "Precio";
         }
         return nombre;
     }
@@ -61,6 +64,8 @@ public class ModeloTablaParticipaciones extends AbstractTableModel{
             case 2:
                 clase = java.lang.String.class;
                 break;
+            case 3:
+                clase = java.lang.Double.class;
         }
         return clase;
     }
@@ -70,41 +75,35 @@ public class ModeloTablaParticipaciones extends AbstractTableModel{
         return false;
     }
 
-    public Object getValueAt(int row, int col) {      //Comentado por ahora, para que no de error
+    public Object getValueAt(int row, int col) {  
         Object resultado = null;
 
         switch (col) {
             case 0:
-                resultado = ventas.get(row).getNparticipaciones();
+                resultado = ofertas.get(row).getNumeroParticipaciones();
                 break;
             case 1:
-                resultado = ventas.get(row).getIdEmpresa();
+                resultado = ofertas.get(row).getIdUsuario2();
                 break;
             case 2:
-                resultado = ventas.get(row).getIdVendedor();
+                resultado = ofertas.get(row).getIdUsuario1();
                 break;
+            case 3:
+                resultado = ofertas.get(row).getPrecioParticipacion();
         }
         return resultado;
     }
 
     public void setFilas(java.util.List<OfertaParticipaciones> ventas) {
-        this.ventas = ventas;
+        this.ofertas = ventas;
         fireTableDataChanged();
     }
 
     public OfertaParticipaciones obtenerVenta(int i) {
-        return this.ventas.get(i);
+        return this.ofertas.get(i);
     }
 
-    /*public java.util.List<String> obtenerId() {
-        java.util.ArrayList<String> us = new ArrayList<String>();
-        for (EmpresaUsuario u : this.usuarios) {
-            us.add(u.getIdUsuario());
-        }
-        return us;
-    }*/
-    
-    public Float obtenerPrecio(int row){
-        return this.ventas.get(row).getPrecio();
+    public double obtenerPrecio(int row) {
+        return this.ofertas.get(row).getPrecioParticipacion();
     }
 }

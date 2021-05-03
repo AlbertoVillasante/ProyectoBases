@@ -362,12 +362,14 @@ public class FachadaBaseDatos {
     }
     
     public double getRendimiento(String idUsuario){
-        if(idUsuario.length()==9){
-             return daoUsuarios.getRendimientoInversor(idUsuario);
-        }else if(idUsuario.length() == 13){
-            return daoUsuarios.getRendimientoEmpresa(idUsuario);
+        switch (idUsuario.length()) {
+            case 9:
+                return daoUsuarios.getRendimientoInversor(idUsuario);
+            case 13:
+                return daoUsuarios.getRendimientoEmpresa(idUsuario);
+            default:
+                return 1.0; // por defecto no hay rendimiento 
         }
-        else return 1.0; // por defecto no hay rendimiento 
     }
     
 
@@ -385,10 +387,6 @@ public class FachadaBaseDatos {
      
     public void moverParticipacionesParciales(OfertaParticipaciones oferta, String idUsuario, int participacionesRestantes){
         daoParticipaciones.moverParticipacionesParciales(oferta,idUsuario,participacionesRestantes);
-    }
-    
-    public String getnombreEmpresa(String id) {
-        return daoUsuarios.getnombreEmpresa(id);
     }
 
 }

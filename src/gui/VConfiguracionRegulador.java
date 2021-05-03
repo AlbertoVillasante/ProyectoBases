@@ -9,6 +9,7 @@ import aplicacion.EmpresaUsuario;
 import aplicacion.FachadaAplicacion;
 import aplicacion.InversorUsuario;
 import java.awt.Color;
+import java.text.DecimalFormat;
 
 /**
  *
@@ -39,7 +40,9 @@ public class VConfiguracionRegulador extends javax.swing.JDialog {
             claveText.setText(iu.getClave());
             direcciontext.setText(iu.getDireccion());
             tlfnText.setText(iu.getTelefono());
-            fondosText.setText(String.valueOf(iu.getFondosDisponiblesCuenta()));
+            DecimalFormat df = new DecimalFormat("#.00");
+            String fondos = String.valueOf(df.format(iu.getFondosDisponiblesCuenta()));
+            fondosText.setText(fondos);
             comisionText.setText(String.valueOf(iu.getComision()));
 
         }
@@ -48,7 +51,9 @@ public class VConfiguracionRegulador extends javax.swing.JDialog {
             claveText.setText(eu.getClave());
             direcciontext.setText(eu.getDireccion());
             tlfnText.setText(eu.getTelefono());
-            fondosText.setText(String.valueOf(eu.getFondosDisponiblesCuenta()));
+            DecimalFormat df = new DecimalFormat("#.00");
+            String fondos = String.valueOf(df.format(eu.getFondosDisponiblesCuenta()));
+            fondosText.setText(fondos);
             comisionText.setText(String.valueOf(eu.getComision()));
         }
     }

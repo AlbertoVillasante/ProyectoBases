@@ -8,6 +8,7 @@ package gui;
 import aplicacion.EmpresaUsuario;
 import aplicacion.FachadaAplicacion;
 import aplicacion.InversorUsuario;
+import aplicacion.OfertaParticipaciones;
 import aplicacion.Venta;
 import java.awt.Color;
 import static java.lang.Float.parseFloat;
@@ -33,16 +34,16 @@ public class VParticipaciones extends javax.swing.JDialog {
      * Creates new form VParticipaciones
      */
     public VParticipaciones(aplicacion.FachadaAplicacion fa, EmpresaUsuario eu, InversorUsuario iu) {
-        int i=0;
+        int i = 0;
         initComponents();
-        
+
         if (eu != null) {
             carteraText.setText(String.valueOf(eu.getnParticipaciones()));
             this.eu = eu;
         } else {
             participacionesPanel.setSelectedIndex(1);
             participacionesPanel.setEnabled(false);
-            this.iu=iu;
+            this.iu = iu;
         }
         this.getContentPane().setBackground(prueba);
         saldoText.setBackground(prueba1);
@@ -69,15 +70,19 @@ public class VParticipaciones extends javax.swing.JDialog {
         participacionesPanel.setBackgroundAt(1, prueba);
         buttonGroup8.add(Baja);
         buttonGroup8.add(Alta);
+        ArrayList<String> empresas = fa.getEmpresas(); //cogemos todas las empresas
+        for (String e : empresas) {
+            btnEmpresas.addItem(e);
+        }
         this.fa = fa;
-        
+
         mostrarVentas();
         jLabel4.setVisible(false);
-        
-        if(eu != null){
+
+        if (eu != null) {
             saldoText.setText(String.valueOf(eu.getFondosDisponiblesCuenta()));
             comisionText.setText(String.valueOf(eu.getComision()));
-        }else{
+        } else {
             saldoText.setText(String.valueOf(iu.getFondosDisponiblesCuenta()));
             comisionText.setText(String.valueOf(iu.getComision()));
         }
@@ -541,51 +546,56 @@ public class VParticipaciones extends javax.swing.JDialog {
     }//GEN-LAST:event_aceptarButton1ActionPerformed
 
     private void selectorCVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectorCVActionPerformed
-        int selec=selectorCV.getSelectedIndex();
-        
+        int selec = selectorCV.getSelectedIndex();
+        String id;
         btnEmpresas.removeAllItems();
-        
-        if(selec == 0){ //Comprar
-            
-        }else{ //Vender
+
+        if (selec == 0) { //Comprar
+            ArrayList<String> empresas = fa.getEmpresas(); //cogemos todas las empresas
+            for (String i : empresas) {
+                btnEmpresas.addItem(i);
+            }
+
+        } else { //Vender
             nParticipacionesText.setText("");
             precioText.setText("");
-            if(eu != null){
-                ArrayList<String> empresas = fa.getEmpresasEmpr(eu.getIdUsuario());
+            if (eu != null) {
+                id = eu.getIdUsuario();
+                ArrayList<String> empresas = fa.getEmpresasEmpr(id);
                 for (String i : empresas) {
                     btnEmpresas.addItem(i);
                 }
-            }else{
-                ArrayList<String> empresas = fa.getEmpresasInv(iu.getIdUsuario());
+            } else {
+                id = iu.getIdUsuario();
+                ArrayList<String> empresas = fa.getEmpresasInv(id);
                 for (String i : empresas) {
                     btnEmpresas.addItem(i);
                 }
             }
 
-            if(btnEmpresas.getItemCount() > 0){
+            if (btnEmpresas.getItemCount() > 0) {
                 aceptarButton.setEnabled(true);
-            }else{
+            } else {
                 aceptarButton.setEnabled(false);
             }
         }
-
 
 // TODO add your handling code here:
     }//GEN-LAST:event_selectorCVActionPerformed
 
     private void aceptarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aceptarButtonActionPerformed
-        if(nParticipacionesText.getText().isEmpty() && precioText.getText().isEmpty()){
+        if (nParticipacionesText.getText().isEmpty() && precioText.getText().isEmpty()) {
             jLabel4.setVisible(true);
-        } else{
+        } else {
             jLabel4.setVisible(false);
-            if(selectorCV.getSelectedIndex() == 0){ //Comprar
-            
-            } else{
+            if (selectorCV.getSelectedIndex() == 0) { //Comprar
+                compraParticipaciones();
+            } else {
                 vender();
                 mostrarVentas();
             }
         }
-        
+
         // TODO add your handling code here:
     }//GEN-LAST:event_aceptarButtonActionPerformed
 
@@ -636,51 +646,157 @@ public class VParticipaciones extends javax.swing.JDialog {
     private javax.swing.JComboBox selectorCV;
     private javax.swing.JTable tablaParticipacionesVenta;
     // End of variables declaration//GEN-END:variables
-    
-    public void mostrarVentas(){
-        int selec=selectorCV.getSelectedIndex(), i=0;
+
+    public void mostrarVentas() {
+        int selec = selectorCV.getSelectedIndex(), i = 0;
         ModeloTablaParticipaciones m;
-        m=(ModeloTablaParticipaciones) tablaParticipacionesVenta.getModel();
+        m = (ModeloTablaParticipaciones) tablaParticipacionesVenta.getModel();
         m.setFilas(fa.mostrarVentas());
-        
+
         if (m.getRowCount() > 0) {
             tablaParticipacionesVenta.setRowSelectionInterval(0, 0);
             aceptarButton.setEnabled(true);
-            if(selec == 0){
-                i=tablaParticipacionesVenta.getSelectedRow();
-                Venta v=m.obtenerVenta(i);
+            if (selec == 0) {
+                i = tablaParticipacionesVenta.getSelectedRow();
+                Venta v = m.obtenerVenta(i);
                 nParticipacionesText.setText(v.getNparticipaciones().toString());
                 precioText.setText(v.getPrecio().toString());
-                
+
             }
-        }else{
-            if(selec == 0){ //Comprar
+        } else {
+            if (selec == 0) { //Comprar
                 aceptarButton.setEnabled(false);
-            }else if(btnEmpresas.getItemCount() > 0){ //Vender
+            } else if (btnEmpresas.getItemCount() > 0) { //Vender
                 aceptarButton.setEnabled(true);
             }
         }
     }
-    
-    public void vender(){
-        int i=0;
+
+    public void vender() {
+        int i = 0;
         String id = null;
-        i=btnEmpresas.getSelectedIndex();
-        
-        
-        if(iu != null){
-            Venta v= new Venta(parseFloat(precioText.getText()), parseInt(nParticipacionesText.getText()), fa.getIdEmpresa(btnEmpresas.getItemAt(i).toString()), iu.getIdUsuario());
-            if(fa.comprobarParticipacionesInversor(v))
+        i = btnEmpresas.getSelectedIndex();
+
+        if (iu != null) {
+            Venta v = new Venta(parseFloat(precioText.getText()), parseInt(nParticipacionesText.getText()), fa.getIdEmpresa(btnEmpresas.getItemAt(i).toString()), iu.getIdUsuario());
+            if (fa.comprobarParticipacionesInversor(v)) {
                 fa.ofertaVentaInv(v);
-        } else{
-            Venta v= new Venta(parseFloat(precioText.getText()), parseInt(nParticipacionesText.getText()), fa.getIdEmpresa(btnEmpresas.getItemAt(i).toString()), eu.getIdUsuario());
-            if(fa.comprobarParticipacionesEmpresa(v))
+            }
+        } else {
+            Venta v = new Venta(parseFloat(precioText.getText()), parseInt(nParticipacionesText.getText()), fa.getIdEmpresa(btnEmpresas.getItemAt(i).toString()), eu.getIdUsuario());
+            if (fa.comprobarParticipacionesEmpresa(v)) {
                 fa.ofertaVentaEmpr(v);
+            }
         }
-        
-        
+
     }
 
+    public void compraParticipaciones() {
 
+        //Se utilizará esta variable para llevar la cuenta de las participaciones que faltan por comprar:
+        Integer participacionesRestantes = Integer.parseInt(nParticipacionesText.getText());
+        Double precio = Double.parseDouble(precioText.getText());
+        Integer ofertasRestantes;
+        OfertaParticipaciones oferta;
+        String idEmpresa = fa.getIdEmpresa(btnEmpresas.getSelectedItem().toString());
+
+        if (eu != null) {
+            if (fa.getnombreEmpresa(eu.getIdUsuario()).equals(idEmpresa)) {
+                VAviso vnoticia;
+                vnoticia = new VAviso("No puedes comprar participaciones de tu propia empresa");
+                vnoticia.setVisible(true);
+
+            } else {
+                //En primer lugar comprobamos si la empresa tiene el dinero suficiente para comprar las participaciones que quiere:
+                if (participacionesRestantes * precio > eu.getFondosDisponiblesCuenta()) {
+
+                    VAviso vnoticia;
+                    vnoticia = new VAviso("El precio y numero de participaciones introducido es incompatible con la cantidad de dinero que posee");
+                    vnoticia.setVisible(true);
+
+                } else {
+                    ofertasRestantes = fa.contarOfertas(idEmpresa, precio); //Relleno el número de ofertas que cumplan lo que pido
+                    if (ofertasRestantes == 0) {
+
+                        VAviso vofertas;
+                        vofertas = new VAviso("No hay ofertas disponibles con esas características");
+                        vofertas.setVisible(true);
+
+                    } else {
+
+                        //mientras me quede dinero sigo comprando las más baratas o queden participaciones que pueda comprar con el dinero indicado
+                        while (participacionesRestantes > 0 && ofertasRestantes > 0) {
+
+                            oferta = fa.getOfertaParticipaciones(idEmpresa, precio); //saco la primera
+                            oferta.setComision(eu.getComision());
+
+                            if (oferta.getNumeroParticipaciones() <= participacionesRestantes) {
+
+                                /*=============================================================================================================
+                                Esta funcion :
+                                1- tiene como return el número de participaciones totales ya que como se quitan todas se puede hacer
+                                2- recibe como argumentos el usuario y  la oferta.
+                                3- borra la oferta de la tabla
+                                4- se las mete al otro.
+                                5- actualiza el dinero de las dos tablas.
+                                6- le da el dinero al regulador.
+                            ==============================================================================================================*/
+                                participacionesRestantes -= fa.moverParticipacionesTodas(eu.getIdUsuario(), oferta);
+
+                            } else {
+
+                                fa.moverParticipacionesParciales(oferta, eu.getIdUsuario(), participacionesRestantes);
+                                participacionesRestantes = 0;
+
+                            }
+                            ofertasRestantes--;
+                        }
+                    }
+                }
+            }
+        } else {
+            //En primer lugar comprobamos si la empresa tiene el dinero suficiente para comprar las participaciones que quiere:
+            if (participacionesRestantes * precio > iu.getFondosDisponiblesCuenta()) {
+
+                VAviso vnoticia;
+                vnoticia = new VAviso("El precio y numero de participaciones introducido es incompatible con la cantidad de dinero que posee");
+                vnoticia.setVisible(true);
+
+            } else {
+
+                ofertasRestantes = fa.contarOfertas(idEmpresa, precio); //Relleno el número de ofertas que cumplan lo que pido
+
+                if (ofertasRestantes == 0) {
+
+                    VAviso vofertas;
+                    vofertas = new VAviso("No hay ofertas disponibles con esas características");
+                    vofertas.setVisible(true);
+
+                } else {
+
+                    while (participacionesRestantes > 0 && ofertasRestantes > 0) {
+
+                        oferta = fa.getOfertaParticipaciones(idEmpresa, precio); //saco la primera
+                        oferta.setComision(iu.getComision());
+
+                        if (oferta.getNumeroParticipaciones() <= participacionesRestantes) {
+
+                            participacionesRestantes -= fa.moverParticipacionesTodas(iu.getIdUsuario(), oferta);
+
+                        } else {
+
+                            fa.moverParticipacionesParciales(oferta, iu.getIdUsuario(), participacionesRestantes);
+                            participacionesRestantes = 0;
+
+                        }
+                        ofertasRestantes--;
+                    }
+
+                }
+            }
+        }
+        VAvisoCorrecto compraEfectuada = new VAvisoCorrecto("Compra realizada con éxito");
+        compraEfectuada.setVisible(true);
+    }
 
 }

@@ -1002,4 +1002,6 @@ public class DAOUsuarios extends AbstractDAO {
         }
         return resultado;
     }
+    
+    
 }

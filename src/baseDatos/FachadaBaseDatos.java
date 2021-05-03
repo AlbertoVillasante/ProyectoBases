@@ -7,6 +7,7 @@ import aplicacion.Categoria;
 import aplicacion.EmpresaUsuario;
 import aplicacion.Estadisticas;
 import aplicacion.Libro;
+import aplicacion.OfertaParticipaciones;
 import aplicacion.Venta;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -31,8 +32,8 @@ public class FachadaBaseDatos {
         FileInputStream arqConfiguracion;
 
         try {
-            arqConfiguracion = new FileInputStream("baseDatos.properties"); //linea a cambiar
-            //arqConfiguracion = new FileInputStream("basesDatos.properties");
+            //arqConfiguracion = new FileInputStream("baseDatos.properties"); //linea a cambiar
+            arqConfiguracion = new FileInputStream("basesDatos.properties");
 
             configuracion.load(arqConfiguracion);
             arqConfiguracion.close();
@@ -219,9 +220,9 @@ public class FachadaBaseDatos {
         System.out.println(fecha + precio + numParticipaciones + idEmpresa);
         daoBeneficios.altaPagoBeneficios(fecha, precio, idEmpresa, numParticipaciones);
     }
-    
-    public void bajaAnuncioBeneficios(String fecha, String nombreEmpresa){
-    String idEmpresa = daoUsuarios.getIdEmpresa(nombreEmpresa);
+
+    public void bajaAnuncioBeneficios(String fecha, String nombreEmpresa) {
+        String idEmpresa = daoUsuarios.getIdEmpresa(nombreEmpresa);
         daoBeneficios.bajaAnuncioBeneficios(fecha, idEmpresa);
     }
 
@@ -288,41 +289,61 @@ public class FachadaBaseDatos {
     public ArrayList<Estadisticas> actualizarTablaEstadisticas(InversorUsuario iu, EmpresaUsuario eu) {
         if (iu != null) {
             return daoUsuarios.actualizarTablaEstadisticasInversor(iu.getIdUsuario());
-        }
-        else {
+        } else {
             return daoUsuarios.actualizarTablaEstadisticasEmpresa(eu.getIdUsuario());
         }
     }
-    
+
     public ArrayList<String> getEmpresasInv(String id) {
         return daoUsuarios.getEmpresasInv(id);
     }
-    
+
     public ArrayList<String> getEmpresasEmpr(String id) {
         return daoUsuarios.getEmpresasEmpr(id);
     }
-    
-    public java.util.List<Venta> mostrarVentas(){
+
+    public java.util.List<Venta> mostrarVentas() {
         return daoParticipaciones.mostrarVentas();
     }
-    
-    public void ofertaVentaInv(Venta v){
+
+    public void ofertaVentaInv(Venta v) {
         daoParticipaciones.ofertaVentaInv(v);
     }
-    
-    public void ofertaVentaEmpr(Venta v){
+
+    public void ofertaVentaEmpr(Venta v) {
         daoParticipaciones.ofertaVentaEmpr(v);
     }
 
-    public boolean comprobarParticipacionesEmpresa(Venta v){
+    public boolean comprobarParticipacionesEmpresa(Venta v) {
         return daoParticipaciones.comprobarParticipacionesEmpresa(v);
     }
-    
-    public boolean comprobarParticipacionesInversor(Venta v){
+
+    public boolean comprobarParticipacionesInversor(Venta v) {
         return daoParticipaciones.comprobarParticipacionesInversor(v);
     }
-    
-    public String getIdEmpresa(String nombre){
+
+    public String getIdEmpresa(String nombre) {
         return daoUsuarios.getIdEmpresa(nombre);
     }
+
+    public int contarOfertas(String id, double precio) {
+        return daoParticipaciones.contarOfertas(id, precio);
+    }
+
+    public OfertaParticipaciones getOfertaParticipaciones(String id, double precio) {
+        return daoParticipaciones.getOfertaParticipaciones(id, precio);
+    }
+    
+     public int moverParticipacionesTodas(String idUsuario, OfertaParticipaciones oferta){
+        return daoParticipaciones.moverParticipacionesTodas(idUsuario,oferta);
+    }
+     
+    public void moverParticipacionesParciales(OfertaParticipaciones oferta, String idUsuario, int participacionesRestantes){
+        daoParticipaciones.moverParticipacionesParciales(oferta,idUsuario,participacionesRestantes);
+    }
+    
+    public String getnombreEmpresa(String id) {
+        return daoUsuarios.getnombreEmpresa(id);
+    }
+
 }

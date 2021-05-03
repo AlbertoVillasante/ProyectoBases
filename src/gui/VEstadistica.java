@@ -114,6 +114,11 @@ public class VEstadistica extends javax.swing.JDialog {
 
         aceptar.setForeground(new java.awt.Color(187, 187, 188));
         aceptar.setText("Aceptar");
+        aceptar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                aceptarActionPerformed(evt);
+            }
+        });
 
         cancelar.setBackground(new java.awt.Color(180, 22, 45));
         cancelar.setForeground(new java.awt.Color(0, 0, 0));
@@ -215,7 +220,7 @@ public class VEstadistica extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(cancelar)
                             .addComponent(aceptar)))
@@ -245,7 +250,7 @@ public class VEstadistica extends javax.swing.JDialog {
                             .addComponent(rendimientoText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(porcentajeLabel))
                         .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                .addGap(26, 26, 26))
         );
 
         pack();
@@ -259,6 +264,10 @@ public class VEstadistica extends javax.swing.JDialog {
 
 
     }//GEN-LAST:event_TextFondosRetencionesActionPerformed
+
+    private void aceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aceptarActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_aceptarActionPerformed
     public static String convertir(double val) {
         Locale.setDefault(Locale.US);
         DecimalFormat num = new DecimalFormat("#,###.00");

@@ -9,13 +9,14 @@ package aplicacion;
  *
  * @author alumnogreibd
  */
-public class Venta {
+public class OfertaParticipaciones {
     private Float precio;
     private Integer nparticipaciones;
     private String idEmpresa;
     private String idVendedor;
+    private String fechaOferta;
 
-    public Venta(Float precio, Integer nparticipaciones, String empr, String idVendedor) {
+    public OfertaParticipaciones(Float precio, Integer nparticipaciones, String empr, String idVendedor) {
         this.precio = precio;
         this.nparticipaciones = nparticipaciones;
         this.idEmpresa = empr;
@@ -53,4 +54,14 @@ public class Venta {
     public void setIdVendedor(String idVendedor) {
         this.idVendedor = idVendedor;
     }
+
+    public String getFechaOferta() {
+        return fechaOferta;
+    }
+
+    public void setFechaOferta(String fechaOferta) {
+        this.fechaOferta = fechaOferta;
+    }
+    
+    
 }

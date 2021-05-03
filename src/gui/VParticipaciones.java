@@ -8,7 +8,7 @@ package gui;
 import aplicacion.EmpresaUsuario;
 import aplicacion.FachadaAplicacion;
 import aplicacion.InversorUsuario;
-import aplicacion.Venta;
+import aplicacion.OfertaParticipaciones;
 import java.awt.Color;
 import static java.lang.Float.parseFloat;
 import static java.lang.Integer.parseInt;
@@ -60,6 +60,7 @@ public class VParticipaciones extends javax.swing.JDialog {
         msNoParticipaciones.setBackground(prueba);
         msjObligatorio.setBackground(prueba);
         buscarButton.setBackground(prueba1);
+        eliminarBtn.setBackground(prueba1);
         Alta.setBackground(prueba);
         Baja.setBackground(prueba);
         aceptarButton.setBackground(prueba1);
@@ -80,13 +81,11 @@ public class VParticipaciones extends javax.swing.JDialog {
         jLabel7.setVisible(false);
         
         if(eu != null){
-            saldoText.setText(String.valueOf(convertir(iu.getFondosDisponiblesCuenta())));
+            saldoText.setText(String.valueOf(convertir(eu.getFondosDisponiblesCuenta())));
             comisionText.setText(String.valueOf(eu.getComision()));
-            partBloqText.setText(String.valueOf(fa.partEmprBloq(eu.getIdUsuario())));
         }else{
             saldoText.setText(String.valueOf(convertir(iu.getFondosDisponiblesCuenta())));
             comisionText.setText(String.valueOf(iu.getComision()));
-            partBloqText.setText(String.valueOf(fa.partInvBloq(iu.getIdUsuario())));
         }
     }
 
@@ -146,6 +145,8 @@ public class VParticipaciones extends javax.swing.JDialog {
         partBloqText = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        eliminarBtn = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -252,7 +253,7 @@ public class VParticipaciones extends javax.swing.JDialog {
         altabajaPanelLayout.setVerticalGroup(
             altabajaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(altabajaPanelLayout.createSequentialGroup()
-                .addContainerGap(63, Short.MAX_VALUE)
+                .addContainerGap(111, Short.MAX_VALUE)
                 .addGroup(altabajaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(carteraLabel)
                     .addComponent(carteraText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -290,6 +291,11 @@ public class VParticipaciones extends javax.swing.JDialog {
         jLabel1.setText("€ ");
 
         btnEmpresas.setForeground(new java.awt.Color(187, 187, 188));
+        btnEmpresas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnEmpresasMouseClicked(evt);
+            }
+        });
         btnEmpresas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEmpresasActionPerformed(evt);
@@ -338,6 +344,7 @@ public class VParticipaciones extends javax.swing.JDialog {
 
         tablaParticipacionesVenta.setForeground(new java.awt.Color(187, 187, 188));
         tablaParticipacionesVenta.setModel(new ModeloTablaParticipaciones());
+        tablaParticipacionesVenta.setSelectionForeground(new java.awt.Color(187, 187, 188));
         jScrollPane2.setViewportView(tablaParticipacionesVenta);
 
         aceptarButton.setForeground(new java.awt.Color(187, 187, 188));
@@ -360,7 +367,7 @@ public class VParticipaciones extends javax.swing.JDialog {
         jLabel4.setText("Rellena los campos obligatorios *");
 
         jLabel5.setForeground(new java.awt.Color(187, 187, 188));
-        jLabel5.setText("Participaciones en propiedad");
+        jLabel5.setText("Participaciones en propiedad:");
 
         partPropText.setEditable(false);
         partPropText.setForeground(new java.awt.Color(187, 187, 188));
@@ -372,12 +379,28 @@ public class VParticipaciones extends javax.swing.JDialog {
 
         partBloqText.setEditable(false);
         partBloqText.setForeground(new java.awt.Color(187, 187, 188));
+        partBloqText.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                partBloqTextActionPerformed(evt);
+            }
+        });
 
         jLabel6.setForeground(new java.awt.Color(255, 51, 51));
         jLabel6.setText("*");
 
         jLabel7.setForeground(new java.awt.Color(255, 51, 51));
         jLabel7.setText("*");
+
+        jLabel8.setForeground(new java.awt.Color(187, 187, 188));
+        jLabel8.setText("Participaciones bloqueadas:  ");
+
+        eliminarBtn.setForeground(new java.awt.Color(187, 187, 188));
+        eliminarBtn.setText("Eliminar");
+        eliminarBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                eliminarBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout compraventaPanelLayout = new javax.swing.GroupLayout(compraventaPanel);
         compraventaPanel.setLayout(compraventaPanelLayout);
@@ -415,27 +438,26 @@ public class VParticipaciones extends javax.swing.JDialog {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jLabel3))
                             .addGroup(compraventaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, compraventaPanelLayout.createSequentialGroup()
-                                    .addGroup(compraventaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(btnEmpresas, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(selectorCV, javax.swing.GroupLayout.Alignment.LEADING, 0, 112, Short.MAX_VALUE))
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(partBloqText, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, compraventaPanelLayout.createSequentialGroup()
-                                    .addGroup(compraventaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel5)
-                                        .addComponent(nparticipacionesLabel))
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addGroup(compraventaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(nParticipacionesText, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
-                                        .addComponent(partPropText))))))
+                                .addComponent(btnEmpresas, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(selectorCV, javax.swing.GroupLayout.Alignment.LEADING, 0, 112, Short.MAX_VALUE))
+                            .addGroup(compraventaPanelLayout.createSequentialGroup()
+                                .addGroup(compraventaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel5)
+                                    .addComponent(nparticipacionesLabel)
+                                    .addComponent(jLabel8))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(compraventaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(nParticipacionesText)
+                                    .addComponent(partPropText)
+                                    .addComponent(partBloqText, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addComponent(jLabel4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
-                .addGroup(compraventaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+                .addGroup(compraventaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(compraventaPanelLayout.createSequentialGroup()
-                        .addGap(85, 85, 85)
-                        .addComponent(buscarButton)))
+                        .addComponent(buscarButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(eliminarBtn)))
                 .addGap(38, 38, 38))
         );
         compraventaPanelLayout.setVerticalGroup(
@@ -443,51 +465,58 @@ public class VParticipaciones extends javax.swing.JDialog {
             .addGroup(compraventaPanelLayout.createSequentialGroup()
                 .addGroup(compraventaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(compraventaPanelLayout.createSequentialGroup()
+                        .addGroup(compraventaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(compraventaPanelLayout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addGroup(compraventaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(saldoText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel1)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, compraventaPanelLayout.createSequentialGroup()
+                                .addGap(16, 16, 16)
+                                .addComponent(saldoLabel)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(selectorCV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnEmpresas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(compraventaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(partPropText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5))
+                        .addGap(18, 18, 18)
+                        .addGroup(compraventaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(partBloqText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel8))
+                        .addGap(18, 18, 18)
+                        .addGroup(compraventaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, compraventaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(nparticipacionesLabel)
+                                .addComponent(nParticipacionesText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(18, 18, 18)
+                        .addGroup(compraventaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, compraventaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(precioLabel)
+                                .addComponent(jLabel6))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, compraventaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(precioText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel2)))
                         .addGap(18, 18, 18)
                         .addGroup(compraventaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(saldoText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, compraventaPanelLayout.createSequentialGroup()
-                        .addGap(16, 16, 16)
-                        .addComponent(saldoLabel)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(compraventaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(selectorCV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(partBloqText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnEmpresas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(compraventaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(partPropText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(compraventaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(nparticipacionesLabel)
-                    .addComponent(nParticipacionesText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7))
-                .addGap(18, 18, 18)
-                .addGroup(compraventaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, compraventaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(precioLabel)
-                        .addComponent(jLabel6))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, compraventaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(precioText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel2)))
-                .addGap(18, 18, 18)
-                .addGroup(compraventaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(comisionLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(comisionText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
-                .addGap(11, 11, 11)
-                .addComponent(aceptarButton)
-                .addGap(12, 12, 12)
-                .addComponent(jLabel4))
-            .addGroup(compraventaPanelLayout.createSequentialGroup()
-                .addGap(33, 33, 33)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(buscarButton)
-                .addContainerGap(30, Short.MAX_VALUE))
+                            .addComponent(comisionLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(comisionText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3))
+                        .addGap(11, 11, 11)
+                        .addComponent(aceptarButton)
+                        .addGap(12, 12, 12)
+                        .addComponent(jLabel4))
+                    .addGroup(compraventaPanelLayout.createSequentialGroup()
+                        .addGap(33, 33, 33)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(compraventaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(buscarButton)
+                            .addComponent(eliminarBtn))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         participacionesPanel.addTab("compra / venta", compraventaPanel);
@@ -518,10 +547,10 @@ public class VParticipaciones extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addComponent(participacionesPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 337, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(participacionesPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 385, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(btnSalir)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         participacionesPanel.getAccessibleContext().setAccessibleName("Compra / Venta");
@@ -544,6 +573,12 @@ public class VParticipaciones extends javax.swing.JDialog {
     }//GEN-LAST:event_nParticipacionesTextActionPerformed
 
     private void btnEmpresasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEmpresasActionPerformed
+        int part = 0;
+        
+        if(selectorCV.getSelectedIndex() == 1){ //Vender
+            actualizarPartBloq(iu, eu);
+        }
+        
         // TODO add your handling code here:
     }//GEN-LAST:event_btnEmpresasActionPerformed
 
@@ -591,31 +626,35 @@ public class VParticipaciones extends javax.swing.JDialog {
     }//GEN-LAST:event_aceptarButton1ActionPerformed
 
     private void selectorCVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectorCVActionPerformed
-        int selec=selectorCV.getSelectedIndex(), j=0, part = 0;
+        int selec=selectorCV.getSelectedIndex(), part = 0;
         
         btnEmpresas.removeAllItems();
         
         if(selec == 0){ //Comprar
-            
+            partPropText.setText("");
         }else{ //Vender
             nParticipacionesText.setText("");
             precioText.setText("");
-            j=btnEmpresas.getSelectedIndex();
             if(eu != null){
                 ArrayList<String> empresas = fa.getEmpresasEmpr(eu.getIdUsuario());
-                for (String i : empresas) {
-                    btnEmpresas.addItem(i);
+                if(empresas.size() != 0){
+                    for (String i : empresas) {
+                        btnEmpresas.addItem(i);
+                    }
+                    part=fa.numParticipacionesEmprEmpr(eu.getIdUsuario(), fa.getIdEmpresa(btnEmpresas.getItemAt(btnEmpresas.getSelectedIndex()).toString()));
+                    partPropText.setText(String.valueOf(part));
                 }
-                /*part=fa.numParticipacionesEmprEmpr(eu.getIdUsuario(), fa.getIdEmpresa(btnEmpresas.getItemAt(j).toString()));
-                partPropText.setText(String.valueOf(part));*/
+                
             }else{
                 ArrayList<String> empresas = fa.getEmpresasInv(iu.getIdUsuario());
-                for (String i : empresas) {
-                    btnEmpresas.addItem(i);
+                if(empresas.size() != 0){
+                    for (String i : empresas) {
+                        btnEmpresas.addItem(i);
+                    }
+
+                    part=fa.numParticipacionesInvEmpr(iu.getIdUsuario(), fa.getIdEmpresa(btnEmpresas.getItemAt(btnEmpresas.getSelectedIndex()).toString()));
+                    partPropText.setText(String.valueOf(part));
                 }
-                /*System.out.println("hOLA");
-                part=fa.numParticipacionesInvEmpr(iu.getIdUsuario(), fa.getIdEmpresa(btnEmpresas.getItemAt(j).toString()));
-                partPropText.setText(String.valueOf(part));*/
             }
 
             if(btnEmpresas.getItemCount() > 0){
@@ -640,6 +679,9 @@ public class VParticipaciones extends javax.swing.JDialog {
             } else{
                 vender();
                 mostrarVentas();
+                actualizarPartBloq(iu, eu);
+                nParticipacionesText.setText("");
+                precioText.setText("");
             }
         }
         
@@ -647,9 +689,24 @@ public class VParticipaciones extends javax.swing.JDialog {
     }//GEN-LAST:event_aceptarButtonActionPerformed
 
     private void partPropTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_partPropTextActionPerformed
-
+        
 // TODO add your handling code here:
     }//GEN-LAST:event_partPropTextActionPerformed
+
+    private void btnEmpresasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEmpresasMouseClicked
+        
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnEmpresasMouseClicked
+
+    private void partBloqTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_partBloqTextActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_partBloqTextActionPerformed
+
+    private void eliminarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarBtnActionPerformed
+        eliminar();
+        mostrarVentas();
+        // TODO add your handling code here:
+    }//GEN-LAST:event_eliminarBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -677,6 +734,7 @@ public class VParticipaciones extends javax.swing.JDialog {
     private javax.swing.JLabel comisionLabel;
     private javax.swing.JTextField comisionText;
     private javax.swing.JPanel compraventaPanel;
+    private javax.swing.JButton eliminarBtn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -684,6 +742,7 @@ public class VParticipaciones extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -717,20 +776,11 @@ public class VParticipaciones extends javax.swing.JDialog {
             aceptarButton.setEnabled(true);
             if(selec == 0){ //Comprar
                 i=tablaParticipacionesVenta.getSelectedRow();
-                Venta v=m.obtenerVenta(i);
+                OfertaParticipaciones v=m.obtenerVenta(i);
                 nParticipacionesText.setText(v.getNparticipaciones().toString());
                 precioText.setText(v.getPrecio().toString());
             } else{ //Vender
-                /*Integer part=0;
-                int j=0;
-                j=btnEmpresas.getSelectedIndex();
-                if(iu != null){
-                    part=fa.numParticipacionesInvEmpr(iu.getIdUsuario(), fa.getIdEmpresa(btnEmpresas.getItemAt(j).toString()));
-                    partPropText.setText(part.toString());
-                } else{
-                    part=fa.numParticipacionesEmprEmpr(eu.getIdUsuario(), fa.getIdEmpresa(btnEmpresas.getItemAt(j).toString()));
-                    partPropText.setText(part.toString());
-                }*/
+                
             }
             
         }else{
@@ -749,15 +799,16 @@ public class VParticipaciones extends javax.swing.JDialog {
         VAviso va = new VAviso("¡No puedes vender más!");
         
         if(iu != null){
-            Venta v= new Venta(parseFloat(precioText.getText()), parseInt(nParticipacionesText.getText()), fa.getIdEmpresa(btnEmpresas.getItemAt(i).toString()), iu.getIdUsuario());
+            OfertaParticipaciones v= new OfertaParticipaciones(parseFloat(precioText.getText()), parseInt(nParticipacionesText.getText()), fa.getIdEmpresa(btnEmpresas.getItemAt(i).toString()), iu.getIdUsuario());
             if(fa.comprobarParticipacionesInversor(v)){
                 fa.ofertaVentaInv(v);
+                
             } else{
                 va.setVisible(true);
             }
                 
         } else{
-            Venta v= new Venta(parseFloat(precioText.getText()), parseInt(nParticipacionesText.getText()), fa.getIdEmpresa(btnEmpresas.getItemAt(i).toString()), eu.getIdUsuario());
+            OfertaParticipaciones v= new OfertaParticipaciones(parseFloat(precioText.getText()), parseInt(nParticipacionesText.getText()), fa.getIdEmpresa(btnEmpresas.getItemAt(i).toString()), eu.getIdUsuario());
             if(fa.comprobarParticipacionesEmpresa(v)){
                 fa.ofertaVentaEmpr(v);
             } else{
@@ -773,6 +824,44 @@ public class VParticipaciones extends javax.swing.JDialog {
         Locale.setDefault(Locale.US);
         DecimalFormat num = new DecimalFormat("#,###.00");
         return num.format(val);
+    }
+    
+    public void actualizarPartBloq(InversorUsuario iu, EmpresaUsuario eu){
+        int part = 0;
+        
+        if(eu != null){ 
+            part=fa.numParticipacionesEmprEmpr(eu.getIdUsuario(), fa.getIdEmpresa(btnEmpresas.getItemAt(btnEmpresas.getSelectedIndex()).toString()));
+            partPropText.setText(String.valueOf(part));
+            partBloqText.setText(String.valueOf(fa.partEmprBloq(eu.getIdUsuario(), fa.getIdEmpresa(btnEmpresas.getItemAt(btnEmpresas.getSelectedIndex()).toString()))));
+        }else{
+            part=fa.numParticipacionesInvEmpr(iu.getIdUsuario(), fa.getIdEmpresa(btnEmpresas.getItemAt(btnEmpresas.getSelectedIndex()).toString()));
+            partPropText.setText(String.valueOf(part));
+            partBloqText.setText(String.valueOf(fa.partInvBloq(iu.getIdUsuario(), fa.getIdEmpresa(btnEmpresas.getItemAt(btnEmpresas.getSelectedIndex()).toString()))));
+        }
+    }
+    
+    public void eliminar(){
+        int i=0;
+        ModeloTablaParticipaciones m;
+        m=(ModeloTablaParticipaciones) tablaParticipacionesVenta.getModel();
+        i=tablaParticipacionesVenta.getSelectedRow();
+        OfertaParticipaciones v=m.obtenerVenta(i);
+        VAviso va = new VAviso("¡No puedes eliminar ofertas que no sean de tu propiedad!");
+        
+        if(iu != null){
+            if(iu.getIdUsuario().equals(v.getIdVendedor())){
+                fa.borrarVentaInv(v);
+            }else{
+                va.setVisible(true);
+            }
+            
+        } else{
+            if(eu.getIdUsuario().equals(v.getIdVendedor())){
+                fa.borrarVentaEmpr(v);
+            } else{
+                va.setVisible(true);
+            }
+        }
     }
 
 

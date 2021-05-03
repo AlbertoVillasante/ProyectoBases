@@ -919,7 +919,7 @@ public class DAOUsuarios extends AbstractDAO {
         try {
             consulta = "select distinct e.nombreComercial "
                     + "from empresausuario as e, poseerparticipacionesempresa as p "
-                    + "where e.idusuario=p.idusuario2 and p.idusuario2 = ? and p.numparticipaciones <> 0 "
+                    + "where e.idusuario=p.idusuario2 and p.idusuario1 = ? and p.numparticipaciones <> 0 "
                     + "order by e.nombreComercial";
 
             stmPrestamos = con.prepareStatement(consulta);
@@ -1065,4 +1065,34 @@ public class DAOUsuarios extends AbstractDAO {
         return rendimiento * 100;
     }
 
+    public String getnombreInversor(String id) {
+        String resultado = null;
+        Connection con;
+        PreparedStatement stmEmpresa = null;
+        ResultSet rsEmpresa;
+
+        con = this.getConexion();
+        try {
+            stmEmpresa = con.prepareStatement("select nombre "
+                    + "from InversorUsuario "
+                    + "where idUsuario = ?");
+
+            stmEmpresa.setString(1, id);
+            rsEmpresa = stmEmpresa.executeQuery();
+
+            if (rsEmpresa.next()) {
+                resultado = rsEmpresa.getString("nombre");
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        } finally {
+            try {
+                stmEmpresa.close();
+            } catch (SQLException e) {
+                System.out.println("Imposible cerrar cursores");
+            }
+        }
+        return resultado;
+    }
 }

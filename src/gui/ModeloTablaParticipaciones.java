@@ -5,7 +5,7 @@
  */
 package gui;
 
-import aplicacion.Venta;
+import aplicacion.OfertaParticipaciones;
 import javax.swing.table.AbstractTableModel;
 import aplicacion.FachadaAplicacion;
 
@@ -15,10 +15,10 @@ import aplicacion.FachadaAplicacion;
  */
 public class ModeloTablaParticipaciones extends AbstractTableModel{
     FachadaAplicacion fa;
-    private java.util.List<Venta> ventas;
+    private java.util.List<OfertaParticipaciones> ventas;
 
     public ModeloTablaParticipaciones() {
-        this.ventas = new java.util.ArrayList<Venta>();
+        this.ventas = new java.util.ArrayList<OfertaParticipaciones>();
     }
 
     public int getColumnCount() {
@@ -87,12 +87,12 @@ public class ModeloTablaParticipaciones extends AbstractTableModel{
         return resultado;
     }
 
-    public void setFilas(java.util.List<Venta> ventas) {
+    public void setFilas(java.util.List<OfertaParticipaciones> ventas) {
         this.ventas = ventas;
         fireTableDataChanged();
     }
 
-    public Venta obtenerVenta(int i) {
+    public OfertaParticipaciones obtenerVenta(int i) {
         return this.ventas.get(i);
     }
 

@@ -7,7 +7,7 @@ import aplicacion.Categoria;
 import aplicacion.EmpresaUsuario;
 import aplicacion.Estadisticas;
 import aplicacion.Libro;
-import aplicacion.Venta;
+import aplicacion.OfertaParticipaciones;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -306,23 +306,23 @@ public class FachadaBaseDatos {
         return daoUsuarios.getEmpresasEmpr(id);
     }
     
-    public java.util.List<Venta> mostrarVentas(){
+    public java.util.List<OfertaParticipaciones> mostrarVentas(){
         return daoParticipaciones.mostrarVentas();
     }
     
-    public void ofertaVentaInv(Venta v){
+    public void ofertaVentaInv(OfertaParticipaciones v){
         daoParticipaciones.ofertaVentaInv(v);
     }
     
-    public void ofertaVentaEmpr(Venta v){
+    public void ofertaVentaEmpr(OfertaParticipaciones v){
         daoParticipaciones.ofertaVentaEmpr(v);
     }
 
-    public boolean comprobarParticipacionesEmpresa(Venta v){
+    public boolean comprobarParticipacionesEmpresa(OfertaParticipaciones v){
         return daoParticipaciones.comprobarParticipacionesEmpresa(v);
     }
     
-    public boolean comprobarParticipacionesInversor(Venta v){
+    public boolean comprobarParticipacionesInversor(OfertaParticipaciones v){
         return daoParticipaciones.comprobarParticipacionesInversor(v);
     }
     
@@ -338,12 +338,28 @@ public class FachadaBaseDatos {
         return daoParticipaciones.numParticipacionesEmprEmpr(idUsuario, idEmpresa);
     }
     
-    public int partInvBloq(String id){
-        return daoParticipaciones.partInvBloq(id);
+    public int partInvBloq(String id, String id2){
+        return daoParticipaciones.partInvBloq(id, id2);
     }
     
-    public int partEmprBloq(String id){
-        return daoParticipaciones.partEmprBloq(id);
+    public int partEmprBloq(String id, String id2){
+        return daoParticipaciones.partEmprBloq(id, id2);
+    }
+    
+    public void borrarVentaInv(OfertaParticipaciones v){
+        daoParticipaciones.borrarVentaInv(v);
+    }
+    
+    public void borrarVentaEmpr(OfertaParticipaciones v){
+        daoParticipaciones.borrarVentaEmpr(v);
+    }
+    
+    public String getnombreInversor(String id) {
+        return daoUsuarios.getnombreInversor(id);
+    }
+    
+    public String getnombreEmpresa(String id) {
+        return daoUsuarios.getnombreEmpresa(id);
     }
     
     public double getRendimiento(String idUsuario){

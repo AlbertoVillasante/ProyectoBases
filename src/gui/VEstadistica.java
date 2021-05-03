@@ -51,6 +51,9 @@ public class VEstadistica extends javax.swing.JDialog {
             textPartTot.setVisible(false);
             jLabel2.setVisible(false);
             TextFond.setText(String.valueOf(Math.round(iu.getFondosDisponiblesCuenta() * 100.0) / 100.0));
+             DecimalFormat df = new DecimalFormat("#.00");
+            String rendimiento = String.valueOf(df.format(fa.getRendimiento(iu.getIdUsuario())));
+            rendimientoText.setText(rendimiento);
         }
         if (eu != null) {
             this.eu = eu;
@@ -64,8 +67,15 @@ public class VEstadistica extends javax.swing.JDialog {
             if(fa.getParticipacionesRetenciones(eu.getIdUsuario()) < 0){
                 textPartTot1.setForeground(new Color(255, 0, 0));
             }
+            DecimalFormat df = new DecimalFormat("#.00");
+            String rendimiento = String.valueOf(df.format(fa.getRendimiento(eu.getIdUsuario())));
+            rendimientoText.setText(rendimiento);
+            
         }
         actualizarTablaEstadisticas();
+        // Poner rendimientos
+      
+        
     }
 
     /**
@@ -91,6 +101,9 @@ public class VEstadistica extends javax.swing.JDialog {
         TextFondosRetenciones = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         textPartTot1 = new javax.swing.JTextField();
+        rendimientoLabel = new javax.swing.JLabel();
+        rendimientoText = new javax.swing.JTextField();
+        porcentajeLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -141,6 +154,12 @@ public class VEstadistica extends javax.swing.JDialog {
 
         textPartTot1.setForeground(new java.awt.Color(187, 187, 188));
 
+        rendimientoLabel.setForeground(new java.awt.Color(187, 187, 188));
+        rendimientoLabel.setText("Rendimiento:");
+
+        porcentajeLabel.setForeground(new java.awt.Color(187, 187, 188));
+        porcentajeLabel.setText("%");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -148,43 +167,55 @@ public class VEstadistica extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(aceptar))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(textPartTot1, javax.swing.GroupLayout.DEFAULT_SIZE, 247, Short.MAX_VALUE)
-                                        .addGap(70, 70, 70))
-                                    .addComponent(jLabel5)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(TextFond, javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(TextFondosRetenciones))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel4)
-                                            .addComponent(jLabel1))))
-                                .addGap(30, 30, 30))
+                                .addComponent(textPartTot1, javax.swing.GroupLayout.DEFAULT_SIZE, 247, Short.MAX_VALUE)
+                                .addGap(70, 70, 70))
                             .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel5)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(TextFond, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(TextFondosRetenciones))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel3)
-                                    .addComponent(textPartTot, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel6))
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel1)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(cancelar)))
+                        .addGap(30, 30, 30))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(aceptar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(cancelar)
-                        .addGap(32, 32, 32))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3)
+                            .addComponent(textPartTot, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(rendimientoLabel)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(rendimientoText, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(porcentajeLabel)))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(cancelar)
+                            .addComponent(aceptar)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -204,13 +235,14 @@ public class VEstadistica extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(TextFondosRetenciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4)))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(aceptar)
-                    .addComponent(cancelar))
-                .addGap(30, 30, 30))
+                            .addComponent(jLabel4))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(rendimientoLabel)
+                            .addComponent(rendimientoText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(porcentajeLabel))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
 
         pack();
@@ -242,6 +274,9 @@ public class VEstadistica extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel porcentajeLabel;
+    private javax.swing.JLabel rendimientoLabel;
+    private javax.swing.JTextField rendimientoText;
     private javax.swing.JTable tablaEstadisticas;
     private javax.swing.JTextField textPartTot;
     private javax.swing.JTextField textPartTot1;
@@ -251,5 +286,13 @@ public class VEstadistica extends javax.swing.JDialog {
         ModeloTablaEstadisticas m;
         m = (ModeloTablaEstadisticas) tablaEstadisticas.getModel();
         m.setFilas(fa.actualizarTablaEstadisticas(iu, eu));
+    }
+    
+    private void probandoRendimientosAcordarseDeBorrasEstaFuncion(){
+    
+        rendimientoText.setText(String.valueOf(fa.getRendimiento(iu.getIdUsuario())));
+        rendimientoText.setText(String.valueOf(fa.getRendimiento(eu.getIdUsuario())));
+       
+    
     }
 }

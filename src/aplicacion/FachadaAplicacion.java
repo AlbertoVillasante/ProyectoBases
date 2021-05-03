@@ -317,4 +317,8 @@ public class FachadaAplicacion {
     public int partEmprBloq(String id){
         return gpart.partEmprBloq(id);
     }
+    
+    public double getRendimiento(String idUsuario){
+        return gu.getRendimiento(idUsuario);
+    }
 }

@@ -345,4 +345,14 @@ public class FachadaBaseDatos {
     public int partEmprBloq(String id){
         return daoParticipaciones.partEmprBloq(id);
     }
+    
+    public double getRendimiento(String idUsuario){
+        if(idUsuario.length()==9){
+             return daoUsuarios.getRendimientoInversor(idUsuario);
+        }else if(idUsuario.length() == 13){
+            return daoUsuarios.getRendimientoEmpresa(idUsuario);
+        }
+        else return 1.0; // por defecto no hay rendimiento 
+    }
+    
 }

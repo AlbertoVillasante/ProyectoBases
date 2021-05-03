@@ -1002,4 +1002,67 @@ public class DAOUsuarios extends AbstractDAO {
         }
         return resultado;
     }
+    
+    public double getRendimientoInversor(String idUsuario){
+        double rendimiento = 1.0;
+        Connection con;
+        PreparedStatement stmUsuario = null;
+        ResultSet rsUsuario;
+
+        con = this.getConexion();
+        try {
+            stmUsuario = con.prepareStatement("select (fondosDisponiblesCuenta / fondosInicialesCuenta) as rendimiento " +
+                "from inversorUsuario where "
+              + "fondosInicialesCuenta <>0 and  idUsuario = ?");
+
+            stmUsuario.setString(1, idUsuario);
+            rsUsuario = stmUsuario.executeQuery();
+
+            if (rsUsuario.next()) {
+                rendimiento = rsUsuario.getDouble("rendimiento");
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        } finally {
+            try {
+                stmUsuario.close();
+            } catch (SQLException e) {
+                System.out.println("Imposible cerrar cursores");
+            }
+        }
+        return rendimiento * 100;
+    }
+    
+        public double getRendimientoEmpresa(String idUsuario){
+        double rendimiento = 1.0;
+        Connection con;
+        PreparedStatement stmUsuario = null;
+        ResultSet rsUsuario;
+
+        con = this.getConexion();
+        try {
+            stmUsuario = con.prepareStatement("select (fondosDisponiblesCuenta / fondosInicialesCuenta) as rendimiento " +
+                "from empresaUsuario where "
+              + "fondosInicialesCuenta <>0 and  idUsuario = ?");
+
+            stmUsuario.setString(1, idUsuario);
+            rsUsuario = stmUsuario.executeQuery();
+
+            if (rsUsuario.next()) {
+                rendimiento = rsUsuario.getDouble("rendimiento");
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        } finally {
+            try {
+                stmUsuario.close();
+            } catch (SQLException e) {
+                System.out.println("Imposible cerrar cursores");
+            }
+        }
+        return rendimiento * 100;
+    }
+
 }

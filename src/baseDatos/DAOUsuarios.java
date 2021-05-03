@@ -247,7 +247,7 @@ public class DAOUsuarios extends AbstractDAO {
         con = super.getConexion();
 
         try {
-            stmUsuario = con.prepareStatement("insert into empresaUsuario(idUsuario, clave, nombre, direccion, telefono, tipoUsuario) "
+            stmUsuario = con.prepareStatement("insert into empresaUsuario(idUsuario, clave, nombreComercial, direccion, telefono, tipoUsuario) "
                     + "values (?,?,?,?,?,?)");
             stmUsuario.setString(1, u.getIdUsuario());
             stmUsuario.setString(2, u.getClave());
@@ -919,7 +919,7 @@ public class DAOUsuarios extends AbstractDAO {
         try {
             consulta = "select distinct e.nombreComercial "
                     + "from empresausuario as e, poseerparticipacionesempresa as p "
-                    + "where e.idusuario=p.idusuario2 and p.idusuario2 = ? and p.numparticipaciones <> 0 "
+                    + "where e.idusuario=p.idusuario2 and p.idusuario1 = ? and p.numparticipaciones <> 0 "
                     + "order by e.nombreComercial";
 
             stmPrestamos = con.prepareStatement(consulta);
@@ -1003,5 +1003,96 @@ public class DAOUsuarios extends AbstractDAO {
         return resultado;
     }
     
+    public double getRendimientoInversor(String idUsuario){
+        double rendimiento = 1.0;
+        Connection con;
+        PreparedStatement stmUsuario = null;
+        ResultSet rsUsuario;
+
+        con = this.getConexion();
+        try {
+            stmUsuario = con.prepareStatement("select (fondosDisponiblesCuenta / fondosInicialesCuenta) as rendimiento " +
+                "from inversorUsuario where "
+              + "fondosInicialesCuenta <>0 and  idUsuario = ?");
+
+            stmUsuario.setString(1, idUsuario);
+            rsUsuario = stmUsuario.executeQuery();
+
+            if (rsUsuario.next()) {
+                rendimiento = rsUsuario.getDouble("rendimiento");
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        } finally {
+            try {
+                stmUsuario.close();
+            } catch (SQLException e) {
+                System.out.println("Imposible cerrar cursores");
+            }
+        }
+        return rendimiento * 100;
+    }
     
+        public double getRendimientoEmpresa(String idUsuario){
+        double rendimiento = 1.0;
+        Connection con;
+        PreparedStatement stmUsuario = null;
+        ResultSet rsUsuario;
+
+        con = this.getConexion();
+        try {
+            stmUsuario = con.prepareStatement("select (fondosDisponiblesCuenta / fondosInicialesCuenta) as rendimiento " +
+                "from empresaUsuario where "
+              + "fondosInicialesCuenta <>0 and  idUsuario = ?");
+
+            stmUsuario.setString(1, idUsuario);
+            rsUsuario = stmUsuario.executeQuery();
+
+            if (rsUsuario.next()) {
+                rendimiento = rsUsuario.getDouble("rendimiento");
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        } finally {
+            try {
+                stmUsuario.close();
+            } catch (SQLException e) {
+                System.out.println("Imposible cerrar cursores");
+            }
+        }
+        return rendimiento * 100;
+    }
+
+    public String getnombreInversor(String id) {
+        String resultado = null;
+        Connection con;
+        PreparedStatement stmEmpresa = null;
+        ResultSet rsEmpresa;
+
+        con = this.getConexion();
+        try {
+            stmEmpresa = con.prepareStatement("select nombre "
+                    + "from InversorUsuario "
+                    + "where idUsuario = ?");
+
+            stmEmpresa.setString(1, id);
+            rsEmpresa = stmEmpresa.executeQuery();
+
+            if (rsEmpresa.next()) {
+                resultado = rsEmpresa.getString("nombre");
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        } finally {
+            try {
+                stmEmpresa.close();
+            } catch (SQLException e) {
+                System.out.println("Imposible cerrar cursores");
+            }
+        }
+        return resultado;
+    }
 }

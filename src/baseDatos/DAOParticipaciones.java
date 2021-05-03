@@ -9,7 +9,7 @@ import aplicacion.EmpresaUsuario;
 import aplicacion.InversorUsuario;
 import aplicacion.OfertaParticipaciones;
 import aplicacion.TipoUsuario;
-import aplicacion.Venta;
+import aplicacion.OfertaParticipaciones;
 import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -134,10 +134,10 @@ public class DAOParticipaciones extends AbstractDAO {
             }
         }
     }
-
-    public java.util.List<Venta> mostrarVentas() {
-        java.util.List<Venta> resultado = new java.util.ArrayList<Venta>();
-        Venta v;
+    
+    public java.util.List<OfertaParticipaciones> mostrarVentas(){
+        java.util.List<OfertaParticipaciones> resultado = new java.util.ArrayList<OfertaParticipaciones>();
+        OfertaParticipaciones v;
         Connection con;
         PreparedStatement stmVenta = null;
         ResultSet rsVenta;
@@ -150,7 +150,7 @@ public class DAOParticipaciones extends AbstractDAO {
                     + "where o.numeroparticipaciones <= p.numparticipaciones and o.idUsuario1 = p.idUsuario1 and o.idUsuario2 = p.idUsuario2 ");
             rsVenta = stmVenta.executeQuery();
             while (rsVenta.next()) {
-                v = new Venta(rsVenta.getFloat("precio"), rsVenta.getInt("numeroparticipaciones"), rsVenta.getString("idUsuario2"), rsVenta.getString("idUsuario1"));
+                v = new OfertaParticipaciones(rsVenta.getFloat("precio"), rsVenta.getInt("numeroparticipaciones"), rsVenta.getString("idUsuario2"), rsVenta.getString("idUsuario1"));
                 resultado.add(v);
             }
 
@@ -160,7 +160,7 @@ public class DAOParticipaciones extends AbstractDAO {
                         + "where o.numeroparticipaciones <= p.numparticipaciones and o.idUsuario1 = p.idUsuario1 and o.idUsuario2 = p.idUsuario2 ");
                 rsVenta = stmVenta.executeQuery();
                 while (rsVenta.next()) {
-                    v = new Venta(rsVenta.getFloat("precio"), rsVenta.getInt("numeroparticipaciones"), rsVenta.getString("idUsuario2"), rsVenta.getString("idUsuario1"));
+                    v = new OfertaParticipaciones(rsVenta.getFloat("precio"), rsVenta.getInt("numeroparticipaciones"), rsVenta.getString("idUsuario2"), rsVenta.getString("idUsuario1"));
                     resultado.add(v);
                 }
             } catch (SQLException e) {
@@ -222,8 +222,8 @@ public class DAOParticipaciones extends AbstractDAO {
         }
         return resultado;
     }
-
-    public void ofertaVentaInv(Venta v) {
+    
+    public void ofertaVentaInv(OfertaParticipaciones v){
         Connection con;
         PreparedStatement stmOferta = null;
         con = super.getConexion();
@@ -247,8 +247,8 @@ public class DAOParticipaciones extends AbstractDAO {
             }
         }
     }
-
-    public void ofertaVentaEmpr(Venta v) {
+    
+    public void ofertaVentaEmpr(OfertaParticipaciones v){
         Connection con;
         PreparedStatement stmOferta = null;
         con = super.getConexion();
@@ -272,8 +272,8 @@ public class DAOParticipaciones extends AbstractDAO {
             }
         }
     }
-
-    public boolean comprobarParticipacionesEmpresa(Venta v) {
+    
+    public boolean comprobarParticipacionesEmpresa(OfertaParticipaciones v){
         Connection con;
         PreparedStatement stmOferta = null;
         con = super.getConexion();
@@ -285,10 +285,15 @@ public class DAOParticipaciones extends AbstractDAO {
         try {
             stmOferta = con.prepareStatement("select * "
                     + "from poseerparticipacionesempresa "
-                    + "where idUsuario1 = ? or idUsuario2 = ? and numparticipaciones >= ?");
+                    + "where idUsuario1 = ? and idUsuario2 = ? "
+                    + "and (numparticipaciones - ?) >= (select COALESCE(sum(numeroparticipaciones), 0) "
+                                                    + "from ofertaparticipacionesventaempresa "
+                                                    + "where idusuario1 = ? and idusuario2 = ? )");
             stmOferta.setString(1, v.getIdVendedor());
             stmOferta.setString(2, v.getIdEmpresa());
             stmOferta.setInt(3, v.getNparticipaciones());
+            stmOferta.setString(4, v.getIdVendedor());
+            stmOferta.setString(5, v.getIdEmpresa());
             rsParticipaciones = stmOferta.executeQuery();
             if (rsParticipaciones.next()) {
                 resultado = true;
@@ -306,8 +311,8 @@ public class DAOParticipaciones extends AbstractDAO {
 
         return resultado;
     }
-
-    public boolean comprobarParticipacionesInversor(Venta v) {
+    
+    public boolean comprobarParticipacionesInversor(OfertaParticipaciones v){
         Connection con;
         PreparedStatement stmOferta = null;
         con = super.getConexion();
@@ -319,10 +324,15 @@ public class DAOParticipaciones extends AbstractDAO {
         try {
             stmOferta = con.prepareStatement("select * "
                     + "from poseerparticipacionesinversor "
-                    + "where idUsuario1 = ? or idUsuario2 = ? and numparticipaciones >= ?");
+                    + "where idUsuario1 = ? and idUsuario2 = ? "
+                    + "and (numparticipaciones - ?) >= (select COALESCE(sum(numeroparticipaciones), 0) "
+                                                    + "from ofertaparticipacionesventainversor "
+                                                    + "where idusuario1 = ? and idusuario2 = ? )");
             stmOferta.setString(1, v.getIdVendedor());
             stmOferta.setString(2, v.getIdEmpresa());
             stmOferta.setInt(3, v.getNparticipaciones());
+            stmOferta.setString(4, v.getIdVendedor());
+            stmOferta.setString(5, v.getIdEmpresa());
             rsParticipaciones = stmOferta.executeQuery();
             if (rsParticipaciones.next()) {
                 resultado = true;
@@ -340,6 +350,199 @@ public class DAOParticipaciones extends AbstractDAO {
 
         return resultado;
     }
+    
+    public int numParticipacionesInvEmpr(String idUsuario, String idEmpresa){
+        Integer resultado = null;
+        Connection con;
+        PreparedStatement stmPrestamos = null;
+        ResultSet rsPrestamos;
+        String consulta;
+
+        con = this.getConexion();
+
+        try {
+            consulta = "SELECT numparticipaciones as nparticipaciones "  
+                    +"FROM poseerparticipacionesinversor " 
+                    +"WHERE idUsuario1 = ? and idUsuario2 = ?";
+
+            stmPrestamos = con.prepareStatement(consulta);
+            stmPrestamos.setString(1, idUsuario);
+            stmPrestamos.setString(2, idEmpresa);
+            rsPrestamos = stmPrestamos.executeQuery();
+            if (rsPrestamos.next()) {
+                resultado = rsPrestamos.getInt("nparticipaciones");
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        } finally {
+            try {
+                stmPrestamos.close();
+            } catch (SQLException e) {
+                System.out.println("Imposible cerrar cursores");
+            }
+        }
+        return resultado;
+    }
+    
+    public int numParticipacionesEmprEmpr(String idUsuario, String idEmpresa){
+        Integer resultado = null;
+        Connection con;
+        PreparedStatement stmPrestamos = null;
+        ResultSet rsPrestamos;
+        String consulta;
+
+        con = this.getConexion();
+
+        try {
+            consulta = "SELECT numparticipaciones as nparticipaciones " 
+                    +"FROM poseerparticipacionesempresa " 
+                    +"WHERE idUsuario1 = ? and idUsuario2 = ?";
+
+            stmPrestamos = con.prepareStatement(consulta);
+            stmPrestamos.setString(1, idUsuario);
+            stmPrestamos.setString(2, idEmpresa);
+            rsPrestamos = stmPrestamos.executeQuery();
+            if (rsPrestamos.next()) {
+                resultado = rsPrestamos.getInt("nparticipaciones");
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        } finally {
+            try {
+                stmPrestamos.close();
+            } catch (SQLException e) {
+                System.out.println("Imposible cerrar cursores");
+            }
+        }
+        return resultado;
+    }
+    
+    public int partInvBloq(String idUser, String idEmpr){
+        Integer resultado = null;
+        Connection con;
+        PreparedStatement stmPrestamos = null;
+        ResultSet rsPrestamos;
+        String consulta;
+
+        con = this.getConexion();
+
+        try {
+            consulta = "SELECT sum(numeroparticipaciones) as suma " 
+                    +"FROM ofertaparticipacionesventainversor " 
+                    +"WHERE idusuario1 = ? and idusuario2 = ?";
+
+            stmPrestamos = con.prepareStatement(consulta);
+            stmPrestamos.setString(1, idUser);
+            stmPrestamos.setString(2, idEmpr);
+            rsPrestamos = stmPrestamos.executeQuery();
+            if (rsPrestamos.next()) {
+                resultado = rsPrestamos.getInt("suma");
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        } finally {
+            try {
+                stmPrestamos.close();
+            } catch (SQLException e) {
+                System.out.println("Imposible cerrar cursores");
+            }
+        }
+        return resultado;
+    }
+    
+    public int partEmprBloq(String idUser, String idEmpr){
+        Integer resultado = null;
+        Connection con;
+        PreparedStatement stmPrestamos = null;
+        ResultSet rsPrestamos;
+        String consulta;
+
+        con = this.getConexion();
+
+        try {
+            consulta = "SELECT sum(numeroparticipaciones) as suma " 
+                    +"FROM ofertaparticipacionesventaempresa " 
+                    +"WHERE idusuario1 = ? and idusuario2 = ?";
+
+            stmPrestamos = con.prepareStatement(consulta);
+            stmPrestamos.setString(1, idUser);
+            stmPrestamos.setString(2, idEmpr);
+            rsPrestamos = stmPrestamos.executeQuery();
+            if (rsPrestamos.next()) {
+                resultado = rsPrestamos.getInt("suma");
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        } finally {
+            try {
+                stmPrestamos.close();
+            } catch (SQLException e) {
+                System.out.println("Imposible cerrar cursores");
+            }
+        }
+        return resultado;
+    }
+    
+    public void borrarVentaInv(OfertaParticipaciones v){
+        Connection con;
+        PreparedStatement stmUsuario=null;
+        ResultSet rsUsuario;
+
+        con=this.getConexion();
+
+        try {
+        stmUsuario=con.prepareStatement("DELETE FROM ofertaparticipacionesventainversor " 
+                                       + "WHERE idusuario1 = ? and idusuario2 = ? "
+                                       + "and fecha = (SELECT min(fecha) " 
+                                                       + "FROM ofertaparticipacionesventainversor " 
+                                                       + "WHERE precio = ? and numeroparticipaciones = ? and idusuario1 = ? and idusuario2 = ?)");
+        stmUsuario.setString(1, v.getIdVendedor());
+        stmUsuario.setString(2, v.getIdEmpresa());
+        stmUsuario.setFloat(3, v.getPrecio());
+        stmUsuario.setInt(4, v.getNparticipaciones());
+        stmUsuario.setString(5, v.getIdVendedor());
+        stmUsuario.setString(6, v.getIdEmpresa());
+        rsUsuario=stmUsuario.executeQuery();
+        } catch (SQLException e){
+          System.out.println(e.getMessage());
+          //this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        }finally{
+          try {stmUsuario.close();} catch (SQLException e){System.out.println("Imposible cerrar cursores");}
+        }
+    }
+    
+    public void borrarVentaEmpr(OfertaParticipaciones v){
+        Connection con;
+        PreparedStatement stmUsuario=null;
+        ResultSet rsUsuario;
+
+        con=this.getConexion();
+
+        try {
+        stmUsuario=con.prepareStatement("DELETE FROM ofertaparticipacionesventaempresa " 
+                                       + "WHERE idusuario1 = ? and idusuario2 = ? "
+                                       + "and fecha = (SELECT min(fecha) " 
+                                                       + "FROM ofertaparticipacionesventaempresa " 
+                                                       + "WHERE precio = ? and numeroparticipaciones = ? and idusuario1 = ? and idusuario2 = ?)");
+        stmUsuario.setString(1, v.getIdVendedor());
+        stmUsuario.setString(2, v.getIdEmpresa());
+        stmUsuario.setFloat(3, v.getPrecio());
+        stmUsuario.setInt(4, v.getNparticipaciones());
+        stmUsuario.setString(5, v.getIdVendedor());
+        stmUsuario.setString(6, v.getIdEmpresa());
+        rsUsuario=stmUsuario.executeQuery();
+        } catch (SQLException e){
+          System.out.println(e.getMessage());
+          //this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        }finally{
+          try {stmUsuario.close();} catch (SQLException e){System.out.println("Imposible cerrar cursores");}
+        }
+    }
+    
 
     public int contarOfertas(String idUsuario, double precio) {
         int resultado=0;

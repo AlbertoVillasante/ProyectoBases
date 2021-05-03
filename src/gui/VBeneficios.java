@@ -125,8 +125,13 @@ public class VBeneficios extends javax.swing.JDialog {
 
         btnBuscar.setForeground(new java.awt.Color(187, 187, 188));
         btnBuscar.setText("Buscar");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
 
-        numPart.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
+        numPart.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(0), Integer.valueOf(0), null, Integer.valueOf(1)));
 
         jLabel3.setForeground(new java.awt.Color(187, 187, 188));
         jLabel3.setText("Número de Participaciones:");
@@ -258,13 +263,20 @@ public class VBeneficios extends javax.swing.JDialog {
             if (cuadroBeneficio.getText().equals("")) {
                 cuadroBeneficio.setText("0");
             }
-
             if (Integer.parseInt(numPart.getValue().toString())==0 && Double.parseDouble(cuadroBeneficio.getText()) <= 0) {
                 error.setVisible(true);
             } else {
                 if (cuadroFechaPago.getDate() == null) {
                     error.setVisible(true);
-                } else {
+                }
+                if(fa.getSaldoRetenciones(eu.getIdUsuario()) < 0){
+                    error.setText("Saldo insuficiente para completar la transacción");
+                    error.setVisible(true);
+                }
+                if(fa.getParticipacionesRetenciones(eu.getIdUsuario()) < 0){
+                    error.setText("Participaciones insuficientes para completar la transacción");
+                    error.setVisible(true); 
+                }else {
                     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
                     String date = sdf.format(cuadroFechaPago.getDate());
                     fa.altaPagoBeneficios(date, Double.parseDouble(cuadroBeneficio.getText()), btnSelector.getSelectedItem().toString(), Integer.parseInt(numPart.getValue().toString()));
@@ -278,6 +290,13 @@ public class VBeneficios extends javax.swing.JDialog {
     private void estadisticasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_estadisticasActionPerformed
         ve = new VEstadistica(fa, iu, eu);
         ve.setVisible(true);    }//GEN-LAST:event_estadisticasActionPerformed
+
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        // TODO add your handling code here:
+        ModeloTablaBeneficios m;
+        m = (ModeloTablaBeneficios) tablaBeneficios.getModel();
+        m.setFilas(fa.getBeneficiosEmpresa(fa.getIdEmpresa(btnSelector.getSelectedItem().toString())));
+    }//GEN-LAST:event_btnBuscarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

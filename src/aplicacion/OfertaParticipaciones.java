@@ -24,6 +24,13 @@ public class OfertaParticipaciones {
         this.idUsuario2 = idUsuario2;
     }
 
+    public OfertaParticipaciones(double precioParticipacion, int numeroParticipaciones, String idUsuario2, String idUsuario1) {
+        this.precioParticipacion = precioParticipacion;
+        this.numeroParticipaciones = numeroParticipaciones;
+        this.idUsuario1 = idUsuario1;
+        this.idUsuario2 = idUsuario2;
+    }
+
     public float getComision() {
         return comision / 100;
     }
@@ -32,7 +39,6 @@ public class OfertaParticipaciones {
         this.comision = comision;
     }
 
-    
     public String getFechaOferta() {
         return fechaOferta;
     }
@@ -73,4 +79,66 @@ public class OfertaParticipaciones {
         this.precioParticipacion = precioParticipacion;
     }
 
-}
+    =======
+ * @author
+    alumnogreibd
+
+    */
+public class OfertaParticipaciones {
+
+        private Float precio;
+        private Integer nparticipaciones;
+        private String idEmpresa;
+        private String idVendedor;
+        private String fechaOferta;
+
+        public OfertaParticipaciones(Float precio, Integer nparticipaciones, String empr, String idVendedor) {
+            this.precio = precio;
+            this.nparticipaciones = nparticipaciones;
+            this.idEmpresa = empr;
+            this.idVendedor = idVendedor;
+        }
+
+        public Float getPrecio() {
+            return precio;
+        }
+
+        public Integer getNparticipaciones() {
+            return nparticipaciones;
+        }
+
+        public String getIdEmpresa() {
+            return idEmpresa;
+        }
+
+        public void setIdEmpresa(String idEmpresa) {
+            this.idEmpresa = idEmpresa;
+        }
+
+        public void setPrecio(Float precio) {
+            this.precio = precio;
+        }
+
+        public void setNparticipaciones(Integer nparticipaciones) {
+            this.nparticipaciones = nparticipaciones;
+        }
+
+        public String getIdVendedor() {
+            return idVendedor;
+        }
+
+        public void setIdVendedor(String idVendedor) {
+            this.idVendedor = idVendedor;
+        }
+
+        public String getFechaOferta() {
+            return fechaOferta;
+        }
+
+        public void setFechaOferta(String fechaOferta) {
+            this.fechaOferta = fechaOferta;
+        }
+
+        >>>>>>> origin
+        /master
+    }

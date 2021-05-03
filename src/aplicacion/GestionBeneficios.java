@@ -36,6 +36,10 @@ public class GestionBeneficios {
     public ArrayList<AnunciarBeneficios> getBeneficios() {
         return fbd.getBeneficios();
     }
+    
+    public ArrayList<AnunciarBeneficios> getBeneficiosEmpresa(String idEmpresa) {
+        return fbd.getBeneficiosEmpresa(idEmpresa);
+    }
 
     public float getSaldoRetenciones(String id) {
         return fbd.getSaldoRetenciones(id);

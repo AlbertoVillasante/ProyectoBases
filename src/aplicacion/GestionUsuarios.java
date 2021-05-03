@@ -148,6 +148,10 @@ public class GestionUsuarios {
         return fbd.getIdEmpresa(nombre);
     }
     
+    public double getRendimiento(String idUsuario){
+        return fbd.getRendimiento(idUsuario);
+    }
+    
      public String getnombreEmpresa(String id) {
         return fbd.getnombreEmpresa(id);
     }

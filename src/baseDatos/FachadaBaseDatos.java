@@ -8,7 +8,6 @@ import aplicacion.EmpresaUsuario;
 import aplicacion.Estadisticas;
 import aplicacion.Libro;
 import aplicacion.OfertaParticipaciones;
-import aplicacion.Venta;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -229,6 +228,10 @@ public class FachadaBaseDatos {
     public ArrayList<AnunciarBeneficios> getBeneficios() {
         return daoBeneficios.getBeneficios();
     }
+    
+    public ArrayList<AnunciarBeneficios> getBeneficiosEmpresa(String idEmpresa) {
+        return daoBeneficios.getBeneficiosEmpresa(idEmpresa);
+    }
 
     public java.util.List<InversorUsuario> mostrarUsuarioInvPend() {
         return daoUsuarios.mostrarUsuarioInvPend();
@@ -301,30 +304,72 @@ public class FachadaBaseDatos {
     public ArrayList<String> getEmpresasEmpr(String id) {
         return daoUsuarios.getEmpresasEmpr(id);
     }
-
-    public java.util.List<Venta> mostrarVentas() {
+    
+    public java.util.List<OfertaParticipaciones> mostrarVentas(){
         return daoParticipaciones.mostrarVentas();
     }
-
-    public void ofertaVentaInv(Venta v) {
+    
+    public void ofertaVentaInv(OfertaParticipaciones v){
         daoParticipaciones.ofertaVentaInv(v);
     }
-
-    public void ofertaVentaEmpr(Venta v) {
+    
+    public void ofertaVentaEmpr(OfertaParticipaciones v){
         daoParticipaciones.ofertaVentaEmpr(v);
     }
 
-    public boolean comprobarParticipacionesEmpresa(Venta v) {
+    public boolean comprobarParticipacionesEmpresa(OfertaParticipaciones v){
         return daoParticipaciones.comprobarParticipacionesEmpresa(v);
     }
-
-    public boolean comprobarParticipacionesInversor(Venta v) {
+    
+    public boolean comprobarParticipacionesInversor(OfertaParticipaciones v){
         return daoParticipaciones.comprobarParticipacionesInversor(v);
     }
 
     public String getIdEmpresa(String nombre) {
         return daoUsuarios.getIdEmpresa(nombre);
     }
+    
+    public int numParticipacionesInvEmpr(String idUsuario, String idEmpresa){
+        return daoParticipaciones.numParticipacionesInvEmpr(idUsuario, idEmpresa);
+    }
+    
+    public int numParticipacionesEmprEmpr(String idUsuario, String idEmpresa){
+        return daoParticipaciones.numParticipacionesEmprEmpr(idUsuario, idEmpresa);
+    }
+    
+    public int partInvBloq(String id, String id2){
+        return daoParticipaciones.partInvBloq(id, id2);
+    }
+    
+    public int partEmprBloq(String id, String id2){
+        return daoParticipaciones.partEmprBloq(id, id2);
+    }
+    
+    public void borrarVentaInv(OfertaParticipaciones v){
+        daoParticipaciones.borrarVentaInv(v);
+    }
+    
+    public void borrarVentaEmpr(OfertaParticipaciones v){
+        daoParticipaciones.borrarVentaEmpr(v);
+    }
+    
+    public String getnombreInversor(String id) {
+        return daoUsuarios.getnombreInversor(id);
+    }
+    
+    public String getnombreEmpresa(String id) {
+        return daoUsuarios.getnombreEmpresa(id);
+    }
+    
+    public double getRendimiento(String idUsuario){
+        if(idUsuario.length()==9){
+             return daoUsuarios.getRendimientoInversor(idUsuario);
+        }else if(idUsuario.length() == 13){
+            return daoUsuarios.getRendimientoEmpresa(idUsuario);
+        }
+        else return 1.0; // por defecto no hay rendimiento 
+    }
+    
 
     public int contarOfertas(String id, double precio) {
         return daoParticipaciones.contarOfertas(id, precio);

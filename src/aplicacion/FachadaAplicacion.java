@@ -205,7 +205,11 @@ public class FachadaAplicacion {
     public ArrayList<AnunciarBeneficios> getBeneficios() {
         return gb.getBeneficios();
     }
-
+    
+    public ArrayList<AnunciarBeneficios> getBeneficiosEmpresa(String idEmpresa) {
+        return gb.getBeneficiosEmpresa(idEmpresa);
+    }
+    
     public void altaPagoBeneficios(String fecha, double precio, String nombreEmpresa, int numParticipaciones) {
         gb.altaPagoBeneficios(fecha, precio, nombreEmpresa, numParticipaciones);
     }
@@ -274,23 +278,23 @@ public class FachadaAplicacion {
         return gu.getEmpresasEmpr(id);
     }
     
-    public java.util.List<Venta> mostrarVentas(){
+    public java.util.List<OfertaParticipaciones> mostrarVentas(){
         return gpart.mostrarVentas();
     }
     
-    public void ofertaVentaInv(Venta v){
+    public void ofertaVentaInv(OfertaParticipaciones v){
         gpart.ofertaVentaInv(v);
     }
     
-    public void ofertaVentaEmpr(Venta v){
+    public void ofertaVentaEmpr(OfertaParticipaciones v){
         gpart.ofertaVentaEmpr(v);
     }
     
-    public boolean comprobarParticipacionesEmpresa(Venta v){
+    public boolean comprobarParticipacionesEmpresa(OfertaParticipaciones v){
         return gpart.comprobarParticipacionesEmpresa(v);
     }
     
-    public boolean comprobarParticipacionesInversor(Venta v){
+    public boolean comprobarParticipacionesInversor(OfertaParticipaciones v){
         return gpart.comprobarParticipacionesInversor(v);
     }
     
@@ -298,6 +302,41 @@ public class FachadaAplicacion {
         return gu.getIdEmpresa(nombre);
     }
     
+    public int numParticipacionesInvEmpr(String idUsuario, String idEmpresa){
+        return gpart.numParticipacionesInvEmpr(idUsuario, idEmpresa);
+    }
+    
+    public int numParticipacionesEmprEmpr(String idUsuario, String idEmpresa){
+        return gpart.numParticipacionesEmprEmpr(idUsuario, idEmpresa);
+    }
+    
+    public int partInvBloq(String id, String id2){
+        return gpart.partInvBloq(id, id2);
+    }
+    
+    public int partEmprBloq(String id, String id2){
+        return gpart.partEmprBloq(id, id2);
+    }
+    
+    public void borrarVentaInv(OfertaParticipaciones v){
+        gpart.borrarVentaInv(v);
+    }
+    
+    public void borrarVentaEmpr(OfertaParticipaciones v){
+        gpart.borrarVentaEmpr(v);
+    }
+    
+    public String getnombreInversor(String id) {
+        return gu.getnombreInversor(id);
+    }
+    
+    public String getnombreEmpresa(String id) {
+        return gu.getnombreEmpresa(id);
+    }
+    
+    public double getRendimiento(String idUsuario){
+        return gu.getRendimiento(idUsuario);
+    }
     public int contarOfertas(String id, double precio){
         return gpart.contarOfertas(id, precio);
     }

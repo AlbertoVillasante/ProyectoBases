@@ -28,40 +28,48 @@ public class GestionParticipaciones {
     public void bajaParticipacionesEmpresa(int participaciones, String id) {
         fbd.bajaParticipacionesEmpresa(participaciones, id);
     }
-
-    public java.util.List<Venta> mostrarVentas() {
+    
+    public java.util.List<OfertaParticipaciones> mostrarVentas(){
         return fbd.mostrarVentas();
     }
-
-    public void ofertaVentaInv(Venta v) {
+    
+    public void ofertaVentaInv(OfertaParticipaciones v){
         fbd.ofertaVentaInv(v);
     }
-
-    public void ofertaVentaEmpr(Venta v) {
+    
+    public void ofertaVentaEmpr(OfertaParticipaciones v){
         fbd.ofertaVentaEmpr(v);
     }
-
-    public boolean comprobarParticipacionesEmpresa(Venta v) {
+    
+    public boolean comprobarParticipacionesEmpresa(OfertaParticipaciones v){
         return fbd.comprobarParticipacionesEmpresa(v);
     }
-
-    public boolean comprobarParticipacionesInversor(Venta v) {
+    
+    public boolean comprobarParticipacionesInversor(OfertaParticipaciones v){
         return fbd.comprobarParticipacionesInversor(v);
     }
-
-    public int contarOfertas(String id, double precio) {
-        return fbd.contarOfertas(id, precio);
-    }
-
-    public OfertaParticipaciones getOfertaParticipaciones(String id, double precio) {
-        return fbd.getOfertaParticipaciones(id, precio);
+    
+    public int numParticipacionesInvEmpr(String idUsuario, String idEmpresa){
+        return fbd.numParticipacionesInvEmpr(idUsuario, idEmpresa);
     }
     
-    public int moverParticipacionesTodas(String idUsuario, OfertaParticipaciones oferta){
-        return fbd.moverParticipacionesTodas(idUsuario,oferta);
+    public int numParticipacionesEmprEmpr(String idUsuario, String idEmpresa){
+        return fbd.numParticipacionesEmprEmpr(idUsuario, idEmpresa);
     }
     
-    public void moverParticipacionesParciales(OfertaParticipaciones oferta, String idUsuario, int participacionesRestantes){
-        fbd.moverParticipacionesParciales(oferta,idUsuario,participacionesRestantes);
+    public int partInvBloq(String idUser, String idEmpr){
+        return fbd.partInvBloq(idUser, idEmpr);
+    }
+    
+    public int partEmprBloq(String idUser, String idEmpr){
+        return fbd.partEmprBloq(idUser, idEmpr);
+    }
+    
+    public void borrarVentaInv(OfertaParticipaciones v){
+        fbd.borrarVentaInv(v);
+    }
+    
+    public void borrarVentaEmpr(OfertaParticipaciones v){
+        fbd.borrarVentaEmpr(v);
     }
 }

@@ -245,12 +245,16 @@ public class DAOBeneficios extends AbstractDAO {
         ResultSet participacionesFinal;
 
         try {
-            stmSaldo = con.prepareStatement("select eu.numeroParticipaciones - sum(distinct ab.numParticipaciones) * (sum( distinct ppi.numparticipaciones) + sum(distinct ppe.numparticipaciones)) as participacionesFinales "
-                    + "from EmpresaUsuario as eu,AnunciarBeneficios as ab,poseerparticipacionesinversor as ppi, poseerparticipacionesempresa ppe "
-                    + "where ab.fechaAnuncioPago = CURRENT_DATE and eu.idUsuario= ab.idEmpresa and ab.idEmpresa= ? and ((ab.idEmpresa = ppi.idUsuario2 and ab.idEmpresa != ppi.idUsuario1) and (ab.idEmpresa = ppe.idUsuario2 and ab.idEmpresa != ppe.idUsuario1)) "
-                    + "group by eu.idUsuario");
+            stmSaldo = con.prepareStatement("elect poseerParticipacionesEmpresa.numParticipaciones - "
+                    + "                                   (select sum(distinct ab.numParticipaciones) * (sum( distinct ppi.numparticipaciones) + sum(distinct ppe.numparticipaciones)) "
+                    + "                                   from AnunciarBeneficios as ab,poseerparticipacionesinversor as ppi, poseerparticipacionesempresa ppe "
+                    + "                                   where  ab.fechaAnuncioPago = current_date and ab.idEmpresa= ?  and ((ab.idEmpresa = ppi.idUsuario2 and ab.idEmpresa != ppi.idUsuario1) and (ab.idEmpresa = ppe.idUsuario2 and ab.idEmpresa != ppe.idUsuario1)) "
+                    + "                                   group by ppe.idUsuario1 ) as ParticipacionesFinales "
+                    + "FROM poseerParticipacionesEmpresa "
+                    + "WHERE idUsuario1 = ?");
 
             stmSaldo.setString(1, id);
+            stmSaldo.setString(2, id);
             participacionesFinal = stmSaldo.executeQuery();
             if (participacionesFinal.next()) {
                 participaciones = participacionesFinal.getInt("participacionesFinales");

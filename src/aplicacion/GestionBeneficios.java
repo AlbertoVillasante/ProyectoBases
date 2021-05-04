@@ -36,6 +36,9 @@ public class GestionBeneficios {
     public ArrayList<AnunciarBeneficios> getBeneficios() {
         return fbd.getBeneficios();
     }
+    public ArrayList<AnunciarBeneficios> getBeneficiosHoy() {
+        return fbd.getBeneficiosHoy();
+    }
     
     public ArrayList<AnunciarBeneficios> getBeneficiosEmpresa(String idEmpresa) {
         return fbd.getBeneficiosEmpresa(idEmpresa);

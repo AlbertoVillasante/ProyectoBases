@@ -206,6 +206,10 @@ public class FachadaAplicacion {
         return gb.getBeneficios();
     }
     
+    public ArrayList<AnunciarBeneficios> getBeneficiosHoy() {
+        return gb.getBeneficiosHoy();
+    }
+    
     public ArrayList<AnunciarBeneficios> getBeneficiosEmpresa(String idEmpresa) {
         return gb.getBeneficiosEmpresa(idEmpresa);
     }

@@ -229,6 +229,10 @@ public class FachadaBaseDatos {
         return daoBeneficios.getBeneficios();
     }
     
+    public ArrayList<AnunciarBeneficios> getBeneficiosHoy() {
+        return daoBeneficios.getBeneficiosHoy();
+    }
+    
     public ArrayList<AnunciarBeneficios> getBeneficiosEmpresa(String idEmpresa) {
         return daoBeneficios.getBeneficiosEmpresa(idEmpresa);
     }

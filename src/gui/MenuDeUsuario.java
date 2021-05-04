@@ -5,6 +5,7 @@
  */
 package gui;
 
+import aplicacion.AnunciarBeneficios;
 import aplicacion.EmpresaUsuario;
 import aplicacion.InversorUsuario;
 import java.awt.Color;
@@ -18,10 +19,12 @@ public class MenuDeUsuario extends javax.swing.JFrame {
     InversorUsuario iu;
     EmpresaUsuario eu;
     aplicacion.FachadaAplicacion fa;
+    VPagosHoy vph;
     Color prueba = new Color(60, 63, 65);
     Color prueba1 = new Color(78, 82, 85);
 
     public MenuDeUsuario(aplicacion.FachadaAplicacion fa, InversorUsuario iu, EmpresaUsuario eu) {
+        String b = "";
         this.fa = fa;
         if (iu != null) {
             this.iu = iu;
@@ -29,6 +32,10 @@ public class MenuDeUsuario extends javax.swing.JFrame {
         if (eu != null) {
             this.eu = eu;
         }
+        for(AnunciarBeneficios benef : fa.getBeneficiosHoy()){
+            b += benef.getNombreEmpresa() + ", ";
+        }
+        vph = new VPagosHoy(b);
         initComponents();
         this.getContentPane().setBackground(prueba);
         btnCerrarSesion.setBackground(prueba1);

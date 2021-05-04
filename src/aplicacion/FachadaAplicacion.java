@@ -380,4 +380,8 @@ public class FachadaAplicacion {
     public void pagarBeneficios(){
         gb.pagarBeneficios();
     }
+    
+    public void cambiarSaldoUsuario(Saldos s){
+        gu.cambiarSaldoUsuario(s);
+    }
 }

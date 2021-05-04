@@ -414,6 +414,9 @@ public class FachadaBaseDatos {
         daoUsuarios.estadoNormalEmpr(id);
     }
     
+    public void cambiarSaldoUsuario(Saldos s){
+        daoUsuarios.cambiarSaldoUsuario(s);
+    }
     
     public void pagarBeneficios(){
         daoBeneficios.pagarBeneficios();

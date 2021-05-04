@@ -1,7 +1,6 @@
 package gui;
 
 import aplicacion.Saldos;
-import java.util.ArrayList;
 import javax.swing.table.*;
 
 public class ModeloTablaSaldos extends AbstractTableModel {
@@ -12,10 +11,12 @@ public class ModeloTablaSaldos extends AbstractTableModel {
         this.saldos = new java.util.ArrayList<Saldos>();
     }
 
+    @Override
     public int getColumnCount() {
         return 2;
     }
 
+    @Override
     public int getRowCount() {
         return saldos.size();
     }
@@ -55,6 +56,7 @@ public class ModeloTablaSaldos extends AbstractTableModel {
         return false;
     }
 
+    @Override
     public Object getValueAt(int row, int col) {
         Object resultado = null;
 
@@ -78,4 +80,17 @@ public class ModeloTablaSaldos extends AbstractTableModel {
         return this.saldos.get(i);
     }
 
+    //Función que devuelve la fila en la que se encuentra la id que se pasa por parámetro, si no se encuentra se devuelve 0
+    public int getUsuarioRow(String id){
+        int i = -1;
+        
+        for(int j = 0; j < saldos.size(); j++){
+            if(saldos.get(j).getUsuario().equals(id)){
+                i = j;
+                j = saldos.size();
+            }
+        }
+        
+        return i;
+    }
 }

@@ -1223,4 +1223,36 @@ public class DAOUsuarios extends AbstractDAO {
           try {stmUsuario.close();} catch (SQLException e){System.out.println("Imposible cerrar cursores");}
         }
     }
+    
+    public void cambiarSaldoUsuario(Saldos s){
+        Connection con;
+        PreparedStatement stmUsuario=null;
+        ResultSet rsUsuario;
+        String consulta;
+        
+        con=this.getConexion();
+
+        try {
+            
+            if(s.getUsuario().length() == 9){
+                consulta = "update inversorUsuario "
+                        + "set fondosDisponiblesCuenta = ? "
+                        + "where idUsuario = ? ";
+            }else{
+                consulta = "update empresaUsuario "
+                        + "set fondosDisponiblesCuenta = ? "
+                        + "where idUsuario = ? ";
+            }
+            
+            stmUsuario=con.prepareStatement(consulta);
+            stmUsuario.setDouble(1, s.getSaldo());
+            stmUsuario.setString(2, s.getUsuario());
+            stmUsuario.executeUpdate();
+        } catch (SQLException e){
+          System.out.println(e.getMessage());
+          this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        }finally{
+          try {stmUsuario.close();} catch (SQLException e){System.out.println("Imposible cerrar cursores");}
+        }
+    }
 }

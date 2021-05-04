@@ -51,4 +51,9 @@ public class GestionBeneficios {
     public int getParticipacionesRetenciones(String id) {
         return fbd.getParticipacionesRetenciones(id);
     }
+    
+    public void pagarBeneficios(){
+       fbd.pagarBeneficios();
+    
+    }
 }

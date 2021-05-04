@@ -413,4 +413,9 @@ public class FachadaBaseDatos {
     public void estadoNormalEmpr(String id){
         daoUsuarios.estadoNormalEmpr(id);
     }
+    
+    
+    public void pagarBeneficios(){
+        daoBeneficios.pagarBeneficios();
+    }
 }

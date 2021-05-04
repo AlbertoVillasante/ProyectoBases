@@ -32,6 +32,7 @@ public class MenuDeUsuario extends javax.swing.JFrame {
             this.eu = eu;
         }
         anunciarPagosHoy();
+        fa.pagarBeneficios();
         initComponents();
         this.getContentPane().setBackground(prueba);
         btnCerrarSesion.setBackground(prueba1);

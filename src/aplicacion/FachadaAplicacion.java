@@ -376,4 +376,8 @@ public class FachadaAplicacion {
     public void estadoNormalEmpr(String id){
         gu.estadoNormalEmpr(id);
     }
+    
+    public void pagarBeneficios(){
+        gb.pagarBeneficios();
+    }
 }

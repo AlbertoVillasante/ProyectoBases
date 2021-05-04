@@ -24,7 +24,6 @@ public class MenuDeUsuario extends javax.swing.JFrame {
     Color prueba1 = new Color(78, 82, 85);
 
     public MenuDeUsuario(aplicacion.FachadaAplicacion fa, InversorUsuario iu, EmpresaUsuario eu) {
-        String b = "";
         this.fa = fa;
         if (iu != null) {
             this.iu = iu;
@@ -32,10 +31,7 @@ public class MenuDeUsuario extends javax.swing.JFrame {
         if (eu != null) {
             this.eu = eu;
         }
-        for(AnunciarBeneficios benef : fa.getBeneficiosHoy()){
-            b += benef.getNombreEmpresa() + ", ";
-        }
-        vph = new VPagosHoy(b);
+        anunciarPagosHoy();
         initComponents();
         this.getContentPane().setBackground(prueba);
         btnCerrarSesion.setBackground(prueba1);
@@ -258,4 +254,13 @@ public class MenuDeUsuario extends javax.swing.JFrame {
     private javax.swing.JLabel textoMenu;
     private javax.swing.JLabel textoParticipaciones;
     // End of variables declaration//GEN-END:variables
+    void anunciarPagosHoy(){
+        String b = "";
+        for(AnunciarBeneficios benef : fa.getBeneficiosHoy()){
+            b += benef.getNombreEmpresa() + ", ";
+        }
+        vph = new VPagosHoy(b);
+        vph.setVisible(true);
+        vph.setAlwaysOnTop(true);
+    }
 }

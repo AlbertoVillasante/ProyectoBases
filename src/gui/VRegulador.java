@@ -5,6 +5,7 @@
  */
 package gui;
 
+import aplicacion.AnunciarBeneficios;
 import aplicacion.EmpresaUsuario;
 import aplicacion.FachadaAplicacion;
 import aplicacion.InversorUsuario;
@@ -22,6 +23,7 @@ public class VRegulador extends javax.swing.JFrame {
     FachadaAplicacion fa;
     InversorUsuario iu;
     EmpresaUsuario eu;
+    VPagosHoy vph;
 
     /**
      * Creates new form VRegulador
@@ -34,6 +36,7 @@ public class VRegulador extends javax.swing.JFrame {
         if (eu != null) {
             this.eu = eu;
         }
+        anunciarPagosHoy();
         initComponents();
         this.getContentPane().setBackground(prueba);
         btnBajaBeneficios.setBackground(prueba1);
@@ -261,4 +264,13 @@ public class VRegulador extends javax.swing.JFrame {
     private javax.swing.JLabel modificarSaldosLabel;
     private javax.swing.JLabel solicitudesPendientesLabel;
     // End of variables declaration//GEN-END:variables
+    void anunciarPagosHoy(){
+        String b = "";
+        for(AnunciarBeneficios benef : fa.getBeneficiosHoy()){
+            b += benef.getNombreEmpresa() + ", ";
+        }
+        vph = new VPagosHoy(b);
+        vph.setVisible(true);
+        vph.setAlwaysOnTop(true);
+    }
 }

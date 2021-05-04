@@ -158,6 +158,22 @@ public class GestionUsuarios {
        public String getnombreInversor(String id) {
         return fbd.getnombreInversor(id);
     }
+       
+       public void eliminarInversor(String id){
+        fbd.eliminarInversor(id);
+    }
+    
+    public void eliminarEmpresa(String id){
+        fbd.eliminarEmpresa(id);
+    }
+    
+    public void estadoNormalInv(String id){
+        fbd.estadoNormalInv(id);
+    }
+    
+    public void estadoNormalEmpr(String id){
+        fbd.estadoNormalEmpr(id);
+    }
 }
 /*  //Comentado para que no de error
     public java.util.List<EmpresaUsuario> obtenerUsuarios(String idUsuario, String nombreUsuario) {

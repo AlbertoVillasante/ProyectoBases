@@ -353,5 +353,19 @@ public class FachadaAplicacion {
         gpart.moverParticipacionesParciales(oferta,idUsuario,participacionesRestantes);
     }
  
+    public void eliminarInversor(String id){
+        gu.eliminarInversor(id);
+    }
+    
+    public void eliminarEmpresa(String id){
+        gu.eliminarEmpresa(id);
+    }
 
+    public void estadoNormalInv(String id){
+        gu.estadoNormalInv(id);
+    }
+    
+    public void estadoNormalEmpr(String id){
+        gu.estadoNormalEmpr(id);
+    }
 }

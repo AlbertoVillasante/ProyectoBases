@@ -1095,4 +1095,86 @@ public class DAOUsuarios extends AbstractDAO {
         }
         return resultado;
     }
+    
+    public void eliminarInversor(String id){
+        Connection con;
+        PreparedStatement stmUsuario=null;
+        ResultSet rsUsuario;
+
+        con=this.getConexion();
+
+        try {
+            stmUsuario=con.prepareStatement("delete from inversorusuario where idusuario = ?");
+            stmUsuario.setString(1, id);
+            rsUsuario=stmUsuario.executeQuery();
+        } catch (SQLException e){
+          System.out.println(e.getMessage());
+          //this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        }finally{
+          try {stmUsuario.close();} catch (SQLException e){System.out.println("Imposible cerrar cursores");}
+        }
+    }
+    
+    public void eliminarEmpresa(String id){
+        Connection con;
+        PreparedStatement stmUsuario=null;
+        ResultSet rsUsuario;
+
+        con=this.getConexion();
+
+        try {
+            stmUsuario=con.prepareStatement("delete from empresausuario where idusuario = ?");
+            stmUsuario.setString(1, id);
+            rsUsuario=stmUsuario.executeQuery();
+        } catch (SQLException e){
+          System.out.println(e.getMessage());
+          //this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        }finally{
+          try {stmUsuario.close();} catch (SQLException e){System.out.println("Imposible cerrar cursores");}
+        }
+    }
+    
+    public void estadoNormalInv(String id){
+        Connection con;
+        PreparedStatement stmUsuario=null;
+        ResultSet rsUsuario;
+
+        con=this.getConexion();
+
+        try {
+            stmUsuario=con.prepareStatement("update inversorUsuario "
+                        + "set tipousuario = ? "
+                        + "where idUsuario = ? ");
+            stmUsuario.setString(1, "Normal");
+            stmUsuario.setString(2, id);
+            stmUsuario.executeUpdate();
+        } catch (SQLException e){
+          System.out.println(e.getMessage());
+          //this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        }finally{
+          try {stmUsuario.close();} catch (SQLException e){System.out.println("Imposible cerrar cursores");}
+        }
+    }
+    
+    public void estadoNormalEmpr(String id){
+        Connection con;
+        PreparedStatement stmUsuario=null;
+        ResultSet rsUsuario;
+
+        con=this.getConexion();
+
+        try {
+            stmUsuario=con.prepareStatement("update empresaUsuario "
+                        + "set tipousuario = ? "
+                        + "where idUsuario = ? ");
+            stmUsuario.setString(1, "Normal");
+            stmUsuario.setString(2, id);
+            stmUsuario.executeUpdate();
+        } catch (SQLException e){
+          System.out.println(e.getMessage());
+          //this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        }finally{
+          try {stmUsuario.close();} catch (SQLException e){System.out.println("Imposible cerrar cursores");}
+        }
+    }
 }

@@ -29,6 +29,7 @@ public class VVerificacion extends javax.swing.JDialog {
         buscarUsuario();
         this.getContentPane().setBackground(prueba);
         btnAceptar.setBackground(prueba1);
+        rechazarBtn.setBackground(prueba1);
         tablaVerificacion.setBackground(prueba1);
         
 
@@ -47,6 +48,7 @@ public class VVerificacion extends javax.swing.JDialog {
         btnAceptar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaVerificacion = new javax.swing.JTable();
+        rechazarBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -76,6 +78,14 @@ public class VVerificacion extends javax.swing.JDialog {
         });
         jScrollPane1.setViewportView(tablaVerificacion);
 
+        rechazarBtn.setForeground(new java.awt.Color(187, 187, 188));
+        rechazarBtn.setText("Rechazar");
+        rechazarBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rechazarBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -85,6 +95,8 @@ public class VVerificacion extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnAceptar)
+                        .addGap(96, 96, 96)
+                        .addComponent(rechazarBtn)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnCancelar))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 495, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -98,7 +110,8 @@ public class VVerificacion extends javax.swing.JDialog {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAceptar)
-                    .addComponent(btnCancelar))
+                    .addComponent(btnCancelar)
+                    .addComponent(rechazarBtn))
                 .addGap(0, 16, Short.MAX_VALUE))
         );
 
@@ -120,6 +133,12 @@ public class VVerificacion extends javax.swing.JDialog {
         
     }//GEN-LAST:event_tablaVerificacionMouseClicked
 
+    private void rechazarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rechazarBtnActionPerformed
+        rechazar();
+        buscarUsuario();
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rechazarBtnActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -128,6 +147,7 @@ public class VVerificacion extends javax.swing.JDialog {
     private javax.swing.JButton btnAceptar;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton rechazarBtn;
     private javax.swing.JTable tablaVerificacion;
     // End of variables declaration//GEN-END:variables
     
@@ -138,10 +158,10 @@ public class VVerificacion extends javax.swing.JDialog {
         if (m.getRowCount() > 0) {
             tablaVerificacion.setRowSelectionInterval(0, 0);
             btnAceptar.setEnabled(true);
-          
-            
+            rechazarBtn.setEnabled(true);
         }else{
             btnAceptar.setEnabled(false);
+            rechazarBtn.setEnabled(false);
         }
     }
     
@@ -165,6 +185,30 @@ public class VVerificacion extends javax.swing.JDialog {
                 fa.registroInversor(iu);
             }else{
                 fa.confirmarBajaInversor(iu.getIdUsuario());
+            }
+        }
+    }
+    
+    public void rechazar(){
+        ModeloTablaVerificacion m;
+        m=(ModeloTablaVerificacion) tablaVerificacion.getModel();
+        
+        if(tablaVerificacion.getSelectedRow() < m.obtenerNumEmprPend()){
+            EmpresaUsuario eu= m.obtenerUsuarioEmpr(tablaVerificacion.getSelectedRow());
+            if(eu.getTipoUsuario().toString().equals("PendAlta")){
+                fa.eliminarEmpresa(eu.getIdUsuario());
+            }else{
+                fa.estadoNormalEmpr(eu.getIdUsuario());
+            }
+            
+        }
+        
+        else{
+            InversorUsuario iu= m.obtenerUsuarioInv(tablaVerificacion.getSelectedRow() - m.obtenerNumEmprPend());
+            if(iu.getTipoUsuario().toString().equals("PendAlta")){
+                fa.eliminarInversor(iu.getIdUsuario());
+            }else{
+                fa.estadoNormalInv(iu.getIdUsuario());
             }
         }
     }

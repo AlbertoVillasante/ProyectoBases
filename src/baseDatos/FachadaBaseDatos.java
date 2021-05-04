@@ -31,8 +31,8 @@ public class FachadaBaseDatos {
         FileInputStream arqConfiguracion;
 
         try {
-            //arqConfiguracion = new FileInputStream("baseDatos.properties"); //linea a cambiar
-            arqConfiguracion = new FileInputStream("basesDatos.properties");
+            arqConfiguracion = new FileInputStream("baseDatos.properties"); //linea a cambiar
+            //arqConfiguracion = new FileInputStream("basesDatos.properties");
 
             configuracion.load(arqConfiguracion);
             arqConfiguracion.close();
@@ -388,5 +388,20 @@ public class FachadaBaseDatos {
     public void moverParticipacionesParciales(OfertaParticipaciones oferta, String idUsuario, int participacionesRestantes){
         daoParticipaciones.moverParticipacionesParciales(oferta,idUsuario,participacionesRestantes);
     }
-
+    
+    public void eliminarInversor(String id){
+        daoUsuarios.eliminarInversor(id);
+    }
+    
+    public void eliminarEmpresa(String id){
+        daoUsuarios.eliminarEmpresa(id);
+    }
+    
+    public void estadoNormalInv(String id){
+        daoUsuarios.estadoNormalInv(id);
+    }
+    
+    public void estadoNormalEmpr(String id){
+        daoUsuarios.estadoNormalEmpr(id);
+    }
 }

@@ -52,6 +52,10 @@ public class GestionUsuarios {
         fgui.nuevaModificacion();
     }
 
+    public ArrayList<Saldos> getSaldoUsuarios() {
+        return fbd.getSaldoUsuarios();
+    }
+    
     public void configuracionRegulador(InversorUsuario iu, EmpresaUsuario eu) {
         fgui.configuracionRegulador(iu, eu);
     }

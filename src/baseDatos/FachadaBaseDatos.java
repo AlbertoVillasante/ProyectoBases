@@ -8,6 +8,7 @@ import aplicacion.EmpresaUsuario;
 import aplicacion.Estadisticas;
 import aplicacion.Libro;
 import aplicacion.OfertaParticipaciones;
+import aplicacion.Saldos;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -192,6 +193,10 @@ public class FachadaBaseDatos {
 
     public void actualizarComision(float comision) {
         daoUsuarios.actualizarComision(comision);
+    }
+    
+    public ArrayList<Saldos> getSaldoUsuarios() {
+        return daoUsuarios.getSaldoUsuarios();
     }
 
     public void insertarUsuarioInversor(InversorUsuario u) {

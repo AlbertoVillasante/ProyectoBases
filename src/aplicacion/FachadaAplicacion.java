@@ -206,6 +206,10 @@ public class FachadaAplicacion {
         return gb.getBeneficios();
     }
     
+    public ArrayList<Saldos> getSaldoUsuarios() {
+        return gu.getSaldoUsuarios();
+    }
+    
     public ArrayList<AnunciarBeneficios> getBeneficiosHoy() {
         return gb.getBeneficiosHoy();
     }

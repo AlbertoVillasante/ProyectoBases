@@ -3,6 +3,7 @@ package baseDatos;
 import aplicacion.EmpresaUsuario;
 import aplicacion.Estadisticas;
 import aplicacion.InversorUsuario;
+import aplicacion.Saldos;
 import aplicacion.TipoUsuario;
 import java.sql.*;
 import java.util.ArrayList;
@@ -798,7 +799,41 @@ public class DAOUsuarios extends AbstractDAO {
         }
         return resultado;
     }
+    
+    public ArrayList<Saldos> getSaldoUsuarios() {
+        ArrayList<Saldos> resultado = new ArrayList<Saldos>();
+        Connection con;
+        PreparedStatement stmPrestamos = null;
+        ResultSet rsPrestamos;
+        String consulta;
 
+        con = this.getConexion();
+
+        try {
+            consulta = "SELECT idusuario, fondosdisponiblescuenta "
+                    +"FROM empresausuario "
+                    +"UNION "
+                    +"SELECT idusuario, fondosdisponiblescuenta "
+                    +"FROM inversorusuario";
+
+            stmPrestamos = con.prepareStatement(consulta);
+            rsPrestamos = stmPrestamos.executeQuery();
+            while (rsPrestamos.next()) {
+                resultado.add(new Saldos(rsPrestamos.getString("idusuario"), Double.valueOf(rsPrestamos.getString("fondosdisponiblescuenta"))));
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        } finally {
+            try {
+                stmPrestamos.close();
+            } catch (SQLException e) {
+                System.out.println("Imposible cerrar cursores");
+            }
+        }
+        return resultado;
+    }
+    
     public ArrayList<Estadisticas> actualizarTablaEstadisticasInversor(String id) {
         ArrayList<Estadisticas> resultado = new ArrayList<Estadisticas>();
         Estadisticas est;

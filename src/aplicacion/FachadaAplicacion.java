@@ -337,12 +337,12 @@ public class FachadaAplicacion {
     public double getRendimiento(String idUsuario){
         return gu.getRendimiento(idUsuario);
     }
-    public int contarOfertas(String id, double precio){
-        return gpart.contarOfertas(id, precio);
+    public int contarOfertas(String id, double precio,String yo){
+        return gpart.contarOfertas(id, precio,yo);
     }
     
-    public OfertaParticipaciones getOfertaParticipaciones(String id, double precio){
-        return gpart.getOfertaParticipaciones(id, precio);
+    public OfertaParticipaciones getOfertaParticipaciones(String id, double precio,String yo){
+        return gpart.getOfertaParticipaciones(id, precio,yo);
     }
     
     public int moverParticipacionesTodas(String idUsuario, OfertaParticipaciones oferta){

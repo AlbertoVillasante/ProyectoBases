@@ -60,6 +60,7 @@ public class VAvisoCorrecto extends javax.swing.JDialog {
 
         btnDerecha.setBackground(new java.awt.Color(255, 255, 255));
         btnDerecha.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/tick.png"))); // NOI18N
+        btnDerecha.setFocusable(false);
         btnDerecha.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDerechaActionPerformed(evt);

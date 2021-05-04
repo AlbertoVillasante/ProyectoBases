@@ -31,8 +31,8 @@ public class FachadaBaseDatos {
         FileInputStream arqConfiguracion;
 
         try {
-            arqConfiguracion = new FileInputStream("baseDatos.properties"); //linea a cambiar
-            //arqConfiguracion = new FileInputStream("basesDatos.properties");
+            //arqConfiguracion = new FileInputStream("baseDatos.properties"); //linea a cambiar
+            arqConfiguracion = new FileInputStream("basesDatos.properties");
 
             configuracion.load(arqConfiguracion);
             arqConfiguracion.close();
@@ -373,12 +373,12 @@ public class FachadaBaseDatos {
     }
     
 
-    public int contarOfertas(String id, double precio) {
-        return daoParticipaciones.contarOfertas(id, precio);
+    public int contarOfertas(String id, double precio,String yo) {
+        return daoParticipaciones.contarOfertas(id, precio,yo);
     }
 
-    public OfertaParticipaciones getOfertaParticipaciones(String id, double precio) {
-        return daoParticipaciones.getOfertaParticipaciones(id, precio);
+    public OfertaParticipaciones getOfertaParticipaciones(String id, double precio, String yo) {
+        return daoParticipaciones.getOfertaParticipaciones(id, precio,yo);
     }
     
      public int moverParticipacionesTodas(String idUsuario, OfertaParticipaciones oferta){

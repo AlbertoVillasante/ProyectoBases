@@ -73,12 +73,12 @@ public class GestionParticipaciones {
         fbd.borrarVentaEmpr(v);
     }
 
-    public int contarOfertas(String id, double precio) {
-        return fbd.contarOfertas(id, precio);
+    public int contarOfertas(String id, double precio,String yo) {
+        return fbd.contarOfertas(id, precio,yo);
     }
 
-    public OfertaParticipaciones getOfertaParticipaciones(String id, double precio) {
-        return fbd.getOfertaParticipaciones(id, precio);
+    public OfertaParticipaciones getOfertaParticipaciones(String id, double precio,String yo) {
+        return fbd.getOfertaParticipaciones(id, precio,yo);
     }
 
     public int moverParticipacionesTodas(String idUsuario, OfertaParticipaciones oferta) {

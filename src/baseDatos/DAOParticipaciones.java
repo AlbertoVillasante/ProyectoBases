@@ -544,7 +544,7 @@ public class DAOParticipaciones extends AbstractDAO {
     }
     
 
-    public int contarOfertas(String idUsuario, double precio) {
+    public int contarOfertas(String idUsuario, double precio, String yo) {
         int resultado=0;
         Connection con;
         PreparedStatement stmOferta = null;
@@ -556,14 +556,14 @@ public class DAOParticipaciones extends AbstractDAO {
                 +               "from ((select opve.* "
                 +                       "from ofertaparticipacionesventaempresa as opve "
                 +                       "where (opve.idusuario2 = ?) "
-                +                       "and (opve.precio <= ?)) "
+                +                       "and (opve.precio <= ?) and opve.idusuario1!= ?) "
                 
                 +         "union "
                 
                 +         "(select opvi.* "
                 +         "from ofertaparticipacionesventainversor as opvi "
                 +         "where (opvi.idusuario2 = ?) "
-                +         "and (opvi.precio <= ?))) as pe "
+                +         "and (opvi.precio <= ?) and opvi.idusuario1!= ?)) as pe "
                 +         "order by pe.precio, fecha) as subconsulta";
         try {
 
@@ -571,8 +571,11 @@ public class DAOParticipaciones extends AbstractDAO {
 
             stmOferta.setString(1, idUsuario);
             stmOferta.setDouble(2, precio);
-            stmOferta.setString(3, idUsuario);
-            stmOferta.setDouble(4, precio);
+            stmOferta.setString(3, yo);
+            stmOferta.setString(4, idUsuario);
+            stmOferta.setDouble(5, precio);
+            stmOferta.setString(6, yo);
+
 
             rsOferta = stmOferta.executeQuery();
             if (rsOferta.next()) {
@@ -592,7 +595,7 @@ public class DAOParticipaciones extends AbstractDAO {
         return resultado;
     }
 
-    public OfertaParticipaciones getOfertaParticipaciones(String idUsuario, double precio) {
+    public OfertaParticipaciones getOfertaParticipaciones(String idUsuario, double precio, String yo) {
 
         OfertaParticipaciones resultado = null;
         Connection con;
@@ -604,14 +607,14 @@ public class DAOParticipaciones extends AbstractDAO {
                 +         "from ((select opve.* "
                 +                "from ofertaparticipacionesventaempresa as opve "
                 +                "where (opve.idusuario2 = ?) "
-                +                "and (opve.precio <= ?)) "
+                +                "and (opve.precio <= ?) and opve.idusuario1!= ?) "
                 
                 +         "union "
                 
                 +               "(select opvi.* "
                 +               "from ofertaparticipacionesventainversor as opvi "
                 +               "where (opvi.idusuario2 = ?) "
-                +               "and (opvi.precio <= ?))) as pe "
+                +               "and (opvi.precio <= ?)and opvi.idusuario1!= ?)) as pe "
                 +               "order by pe.precio, fecha "
                 +               "Limit 1";
         try {
@@ -620,8 +623,10 @@ public class DAOParticipaciones extends AbstractDAO {
 
             stmOferta.setString(1, idUsuario);
             stmOferta.setDouble(2, precio);
-            stmOferta.setString(3, idUsuario);
-            stmOferta.setDouble(4, precio);
+            stmOferta.setString(3, yo);
+            stmOferta.setString(4, idUsuario);
+            stmOferta.setDouble(5, precio);
+            stmOferta.setString(6, yo);
 
             rsOferta = stmOferta.executeQuery();
             if (rsOferta.next()) {
@@ -810,8 +815,6 @@ public class DAOParticipaciones extends AbstractDAO {
             
             //para actualizar los fondos del vendedor
             stmOferta.setDouble(12, oferta.getNumeroParticipaciones()*oferta.getPrecioParticipacion()-comision); //supongo que la comision se le quita a este
-            System.out.println(oferta.getNumeroParticipaciones()*oferta.getPrecioParticipacion()-comision);
-            System.out.println(oferta.getNumeroParticipaciones() +"\n"+oferta.getPrecioParticipacion()+"\n"+comision);
             stmOferta.setString(13, oferta.getIdUsuario1());
             
             //por último la comisión
@@ -945,7 +948,6 @@ public class DAOParticipaciones extends AbstractDAO {
             
             //para actualizar los fondos del vendedor
             stmOferta.setDouble(13, (participacionesRestantes*oferta.getPrecioParticipacion())-comision); //supongo que la comision se le quita a este
-            System.out.println(oferta.getNumeroParticipaciones()*oferta.getPrecioParticipacion()-comision);
             stmOferta.setString(14, oferta.getIdUsuario1());
             
             //por último la comisión

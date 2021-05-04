@@ -863,7 +863,7 @@ public class VParticipaciones extends javax.swing.JDialog {
                     vnoticia.setVisible(true);
 
                 } else {
-                    ofertasRestantes = fa.contarOfertas(idEmpresa, precio); //Relleno el número de ofertas que cumplan lo que pido
+                    ofertasRestantes = fa.contarOfertas(idEmpresa, precio, eu.getIdUsuario()); //Relleno el número de ofertas que cumplan lo que pido
                     if (ofertasRestantes == 0) {
 
                         VAviso vofertas;
@@ -875,7 +875,7 @@ public class VParticipaciones extends javax.swing.JDialog {
                         //mientras me quede dinero sigo comprando las más baratas o queden participaciones que pueda comprar con el dinero indicado
                         while (participacionesRestantes > 0 && ofertasRestantes > 0) {
 
-                            oferta = fa.getOfertaParticipaciones(idEmpresa, precio); //saco la primera
+                            oferta = fa.getOfertaParticipaciones(idEmpresa, precio,eu.getIdUsuario()); //saco la primera
                             oferta.setComision(eu.getComision());
 
                             if (oferta.getNumeroParticipaciones() <= participacionesRestantes) {
@@ -912,7 +912,7 @@ public class VParticipaciones extends javax.swing.JDialog {
 
             } else {
 
-                ofertasRestantes = fa.contarOfertas(idEmpresa, precio); //Relleno el número de ofertas que cumplan lo que pido
+                ofertasRestantes = fa.contarOfertas(idEmpresa, precio,iu.getIdUsuario()); //Relleno el número de ofertas que cumplan lo que pido
 
                 if (ofertasRestantes == 0) {
 
@@ -924,7 +924,7 @@ public class VParticipaciones extends javax.swing.JDialog {
 
                     while (participacionesRestantes > 0 && ofertasRestantes > 0) {
 
-                        oferta = fa.getOfertaParticipaciones(idEmpresa, precio); //saco la primera
+                        oferta = fa.getOfertaParticipaciones(idEmpresa, precio,iu.getIdUsuario()); //saco la primera
                         oferta.setComision(iu.getComision());
 
                         if (oferta.getNumeroParticipaciones() <= participacionesRestantes) {

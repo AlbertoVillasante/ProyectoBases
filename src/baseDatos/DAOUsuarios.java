@@ -834,6 +834,42 @@ public class DAOUsuarios extends AbstractDAO {
         return resultado;
     }
     
+    public ArrayList<Saldos> getSaldoUsuario(String id) {
+        ArrayList<Saldos> resultado = new ArrayList<Saldos>();
+        Connection con;
+        PreparedStatement stmPrestamos = null;
+        ResultSet rsPrestamos;
+        String consulta;
+        
+        con = this.getConexion();
+        try {
+            consulta = "SELECT idusuario, fondosdisponiblescuenta "
+                    +"FROM inversorusuario "
+                    +"WHERE idusuario like ? "
+                    +"UNION "
+                    +"SELECT idusuario, fondosdisponiblescuenta "
+                    +"FROM empresausuario "
+                    +"WHERE idusuario like ?";
+            stmPrestamos = con.prepareStatement(consulta);
+            stmPrestamos.setString(1, id + "%");
+            stmPrestamos.setString(2, id + "%");
+            rsPrestamos = stmPrestamos.executeQuery();
+            while (rsPrestamos.next()) {
+                resultado.add(new Saldos(rsPrestamos.getString("idusuario"), Double.valueOf(rsPrestamos.getString("fondosdisponiblescuenta"))));
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        } finally {
+            try {
+                stmPrestamos.close();
+            } catch (SQLException e) {
+                System.out.println("Imposible cerrar cursores");
+            }
+        }
+        return resultado;
+    }
+    
     public ArrayList<Estadisticas> actualizarTablaEstadisticasInversor(String id) {
         ArrayList<Estadisticas> resultado = new ArrayList<Estadisticas>();
         Estadisticas est;

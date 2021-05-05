@@ -5,8 +5,11 @@
  */
 package gui;
 
+import aplicacion.EmpresaUsuario;
 import aplicacion.FachadaAplicacion;
+import aplicacion.InversorUsuario;
 import aplicacion.Saldos;
+import aplicacion.TipoUsuario;
 import java.awt.Color;
 import java.text.DecimalFormat;
 import java.util.Locale;
@@ -19,15 +22,16 @@ public class VSaldos extends javax.swing.JDialog {
     FachadaAplicacion fa;
 
     public VSaldos(FachadaAplicacion fa) {
-        this.fa = fa;
         initComponents();
+        this.fa = fa;
         this.getContentPane().setBackground(prueba);
         cuadroDni.setBackground(prueba1);
-        btnSaldo.setBackground(prueba1);
+        cuadroSaldo.setBackground(prueba1);
         btnBuscar.setBackground(prueba1);
         btnActualizar.setBackground(prueba1);
         tabla.setBackground(prueba1);
         aceptarButton.setBackground(prueba1);
+        error.setVisible(false);
         actualizarTablaSaldos();
     }
 
@@ -43,8 +47,7 @@ public class VSaldos extends javax.swing.JDialog {
         jPanel1 = new javax.swing.JPanel();
         DNILablel = new javax.swing.JLabel();
         saldoLabel = new javax.swing.JLabel();
-        btnSaldo = new javax.swing.JTextField();
-        cuadroDni = new javax.swing.JTextField();
+        cuadroSaldo = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         btnActualizar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
@@ -52,6 +55,8 @@ public class VSaldos extends javax.swing.JDialog {
         btnBuscar = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         tabla = new javax.swing.JTable();
+        error = new javax.swing.JLabel();
+        cuadroDni = new javax.swing.JTextField();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -67,19 +72,12 @@ public class VSaldos extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         DNILablel.setForeground(new java.awt.Color(187, 187, 188));
-        DNILablel.setText("DNI:");
+        DNILablel.setText("ID:");
 
         saldoLabel.setForeground(new java.awt.Color(187, 187, 188));
         saldoLabel.setText("Saldo:");
 
-        btnSaldo.setForeground(new java.awt.Color(187, 187, 188));
-
-        cuadroDni.setForeground(new java.awt.Color(187, 187, 188));
-        cuadroDni.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cuadroDniActionPerformed(evt);
-            }
-        });
+        cuadroSaldo.setForeground(new java.awt.Color(187, 187, 188));
 
         jLabel2.setForeground(new java.awt.Color(187, 187, 188));
         jLabel2.setText("€ ");
@@ -111,6 +109,7 @@ public class VSaldos extends javax.swing.JDialog {
 
         btnBuscar.setForeground(new java.awt.Color(187, 187, 188));
         btnBuscar.setText("Buscar");
+        btnBuscar.setFocusable(false);
         btnBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBuscarActionPerformed(evt);
@@ -126,38 +125,44 @@ public class VSaldos extends javax.swing.JDialog {
         });
         jScrollPane2.setViewportView(tabla);
 
+        error.setForeground(new java.awt.Color(255, 51, 51));
+        error.setText("Introduzca un ID válido!");
+
+        cuadroDni.setForeground(new java.awt.Color(187, 187, 188));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(30, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(DNILablel)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(cuadroDni, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(saldoLabel)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnSaldo, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 101, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
-                                .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 14, Short.MAX_VALUE))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
                         .addComponent(btnActualizar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(aceptarButton)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 2, Short.MAX_VALUE)
+                        .addComponent(aceptarButton))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(saldoLabel)
+                            .addComponent(DNILablel))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(error)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(cuadroSaldo, javax.swing.GroupLayout.DEFAULT_SIZE, 96, Short.MAX_VALUE)
+                                    .addComponent(cuadroDni))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 91, Short.MAX_VALUE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)))))))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnCancelar, javax.swing.GroupLayout.Alignment.TRAILING))
@@ -171,14 +176,16 @@ public class VSaldos extends javax.swing.JDialog {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(DNILablel)
-                            .addComponent(cuadroDni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnBuscar))
+                            .addComponent(btnBuscar)
+                            .addComponent(cuadroDni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(21, 21, 21)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnSaldo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cuadroSaldo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2)
                             .addComponent(saldoLabel))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(error)
+                        .addGap(18, 18, 18))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -194,14 +201,18 @@ public class VSaldos extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
-        
-        if(cuadroDni.getText().equals("") || btnSaldo.getText().equals("")){
-            VAviso vnoticia;
-            vnoticia = new VAviso("Debe completar ambos campos o seleccionar un usuario de la tabla para llevar a cabo esta operación");
-            vnoticia.setVisible(true);
-        }else{
-            Saldos saldoUsuario = new Saldos(cuadroDni.getText(), Double.parseDouble(btnSaldo.getText()));
-            fa.cambiarSaldoUsuario(saldoUsuario);
+        if(cuadroDni.getText().length() == 9){
+            InversorUsuario i = new InversorUsuario(cuadroDni.getText(), "", "", "", "", "", "", TipoUsuario.Normal);
+            i.setFondosDisponiblesCuenta(Double.valueOf(cuadroSaldo.getText()));
+            fa.modificarCuentaInversor(i);
+        }
+        else if(cuadroDni.getText().length() == 13){
+            EmpresaUsuario e = new EmpresaUsuario(cuadroDni.getText(), "", "", "", "", TipoUsuario.Normal);
+            e.setFondosDisponiblesCuenta(Double.valueOf(cuadroSaldo.getText()));
+            fa.modificarCuentaEmpresa(e);
+        }
+        else{
+            error.setVisible(true);
         }
         actualizarTablaSaldos();
     }//GEN-LAST:event_btnActualizarActionPerformed
@@ -209,11 +220,7 @@ public class VSaldos extends javax.swing.JDialog {
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         this.dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
-
-    private void cuadroDniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cuadroDniActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cuadroDniActionPerformed
-
+                                          
     private void tablaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaMouseClicked
         // TODO add your handling code here:
         ModeloTablaSaldos m;
@@ -223,39 +230,33 @@ public class VSaldos extends javax.swing.JDialog {
             int i = tabla.getSelectedRow();
             Saldos s = m.obtenerSaldo(i);
             cuadroDni.setText(s.getUsuario());
-            btnSaldo.setText(String.valueOf(s.getSaldo()));
+            cuadroSaldo.setText(String.valueOf(s.getSaldo()));
         }
     }//GEN-LAST:event_tablaMouseClicked
 
     private void aceptarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aceptarButtonActionPerformed
         // TODO add your handling code here:
-        if(cuadroDni.getText().equals("") || btnSaldo.getText().equals("")){
-            VAviso vnoticia;
-            vnoticia = new VAviso("Debe completar ambos campos o seleccionar un usuario de la tabla para llevar a cabo esta operación");
-            vnoticia.setVisible(true);
-        }else{
-            Saldos saldoUsuario = new Saldos(cuadroDni.getText(), Double.parseDouble(btnSaldo.getText()));
-            fa.cambiarSaldoUsuario(saldoUsuario);
+        if(cuadroDni.getText().length() == 9){
+            InversorUsuario i = new InversorUsuario(cuadroDni.getText(), "", "", "", "", "", "", TipoUsuario.Normal);
+            i.setFondosDisponiblesCuenta(Double.valueOf(cuadroSaldo.getText()));
+            fa.modificarCuentaInversor(i);
+        }
+        else if(cuadroDni.getText().length() == 13){
+            EmpresaUsuario e = new EmpresaUsuario(cuadroDni.getText(), "", "", "", "", TipoUsuario.Normal);
+            e.setFondosDisponiblesCuenta(Double.valueOf(cuadroSaldo.getText()));
+            fa.modificarCuentaEmpresa(e);
+        }
+        else{
+            error.setVisible(true);
         }
         this.dispose();
     }//GEN-LAST:event_aceptarButtonActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         // TODO add your handling code here:
-        
-        if(cuadroDni.getText().equals("")){
-            VAviso vnoticia;
-            vnoticia = new VAviso("Debe introducir el DNI del usuario para encontrarlo en la tabla");
-            vnoticia.setVisible(true);
-        }else{
-            ModeloTablaSaldos m;
-            m = (ModeloTablaSaldos) tabla.getModel();
-            int i = m.getUsuarioRow(cuadroDni.getText());
-            tabla.setRowSelectionInterval(i, i);
-            Saldos s = m.obtenerSaldo(i);
-            cuadroDni.setText(s.getUsuario());
-            btnSaldo.setText(String.valueOf(s.getSaldo()));
-        }
+        ModeloTablaSaldos m;
+        m = (ModeloTablaSaldos) tabla.getModel();
+        m.setFilas(fa.getSaldoUsuario(cuadroDni.getText()));
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     /**
@@ -268,8 +269,9 @@ public class VSaldos extends javax.swing.JDialog {
     private javax.swing.JButton btnActualizar;
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnCancelar;
-    private javax.swing.JTextField btnSaldo;
     private javax.swing.JTextField cuadroDni;
+    private javax.swing.JTextField cuadroSaldo;
+    private javax.swing.JLabel error;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
@@ -281,18 +283,6 @@ public class VSaldos extends javax.swing.JDialog {
         ModeloTablaSaldos m;
         m = (ModeloTablaSaldos) tabla.getModel();
         m.setFilas(fa.getSaldoUsuarios());
-        
-        
-        if(m.getRowCount() == 0){
-            aceptarButton.setEnabled(false);
-            btnActualizar.setEnabled(false);
-        }else{
-            tabla.setRowSelectionInterval(0, 0);
-            Saldos s = m.obtenerSaldo(0);
-            cuadroDni.setText(s.getUsuario());
-            btnSaldo.setText(String.valueOf(s.getSaldo()));
-            aceptarButton.setEnabled(true);
-            btnActualizar.setEnabled(true);
-        }
     }
 }
+

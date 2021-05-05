@@ -56,6 +56,10 @@ public class GestionUsuarios {
         return fbd.getSaldoUsuarios();
     }
     
+    public ArrayList<Saldos> getSaldoUsuario(String id) {
+        return fbd.getSaldoUsuario(id);
+    }
+    
     public void configuracionRegulador(InversorUsuario iu, EmpresaUsuario eu) {
         fgui.configuracionRegulador(iu, eu);
     }

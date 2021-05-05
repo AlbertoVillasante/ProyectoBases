@@ -36,8 +36,8 @@ public class VRegulador extends javax.swing.JFrame {
         if (eu != null) {
             this.eu = eu;
         }
-        anunciarPagosHoy();
         initComponents();
+        anunciarPagosHoy();
         this.getContentPane().setBackground(prueba);
         btnBajaBeneficios.setBackground(prueba1);
         btnCerrarSesion.setBackground(prueba1);
@@ -223,7 +223,7 @@ public class VRegulador extends javax.swing.JFrame {
     }//GEN-LAST:event_botonSolicitudesActionPerformed
 
     private void botonConfiguracionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonConfiguracionActionPerformed
-        fa.configuracionRegulador(iu,eu);
+        fa.configuracionRegulador(iu, eu);
     }//GEN-LAST:event_botonConfiguracionActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
@@ -236,7 +236,7 @@ public class VRegulador extends javax.swing.JFrame {
 
     private void btnCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarSesionActionPerformed
         this.dispose();
-        VAutentificacion va=  new VAutentificacion(fa);
+        VAutentificacion va = new VAutentificacion(fa);
         va.setLocation(185, 80);
         va.setVisible(true);
     }//GEN-LAST:event_btnCerrarSesionActionPerformed
@@ -264,13 +264,15 @@ public class VRegulador extends javax.swing.JFrame {
     private javax.swing.JLabel modificarSaldosLabel;
     private javax.swing.JLabel solicitudesPendientesLabel;
     // End of variables declaration//GEN-END:variables
-    void anunciarPagosHoy(){
+    void anunciarPagosHoy() {
         String b = "";
-        for(AnunciarBeneficios benef : fa.getBeneficiosHoy()){
-            b += benef.getNombreEmpresa() + ", ";
+        if (fa.getBeneficiosHoy().size() != 0) {
+            for (AnunciarBeneficios benef : fa.getBeneficiosHoy()) {
+                b += benef.getNombreEmpresa() + ", ";
+            }
+            vph = new VPagosHoy(b);
+            vph.setVisible(true);
+            vph.setAlwaysOnTop(true);
         }
-        vph = new VPagosHoy(b);
-        vph.setVisible(true);
-        vph.setAlwaysOnTop(true);
     }
 }

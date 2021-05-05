@@ -580,11 +580,13 @@ public class VParticipaciones extends javax.swing.JDialog {
     private void aceptarButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aceptarButton1ActionPerformed
         if (Alta.isSelected()) {
             fa.altaParticipacionesEmpresa(Integer.parseInt(numeroText.getText()), eu.getIdUsuario());
+            fa.insertarNoticia("Alta P", "El usuario " + eu.getNombreComercial() + " ha dado de alta " + numeroText.getText() + " participaciones", eu.getIdUsuario());
             eu.setnParticipaciones(eu.getnParticipaciones() + Integer.parseInt(numeroText.getText()));
             carteraText.setText(String.valueOf(eu.getnParticipaciones()));
         } else if (Baja.isSelected()) {
             if (Integer.parseInt(carteraText.getText()) - Integer.parseInt(numeroText.getText()) >= 0) {
                 fa.bajaParticipacionesEmpresa(Integer.parseInt(numeroText.getText()), eu.getIdUsuario());
+                fa.insertarNoticia("Baja P", "El usuario " + eu.getNombreComercial() + " ha dado de baja " + numeroText.getText() + " participaciones", eu.getIdUsuario());
                 eu.setnParticipaciones(eu.getnParticipaciones() - Integer.parseInt(numeroText.getText()));
                 carteraText.setText(String.valueOf(eu.getnParticipaciones()));
             } else {
@@ -890,10 +892,19 @@ public class VParticipaciones extends javax.swing.JDialog {
                                 6- le da el dinero al regulador.
                             ==============================================================================================================*/
                                 participacionesRestantes -= fa.moverParticipacionesTodas(eu.getIdUsuario(), oferta);
+                                if(oferta.getIdUsuario1().length() == 9){
+                                    fa.insertarNoticia("Compra", "El usuario " + eu.getNombreComercial() + "ha comprado " + oferta.getNumeroParticipaciones() + " participaciones al usuario " + fa.getnombreInversor(oferta.getIdUsuario1()), eu.getIdUsuario());
+                                } else{
+                                    fa.insertarNoticia("Compra", "El usuario " + eu.getNombreComercial() + "ha comprado " + oferta.getNumeroParticipaciones() + " participaciones al usuario " + fa.getnombreEmpresa(oferta.getIdUsuario1()), eu.getIdUsuario());
+                                }
 
                             } else {
-
                                 fa.moverParticipacionesParciales(oferta, eu.getIdUsuario(), participacionesRestantes);
+                                if(oferta.getIdUsuario1().length() == 9){
+                                    fa.insertarNoticia("Compra", "El usuario " + eu.getNombreComercial() + "ha comprado " + participacionesRestantes + " participaciones al usuario " + fa.getnombreInversor(oferta.getIdUsuario1()), eu.getIdUsuario());
+                                } else{
+                                    fa.insertarNoticia("Compra", "El usuario " + eu.getNombreComercial() + "ha comprado " + participacionesRestantes + " participaciones al usuario " + fa.getnombreEmpresa(oferta.getIdUsuario1()), eu.getIdUsuario());
+                                }
                                 participacionesRestantes = 0;
 
                             }
@@ -928,12 +939,20 @@ public class VParticipaciones extends javax.swing.JDialog {
                         oferta.setComision(iu.getComision());
 
                         if (oferta.getNumeroParticipaciones() <= participacionesRestantes) {
-
                             participacionesRestantes -= fa.moverParticipacionesTodas(iu.getIdUsuario(), oferta);
-
+                            if(oferta.getIdUsuario1().length() == 9){
+                                fa.insertarNoticia("Compra", "El usuario " + iu.getNombre() + "ha comprado " + oferta.getNumeroParticipaciones() + " participaciones al usuario " + fa.getnombreInversor(oferta.getIdUsuario1()), iu.getIdUsuario());
+                            } else{
+                                fa.insertarNoticia("Compra", "El usuario " + iu.getNombre() + "ha comprado " + oferta.getNumeroParticipaciones() + " participaciones al usuario " + fa.getnombreEmpresa(oferta.getIdUsuario1()), iu.getIdUsuario());
+                            }
                         } else {
 
                             fa.moverParticipacionesParciales(oferta, iu.getIdUsuario(), participacionesRestantes);
+                            if(oferta.getIdUsuario1().length() == 9){
+                                fa.insertarNoticia("Compra", "El usuario " + iu.getNombre() + "ha comprado " + participacionesRestantes + " participaciones al usuario " + fa.getnombreInversor(oferta.getIdUsuario1()), iu.getIdUsuario());
+                            } else{
+                                fa.insertarNoticia("Compra", "El usuario " + iu.getNombre() + "ha comprado " + participacionesRestantes + " participaciones al usuario " + fa.getnombreEmpresa(oferta.getIdUsuario1()), iu.getIdUsuario());
+                            }
                             participacionesRestantes = 0;
 
                         }

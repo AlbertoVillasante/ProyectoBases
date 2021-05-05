@@ -16,15 +16,18 @@ import javax.swing.table.AbstractTableModel;
 public class ModeloTablaNoticias extends AbstractTableModel{
     private java.util.List<Noticias> noticia;
     FachadaAplicacion fa;
+    private int flag;
 
     public ModeloTablaNoticias() {
         this.noticia = new java.util.ArrayList<Noticias>();
     }
 
+    @Override
     public int getColumnCount() {
         return 1;
     }
 
+    @Override
     public int getRowCount() {
         return noticia.size();
     }
@@ -60,41 +63,16 @@ public class ModeloTablaNoticias extends AbstractTableModel{
     
     @Override
     public Object getValueAt(int row, int col) {      
-        Object resultado = null;
+        Object resultado;
         
-        if(noticia.get(row).getTipoNoticia().equals("Alta")){
-            if(noticia.get(row).getIdUsuario().length() == 9){
-                resultado = "El inversor " + fa.getnombreInversor(noticia.get(row).getIdUsuario()) + " ha ingresado en el Mercado de Valores";
-            } else{
-                resultado = "La empresa " + fa.getnombreEmpresa(noticia.get(row).getIdUsuario()) + " ha ingresado en el Mercado de Valores";
-            }
-            
-        } else if(noticia.get(row).getTipoNoticia().equals("Compra")){
-            if(noticia.get(row).getIdUsuario().length() == 9){
-                resultado = "El inversor " + fa.getnombreInversor(noticia.get(row).getIdUsuario()) + " ha comprado";
-            } else{
-                resultado = "La empresa " + fa.getnombreEmpresa(noticia.get(row).getIdUsuario()) + " ha comprado";
-            }
-            
-        } else if(noticia.get(row).getTipoNoticia().equals("Baja")){
-            if(noticia.get(row).getIdUsuario().length() == 9){
-                resultado = "El inversor " + fa.getnombreInversor(noticia.get(row).getIdUsuario()) + " se ha dado de baja en el Mercado de Valores";
-            } else{
-                resultado = "La empresa " + fa.getnombreEmpresa(noticia.get(row).getIdUsuario()) + " se ha dado de baja en el Mercado de Valores";
-            }
-        } else if(noticia.get(row).getTipoNoticia().equals("Alta P")){
-            
-        } else if(noticia.get(row).getTipoNoticia().equals("Baja P")){
-            
-        } else if(noticia.get(row).getTipoNoticia().equals("Anuncio beneficios")){
-            
-        }
+        resultado = noticia.get(row).getDescripcion();
             
         return resultado;
     }
 
-    public void setFilas(java.util.List<Noticias> not) {
+    public void setFilas(java.util.List<Noticias> not, int flag) {
         this.noticia = not;
+        this.flag = flag;
         fireTableDataChanged();
     }
 }

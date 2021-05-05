@@ -453,7 +453,7 @@ public class DAOUsuarios extends AbstractDAO {
         PreparedStatement stmUsuarios = null;
         con = super.getConexion();
 
-        System.out.println(u.getClave());
+        
 
         try {
             stmUsuarios = con.prepareStatement("update inversorUsuario "
@@ -1079,14 +1079,20 @@ public class DAOUsuarios extends AbstractDAO {
         Connection con;
         PreparedStatement stmUsuario = null;
         ResultSet rsUsuario;
-
         con = this.getConexion();
+        
+        
         try {
-            stmUsuario = con.prepareStatement("select ((fondosDisponiblesCuenta-fondosInicialesCuenta) / fondosInicialesCuenta) as rendimiento " +
+            stmUsuario = con.prepareStatement("select ((fondosDisponiblesCuenta-fondosInicialesCuenta + "
+                    + "(SELECT SUM(ppi.numParticipaciones * eu.valorParticipaciones) as dineroEnAcciones " +
+"			FROM poseerParticipacionesInversor as ppi, empresaUsuario as eu " +
+"			where ppi.idUsuario1 = ? and ppi.idUsuario2 = eu.idUsuario) "
+                    + ") / fondosInicialesCuenta) as rendimiento " +
                 "from inversorUsuario where "
               + "fondosInicialesCuenta <>0 and  idUsuario = ?");
 
             stmUsuario.setString(1, idUsuario);
+            stmUsuario.setString(2, idUsuario);
             rsUsuario = stmUsuario.executeQuery();
 
             if (rsUsuario.next()) {
@@ -1113,11 +1119,16 @@ public class DAOUsuarios extends AbstractDAO {
 
         con = this.getConexion();
         try {
-            stmUsuario = con.prepareStatement("select ((fondosDisponiblesCuenta-fondosInicialesCuenta) / fondosInicialesCuenta)  as rendimiento " +
+            stmUsuario = con.prepareStatement("select ((fondosDisponiblesCuenta-fondosInicialesCuenta + "
+                    + "(SELECT SUM(ppe.numParticipaciones * eu.valorParticipaciones) as dineroEnAcciones " +
+"			FROM poseerParticipacionesEmpresa as ppe, empresaUsuario as eu " +
+"			where ppe.idUsuario1 = ? and ppe.idUsuario2 = eu.idUsuario)"
+                    + ") / fondosInicialesCuenta)  as rendimiento " +
                 "from empresaUsuario where "
               + "fondosInicialesCuenta <>0 and  idUsuario = ?");
 
             stmUsuario.setString(1, idUsuario);
+            stmUsuario.setString(2, idUsuario);
             rsUsuario = stmUsuario.executeQuery();
 
             if (rsUsuario.next()) {
@@ -1248,4 +1259,69 @@ public class DAOUsuarios extends AbstractDAO {
           try {stmUsuario.close();} catch (SQLException e){System.out.println("Imposible cerrar cursores");}
         }
     }
+    
+    public void cambiarSaldoUsuario(Saldos s){
+        Connection con;
+        PreparedStatement stmUsuario=null;
+        ResultSet rsUsuario;
+        String consulta;
+        
+        con=this.getConexion();
+
+        try {
+            
+            if(s.getUsuario().length() == 9){
+                consulta = "update inversorUsuario "
+                        + "set fondosDisponiblesCuenta = ? "
+                        + "where idUsuario = ? ";
+            }else{
+                consulta = "update empresaUsuario "
+                        + "set fondosDisponiblesCuenta = ? "
+                        + "where idUsuario = ? ";
+            }
+            
+            stmUsuario=con.prepareStatement(consulta);
+            stmUsuario.setDouble(1, s.getSaldo());
+            stmUsuario.setString(2, s.getUsuario());
+            stmUsuario.executeUpdate();
+        } catch (SQLException e){
+          System.out.println(e.getMessage());
+          this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        }finally{
+          try {stmUsuario.close();} catch (SQLException e){System.out.println("Imposible cerrar cursores");}
+        }
+    }
+    
+    public void cambiarSaldoUsuarioInicial(Saldos s){
+        Connection con;
+        PreparedStatement stmUsuario=null;
+        ResultSet rsUsuario;
+        String consulta;
+        
+        con=this.getConexion();
+
+        try {
+            
+            if(s.getUsuario().length() == 9){
+                consulta = "update inversorUsuario "
+                        + "set fondosInicialesCuenta = ? "
+                        + "where idUsuario = ? ";
+            }else{
+                consulta = "update empresaUsuario "
+                        + "set fondosInicialesCuenta = ? "
+                        + "where idUsuario = ? ";
+            }
+            
+            stmUsuario=con.prepareStatement(consulta);
+            stmUsuario.setDouble(1, s.getSaldo());
+            stmUsuario.setString(2, s.getUsuario());
+            stmUsuario.executeUpdate();
+        } catch (SQLException e){
+          System.out.println(e.getMessage());
+          this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        }finally{
+          try {stmUsuario.close();} catch (SQLException e){System.out.println("Imposible cerrar cursores");}
+        }
+    }
+    
 }

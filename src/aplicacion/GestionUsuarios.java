@@ -182,6 +182,10 @@ public class GestionUsuarios {
     public void estadoNormalEmpr(String id){
         fbd.estadoNormalEmpr(id);
     }
+    
+    public void cambiarSaldoUsuario(Saldos s){
+        fbd.cambiarSaldoUsuario(s);
+    }
 }
 /*  //Comentado para que no de error
     public java.util.List<EmpresaUsuario> obtenerUsuarios(String idUsuario, String nombreUsuario) {

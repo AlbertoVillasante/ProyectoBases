@@ -9,6 +9,8 @@ import aplicacion.AnunciarBeneficios;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class DAOBeneficios extends AbstractDAO {
 
@@ -279,7 +281,7 @@ public class DAOBeneficios extends AbstractDAO {
         ResultSet participacionesFinal;
 
         try {
-            stmSaldo = con.prepareStatement("elect poseerParticipacionesEmpresa.numParticipaciones - "
+            stmSaldo = con.prepareStatement("select poseerParticipacionesEmpresa.numParticipaciones - "
                     + "                                   (select sum(distinct ab.numParticipaciones) * (sum( distinct ppi.numparticipaciones) + sum(distinct ppe.numparticipaciones)) "
                     + "                                   from AnunciarBeneficios as ab,poseerparticipacionesinversor as ppi, poseerparticipacionesempresa ppe "
                     + "                                   where  ab.fechaAnuncioPago = current_date and ab.idEmpresa= ?  and ((ab.idEmpresa = ppi.idUsuario2 and ab.idEmpresa != ppi.idUsuario1) and (ab.idEmpresa = ppe.idUsuario2 and ab.idEmpresa != ppe.idUsuario1)) "
@@ -318,31 +320,32 @@ public class DAOBeneficios extends AbstractDAO {
         //ArrayList<AnunciarBeneficios> resultado = new ArrayList<AnunciarBeneficios>();
         ResultSet rsBeneficios;
         ResultSet rsEmpresas;
-
+        
         try {
+            con.setAutoCommit(false);
             stmAnunciosBeneficios = con.prepareStatement("( "
-                    + "SELECT distinct ppi.idUsuario1 as usuarioCobrador,  ppi.numParticipaciones as participacionesEmpresaAB, ab.importe as dineroPorParticipacion,  ab.numparticipaciones as participacionesPorParticipacion "
+                    + "SELECT distinct ppi.idUsuario1 as usuarioCobrador,  ppi.numParticipaciones as participacionesEmpresaAB, ab.importe as dineroPorParticipacion,  ab.numparticipaciones as participacionesPorParticipacion, ab.idEmpresa as empresaPagadora "
                     + "FROM poseerParticipacionesInversor as ppi, anunciarbeneficios as ab "
                     + "WHERE  ppi.idUsuario2 = ab.idEmpresa and ppi.idUsuario1 != ab.idEmpresa and  ab.fechaAnuncioPago = CURRENT_DATE "
                     + ") "
                     + "UNION "
                     + "( "
-                    + "SELECT distinct ppe.idUsuario1 as usuarioCobrador,  ppe.numParticipaciones as participacionesEmpresaAB, ab.importe as dineroPorParticipacion,  ab.numparticipaciones as participacionesPorParticipacion "
+                    + "SELECT distinct ppe.idUsuario1 as usuarioCobrador,  ppe.numParticipaciones as participacionesEmpresaAB, ab.importe as dineroPorParticipacion,  ab.numparticipaciones as participacionesPorParticipacion, ab.idEmpresa as empresaPagadora  "
                     + "FROM poseerParticipacionesEmpresa as ppe, anunciarbeneficios as ab "
                     + "WHERE ppe.idUsuario2 = ab.idEmpresa and ppe.idUsuario1 != ab.idEmpresa and  ab.fechaAnuncioPago = CURRENT_DATE "
-                    + ") ");
+                    + ")", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            
             rsBeneficios = stmAnunciosBeneficios.executeQuery(); // Obtenemos los usuarios que tienen participaciones de las empresas que pagan beneficios hoy
-
+            
             while (rsBeneficios.next()) {
-
                 if ((rsBeneficios.getString("usuarioCobrador")).length() == 9) { // Es INVERSOR
 
                     try { // Actualizamos el saldo de los inversores usuarios a partir de los resultados de la fila anterior
                         stmCobradores = con.prepareStatement("UPDATE inversorUsuario "
-                                + "SET fondosDisponiblesCuenta += (? * ?) "
+                                + "SET fondosDisponiblesCuenta = fondosDisponiblesCuenta + (? * ?) "
                                 + "where idUsuario = ? ");
 
-                        stmCobradores.setDouble(1, rsBeneficios.getDouble("dineroPorParticipaciones"));
+                        stmCobradores.setDouble(1, rsBeneficios.getDouble("dineroPorParticipacion"));
                         stmCobradores.setInt(2, rsBeneficios.getInt("participacionesEmpresaAB"));
                         stmCobradores.setString(3, rsBeneficios.getString("usuarioCobrador"));
                         stmCobradores.executeUpdate();
@@ -357,8 +360,201 @@ public class DAOBeneficios extends AbstractDAO {
                     try { // Actualizamos la cartera de participaciones del usuario
                         stmCobradores = null;
                         stmCobradores = con.prepareStatement("UPDATE poseerParticipacionesInversor "
-                                + "SET numParticipaciones += (? * ?) "
+                                + "SET numParticipaciones = numParticipaciones + (? * ?) "
+                                + "where idUsuario1 = ? and idUsuario2 = ? ");
+
+                        stmCobradores.setInt(1, rsBeneficios.getInt("participacionesPorParticipacion"));
+                        stmCobradores.setInt(2, rsBeneficios.getInt("participacionesEmpresaAB"));
+                        stmCobradores.setString(3, rsBeneficios.getString("usuarioCobrador"));
+                        stmCobradores.setString(4, rsBeneficios.getString("empresaPagadora"));
+                        stmCobradores.executeUpdate();
+
+                    } catch (SQLException e) {
+                        System.out.println(e.getMessage());
+                        this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+                    } finally {
+                        stmCobradores.close();
+                    }
+
+                } else if ((rsBeneficios.getString("usuarioCobrador")).length() == 13) { // Es EMPRESA
+
+                    try { // Actualizamos el saldo de las empresas usuarios a partir de los resultados de la fila anterior
+                        stmCobradores = con.prepareStatement("UPDATE empresaUsuario "
+                                + "SET fondosDisponiblesCuenta = fondosDisponiblesCuenta + (? * ?) "
                                 + "where idUsuario = ? ");
+
+                        stmCobradores.setDouble(1, rsBeneficios.getDouble("dineroPorParticipacion"));
+                        stmCobradores.setInt(2, rsBeneficios.getInt("participacionesEmpresaAB"));
+                        stmCobradores.setString(3, rsBeneficios.getString("usuarioCobrador"));
+                        stmCobradores.executeUpdate();
+
+                    } catch (SQLException e) {
+                        System.out.println(e.getMessage());
+                        this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+                    } finally {
+                        stmCobradores.close();
+                    }
+
+                    try { // Actualizamos la cartera de participaciones de la empresa usuario
+                        stmCobradores = null;
+                        stmCobradores = con.prepareStatement("UPDATE poseerParticipacionesEmpresa "
+                                + "SET numParticipaciones = numParticipaciones + (? * ?) "
+                                + "where idUsuario1 = ? and idUsuario2 = ?");
+
+                        stmCobradores.setInt(1, rsBeneficios.getInt("participacionesPorParticipacion"));
+                        stmCobradores.setInt(2, rsBeneficios.getInt("participacionesEmpresaAB"));
+                        stmCobradores.setString(3, rsBeneficios.getString("usuarioCobrador"));
+                        stmCobradores.setString(4, rsBeneficios.getString("empresaPagadora"));
+                        stmCobradores.executeUpdate();
+
+                    } catch (SQLException e) {
+                        System.out.println(e.getMessage());
+                        this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+                    } finally {
+                        stmCobradores.close();
+                    }
+
+                }
+
+            }
+
+            if (rsBeneficios.first()) { // Comprobamos que hay al menos una fila y hay que borrar el anuncio
+                // Actualizamos la cartera de participaciones y el dinero de la empresa que anuncia beneficios
+
+                try {
+
+                    stmEmpresas = con.prepareStatement("SELECT idEmpresa FROM anunciarBeneficios where fechaAnuncioPago=current_date"
+                    , ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+                    rsEmpresas = stmEmpresas.executeQuery();
+                    while (rsEmpresas.next()) { // TRas obtener las empresas que anunciaron beneficios hoy les restamos a esta el dinero y las participaciones
+
+                        try {
+
+                            stmQuitarDineroParticipacionesEmpresa = con.prepareStatement("UPDATE empresaUsuario "
+                                    + "SET fondosDisponiblesCuenta = ? "
+                                    + "where idUsuario =  ? ");
+
+                            stmQuitarDineroParticipacionesEmpresa.setDouble(1, this.getSaldoTrasPagarBeneficiosHoy(rsEmpresas.getString("idEmpresa")));
+                            stmQuitarDineroParticipacionesEmpresa.setString(2, rsEmpresas.getString("idEmpresa"));
+
+                        } catch (SQLException e) {
+                            System.out.println(e.getMessage());
+                            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+                        } finally {
+                            stmQuitarDineroParticipacionesEmpresa.close();
+                        }
+
+                        try {
+                            stmQuitarDineroParticipacionesEmpresa = null;
+                            stmQuitarDineroParticipacionesEmpresa = con.prepareStatement("UPDATE poseerParticipacionesEmpresa "
+                                    + "SET numParticipaciones = ? "
+                                    + "where idUsuario1 =  ? ");
+
+                            stmQuitarDineroParticipacionesEmpresa.setInt(1, this.getParticipacionesTrasPagarBeneficiosHoy(rsEmpresas.getString("idEmpresa")));
+                            stmQuitarDineroParticipacionesEmpresa.setString(2, rsEmpresas.getString("idEmpresa"));
+
+                        } catch (SQLException e) {
+                            System.out.println(e.getMessage());
+                            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+                        } finally {
+                            stmQuitarDineroParticipacionesEmpresa.close();
+                        }
+
+                    }
+
+                    if (rsEmpresas.first()) {
+                        // Si hay al menos un beneficio debemos eliminarlo
+                        try {
+
+                            stmBorrarBeneficios = con.prepareStatement("DELETE from AnunciarBeneficios where fechaAnuncioPago = CURRENT_DATE"); // Borramos todos los anuncios que ya se han pagado hoy
+                            stmBorrarBeneficios.executeUpdate();
+
+                        } catch (SQLException e) {
+                            System.out.println(e.getMessage());
+                            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+                        } finally {
+                            stmBorrarBeneficios.close();
+                        }
+
+                    }
+
+                } catch (SQLException e) {
+                    System.out.println(e.getMessage());
+                    this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+                } finally {
+                    stmEmpresas.close();
+                }
+
+            }
+
+            con.commit();
+            con.setAutoCommit(true);
+         
+        } catch (SQLException e) {
+            
+            System.out.println(e.getMessage());
+            try {
+                con.rollback();
+            } catch (SQLException ex) {
+                Logger.getLogger(DAOParticipaciones.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        } finally {
+            try {
+                stmAnunciosBeneficios.close();
+            } catch (SQLException e) {
+                System.out.println("Imposible cerrar cursores");
+            }
+        }
+
+    }
+    
+    public void pagarBeneficiossmda() {
+        Connection con;
+        PreparedStatement stmAnunciosBeneficios = null;
+        PreparedStatement stmCobradores = null;
+        PreparedStatement stmEmpresas = null;
+        PreparedStatement stmQuitarDineroParticipacionesEmpresa = null;
+        PreparedStatement stmBorrarBeneficios = null;
+        con = super.getConexion();
+        //ArrayList<AnunciarBeneficios> resultado = new ArrayList<AnunciarBeneficios>();
+        ResultSet rsBeneficios;
+        ResultSet rsEmpresas;
+        System.out.println("1");
+        try {
+            stmAnunciosBeneficios = con.prepareStatement("( "
+                    + "SELECT distinct ppi.idUsuario1 as usuarioCobrador,  ppi.numParticipaciones as participacionesEmpresaAB, ab.importe as dineroPorParticipacion,  ab.numparticipaciones as participacionesPorParticipacion "
+                    + "FROM poseerParticipacionesInversor as ppi, anunciarbeneficios as ab "
+                    + "WHERE  ppi.idUsuario2 = ab.idEmpresa and ppi.idUsuario1 != ab.idEmpresa and  ab.fechaAnuncioPago = CURRENT_DATE "
+                    + ") "
+                    + "UNION "
+                    + "( "
+                    + "SELECT distinct ppe.idUsuario1 as usuarioCobrador,  ppe.numParticipaciones as participacionesEmpresaAB, ab.importe as dineroPorParticipacion,  ab.numparticipaciones as participacionesPorParticipacion "
+                    + "FROM poseerParticipacionesEmpresa as ppe, anunciarbeneficios as ab "
+                    + "WHERE ppe.idUsuario2 = ab.idEmpresa and ppe.idUsuario1 != ab.idEmpresa and  ab.fechaAnuncioPago = CURRENT_DATE "
+                    + ")", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            System.out.println("2");
+            rsBeneficios = stmAnunciosBeneficios.executeQuery(); // Obtenemos los usuarios que tienen participaciones de las empresas que pagan beneficios hoy
+            
+            while (rsBeneficios.next()) {
+                System.out.println("3");
+                System.out.println(rsBeneficios.getString("usuarioCobrador"));
+                if ((rsBeneficios.getString("usuarioCobrador")).length() == 9) { // Es INVERSOR
+
+                    try { // Actualizamos el saldo de los inversores usuarios a partir de los resultados de la fila anterior
+                        stmCobradores = con.prepareStatement("UPDATE inversorUsuario "
+                                + "SET fondosDisponiblesCuenta = fondosDisponiblesCuenta + (? * ?) "
+                                + "where idUsuario = ? ");
+
+                        stmCobradores.setDouble(1, rsBeneficios.getDouble("dineroPorParticipacion"));
+                        stmCobradores.setInt(2, rsBeneficios.getInt("participacionesEmpresaAB"));
+                        stmCobradores.setString(3, rsBeneficios.getString("usuarioCobrador"));
+                        stmCobradores.executeUpdate();
+ // Actualizamos la cartera de participaciones del usuario
+                        stmCobradores = null;
+                        stmCobradores = con.prepareStatement("UPDATE poseerParticipacionesInversor "
+                                + "SET numParticipaciones = numParticipaciones + (? * ?) "
+                                + "where idUsuario1 = ? ");
 
                         stmCobradores.setInt(1, rsBeneficios.getInt("participacionesPorParticipacion"));
                         stmCobradores.setInt(2, rsBeneficios.getInt("participacionesEmpresaAB"));
@@ -376,10 +572,10 @@ public class DAOBeneficios extends AbstractDAO {
 
                     try { // Actualizamos el saldo de las empresas usuarios a partir de los resultados de la fila anterior
                         stmCobradores = con.prepareStatement("UPDATE empresaUsuario "
-                                + "SET fondosDisponiblesCuenta += (? * ?) "
+                                + "SET fondosDisponiblesCuenta = fondosDisponiblesCuenta + (? * ?) "
                                 + "where idUsuario = ? ");
 
-                        stmCobradores.setDouble(1, rsBeneficios.getDouble("dineroPorParticipaciones"));
+                        stmCobradores.setDouble(1, rsBeneficios.getDouble("dineroPorParticipacion"));
                         stmCobradores.setInt(2, rsBeneficios.getInt("participacionesEmpresaAB"));
                         stmCobradores.setString(3, rsBeneficios.getString("usuarioCobrador"));
                         stmCobradores.executeUpdate();
@@ -394,8 +590,8 @@ public class DAOBeneficios extends AbstractDAO {
                     try { // Actualizamos la cartera de participaciones de la empresa usuario
                         stmCobradores = null;
                         stmCobradores = con.prepareStatement("UPDATE poseerParticipacionesEmpresa "
-                                + "SET numParticipaciones += (? * ?) "
-                                + "where idUsuario = ? ");
+                                + "SET numParticipaciones = numParticipaciones + (? * ?) "
+                                + "where idUsuario1 = ? ");
 
                         stmCobradores.setInt(1, rsBeneficios.getInt("participacionesPorParticipacion"));
                         stmCobradores.setInt(2, rsBeneficios.getInt("participacionesEmpresaAB"));
@@ -418,7 +614,8 @@ public class DAOBeneficios extends AbstractDAO {
 
                 try {
 
-                    stmEmpresas = con.prepareStatement("SELECT idEmpresa FROM anunciarBeneficios where fechaAnuncioPago=current_date");
+                    stmEmpresas = con.prepareStatement("SELECT idEmpresa FROM anunciarBeneficios where fechaAnuncioPago=current_date"
+                    , ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
                     rsEmpresas = stmEmpresas.executeQuery();
                     while (rsEmpresas.next()) { // TRas obtener las empresas que anunciaron beneficios hoy les restamos a esta el dinero y las participaciones
 

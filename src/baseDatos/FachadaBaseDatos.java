@@ -7,6 +7,7 @@ import aplicacion.Categoria;
 import aplicacion.EmpresaUsuario;
 import aplicacion.Estadisticas;
 import aplicacion.Libro;
+import aplicacion.Noticias;
 import aplicacion.OfertaParticipaciones;
 import aplicacion.Saldos;
 import java.io.FileInputStream;
@@ -24,6 +25,7 @@ public class FachadaBaseDatos {
     private DAOUsuarios daoUsuarios;
     private DAOParticipaciones daoParticipaciones;
     private DAOBeneficios daoBeneficios;
+    private DAONoticias daoNoticias;
 
     public FachadaBaseDatos(aplicacion.FachadaAplicacion fa) {
 
@@ -55,6 +57,7 @@ public class FachadaBaseDatos {
             daoUsuarios = new DAOUsuarios(conexion, fa);
             daoParticipaciones = new DAOParticipaciones(conexion, fa);
             daoBeneficios = new DAOBeneficios(conexion, fa);
+            daoNoticias = new DAONoticias(conexion, fa);
 
         } catch (FileNotFoundException f) {
             System.out.println(f.getMessage());
@@ -225,7 +228,7 @@ public class FachadaBaseDatos {
 
     public void altaPagoBeneficios(String fecha, double precio, String nombreEmpresa, int numParticipaciones) {
         String idEmpresa = daoUsuarios.getIdEmpresa(nombreEmpresa);
-        System.out.println(fecha + precio + numParticipaciones + idEmpresa);
+       
         daoBeneficios.altaPagoBeneficios(fecha, precio, idEmpresa, numParticipaciones);
     }
 
@@ -416,5 +419,21 @@ public class FachadaBaseDatos {
     
     public void estadoNormalEmpr(String id){
         daoUsuarios.estadoNormalEmpr(id);
+    }
+    
+    public void cambiarSaldoUsuario(Saldos s){
+        daoUsuarios.cambiarSaldoUsuario(s);
+        daoUsuarios.cambiarSaldoUsuarioInicial(s);
+    }
+    
+    public void pagarBeneficios(){
+        daoBeneficios.pagarBeneficios();
+    }
+    
+    public void insertarNoticia(String tipo, String descripcion, String id){
+        daoNoticias.insertarNoticia(tipo, descripcion, id);
+    }
+    public java.util.List<Noticias> getNoticias(String tipo1, String tipo2, String tipo3) {
+        return daoNoticias.getNoticias(tipo1, tipo2, tipo3);
     }
 }

@@ -5,6 +5,7 @@
  */
 package gui;
 
+import aplicacion.Noticias;
 import java.awt.Color;
 import javax.swing.ImageIcon;
 
@@ -19,11 +20,23 @@ public class VNoticiero extends javax.swing.JDialog {
     
     public VNoticiero(aplicacion.FachadaAplicacion fa, String tiponoticia) {
         initComponents();
+        this.fa = fa;
+        int flag = 0;
         this.getContentPane().setBackground(prueba);
         titulo.setText(tiponoticia);
-        if(tiponoticia.equals("ANUNCIOS DE BENEFICIOS")) fotoNoticia.setIcon(new ImageIcon(getClass().getResource("/gui/Beneficios.png")));
-        if(tiponoticia.equals("ANUNCIOS DE ALTAS Y BAJAS")) fotoNoticia.setIcon(new ImageIcon(getClass().getResource("/gui/gente.png")));
-        if(tiponoticia.equals("ANUNCIOS DE PARTICIPACIONES")) fotoNoticia.setIcon(new ImageIcon(getClass().getResource("/gui/participaciones.png")));
+        if(tiponoticia.equals("ANUNCIOS DE BENEFICIOS")){
+            fotoNoticia.setIcon(new ImageIcon(getClass().getResource("/gui/Beneficios.png")));
+            flag = 0;
+        }
+        if(tiponoticia.equals("ANUNCIOS DE ALTAS Y BAJAS")){
+            fotoNoticia.setIcon(new ImageIcon(getClass().getResource("/gui/gente.png")));
+            flag = 1;
+        }
+        if(tiponoticia.equals("ANUNCIOS DE PARTICIPACIONES")){
+            fotoNoticia.setIcon(new ImageIcon(getClass().getResource("/gui/participaciones.png")));
+            flag = 2;
+        }
+        mostrarNoticias(flag);
     }
 
     /**
@@ -41,7 +54,7 @@ public class VNoticiero extends javax.swing.JDialog {
         salir = new javax.swing.JButton();
         fotoNoticia = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tablaNoticias = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -77,18 +90,8 @@ public class VNoticiero extends javax.swing.JDialog {
         fotoNoticia.setFocusPainted(false);
         fotoNoticia.setFocusable(false);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3"
-            }
-        ));
-        jScrollPane1.setViewportView(jTable1);
+        tablaNoticias.setModel(new ModeloTablaNoticias());
+        jScrollPane1.setViewportView(tablaNoticias);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -141,8 +144,35 @@ public class VNoticiero extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JButton salir;
+    private javax.swing.JTable tablaNoticias;
     private javax.swing.JTextField titulo;
     // End of variables declaration//GEN-END:variables
+    
+    public void mostrarNoticias(int flag){
+        ModeloTablaNoticias m;
+        m=(ModeloTablaNoticias) tablaNoticias.getModel();
+        java.util.List<Noticias> noticias = null;
+        
+        switch(flag){
+            case 0:
+                noticias = fa.getNoticias("Anuncio beneficios", null, null);
+                break;
+            case 1:
+                noticias = fa.getNoticias("Alta", null, null);
+                break;
+            case 2:
+                noticias = fa.getNoticias("Compra", "Alta P", "Baja P");
+                break;
+        }
+        
+        if(noticias.equals(null)){
+            VAviso v = new VAviso("Aviso");
+            v.setVisible(true);
+        } else{
+            m.setFilas(noticias, flag);
+        }
+        
+    }
+
 }

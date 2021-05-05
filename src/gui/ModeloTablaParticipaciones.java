@@ -22,10 +22,12 @@ public class ModeloTablaParticipaciones extends AbstractTableModel {
         this.ofertas = new java.util.ArrayList<OfertaParticipaciones>();
     }
 
+    @Override
     public int getColumnCount() {
         return 4;
     }
 
+    @Override
     public int getRowCount() {
         return ofertas.size();
     }
@@ -75,6 +77,7 @@ public class ModeloTablaParticipaciones extends AbstractTableModel {
         return false;
     }
 
+    @Override
     public Object getValueAt(int row, int col) {  
         Object resultado = null;
 

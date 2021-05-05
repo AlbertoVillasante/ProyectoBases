@@ -384,4 +384,12 @@ public class FachadaAplicacion {
     public void cambiarSaldoUsuario(Saldos s){
         gu.cambiarSaldoUsuario(s);
     }
+    
+    public void insertarNoticia(String tipo, String descripcion, String id){
+        gn.insertarNoticia(tipo, descripcion, id);
+    }
+    
+    public java.util.List<Noticias> getNoticias(String tipo1, String tipo2, String tipo3) {
+        return gn.getNoticias(tipo1, tipo2, tipo3);
+    }
 }

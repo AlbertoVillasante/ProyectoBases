@@ -265,7 +265,7 @@ public class VBeneficios extends javax.swing.JDialog {
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
         //comprobaciones
-        if (!btnSelector.getSelectedItem().toString().equals(eu.getNombreComercial())) {
+         if (!btnSelector.getSelectedItem().toString().equals(eu.getNombreComercial())) {
             VAviso va;
             va=new   VAviso("Esa empresa no es de su propiedad.\nAcción no disponible");
             va.setVisible(true);
@@ -290,6 +290,7 @@ public class VBeneficios extends javax.swing.JDialog {
                     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
                     String date = sdf.format(cuadroFechaPago.getDate());
                     fa.altaPagoBeneficios(date, Double.parseDouble(cuadroBeneficio.getText()), btnSelector.getSelectedItem().toString(), Integer.parseInt(numPart.getValue().toString()));
+                    fa.insertarNoticia("Anuncio beneficios", "El usuario " + eu.getNombreComercial() + " ha anunciado " + cuadroBeneficio.getText() + " de beneficio por participacion", eu.getIdUsuario());
                     actualizarTablaBeneficios();
                     error.setVisible(false);
                 }

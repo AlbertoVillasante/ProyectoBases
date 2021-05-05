@@ -462,6 +462,81 @@ public class VUsuario extends javax.swing.JDialog {
         btnInversor.setText("");
         tipo_usr.setSelectedIndex(0);*/
 
+        txtUsuarioNoDisponible.setEnabled(false);
+
+        if (btnUsuario.getText().equals("") || btnUsuario.getText().equals("DNI / NIF")) {
+            obligatorioTexto.setEnabled(true);
+            obligatorio1.setEnabled(true);
+        } else {
+            obligatorio1.setEnabled(false);
+        }
+        if (btnClave1.getText().equals("")) {
+            obligatorioTexto.setEnabled(true);
+            obligatorio2.setEnabled(true);
+        } else {
+            obligatorio2.setEnabled(false);
+        }
+        if (btnDireccion.getText().equals("")) {
+            obligatorioTexto.setEnabled(true);
+            obligatorio3.setEnabled(true);
+        } else {
+            obligatorio3.setEnabled(false);
+        }
+        if (btnTelefono.getText().equals("")) {
+            obligatorioTexto.setEnabled(true);
+            obligatorio4.setEnabled(true);
+        } else {
+            obligatorio4.setEnabled(false);
+        }
+
+        if (tipo_usr.getSelectedIndex() == 0) {
+            if (btnInversor.getText().equals("")) {
+                obligatorioTexto.setEnabled(true);
+                obligatorio6.setEnabled(true);
+            } else {
+                obligatorio6.setEnabled(false);
+            }
+            if (btnApellido1.getText().equals("")) {
+                obligatorioTexto.setEnabled(true);
+                obligatorio7.setEnabled(true);
+            } else {
+                obligatorio7.setEnabled(false);
+            }
+            if (btnApellido2.getText().equals("")) {
+                obligatorioTexto.setEnabled(true);
+                obligatorio8.setEnabled(true);
+            } else {
+                obligatorio8.setEnabled(false);
+            }
+        }
+
+        if (tipo_usr.getSelectedIndex() == 1) {
+            if (btnApellido2.getText().equals("")) {
+                obligatorioTexto.setEnabled(true);
+                obligatorio5.setEnabled(true);
+            } else {
+                obligatorio5.setEnabled(false);
+            }
+        }
+        if (tipo_usr.getSelectedIndex() == 0) {
+            if (!btnUsuario.getText().equals("") && !btnUsuario.getText().equals("DNI / NIF") && !btnDireccion.getText().equals("")
+                    && !btnClave1.getText().equals("") && !btnTelefono.getText().equals("")
+                    && !btnInversor.getText().equals("") && !btnApellido1.getText().equals("") && !btnApellido2.getText().equals("")) {
+                obligatorioTexto.setEnabled(false);
+            }
+        }
+        if (tipo_usr.getSelectedIndex() == 1) {
+            if (!btnUsuario.getText().equals("") && !btnUsuario.getText().equals("DNI / NIF") && !btnDireccion.getText().equals("")
+                    && !btnClave1.getText().equals("") && !btnTelefono.getText().equals("")
+                    && !btnEmpresa.getText().equals("")) {
+                obligatorioTexto.setEnabled(false);
+            }
+        }
+
+        if (obligatorioTexto.isEnabled()) {
+            return;
+        }
+        
         actualizarDatos();
 
         //btnBorrar.setEnabled(true);
@@ -742,6 +817,7 @@ public class VUsuario extends javax.swing.JDialog {
         txtUsuarioNoDisponible.setEnabled(false);
 
         if (flag) { //REGISTRO
+            btnUsuario.setEditable(true);
             tipo_usr.setEnabled(true);
             btnEmpresa.setEnabled(false);
             obligatorio5.setEnabled(false);
@@ -753,6 +829,7 @@ public class VUsuario extends javax.swing.JDialog {
             volver.setVisible(true);
 
         } else { //MODIFICACIÓN
+            btnUsuario.setEditable(false);
             btnBaja.setVisible(true);
             btnRegistrar.setVisible(false);
             btnActualizar.setVisible(true);

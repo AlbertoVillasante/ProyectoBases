@@ -12,7 +12,10 @@ import java.awt.Color;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.TimeZone;
 
 /**
  *
@@ -45,6 +48,8 @@ public class VBeneficios extends javax.swing.JDialog {
             this.eu = eu;
         }
 
+        
+        
         this.getContentPane().setBackground(prueba);
         actualizarTablaBeneficios();
         btnSelector.setBackground(prueba1);
@@ -114,6 +119,11 @@ public class VBeneficios extends javax.swing.JDialog {
 
         btnPagar.setForeground(new java.awt.Color(255, 51, 51));
         btnPagar.setText("Pagar ahora");
+        btnPagar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPagarActionPerformed(evt);
+            }
+        });
 
         jLabel1.setForeground(new java.awt.Color(187, 187, 188));
         jLabel1.setText("Fecha pago:");
@@ -131,7 +141,7 @@ public class VBeneficios extends javax.swing.JDialog {
             }
         });
 
-        numPart.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
+        numPart.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(0), Integer.valueOf(0), null, Integer.valueOf(1)));
 
         jLabel3.setForeground(new java.awt.Color(187, 187, 188));
         jLabel3.setText("Número de Participaciones:");
@@ -297,6 +307,39 @@ public class VBeneficios extends javax.swing.JDialog {
         m = (ModeloTablaBeneficios) tablaBeneficios.getModel();
         m.setFilas(fa.getBeneficiosEmpresa(fa.getIdEmpresa(btnSelector.getSelectedItem().toString())));
     }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void btnPagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPagarActionPerformed
+        // TODO add your handling code here:
+         //comprobaciones
+        if (!btnSelector.getSelectedItem().toString().equals(eu.getNombreComercial())) {
+            VAviso va;
+            va=new   VAviso("Esa empresa no es de su propiedad.\nAcción no disponible");
+            va.setVisible(true);
+        } else {
+            if (cuadroBeneficio.getText().equals("")) {
+                cuadroBeneficio.setText("0");
+            }
+            if (Integer.parseInt(numPart.getValue().toString())==0 && Double.parseDouble(cuadroBeneficio.getText()) <= 0) {
+                error.setVisible(true);
+            } else {
+
+                if(fa.getSaldoRetenciones(eu.getIdUsuario()) < 0){
+                    error.setText("Saldo insuficiente para completar la transacción");
+                    error.setVisible(true);
+                }
+                if(fa.getParticipacionesRetenciones(eu.getIdUsuario()) < 0){
+                    error.setText("Participaciones insuficientes para completar la transacción");
+                    error.setVisible(true); 
+                }else {
+                    
+                    fa.altaPagoBeneficios(String.valueOf(LocalDate.now()), Double.parseDouble(cuadroBeneficio.getText()), btnSelector.getSelectedItem().toString(), Integer.parseInt(numPart.getValue().toString()));
+                    fa.pagarBeneficios();
+                    actualizarTablaBeneficios();
+                    error.setVisible(false);
+                }
+            }
+        }
+    }//GEN-LAST:event_btnPagarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

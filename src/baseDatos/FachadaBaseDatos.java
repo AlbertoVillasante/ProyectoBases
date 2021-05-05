@@ -425,15 +425,10 @@ public class FachadaBaseDatos {
         daoBeneficios.pagarBeneficios();
     }
     
-    public void insertarNoticiaInv(String tipo, String descripcion){
-        daoNoticias.insertarNoticiaInv(tipo, descripcion);
+    public void insertarNoticia(String tipo, String descripcion, String id){
+        daoNoticias.insertarNoticia(tipo, descripcion, id);
     }
-    
-    public void insertarNoticiaEmpr(String tipo, String descripcion){
-        daoNoticias.insertarNoticiaEmpr(tipo, descripcion);
-    }
-    
-    public java.util.List<Noticias> getNoticias() {
-        return daoNoticias.getNoticias();
+    public java.util.List<Noticias> getNoticias(String tipo1, String tipo2, String tipo3) {
+        return daoNoticias.getNoticias(tipo1, tipo2, tipo3);
     }
 }

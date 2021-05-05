@@ -385,15 +385,11 @@ public class FachadaAplicacion {
         gu.cambiarSaldoUsuario(s);
     }
     
-     public void insertarNoticiaInv(String tipo, String descripcion){
-        gn.insertarNoticiaInv(tipo, descripcion);
+    public void insertarNoticia(String tipo, String descripcion, String id){
+        gn.insertarNoticia(tipo, descripcion, id);
     }
     
-    public void insertarNoticiaEmpr(String tipo, String descripcion){
-        gn.insertarNoticiaEmpr(tipo, descripcion);
-    }
-    
-    public java.util.List<Noticias> getNoticias() {
-        return gn.getNoticias();
+    public java.util.List<Noticias> getNoticias(String tipo1, String tipo2, String tipo3) {
+        return gn.getNoticias(tipo1, tipo2, tipo3);
     }
 }

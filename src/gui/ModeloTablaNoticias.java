@@ -63,25 +63,9 @@ public class ModeloTablaNoticias extends AbstractTableModel{
     
     @Override
     public Object getValueAt(int row, int col) {      
-        Object resultado = null;
+        Object resultado;
         
-        switch(flag){
-            case 0:
-                if(noticia.get(row).getTipoNoticia().equals("Anuncio beneficios")){
-                    resultado = noticia.get(row).getDescripcion();
-                }
-                break;
-            case 1:
-                if(noticia.get(row).getTipoNoticia().equals("Alta") || noticia.get(row).getTipoNoticia().equals("Baja")){
-                    resultado = noticia.get(row).getDescripcion();
-                }
-                break;
-            case 2:
-                if(noticia.get(row).getTipoNoticia().equals("Compra") || noticia.get(row).getTipoNoticia().equals("Alta P") || noticia.get(row).getTipoNoticia().equals("Baja P")){
-                    resultado = noticia.get(row).getDescripcion();
-                }
-                break;
-        }
+        resultado = noticia.get(row).getDescripcion();
             
         return resultado;
     }

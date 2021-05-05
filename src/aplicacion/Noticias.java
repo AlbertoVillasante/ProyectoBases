@@ -11,10 +11,11 @@ package aplicacion;
  */
 public class Noticias {
     private int idNoticia;
+    private String idUsuario;
     private String TipoNoticia;
     private String descripcion;
 
-    public Noticias(int idNoticia, String TipoNoticia, String descripcion) {
+    public Noticias(int idNoticia, String idUsuario, String TipoNoticia, String descripcion) {
         this.idNoticia = idNoticia;
         this.TipoNoticia = TipoNoticia;
         this.descripcion=descripcion;

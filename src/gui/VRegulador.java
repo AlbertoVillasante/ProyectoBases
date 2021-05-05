@@ -266,11 +266,13 @@ public class VRegulador extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
     void anunciarPagosHoy(){
         String b = "";
-        for(AnunciarBeneficios benef : fa.getBeneficiosHoy()){
-            b += benef.getNombreEmpresa() + ", ";
+        if(fa.getBeneficiosHoy().size() != 0){
+            for(AnunciarBeneficios benef : fa.getBeneficiosHoy()){
+                b += benef.getNombreEmpresa() + ", ";
+            }
+            vph = new VPagosHoy(b);
+            vph.setVisible(true);
+            vph.setAlwaysOnTop(true);
         }
-        vph = new VPagosHoy(b);
-        vph.setVisible(true);
-        vph.setAlwaysOnTop(true);
     }
 }

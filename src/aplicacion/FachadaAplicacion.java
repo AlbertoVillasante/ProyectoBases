@@ -210,6 +210,10 @@ public class FachadaAplicacion {
         return gu.getSaldoUsuarios();
     }
     
+    public ArrayList<Saldos> getSaldoUsuario(String id) {
+        return gu.getSaldoUsuario(id);
+    }
+    
     public ArrayList<AnunciarBeneficios> getBeneficiosHoy() {
         return gb.getBeneficiosHoy();
     }

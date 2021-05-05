@@ -198,6 +198,10 @@ public class FachadaBaseDatos {
     public ArrayList<Saldos> getSaldoUsuarios() {
         return daoUsuarios.getSaldoUsuarios();
     }
+    
+    public ArrayList<Saldos> getSaldoUsuario(String id) {
+        return daoUsuarios.getSaldoUsuario(id);
+    }
 
     public void insertarUsuarioInversor(InversorUsuario u) {
         daoUsuarios.insertarUsuarioInversor(u);

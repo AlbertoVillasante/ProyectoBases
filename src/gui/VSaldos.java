@@ -7,7 +7,9 @@ package gui;
 
 import aplicacion.EmpresaUsuario;
 import aplicacion.FachadaAplicacion;
+import aplicacion.InversorUsuario;
 import aplicacion.Saldos;
+import aplicacion.TipoUsuario;
 import java.awt.Color;
 import java.text.DecimalFormat;
 import java.util.Locale;
@@ -20,8 +22,8 @@ public class VSaldos extends javax.swing.JDialog {
     FachadaAplicacion fa;
 
     public VSaldos(FachadaAplicacion fa) {
-        this.fa = fa;
         initComponents();
+        this.fa = fa;
         this.getContentPane().setBackground(prueba);
         cuadroDni.setBackground(prueba1);
         cuadroSaldo.setBackground(prueba1);
@@ -53,6 +55,8 @@ public class VSaldos extends javax.swing.JDialog {
         btnBuscar = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         tabla = new javax.swing.JTable();
+        error = new javax.swing.JLabel();
+        cuadroDni = new javax.swing.JTextField();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -105,6 +109,7 @@ public class VSaldos extends javax.swing.JDialog {
 
         btnBuscar.setForeground(new java.awt.Color(187, 187, 188));
         btnBuscar.setText("Buscar");
+        btnBuscar.setFocusable(false);
         btnBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBuscarActionPerformed(evt);
@@ -123,7 +128,7 @@ public class VSaldos extends javax.swing.JDialog {
         error.setForeground(new java.awt.Color(255, 51, 51));
         error.setText("Introduzca un ID válido!");
 
-        cuadroDni.setForeground(new java.awt.Color(187, 187, 187));
+        cuadroDni.setForeground(new java.awt.Color(187, 187, 188));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -196,14 +201,18 @@ public class VSaldos extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
-        
-        if(cuadroDni.getText().equals("") || btnSaldo.getText().equals("")){
-            VAviso vnoticia;
-            vnoticia = new VAviso("Debe completar ambos campos o seleccionar un usuario de la tabla para llevar a cabo esta operación");
-            vnoticia.setVisible(true);
-        }else{
-            Saldos saldoUsuario = new Saldos(cuadroDni.getText(), Double.parseDouble(btnSaldo.getText()));
-            fa.cambiarSaldoUsuario(saldoUsuario);
+        if(cuadroDni.getText().length() == 9){
+            InversorUsuario i = new InversorUsuario(cuadroDni.getText(), "", "", "", "", "", "", TipoUsuario.Normal);
+            i.setFondosDisponiblesCuenta(Double.valueOf(cuadroSaldo.getText()));
+            fa.modificarCuentaInversor(i);
+        }
+        else if(cuadroDni.getText().length() == 13){
+            EmpresaUsuario e = new EmpresaUsuario(cuadroDni.getText(), "", "", "", "", TipoUsuario.Normal);
+            e.setFondosDisponiblesCuenta(Double.valueOf(cuadroSaldo.getText()));
+            fa.modificarCuentaEmpresa(e);
+        }
+        else{
+            error.setVisible(true);
         }
         actualizarTablaSaldos();
     }//GEN-LAST:event_btnActualizarActionPerformed
@@ -211,11 +220,7 @@ public class VSaldos extends javax.swing.JDialog {
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         this.dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
-                                                                                   
-    private void tablaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cuadroDniActionPerformed
-
+                                          
     private void tablaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaMouseClicked
         // TODO add your handling code here:
         ModeloTablaSaldos m;
@@ -225,39 +230,33 @@ public class VSaldos extends javax.swing.JDialog {
             int i = tabla.getSelectedRow();
             Saldos s = m.obtenerSaldo(i);
             cuadroDni.setText(s.getUsuario());
-            btnSaldo.setText(String.valueOf(s.getSaldo()));
+            cuadroSaldo.setText(String.valueOf(s.getSaldo()));
         }
     }//GEN-LAST:event_tablaMouseClicked
 
     private void aceptarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aceptarButtonActionPerformed
         // TODO add your handling code here:
-        if(cuadroDni.getText().equals("") || btnSaldo.getText().equals("")){
-            VAviso vnoticia;
-            vnoticia = new VAviso("Debe completar ambos campos o seleccionar un usuario de la tabla para llevar a cabo esta operación");
-            vnoticia.setVisible(true);
-        }else{
-            Saldos saldoUsuario = new Saldos(cuadroDni.getText(), Double.parseDouble(btnSaldo.getText()));
-            fa.cambiarSaldoUsuario(saldoUsuario);
+        if(cuadroDni.getText().length() == 9){
+            InversorUsuario i = new InversorUsuario(cuadroDni.getText(), "", "", "", "", "", "", TipoUsuario.Normal);
+            i.setFondosDisponiblesCuenta(Double.valueOf(cuadroSaldo.getText()));
+            fa.modificarCuentaInversor(i);
+        }
+        else if(cuadroDni.getText().length() == 13){
+            EmpresaUsuario e = new EmpresaUsuario(cuadroDni.getText(), "", "", "", "", TipoUsuario.Normal);
+            e.setFondosDisponiblesCuenta(Double.valueOf(cuadroSaldo.getText()));
+            fa.modificarCuentaEmpresa(e);
+        }
+        else{
+            error.setVisible(true);
         }
         this.dispose();
     }//GEN-LAST:event_aceptarButtonActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         // TODO add your handling code here:
-        
-        if(cuadroDni.getText().equals("")){
-            VAviso vnoticia;
-            vnoticia = new VAviso("Debe introducir el DNI del usuario para encontrarlo en la tabla");
-            vnoticia.setVisible(true);
-        }else{
-            ModeloTablaSaldos m;
-            m = (ModeloTablaSaldos) tabla.getModel();
-            int i = m.getUsuarioRow(cuadroDni.getText());
-            tabla.setRowSelectionInterval(i, i);
-            Saldos s = m.obtenerSaldo(i);
-            cuadroDni.setText(s.getUsuario());
-            btnSaldo.setText(String.valueOf(s.getSaldo()));
-        }
+        ModeloTablaSaldos m;
+        m = (ModeloTablaSaldos) tabla.getModel();
+        m.setFilas(fa.getSaldoUsuario(cuadroDni.getText()));
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     /**
@@ -284,19 +283,6 @@ public class VSaldos extends javax.swing.JDialog {
         ModeloTablaSaldos m;
         m = (ModeloTablaSaldos) tabla.getModel();
         m.setFilas(fa.getSaldoUsuarios());
-        
-        
-        if(m.getRowCount() == 0){
-            aceptarButton.setEnabled(false);
-            btnActualizar.setEnabled(false);
-        }else{
-            tabla.setRowSelectionInterval(0, 0);
-            Saldos s = m.obtenerSaldo(0);
-            cuadroDni.setText(s.getUsuario());
-            btnSaldo.setText(String.valueOf(s.getSaldo()));
-            aceptarButton.setEnabled(true);
-            btnActualizar.setEnabled(true);
-        }
     }
 }
 

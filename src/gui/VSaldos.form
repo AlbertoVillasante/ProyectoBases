@@ -199,6 +199,7 @@
           <Color blue="bc" green="bb" red="bb" type="rgb"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Buscar"/>
+        <Property name="focusable" type="boolean" value="false"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBuscarActionPerformed"/>
@@ -240,7 +241,7 @@
     <Component class="javax.swing.JTextField" name="cuadroDni">
       <Properties>
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="bb" green="bb" red="bb" type="rgb"/>
+          <Color blue="bc" green="bb" red="bb" type="rgb"/>
         </Property>
       </Properties>
     </Component>

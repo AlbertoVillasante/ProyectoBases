@@ -91,7 +91,6 @@ public class VParticipaciones extends javax.swing.JDialog {
         numeroText = new javax.swing.JTextField();
         aceptarButton1 = new javax.swing.JButton();
         msjObligatorio = new java.awt.Label();
-        msNoParticipaciones = new java.awt.Label();
         Alta = new javax.swing.JRadioButton();
         Baja = new javax.swing.JRadioButton();
         compraventaPanel = new javax.swing.JPanel();
@@ -174,9 +173,6 @@ public class VParticipaciones extends javax.swing.JDialog {
         msjObligatorio.setForeground(new java.awt.Color(255, 0, 0));
         msjObligatorio.setText("Rellena los campos obligatorios (*)");
 
-        msNoParticipaciones.setForeground(new java.awt.Color(255, 0, 0));
-        msNoParticipaciones.setText("No dispones de ese número de participaciones*");
-
         Alta.setForeground(new java.awt.Color(187, 187, 188));
         Alta.setText("Alta");
         Alta.addActionListener(new java.awt.event.ActionListener() {
@@ -207,26 +203,25 @@ public class VParticipaciones extends javax.swing.JDialog {
                         .addGap(18, 18, 18)
                         .addGroup(altabajaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(carteraText)
-                            .addComponent(numeroText, javax.swing.GroupLayout.DEFAULT_SIZE, 93, Short.MAX_VALUE))
+                            .addComponent(numeroText, javax.swing.GroupLayout.DEFAULT_SIZE, 97, Short.MAX_VALUE))
                         .addGap(316, 316, 316))
                     .addGroup(altabajaPanelLayout.createSequentialGroup()
-                        .addComponent(msjObligatorio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(aceptarButton1)
                         .addGap(41, 41, 41))
                     .addGroup(altabajaPanelLayout.createSequentialGroup()
                         .addGroup(altabajaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(msNoParticipaciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(altabajaPanelLayout.createSequentialGroup()
                                 .addComponent(Alta, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(31, 31, 31)
-                                .addComponent(Baja)))
+                                .addComponent(Baja))
+                            .addComponent(msjObligatorio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         altabajaPanelLayout.setVerticalGroup(
             altabajaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(altabajaPanelLayout.createSequentialGroup()
-                .addContainerGap(111, Short.MAX_VALUE)
+                .addContainerGap(99, Short.MAX_VALUE)
                 .addGroup(altabajaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(carteraLabel)
                     .addComponent(carteraText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -234,16 +229,14 @@ public class VParticipaciones extends javax.swing.JDialog {
                 .addGroup(altabajaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(numeroLabel)
                     .addComponent(numeroText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
-                .addComponent(msNoParticipaciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
+                .addGap(47, 47, 47)
                 .addGroup(altabajaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Alta, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Baja, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(altabajaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(aceptarButton1)
-                    .addComponent(msjObligatorio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(19, 19, 19)
+                .addComponent(msjObligatorio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(5, 5, 5)
+                .addComponent(aceptarButton1)
                 .addGap(38, 38, 38))
         );
 
@@ -584,7 +577,9 @@ public class VParticipaciones extends javax.swing.JDialog {
             eu.setnParticipaciones(eu.getnParticipaciones() + Integer.parseInt(numeroText.getText()));
             carteraText.setText(String.valueOf(eu.getnParticipaciones()));
         } else if (Baja.isSelected()) {
-            if (Integer.parseInt(carteraText.getText()) - Integer.parseInt(numeroText.getText()) >= 0) {
+            if (Integer.parseInt(carteraText.getText()) - Integer.parseInt(numeroText.getText()) > 0
+                    && (fa.participacionesComprobarBaja(eu.getIdUsuario()) - fa.partEmprBloq(eu.getIdUsuario(), eu.getIdUsuario())) > Integer.parseInt(numeroText.getText())) {
+
                 fa.bajaParticipacionesEmpresa(Integer.parseInt(numeroText.getText()), eu.getIdUsuario());
                 fa.insertarNoticia("Baja P", "El usuario " + eu.getNombreComercial() + " ha dado de baja " + numeroText.getText() + " participaciones", eu.getIdUsuario());
                 eu.setnParticipaciones(eu.getnParticipaciones() - Integer.parseInt(numeroText.getText()));
@@ -725,7 +720,6 @@ public class VParticipaciones extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextArea jTextArea1;
-    private java.awt.Label msNoParticipaciones;
     private java.awt.Label msjObligatorio;
     private javax.swing.JTextField nParticipacionesText;
     private javax.swing.JLabel nparticipacionesLabel;
@@ -776,6 +770,15 @@ public class VParticipaciones extends javax.swing.JDialog {
         VAviso avisoVenta = new VAviso("¡No puedes vender más!");
 
         if (iu != null) {
+            if (precioText.getText().isEmpty() || parseFloat(precioText.getText()) < 0) {
+                VAviso precio = new VAviso("El precio no es válido");
+                precio.setVisible(true);
+                return;
+            } else if (parseInt(nParticipacionesText.getText()) < 0 || nParticipacionesText.getText().isEmpty()) {
+                VAviso participaciones = new VAviso("El número de participaciones no es válido");
+                participaciones.setVisible(true);
+                return;
+            }
             OfertaParticipaciones v = new OfertaParticipaciones(parseFloat(precioText.getText()), parseInt(nParticipacionesText.getText()), fa.getIdEmpresa(btnEmpresas.getItemAt(i).toString()), iu.getIdUsuario());
             if (fa.comprobarParticipacionesInversor(v)) {
                 fa.ofertaVentaInv(v);
@@ -845,16 +848,19 @@ public class VParticipaciones extends javax.swing.JDialog {
 
         //Se utilizará esta variable para llevar la cuenta de las participaciones que faltan por comprar:
         Integer participacionesRestantes = Integer.parseInt(nParticipacionesText.getText());
+        int aux = Integer.parseInt(nParticipacionesText.getText());
         Double precio = Double.parseDouble(precioText.getText());
         Integer ofertasRestantes;
         OfertaParticipaciones oferta;
         String idEmpresa = fa.getIdEmpresa(btnEmpresas.getSelectedItem().toString());
+        boolean exito = true;
 
         if (eu != null) {
             if (fa.getnombreEmpresa(eu.getIdUsuario()).equals(idEmpresa)) {
                 VAviso vnoticia;
                 vnoticia = new VAviso("No puedes comprar participaciones de tu propia empresa");
                 vnoticia.setVisible(true);
+                exito = false;
 
             } else {
                 //En primer lugar comprobamos si la empresa tiene el dinero suficiente para comprar las participaciones que quiere:
@@ -863,6 +869,7 @@ public class VParticipaciones extends javax.swing.JDialog {
                     VAviso vnoticia;
                     vnoticia = new VAviso("El precio y numero de participaciones introducido es incompatible con la cantidad de dinero que posee");
                     vnoticia.setVisible(true);
+                    exito = false;
 
                 } else {
                     ofertasRestantes = fa.contarOfertas(idEmpresa, precio, eu.getIdUsuario()); //Relleno el número de ofertas que cumplan lo que pido
@@ -871,13 +878,14 @@ public class VParticipaciones extends javax.swing.JDialog {
                         VAviso vofertas;
                         vofertas = new VAviso("No hay ofertas disponibles con esas características");
                         vofertas.setVisible(true);
+                        exito = false;
 
                     } else {
 
                         //mientras me quede dinero sigo comprando las más baratas o queden participaciones que pueda comprar con el dinero indicado
                         while (participacionesRestantes > 0 && ofertasRestantes > 0) {
 
-                            oferta = fa.getOfertaParticipaciones(idEmpresa, precio,eu.getIdUsuario()); //saco la primera
+                            oferta = fa.getOfertaParticipaciones(idEmpresa, precio, eu.getIdUsuario()); //saco la primera
                             oferta.setComision(eu.getComision());
 
                             if (oferta.getNumeroParticipaciones() <= participacionesRestantes) {
@@ -892,17 +900,17 @@ public class VParticipaciones extends javax.swing.JDialog {
                                 6- le da el dinero al regulador.
                             ==============================================================================================================*/
                                 participacionesRestantes -= fa.moverParticipacionesTodas(eu.getIdUsuario(), oferta);
-                                if(oferta.getIdUsuario1().length() == 9){
+                                if (oferta.getIdUsuario1().length() == 9) {
                                     fa.insertarNoticia("Compra", "El usuario " + eu.getNombreComercial() + "ha comprado " + oferta.getNumeroParticipaciones() + " participaciones al usuario " + fa.getnombreInversor(oferta.getIdUsuario1()), eu.getIdUsuario());
-                                } else{
+                                } else {
                                     fa.insertarNoticia("Compra", "El usuario " + eu.getNombreComercial() + "ha comprado " + oferta.getNumeroParticipaciones() + " participaciones al usuario " + fa.getnombreEmpresa(oferta.getIdUsuario1()), eu.getIdUsuario());
                                 }
 
                             } else {
                                 fa.moverParticipacionesParciales(oferta, eu.getIdUsuario(), participacionesRestantes);
-                                if(oferta.getIdUsuario1().length() == 9){
+                                if (oferta.getIdUsuario1().length() == 9) {
                                     fa.insertarNoticia("Compra", "El usuario " + eu.getNombreComercial() + "ha comprado " + participacionesRestantes + " participaciones al usuario " + fa.getnombreInversor(oferta.getIdUsuario1()), eu.getIdUsuario());
-                                } else{
+                                } else {
                                     fa.insertarNoticia("Compra", "El usuario " + eu.getNombreComercial() + "ha comprado " + participacionesRestantes + " participaciones al usuario " + fa.getnombreEmpresa(oferta.getIdUsuario1()), eu.getIdUsuario());
                                 }
                                 participacionesRestantes = 0;
@@ -920,38 +928,39 @@ public class VParticipaciones extends javax.swing.JDialog {
                 VAviso vnoticia;
                 vnoticia = new VAviso("El precio y numero de participaciones introducido es incompatible con la cantidad de dinero que posee");
                 vnoticia.setVisible(true);
+                exito = false;
 
             } else {
 
-                ofertasRestantes = fa.contarOfertas(idEmpresa, precio,iu.getIdUsuario()); //Relleno el número de ofertas que cumplan lo que pido
+                ofertasRestantes = fa.contarOfertas(idEmpresa, precio, iu.getIdUsuario()); //Relleno el número de ofertas que cumplan lo que pido
 
                 if (ofertasRestantes == 0) {
 
                     VAviso vofertas;
                     vofertas = new VAviso("No hay ofertas disponibles con esas características");
                     vofertas.setVisible(true);
-
+                    exito = false;
                 } else {
 
                     while (participacionesRestantes > 0 && ofertasRestantes > 0) {
 
-                        oferta = fa.getOfertaParticipaciones(idEmpresa, precio,iu.getIdUsuario()); //saco la primera
+                        oferta = fa.getOfertaParticipaciones(idEmpresa, precio, iu.getIdUsuario()); //saco la primera
                         oferta.setComision(iu.getComision());
 
                         if (oferta.getNumeroParticipaciones() <= participacionesRestantes) {
                             participacionesRestantes -= fa.moverParticipacionesTodas(iu.getIdUsuario(), oferta);
-                            if(oferta.getIdUsuario1().length() == 9){
-                                fa.insertarNoticia("Compra", "El usuario " + iu.getNombre() + "ha comprado " + oferta.getNumeroParticipaciones() + " participaciones al usuario " + fa.getnombreInversor(oferta.getIdUsuario1()), iu.getIdUsuario());
-                            } else{
-                                fa.insertarNoticia("Compra", "El usuario " + iu.getNombre() + "ha comprado " + oferta.getNumeroParticipaciones() + " participaciones al usuario " + fa.getnombreEmpresa(oferta.getIdUsuario1()), iu.getIdUsuario());
+                            if (oferta.getIdUsuario1().length() == 9) {
+                                fa.insertarNoticia("Compra", "El usuario " + iu.getNombre() + " ha comprado " + oferta.getNumeroParticipaciones() + " participaciones al usuario " + fa.getnombreInversor(oferta.getIdUsuario1()), iu.getIdUsuario());
+                            } else {
+                                fa.insertarNoticia("Compra", "El usuario " + iu.getNombre() + " ha comprado " + oferta.getNumeroParticipaciones() + " participaciones al usuario " + fa.getnombreEmpresa(oferta.getIdUsuario1()), iu.getIdUsuario());
                             }
                         } else {
 
                             fa.moverParticipacionesParciales(oferta, iu.getIdUsuario(), participacionesRestantes);
-                            if(oferta.getIdUsuario1().length() == 9){
-                                fa.insertarNoticia("Compra", "El usuario " + iu.getNombre() + "ha comprado " + participacionesRestantes + " participaciones al usuario " + fa.getnombreInversor(oferta.getIdUsuario1()), iu.getIdUsuario());
-                            } else{
-                                fa.insertarNoticia("Compra", "El usuario " + iu.getNombre() + "ha comprado " + participacionesRestantes + " participaciones al usuario " + fa.getnombreEmpresa(oferta.getIdUsuario1()), iu.getIdUsuario());
+                            if (oferta.getIdUsuario1().length() == 9) {
+                                fa.insertarNoticia("Compra", "El usuario " + iu.getNombre() + " ha comprado " + participacionesRestantes + " participaciones al usuario " + fa.getnombreInversor(oferta.getIdUsuario1()), iu.getIdUsuario());
+                            } else {
+                                fa.insertarNoticia("Compra", "El usuario " + iu.getNombre() + " ha comprado " + participacionesRestantes + " participaciones al usuario " + fa.getnombreEmpresa(oferta.getIdUsuario1()), iu.getIdUsuario());
                             }
                             participacionesRestantes = 0;
 
@@ -962,8 +971,18 @@ public class VParticipaciones extends javax.swing.JDialog {
                 }
             }
         }
-        VAvisoCorrecto compraEfectuada = new VAvisoCorrecto("Compra realizada con éxito");
-        compraEfectuada.setVisible(true);
+        if (exito) {
+
+            int participacionesCompradas = aux - participacionesRestantes;
+            VAvisoCorrecto compraEfectuada = new VAvisoCorrecto("Compra realizada con éxito.\nTu nuevo saldo es de "
+                    + convertir(fa.getSaldoCompraVenta(iu.getIdUsuario())) + " €.\nSe han comprado " + participacionesCompradas + " participaciones.");
+            compraEfectuada.setVisible(true);
+            if (iu != null) {
+                saldoText.setText(convertir(fa.getSaldoCompraVenta(iu.getIdUsuario())));
+            } else {
+                saldoText.setText(convertir(fa.getSaldoCompraVenta(eu.getIdUsuario())));
+            }
+        }
     }
 
     private void colores() {
@@ -979,7 +998,6 @@ public class VParticipaciones extends javax.swing.JDialog {
         carteraText.setBackground(prueba1);
         carteraText.setEditable(false);
         numeroText.setBackground(prueba1);
-        msNoParticipaciones.setBackground(prueba);
         msjObligatorio.setBackground(prueba);
         buscarButton.setBackground(prueba1);
         eliminarBtn.setBackground(prueba1);

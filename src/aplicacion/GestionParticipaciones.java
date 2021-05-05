@@ -88,4 +88,12 @@ public class GestionParticipaciones {
     public void moverParticipacionesParciales(OfertaParticipaciones oferta, String idUsuario, int participacionesRestantes) {
         fbd.moverParticipacionesParciales(oferta, idUsuario, participacionesRestantes);
     }
+    
+    public double getSaldoCompraVenta(String id) {
+        return fbd.getSaldoCompraVenta(id);
+    }
+    
+    public int participacionesComprobarBaja(String id) {
+        return fbd.participacionesComprobarBaja(id);
+    }
 }

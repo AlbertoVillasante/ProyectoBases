@@ -20,10 +20,10 @@ public class VAvisoCorrecto extends javax.swing.JDialog {
     public VAvisoCorrecto(String txtExcepcion) {
         initComponents();
         this.getContentPane().setBackground(prueba);
-        jTextField1.setBackground(prueba1);
+        jTextArea1.setBackground(prueba1);
         btnCerrar.setBackground(prueba1);
-        jTextField1.setForeground(prueba2);
-        jTextField1.setText(txtExcepcion);
+        jTextArea1.setForeground(prueba2);
+        jTextArea1.setText(txtExcepcion);
         aviso.setBackground(prueba);
         btnDerecha.setBackground(prueba);
         this.addWindowListener(new java.awt.event.WindowAdapter() {
@@ -46,7 +46,8 @@ public class VAvisoCorrecto extends javax.swing.JDialog {
         btnCerrar = new javax.swing.JButton();
         btnDerecha = new javax.swing.JButton();
         aviso = new java.awt.Label();
-        jTextField1 = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -58,8 +59,11 @@ public class VAvisoCorrecto extends javax.swing.JDialog {
             }
         });
 
-        btnDerecha.setBackground(new java.awt.Color(255, 255, 255));
-        btnDerecha.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/tick.png"))); // NOI18N
+        btnDerecha.setBackground(new java.awt.Color(1, 1, 1));
+        btnDerecha.setForeground(new java.awt.Color(0, 0, 0));
+        btnDerecha.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/tick(1).png"))); // NOI18N
+        btnDerecha.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        btnDerecha.setFocusPainted(false);
         btnDerecha.setFocusable(false);
         btnDerecha.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -73,37 +77,45 @@ public class VAvisoCorrecto extends javax.swing.JDialog {
         aviso.setPreferredSize(new java.awt.Dimension(80, 30));
         aviso.setText("SUCCESS");
 
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jScrollPane1.setViewportView(jTextArea1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(170, 170, 170)
+                        .addComponent(btnCerrar)
+                        .addGap(170, 170, 170))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(156, 156, 156)
-                        .addComponent(btnDerecha)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(aviso, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(195, 195, 195)
-                        .addComponent(btnCerrar))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(36, 36, 36)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 381, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(36, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(136, 136, 136)
+                                .addComponent(btnDerecha)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(aviso, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(20, 20, 20)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 416, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                .addGap(20, 20, 20))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(36, 36, 36)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(aviso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnDerecha))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(aviso, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnDerecha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(15, 15, 15)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnCerrar)
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addGap(24, 24, 24))
         );
 
         pack();
@@ -122,6 +134,7 @@ public class VAvisoCorrecto extends javax.swing.JDialog {
     private java.awt.Label aviso;
     private javax.swing.JButton btnCerrar;
     private javax.swing.JButton btnDerecha;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextArea jTextArea1;
     // End of variables declaration//GEN-END:variables
 }

@@ -5,6 +5,8 @@
  */
 package aplicacion;
 
+import java.sql.Timestamp;
+
 /**
  *
  * @author hugo
@@ -12,6 +14,7 @@ package aplicacion;
 public class OfertaParticipaciones {
 
     private String fechaOferta;
+   // private Timestamp fechaOferta;
     private String idUsuario1;
     private String idUsuario2;
     private int numeroParticipaciones;

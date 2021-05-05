@@ -161,8 +161,8 @@ public class FachadaAplicacion {
     public void nuevoBeneficio(InversorUsuario iu, EmpresaUsuario eu) {
         gb.nuevoBeneficio(iu, eu);
     }
-    
-    public void nuevoBajaBeneficio(InversorUsuario iu, EmpresaUsuario eu){
+
+    public void nuevoBajaBeneficio(InversorUsuario iu, EmpresaUsuario eu) {
         gb.nuevoBajaBeneficio(iu, eu);
     }
 
@@ -205,24 +205,24 @@ public class FachadaAplicacion {
     public ArrayList<AnunciarBeneficios> getBeneficios() {
         return gb.getBeneficios();
     }
-    
+
     public ArrayList<Saldos> getSaldoUsuarios() {
         return gu.getSaldoUsuarios();
     }
-    
+
     public ArrayList<AnunciarBeneficios> getBeneficiosHoy() {
         return gb.getBeneficiosHoy();
     }
-    
+
     public ArrayList<AnunciarBeneficios> getBeneficiosEmpresa(String idEmpresa) {
         return gb.getBeneficiosEmpresa(idEmpresa);
     }
-    
+
     public void altaPagoBeneficios(String fecha, double precio, String nombreEmpresa, int numParticipaciones) {
         gb.altaPagoBeneficios(fecha, precio, nombreEmpresa, numParticipaciones);
     }
-    
-    public void bajaAnuncioBeneficios(String fecha, String nombreEmpresa){
+
+    public void bajaAnuncioBeneficios(String fecha, String nombreEmpresa) {
         gb.bajaAnuncioBeneficios(fecha, nombreEmpresa);
     }
 
@@ -261,7 +261,7 @@ public class FachadaAplicacion {
     public void nuevaNoticia() {
         gn.nuevaNoticia();
     }
-    
+
     public void nuevoNoticiero(String tiponoticia) {
         gn.nuevoNoticiero(tiponoticia);
     }
@@ -277,119 +277,128 @@ public class FachadaAplicacion {
     public ArrayList<Estadisticas> actualizarTablaEstadisticas(InversorUsuario iu, EmpresaUsuario eu) {
         return gu.actualizarTablaEstadisticas(iu, eu);
     }
-    
+
     public ArrayList<String> getEmpresasInv(String id) {
         return gu.getEmpresasInv(id);
     }
-    
+
     public ArrayList<String> getEmpresasEmpr(String id) {
         return gu.getEmpresasEmpr(id);
     }
-    
-    public java.util.List<OfertaParticipaciones> mostrarVentas(){
+
+    public java.util.List<OfertaParticipaciones> mostrarVentas() {
         return gpart.mostrarVentas();
     }
-    
-    public void ofertaVentaInv(OfertaParticipaciones v){
+
+    public void ofertaVentaInv(OfertaParticipaciones v) {
         gpart.ofertaVentaInv(v);
     }
-    
-    public void ofertaVentaEmpr(OfertaParticipaciones v){
+
+    public void ofertaVentaEmpr(OfertaParticipaciones v) {
         gpart.ofertaVentaEmpr(v);
     }
-    
-    public boolean comprobarParticipacionesEmpresa(OfertaParticipaciones v){
+
+    public boolean comprobarParticipacionesEmpresa(OfertaParticipaciones v) {
         return gpart.comprobarParticipacionesEmpresa(v);
     }
-    
-    public boolean comprobarParticipacionesInversor(OfertaParticipaciones v){
+
+    public boolean comprobarParticipacionesInversor(OfertaParticipaciones v) {
         return gpart.comprobarParticipacionesInversor(v);
     }
-    
-    public String getIdEmpresa(String nombre){
+
+    public String getIdEmpresa(String nombre) {
         return gu.getIdEmpresa(nombre);
     }
-    
-    public int numParticipacionesInvEmpr(String idUsuario, String idEmpresa){
+
+    public int numParticipacionesInvEmpr(String idUsuario, String idEmpresa) {
         return gpart.numParticipacionesInvEmpr(idUsuario, idEmpresa);
     }
-    
-    public int numParticipacionesEmprEmpr(String idUsuario, String idEmpresa){
+
+    public int numParticipacionesEmprEmpr(String idUsuario, String idEmpresa) {
         return gpart.numParticipacionesEmprEmpr(idUsuario, idEmpresa);
     }
-    
-    public int partInvBloq(String id, String id2){
+
+    public int partInvBloq(String id, String id2) {
         return gpart.partInvBloq(id, id2);
     }
-    
-    public int partEmprBloq(String id, String id2){
+
+    public int partEmprBloq(String id, String id2) {
         return gpart.partEmprBloq(id, id2);
     }
-    
-    public void borrarVentaInv(OfertaParticipaciones v){
+
+    public void borrarVentaInv(OfertaParticipaciones v) {
         gpart.borrarVentaInv(v);
     }
-    
-    public void borrarVentaEmpr(OfertaParticipaciones v){
+
+    public void borrarVentaEmpr(OfertaParticipaciones v) {
         gpart.borrarVentaEmpr(v);
     }
-    
+
     public String getnombreInversor(String id) {
         return gu.getnombreInversor(id);
     }
-    
+
     public String getnombreEmpresa(String id) {
         return gu.getnombreEmpresa(id);
     }
-    
-    public double getRendimiento(String idUsuario){
+
+    public double getRendimiento(String idUsuario) {
         return gu.getRendimiento(idUsuario);
     }
-    public int contarOfertas(String id, double precio,String yo){
-        return gpart.contarOfertas(id, precio,yo);
+
+    public int contarOfertas(String id, double precio, String yo) {
+        return gpart.contarOfertas(id, precio, yo);
     }
-    
-    public OfertaParticipaciones getOfertaParticipaciones(String id, double precio,String yo){
-        return gpart.getOfertaParticipaciones(id, precio,yo);
+
+    public OfertaParticipaciones getOfertaParticipaciones(String id, double precio, String yo) {
+        return gpart.getOfertaParticipaciones(id, precio, yo);
     }
-    
-    public int moverParticipacionesTodas(String idUsuario, OfertaParticipaciones oferta){
-        return gpart.moverParticipacionesTodas(idUsuario,oferta);
+
+    public int moverParticipacionesTodas(String idUsuario, OfertaParticipaciones oferta) {
+        return gpart.moverParticipacionesTodas(idUsuario, oferta);
     }
-    
-    public void moverParticipacionesParciales(OfertaParticipaciones oferta, String idUsuario, int participacionesRestantes){
-        gpart.moverParticipacionesParciales(oferta,idUsuario,participacionesRestantes);
+
+    public void moverParticipacionesParciales(OfertaParticipaciones oferta, String idUsuario, int participacionesRestantes) {
+        gpart.moverParticipacionesParciales(oferta, idUsuario, participacionesRestantes);
     }
- 
-    public void eliminarInversor(String id){
+
+    public void eliminarInversor(String id) {
         gu.eliminarInversor(id);
     }
-    
-    public void eliminarEmpresa(String id){
+
+    public void eliminarEmpresa(String id) {
         gu.eliminarEmpresa(id);
     }
 
-    public void estadoNormalInv(String id){
+    public void estadoNormalInv(String id) {
         gu.estadoNormalInv(id);
     }
-    
-    public void estadoNormalEmpr(String id){
+
+    public void estadoNormalEmpr(String id) {
         gu.estadoNormalEmpr(id);
     }
-    
-    public void pagarBeneficios(){
+
+    public void pagarBeneficios() {
         gb.pagarBeneficios();
     }
-    
-    public void cambiarSaldoUsuario(Saldos s){
+
+    public void cambiarSaldoUsuario(Saldos s) {
         gu.cambiarSaldoUsuario(s);
     }
-    
-    public void insertarNoticia(String tipo, String descripcion, String id){
+
+    public void insertarNoticia(String tipo, String descripcion, String id) {
         gn.insertarNoticia(tipo, descripcion, id);
     }
-    
+
     public java.util.List<Noticias> getNoticias(String tipo1, String tipo2, String tipo3) {
         return gn.getNoticias(tipo1, tipo2, tipo3);
+    }
+
+    public double getSaldoCompraVenta(String id) {
+        return gpart.getSaldoCompraVenta(id);
+    }
+
+    public int participacionesComprobarBaja(String id) {
+        return gpart.participacionesComprobarBaja(id);
     }
 }

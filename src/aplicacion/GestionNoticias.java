@@ -29,5 +29,17 @@ public class GestionNoticias {
     public void nuevoNoticiero(String tiponoticia){
         fgui.nuevoNoticiero(tiponoticia);
     }
+    
+    public void insertarNoticiaInv(String tipo, String descripcion){
+        fbd.insertarNoticiaInv(tipo, descripcion);
+    }
+    
+    public void insertarNoticiaEmpr(String tipo, String descripcion){
+        fbd.insertarNoticiaEmpr(tipo, descripcion);
+    }
+    
+    public java.util.List<Noticias> getNoticias() {
+        return fbd.getNoticias();
+    }
 
 }

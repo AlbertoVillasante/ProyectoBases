@@ -16,14 +16,25 @@ public class VNoticiero extends javax.swing.JDialog {
     Color prueba = new Color(60, 63, 65);
     Color prueba1 = new Color(78, 82, 85);
     aplicacion.FachadaAplicacion fa;
+    private int flag;
     
     public VNoticiero(aplicacion.FachadaAplicacion fa, String tiponoticia) {
         initComponents();
         this.getContentPane().setBackground(prueba);
         titulo.setText(tiponoticia);
-        if(tiponoticia.equals("ANUNCIOS DE BENEFICIOS")) fotoNoticia.setIcon(new ImageIcon(getClass().getResource("/gui/Beneficios.png")));
-        if(tiponoticia.equals("ANUNCIOS DE ALTAS Y BAJAS")) fotoNoticia.setIcon(new ImageIcon(getClass().getResource("/gui/gente.png")));
-        if(tiponoticia.equals("ANUNCIOS DE PARTICIPACIONES")) fotoNoticia.setIcon(new ImageIcon(getClass().getResource("/gui/participaciones.png")));
+        if(tiponoticia.equals("ANUNCIOS DE BENEFICIOS")){
+            fotoNoticia.setIcon(new ImageIcon(getClass().getResource("/gui/Beneficios.png")));
+            flag = 0;
+        }
+        if(tiponoticia.equals("ANUNCIOS DE ALTAS Y BAJAS")){
+            fotoNoticia.setIcon(new ImageIcon(getClass().getResource("/gui/gente.png")));
+            flag = 1;
+        }
+        if(tiponoticia.equals("ANUNCIOS DE PARTICIPACIONES")){
+            fotoNoticia.setIcon(new ImageIcon(getClass().getResource("/gui/participaciones.png")));
+            flag = 2;
+        }
+        mostrarNoticias(flag);
     }
 
     /**
@@ -77,17 +88,7 @@ public class VNoticiero extends javax.swing.JDialog {
         fotoNoticia.setFocusPainted(false);
         fotoNoticia.setFocusable(false);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3"
-            }
-        ));
+        jTable1.setModel(new ModeloTablaNoticias());
         jScrollPane1.setViewportView(jTable1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -145,4 +146,17 @@ public class VNoticiero extends javax.swing.JDialog {
     private javax.swing.JButton salir;
     private javax.swing.JTextField titulo;
     // End of variables declaration//GEN-END:variables
+    
+    public void mostrarNoticias(int flag){
+        ModeloTablaNoticias m;
+        //m=(ModeloTablaNoticias) tablaNoticias.getModel();
+        if(fa.getNoticias().size() == 0){
+            VAviso v = new VAviso("Aviso");
+            v.setVisible(true);
+        } else{
+            //m.setFilas(fa.getNoticias(), flag);
+        }
+        
+    }
+
 }

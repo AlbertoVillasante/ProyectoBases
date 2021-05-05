@@ -7,6 +7,7 @@ import aplicacion.Categoria;
 import aplicacion.EmpresaUsuario;
 import aplicacion.Estadisticas;
 import aplicacion.Libro;
+import aplicacion.Noticias;
 import aplicacion.OfertaParticipaciones;
 import aplicacion.Saldos;
 import java.io.FileInputStream;
@@ -24,6 +25,7 @@ public class FachadaBaseDatos {
     private DAOUsuarios daoUsuarios;
     private DAOParticipaciones daoParticipaciones;
     private DAOBeneficios daoBeneficios;
+    private DAONoticias daoNoticias;
 
     public FachadaBaseDatos(aplicacion.FachadaAplicacion fa) {
 
@@ -55,6 +57,7 @@ public class FachadaBaseDatos {
             daoUsuarios = new DAOUsuarios(conexion, fa);
             daoParticipaciones = new DAOParticipaciones(conexion, fa);
             daoBeneficios = new DAOBeneficios(conexion, fa);
+            daoNoticias = new DAONoticias(conexion, fa);
 
         } catch (FileNotFoundException f) {
             System.out.println(f.getMessage());
@@ -420,5 +423,17 @@ public class FachadaBaseDatos {
     
     public void pagarBeneficios(){
         daoBeneficios.pagarBeneficios();
+    }
+    
+    public void insertarNoticiaInv(String tipo, String descripcion){
+        daoNoticias.insertarNoticiaInv(tipo, descripcion);
+    }
+    
+    public void insertarNoticiaEmpr(String tipo, String descripcion){
+        daoNoticias.insertarNoticiaEmpr(tipo, descripcion);
+    }
+    
+    public java.util.List<Noticias> getNoticias() {
+        return daoNoticias.getNoticias();
     }
 }

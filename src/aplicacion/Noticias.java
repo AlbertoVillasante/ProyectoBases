@@ -10,22 +10,14 @@ package aplicacion;
  * @author alumnogreibd
  */
 public class Noticias {
-    private String idUsuario;
     private int idNoticia;
     private String TipoNoticia;
+    private String descripcion;
 
-    public Noticias(String idUsuario, int idNoticia, String TipoNoticia) {
-        this.idUsuario = idUsuario;
+    public Noticias(int idNoticia, String TipoNoticia, String descripcion) {
         this.idNoticia = idNoticia;
         this.TipoNoticia = TipoNoticia;
-    }
-
-    public String getIdUsuario() {
-        return idUsuario;
-    }
-
-    public void setIdUsuario(String idUsuario) {
-        this.idUsuario = idUsuario;
+        this.descripcion=descripcion;
     }
 
     public int getIdNoticia() {
@@ -42,5 +34,13 @@ public class Noticias {
 
     public void setTipoNoticia(String TipoNoticia) {
         this.TipoNoticia = TipoNoticia;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 }

@@ -34,6 +34,7 @@ public class VConfiguracionRegulador extends javax.swing.JDialog {
         fondosText.setBackground(prueba1);
         comisionText.setBackground(prueba1);
         botonAceptar.setBackground(prueba1);
+        fondosText.setEditable(false);
 
         if (iu != null) {
             this.iu = iu;
@@ -157,6 +158,7 @@ public class VConfiguracionRegulador extends javax.swing.JDialog {
         obligatorio6.setText("*");
 
         fondosText.setForeground(new java.awt.Color(187, 187, 188));
+        fondosText.setFocusable(false);
         fondosText.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 fondosTextActionPerformed(evt);
@@ -336,6 +338,10 @@ public class VConfiguracionRegulador extends javax.swing.JDialog {
         fa.actualizarComision(comision);
         if (iu != null) {
             iu.setComision(comision);
+            iu.setClave(claveText.getText());
+            iu.setDireccion(direcciontext.getText());
+            iu.setTelefono(tlfnText.getText());
+            fa.modificarRegulador(iu);
         }
         if (eu != null) {
             eu.setComision(comision);

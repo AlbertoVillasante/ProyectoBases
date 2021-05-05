@@ -116,27 +116,6 @@ public class FachadaBaseDatos {
         daoLibros.modificarEjemplarLibro(idLibro, ejemplar);
     }
 
-    /*  //Comentado para que no de error
-    public EmpresaUsuario validarUsuario(String idUsuario, String clave) {
-        return daoUsuarios.validarUsuario(idUsuario, clave);
-    }
-
-    public java.util.List<EmpresaUsuario> consultarListaUsuarios(String idUsuario, String nombreUsuario) {
-        return daoUsuarios.consultarListaUsuarios(idUsuario, nombreUsuario);
-    }
-
-    public void insertarUsuario(EmpresaUsuario u) {
-        daoUsuarios.insertarUsuario(u);
-    }
-
-    public void modificarUsuario(EmpresaUsuario u, String id) {
-        daoUsuarios.modificarUsuario(u, id);
-    }
-
-    public void borrarUsuario(String idUsuario) {
-        daoUsuarios.borrarUsuario(idUsuario);
-    }
-     */
     public java.util.List<Categoria> consultarCategorias() {
         return daoCategorias.consultarCategorias();
     }
@@ -161,11 +140,6 @@ public class FachadaBaseDatos {
         daoLibros.nuevoPrestamo(e);
     }
 
-    /*  //Comentado para que no de error
-    public java.util.List<EmpresaUsuario> consultarListaUsuariosPrestamo(String idUsuario, String nombreUsuario) {
-        return daoUsuarios.consultarListaUsuariosPrestamo(idUsuario, nombreUsuario);
-    }
-     */
     public void devolverEjemplar(Integer ejemplar, String usuario, Integer libro) {
         daoLibros.devolverEjemplar(ejemplar, usuario, libro);
     }
@@ -201,7 +175,7 @@ public class FachadaBaseDatos {
     public ArrayList<Saldos> getSaldoUsuarios() {
         return daoUsuarios.getSaldoUsuarios();
     }
-    
+
     public ArrayList<Saldos> getSaldoUsuario(String id) {
         return daoUsuarios.getSaldoUsuario(id);
     }
@@ -443,5 +417,9 @@ public class FachadaBaseDatos {
 
     public int participacionesComprobarBaja(String id) {
         return daoParticipaciones.participacionesComprobarBaja(id);
+    }
+
+    public void modificarRegulador(InversorUsuario u) {
+        daoUsuarios.modificarRegulador(u);
     }
 }

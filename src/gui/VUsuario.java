@@ -708,19 +708,7 @@ public class VUsuario extends javax.swing.JDialog {
     private javax.swing.JButton volver;
     // End of variables declaration//GEN-END:variables
 
-    /*public void buscarUsuarios() {
-        ModeloTablaUsuarios m;
-
-        m = (ModeloTablaUsuarios) TablaUsuarios.getModel();
-        //m.setFilas(fa.obtenerUsuarios(buscaId.getText(), buscaNombre.getText()));     //Comentado para que no de error
-        if (m.getRowCount() > 0) {
-            TablaUsuarios.setRowSelectionInterval(0, 0);
-            btnBorrar.setEnabled(true);
-        } else {
-            btnBorrar.setEnabled(false);
-        }
-
-    }*/
+    
     public void registrarUsuario() {
         Integer tipoUser = tipo_usr.getSelectedIndex();
         String tipo = "PendAlta";
@@ -771,12 +759,6 @@ public class VUsuario extends javax.swing.JDialog {
             this.iu.setTelefono(btnTelefono.getText());
 
             fa.modificarUsuarioInversor(iu);
-            /*btnClave1.setText(invu.getClave());
-            btnDireccion.setText(invu.getDireccion());
-            btnTelefono.setText(invu.getTelefono());
-            btnApellido1.setText(invu.getApellido1());
-            btnApellido2.setText(invu.getApellido2());
-            btnInversor.setText(invu.getNombre());*/
         } else if (this.eu != null) {
             this.eu.setNombreComercial(btnEmpresa.getText());
             this.eu.setClave(btnClave1.getText());
@@ -784,10 +766,6 @@ public class VUsuario extends javax.swing.JDialog {
             this.eu.setTelefono(btnTelefono.getText());
 
             fa.modificarUsuarioEmpresa(eu);
-            /*btnClave1.setText(empu.getClave());
-            btnDireccion.setText(empu.getDireccion());
-            btnEmpresa.setText(empu.getNombreComercial());
-            btnTelefono.setText(empu.getTelefono());*/
         }
     }
 

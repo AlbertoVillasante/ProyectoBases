@@ -203,45 +203,6 @@ public class DAOUsuarios extends AbstractDAO {
         return resultado;
     }
 
-    /*public java.util.List<EmpresaUsuario> consultarListaUsuarios(String idUsuario, String nombreUsuario) {
-        java.util.List<EmpresaUsuario> resultado = new java.util.ArrayList<EmpresaUsuario>();
-        EmpresaUsuario usuarioActual;
-        Connection con;
-        PreparedStatement stmUsuario = null;
-        ResultSet rsUsuario;
-        con = this.getConexion();
-
-        String consulta = "select * "
-                + "from usuario "
-                + "where id_usuario like ?"
-                + "  and nombre like ?";
-
-        try {
-            stmUsuario = con.prepareStatement(consulta);
-            stmUsuario.setString(1, "%" + idUsuario + "%");
-            stmUsuario.setString(2, "%" + nombreUsuario + "%");
-            rsUsuario = stmUsuario.executeQuery();
-
-            while (rsUsuario.next()) {
-                usuarioActual = new EmpresaUsuario(rsUsuario.getString("id_usuario"), rsUsuario.getString("clave"), rsUsuario.getString("nombre"),
-                        rsUsuario.getString("direccion"), rsUsuario.getString("email"), TipoUsuario.valueOf(rsUsuario.getString("tipo_usuario")));
-
-                resultado.add(usuarioActual);
-
-            }
-
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
-        } finally {
-            try {
-                stmUsuario.close();
-            } catch (SQLException e) {
-                System.out.println("Imposible cerrar cursores");
-            }
-        }
-        return resultado;
-    }*/
     public void insertarUsuarioEmpresa(EmpresaUsuario u) {
         Connection con;
         PreparedStatement stmUsuario = null;
@@ -448,6 +409,34 @@ public class DAOUsuarios extends AbstractDAO {
         }
     }
 
+    public void modificarRegulador(InversorUsuario u){
+        Connection con;
+        PreparedStatement stmUsuarios = null;
+        con = super.getConexion();
+
+        try {
+            stmUsuarios = con.prepareStatement("update inversorUsuario "
+                    + "set clave = ?, direccion = ?, telefono = ? "
+                    + "where idusuario = ?");  
+
+            stmUsuarios.setString(1, u.getClave());
+            stmUsuarios.setString(2, u.getDireccion());
+            stmUsuarios.setString(3, u.getTelefono());
+            stmUsuarios.setString(4, u.getIdUsuario());
+            stmUsuarios.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        } finally {
+            try {
+                stmUsuarios.close();
+            } catch (SQLException e) {
+                System.out.println("Imposible cerrar cursores");
+            }
+        }
+    }
+    
     public void modificarUsuarioInversor(InversorUsuario u) {
         Connection con;
         PreparedStatement stmUsuarios = null;
@@ -675,74 +664,6 @@ public class DAOUsuarios extends AbstractDAO {
         }
     }
 
-    /*public void borrarUsuario(String idUsuario) {
-        Connection con;
-        PreparedStatement stmUsuario = null;
-
-        con = super.getConexion();
-
-        try {
-            stmUsuario = con.prepareStatement("delete from usuario where id_usuario = ?");
-            stmUsuario.setString(1, idUsuario);
-            stmUsuario.executeUpdate();
-
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
-        } finally {
-            try {
-                stmUsuario.close();
-            } catch (SQLException e) {
-                System.out.println("Imposible cerrar cursores");
-            }
-        }
-    }
-102346792845F
-
-    public java.util.List<EmpresaUsuario> consultarListaUsuariosPrestamo(String idUsuario, String nombreUsuario) {
-        java.util.List<EmpresaUsuario> resultado = new java.util.ArrayList<EmpresaUsuario>();
-        EmpresaUsuario usuarioActual;
-        Connection con;
-        PreparedStatement stmUsuario = null;
-        ResultSet rsUsuario;
-        con = this.getConexion();
-        String consulta = "select usuario.*, (select count(prestamo.*) " +
-                                                             "from prestamo " +
-                                                             "where usuario =usuario.id_usuario " +
-                                                             "and fecha_devolucion is null " +
-                                                             "and now() > (fecha_prestamo + 30)) as vencido "+
-                           "from usuario "+
-                           "where (usuario.id_usuario like ? and usuario.nombre like ?) ";
-        
-     
-        try {
-            stmUsuario = con.prepareStatement(consulta);
-            stmUsuario.setString(1, "%" + idUsuario + "%");
-            stmUsuario.setString(2, "%" + nombreUsuario + "%");
-
-            rsUsuario = stmUsuario.executeQuery();
-            
-         
-            while (rsUsuario.next()) {
-                usuarioActual = new EmpresaUsuario(rsUsuario.getString("id_usuario"), rsUsuario.getString("clave"), rsUsuario.getString("nombre"),
-                        rsUsuario.getString("direccion"), rsUsuario.getString("email"), TipoUsuario.valueOf(rsUsuario.getString("tipo_usuario")));
-                usuarioActual.setPrestamosVencidos(rsUsuario.getInt("vencido"));
-                resultado.add(usuarioActual);
-
-            }
-
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
-        } finally {
-            try {
-                stmUsuario.close();
-            } catch (SQLException e) {
-                System.out.println("Imposible cerrar cursores");
-            }
-        }
-        return resultado;
-    }*/
     public void actualizarComision(float valor) {
         Connection con;
         PreparedStatement stmComision = null;
@@ -1181,14 +1102,12 @@ public class DAOUsuarios extends AbstractDAO {
     public void eliminarInversor(String id){
         Connection con;
         PreparedStatement stmUsuario=null;
-        ResultSet rsUsuario;
-
         con=this.getConexion();
 
         try {
             stmUsuario=con.prepareStatement("delete from inversorusuario where idusuario = ?");
             stmUsuario.setString(1, id);
-            rsUsuario=stmUsuario.executeQuery();
+            stmUsuario.executeUpdate();
         } catch (SQLException e){
           System.out.println(e.getMessage());
           //this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
@@ -1200,14 +1119,13 @@ public class DAOUsuarios extends AbstractDAO {
     public void eliminarEmpresa(String id){
         Connection con;
         PreparedStatement stmUsuario=null;
-        ResultSet rsUsuario;
 
         con=this.getConexion();
 
         try {
             stmUsuario=con.prepareStatement("delete from empresausuario where idusuario = ?");
             stmUsuario.setString(1, id);
-            rsUsuario=stmUsuario.executeQuery();
+            stmUsuario.executeUpdate();
         } catch (SQLException e){
           System.out.println(e.getMessage());
           //this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
@@ -1219,7 +1137,6 @@ public class DAOUsuarios extends AbstractDAO {
     public void estadoNormalInv(String id){
         Connection con;
         PreparedStatement stmUsuario=null;
-        ResultSet rsUsuario;
 
         con=this.getConexion();
 
@@ -1241,7 +1158,6 @@ public class DAOUsuarios extends AbstractDAO {
     public void estadoNormalEmpr(String id){
         Connection con;
         PreparedStatement stmUsuario=null;
-        ResultSet rsUsuario;
 
         con=this.getConexion();
 
@@ -1263,7 +1179,6 @@ public class DAOUsuarios extends AbstractDAO {
     public void cambiarSaldoUsuario(Saldos s){
         Connection con;
         PreparedStatement stmUsuario=null;
-        ResultSet rsUsuario;
         String consulta;
         
         con=this.getConexion();
@@ -1295,7 +1210,6 @@ public class DAOUsuarios extends AbstractDAO {
     public void cambiarSaldoUsuarioInicial(Saldos s){
         Connection con;
         PreparedStatement stmUsuario=null;
-        ResultSet rsUsuario;
         String consulta;
         
         con=this.getConexion();

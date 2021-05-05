@@ -14,7 +14,6 @@ public class GestionUsuarios {
         this.fbd = fbd;
     }
 
-    //Comentado para que no de error
     public InversorUsuario comprobarAutentificacionI(String idUsuario, String clave) {
         InversorUsuario u;
 
@@ -55,11 +54,11 @@ public class GestionUsuarios {
     public ArrayList<Saldos> getSaldoUsuarios() {
         return fbd.getSaldoUsuarios();
     }
-    
+
     public ArrayList<Saldos> getSaldoUsuario(String id) {
         return fbd.getSaldoUsuario(id);
     }
-    
+
     public void configuracionRegulador(InversorUsuario iu, EmpresaUsuario eu) {
         fgui.configuracionRegulador(iu, eu);
     }
@@ -140,72 +139,55 @@ public class GestionUsuarios {
         fbd.modificarCuentaInversor(usuario);
     }
 
-     public ArrayList<Estadisticas> actualizarTablaEstadisticas(InversorUsuario iu, EmpresaUsuario eu) {
-        return fbd.actualizarTablaEstadisticas(iu,eu);
+    public ArrayList<Estadisticas> actualizarTablaEstadisticas(InversorUsuario iu, EmpresaUsuario eu) {
+        return fbd.actualizarTablaEstadisticas(iu, eu);
     }
-     
+
     public ArrayList<String> getEmpresasInv(String id) {
         return fbd.getEmpresasInv(id);
     }
-    
+
     public ArrayList<String> getEmpresasEmpr(String id) {
         return fbd.getEmpresasEmpr(id);
     }
-    
-    public String getIdEmpresa(String nombre){
+
+    public String getIdEmpresa(String nombre) {
         return fbd.getIdEmpresa(nombre);
     }
-    
-    public double getRendimiento(String idUsuario){
+
+    public double getRendimiento(String idUsuario) {
         return fbd.getRendimiento(idUsuario);
     }
-    
-     public String getnombreEmpresa(String id) {
+
+    public String getnombreEmpresa(String id) {
         return fbd.getnombreEmpresa(id);
     }
-       public String getnombreInversor(String id) {
+
+    public String getnombreInversor(String id) {
         return fbd.getnombreInversor(id);
     }
-       
-       public void eliminarInversor(String id){
+
+    public void eliminarInversor(String id) {
         fbd.eliminarInversor(id);
     }
-    
-    public void eliminarEmpresa(String id){
+
+    public void eliminarEmpresa(String id) {
         fbd.eliminarEmpresa(id);
     }
-    
-    public void estadoNormalInv(String id){
+
+    public void estadoNormalInv(String id) {
         fbd.estadoNormalInv(id);
     }
-    
-    public void estadoNormalEmpr(String id){
+
+    public void estadoNormalEmpr(String id) {
         fbd.estadoNormalEmpr(id);
     }
-    
-    public void cambiarSaldoUsuario(Saldos s){
+
+    public void cambiarSaldoUsuario(Saldos s) {
         fbd.cambiarSaldoUsuario(s);
     }
+
+    public void modificarRegulador(InversorUsuario u) {
+        fbd.modificarRegulador(u);
+    }
 }
-/*  //Comentado para que no de error
-    public java.util.List<EmpresaUsuario> obtenerUsuarios(String idUsuario, String nombreUsuario) {
-        return fbd.consultarListaUsuarios(idUsuario, nombreUsuario);
-    }
-
-    public void actualizarUsuario(EmpresaUsuario u, String id) {
-
-        if (id == null) {
-            fbd.insertarUsuario(u);
-        } else {
-            fbd.modificarUsuario(u, id);
-        }
-    }
-
-    public void borrarUsuario(String idUsuario) {
-        fbd.borrarUsuario(idUsuario);
-    }
-
-    public java.util.List<EmpresaUsuario> obtenerUsuariosPrestamo(String idUsuario, String nombreUsuario) {
-        return fbd.consultarListaUsuariosPrestamo(idUsuario, nombreUsuario);
-    }
- */

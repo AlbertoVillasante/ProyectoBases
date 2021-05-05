@@ -111,53 +111,10 @@ public class FachadaAplicacion {
         gu.modificarUsuarioInversor(u);
     }
 
-    /*  //Comentado para que no de error
-    public java.util.List<EmpresaUsuario> obtenerUsuarios(String idUsuario, String nombreUsuario) {
-        return gu.obtenerUsuarios(idUsuario, nombreUsuario);
-    }
-
-    public void actualizarUsuario(EmpresaUsuario u, String id) {
-        gu.actualizarUsuario(u, id);
-    }
-
-    public void borrarUsuario(String idUsuario) {
-        gu.borrarUsuario(idUsuario);
-    }
-     */
- /*public void nuevaCategoria() {
-        gc.nuevaCategoria();
-    }
-
-    public void actualizarCategoria(Categoria c) {
-        gc.actualizarCategoria(c);
-    }
-
-    public java.util.List<Categoria> obtenerCategoria(String nombre) {
-        return gc.obtenerCategoria(nombre);
-    }
-
-    public void borrarCategoria(String nombre) {
-        gc.borrarCategoria(nombre);
-    }
-
-    public void nuevoPrestamo(Ejemplar e) {
-        gp.nuevoPrestamo(e);
-    }
-/*  //Comentado para que no de error
-    public java.util.List<EmpresaUsuario> obtenerUsuariosPrestamo(String idUsuario, String nombreUsuario) {
-        return gu.obtenerUsuariosPrestamo(idUsuario, nombreUsuario);
-    }
-     */
- /*public void devolverEjemplar(Integer ejemplar, String usuario, Integer libro) {
-        gp.devolverEjemplar(ejemplar, usuario, libro);
-    }*/
     public boolean checkeo_borrado_ejemplares_prestados(int ejemplar, int libro) {
         return gl.checkeo_borrado_ejemplares_prestados(ejemplar, libro);
     }
 
-    /* public Integer DiasFaltanParaVencer(Integer libro, Integer ejemplar) {
-        return gp.DiasFaltanParaVencer(libro, ejemplar);
-    }*/
     public void nuevoBeneficio(InversorUsuario iu, EmpresaUsuario eu) {
         gb.nuevoBeneficio(iu, eu);
     }
@@ -209,11 +166,11 @@ public class FachadaAplicacion {
     public ArrayList<Saldos> getSaldoUsuarios() {
         return gu.getSaldoUsuarios();
     }
-    
+
     public ArrayList<Saldos> getSaldoUsuario(String id) {
         return gu.getSaldoUsuario(id);
     }
-    
+
     public ArrayList<AnunciarBeneficios> getBeneficiosHoy() {
         return gb.getBeneficiosHoy();
     }
@@ -404,5 +361,9 @@ public class FachadaAplicacion {
 
     public int participacionesComprobarBaja(String id) {
         return gpart.participacionesComprobarBaja(id);
+    }
+
+    public void modificarRegulador(InversorUsuario u) {
+        fbd.modificarRegulador(u);
     }
 }

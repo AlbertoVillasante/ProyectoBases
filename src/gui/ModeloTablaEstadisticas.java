@@ -1,6 +1,5 @@
 package gui;
 
-import aplicacion.AnunciarBeneficios;
 import aplicacion.Estadisticas;
 import javax.swing.table.*;
 

@@ -4,10 +4,6 @@ import gui.FachadaGui;
 import baseDatos.FachadaBaseDatos;
 import java.util.ArrayList;
 
-/**
- *
- * @author hugo
- */
 public class GestionParticipaciones {
 
     FachadaGui fgui;

@@ -1,16 +1,12 @@
 package aplicacion;
 
 import java.util.ArrayList;
-import sun.awt.EmbeddedFrame;
 
 public class FachadaAplicacion {
 
     gui.FachadaGui fgui;
     baseDatos.FachadaBaseDatos fbd;
-    GesionLibros gl;
     GestionUsuarios gu;
-    GestionCategorias gc;
-    GestionPrestamos gp;
     GestionBeneficios gb;
     GestionParticipaciones gpart;
     GestionNoticias gn;
@@ -18,9 +14,7 @@ public class FachadaAplicacion {
     public FachadaAplicacion() {
         fgui = new gui.FachadaGui(this);
         fbd = new baseDatos.FachadaBaseDatos(this);
-        gl = new GesionLibros(fgui, fbd);
         gu = new GestionUsuarios(fgui, fbd);
-        gc = new GestionCategorias(fgui, fbd);
         gb = new GestionBeneficios(fgui, fbd);
         gpart = new GestionParticipaciones(fgui, fbd);
         gn = new GestionNoticias(fgui, fbd);
@@ -39,33 +33,6 @@ public class FachadaAplicacion {
 
     public void muestraExcepcion(String e) {
         fgui.muestraExcepcion(e);
-    }
-
-    public java.util.List<Libro> obtenerLibros(Integer id, String titulo, String isbn, String autor) {
-        return gl.obtenerLibros(id, titulo, isbn, autor);
-    }
-
-    /*public void visualizarLibro(Integer idLibro) {
-        gl.visualizarLibro(idLibro);
-    }
-
-    public void nuevoLibro() {
-        gl.nuevoLibro();
-    }*/
-    public Integer actualizarLibro(Libro l) {
-        return gl.actualizarLibro(l);
-    }
-
-    public void borrarLibro(Integer idLibro) {
-        gl.borrarLibro(idLibro);
-    }
-
-    public void actualizarCategoriasLibro(Integer idLibro, java.util.List<String> categorias) {
-        gl.actualizarCategoriasLibro(idLibro, categorias);
-    }
-
-    public java.util.List<Ejemplar> actualizarEjemplaresLibro(Integer idLibro, java.util.List<Ejemplar> ejemplares, java.util.List<Integer> borrar) {
-        return gl.actualizarEjemplaresLibro(idLibro, ejemplares, borrar);
     }
 
     public InversorUsuario comprobarAutentificacionI(String idUsuario, String clave) {
@@ -110,10 +77,6 @@ public class FachadaAplicacion {
 
     public void modificarUsuarioInversor(InversorUsuario u) {
         gu.modificarUsuarioInversor(u);
-    }
-
-    public boolean checkeo_borrado_ejemplares_prestados(int ejemplar, int libro) {
-        return gl.checkeo_borrado_ejemplares_prestados(ejemplar, libro);
     }
 
     public void nuevoBeneficio(InversorUsuario iu, EmpresaUsuario eu) {

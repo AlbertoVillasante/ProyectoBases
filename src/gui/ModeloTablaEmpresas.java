@@ -1,6 +1,5 @@
 package gui;
 
-import aplicacion.EmpresaUsuario;
 import aplicacion.prestamo;
 import java.util.ArrayList;
 import javax.swing.table.*;

@@ -110,7 +110,6 @@ public class VParticipaciones extends javax.swing.JDialog {
         jScrollPane2 = new javax.swing.JScrollPane();
         tablaParticipacionesVenta = new javax.swing.JTable();
         aceptarButton = new javax.swing.JButton();
-        buscarButton = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         partPropText = new javax.swing.JTextField();
@@ -321,14 +320,6 @@ public class VParticipaciones extends javax.swing.JDialog {
             }
         });
 
-        buscarButton.setForeground(new java.awt.Color(187, 187, 188));
-        buscarButton.setText("Buscar");
-        buscarButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buscarButtonActionPerformed(evt);
-            }
-        });
-
         jLabel4.setForeground(new java.awt.Color(255, 51, 51));
         jLabel4.setText("Rellena los campos obligatorios *");
 
@@ -382,12 +373,9 @@ public class VParticipaciones extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(compraventaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(compraventaPanelLayout.createSequentialGroup()
-                                .addGroup(compraventaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(aceptarButton)
-                                    .addGroup(compraventaPanelLayout.createSequentialGroup()
-                                        .addComponent(precioLabel)
-                                        .addGap(32, 32, 32)
-                                        .addComponent(precioText, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(precioLabel)
+                                .addGap(32, 32, 32)
+                                .addComponent(precioText, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(compraventaPanelLayout.createSequentialGroup()
@@ -421,7 +409,7 @@ public class VParticipaciones extends javax.swing.JDialog {
                 .addGroup(compraventaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(compraventaPanelLayout.createSequentialGroup()
-                        .addComponent(buscarButton)
+                        .addComponent(aceptarButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(eliminarBtn)))
                 .addGap(38, 38, 38))
@@ -471,17 +459,15 @@ public class VParticipaciones extends javax.swing.JDialog {
                             .addComponent(comisionLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(comisionText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3))
-                        .addGap(11, 11, 11)
-                        .addComponent(aceptarButton)
-                        .addGap(12, 12, 12)
+                        .addGap(46, 46, 46)
                         .addComponent(jLabel4))
                     .addGroup(compraventaPanelLayout.createSequentialGroup()
                         .addGap(33, 33, 33)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addGroup(compraventaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(buscarButton)
-                            .addComponent(eliminarBtn))))
+                            .addComponent(eliminarBtn)
+                            .addComponent(aceptarButton))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -525,10 +511,6 @@ public class VParticipaciones extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void buscarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_buscarButtonActionPerformed
 
     private void precioTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_precioTextActionPerformed
         // TODO add your handling code here:
@@ -692,7 +674,6 @@ public class VParticipaciones extends javax.swing.JDialog {
     private javax.swing.JPanel altabajaPanel;
     private javax.swing.JComboBox btnEmpresas;
     private javax.swing.JButton btnSalir;
-    private javax.swing.JButton buscarButton;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.ButtonGroup buttonGroup3;
@@ -999,7 +980,6 @@ public class VParticipaciones extends javax.swing.JDialog {
         carteraText.setEditable(false);
         numeroText.setBackground(prueba1);
         msjObligatorio.setBackground(prueba);
-        buscarButton.setBackground(prueba1);
         eliminarBtn.setBackground(prueba1);
         Alta.setBackground(prueba);
         Baja.setBackground(prueba);

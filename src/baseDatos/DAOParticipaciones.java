@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package baseDatos;
 
 import aplicacion.EmpresaUsuario;
@@ -20,7 +16,6 @@ public class DAOParticipaciones extends AbstractDAO {
         super.setFachadaAplicacion(fa);
     }
 
-    //FUNCION DE ALTA MODIFICADA POR HUGO: CREO QUE SERÍA ALGO ASÍ:
     public void altaParticipacionesEmpresa(int participaciones, String id) {
         Connection con;
         PreparedStatement stmParticipaciones = null;
@@ -29,7 +24,7 @@ public class DAOParticipaciones extends AbstractDAO {
                 + "set numeroParticipaciones = numeroParticipaciones + ? "
                 + "where idUsuario=?; ";
 
-        if (poseerYaParticipacionesEmpresa(id, id)) { //duda
+        if (poseerYaParticipacionesEmpresa(id, id)) { 
             consulta += "update poseerParticipacionesEmpresa "
                     + "set numParticipaciones = numParticipaciones + ? "
                     + "where idUsuario1 = ? and idUsuario2 = ?;";
@@ -560,7 +555,6 @@ public class DAOParticipaciones extends AbstractDAO {
     public void borrarVentaInv(OfertaParticipaciones v) {
         Connection con;
         PreparedStatement stmUsuario = null;
-        ResultSet rsUsuario;
 
         con = this.getConexion();
 
@@ -576,10 +570,10 @@ public class DAOParticipaciones extends AbstractDAO {
             stmUsuario.setInt(4, v.getNumeroParticipaciones());
             stmUsuario.setString(5, v.getIdUsuario1());
             stmUsuario.setString(6, v.getIdUsuario2());
-            rsUsuario = stmUsuario.executeQuery();
+            stmUsuario.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
-            //this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
         } finally {
             try {
                 stmUsuario.close();
@@ -592,7 +586,6 @@ public class DAOParticipaciones extends AbstractDAO {
     public void borrarVentaEmpr(OfertaParticipaciones v) {
         Connection con;
         PreparedStatement stmUsuario = null;
-        ResultSet rsUsuario;
 
         con = this.getConexion();
 
@@ -608,10 +601,10 @@ public class DAOParticipaciones extends AbstractDAO {
             stmUsuario.setInt(4, v.getNumeroParticipaciones());
             stmUsuario.setString(5, v.getIdUsuario1());
             stmUsuario.setString(6, v.getIdUsuario2());
-            rsUsuario = stmUsuario.executeQuery();
+            stmUsuario.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
-            //this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
         } finally {
             try {
                 stmUsuario.close();

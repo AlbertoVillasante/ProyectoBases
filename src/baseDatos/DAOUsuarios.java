@@ -99,11 +99,9 @@ public class DAOUsuarios extends AbstractDAO {
         try {
             stmUsuario = con.prepareStatement("select * "
                     + "from inversorUsuario "
-                    //+ "where idUsuario = ? and clave = ? and tipoUsuario != ?");
                     + "where idUsuario = ? and clave = ?");
             stmUsuario.setString(1, idUsuario);
             stmUsuario.setString(2, clave);
-            //stmUsuario.setString(3, "PendAlta");       //Depende de la implementación, posible cambio
             rsUsuario = stmUsuario.executeQuery();
             if (rsUsuario.next()) {
                 resultado = new InversorUsuario(rsUsuario.getString("idUsuario"), rsUsuario.getString("clave"),
@@ -112,7 +110,7 @@ public class DAOUsuarios extends AbstractDAO {
                 resultado.setFondosDisponiblesCuenta(rsUsuario.getFloat("fondosDisponiblesCuenta"));
             }
             try {
-                stmUsuario = null;                                  //Cuidado con pendAlta --> nullPointer
+                stmUsuario = null;                                 
                 stmUsuario = con.prepareStatement("select valor "
                         + "from comision "
                         + "where fechaComision = ( select max(fechaComision) from comision)");
@@ -155,11 +153,9 @@ public class DAOUsuarios extends AbstractDAO {
         try {
             stmUsuario = con.prepareStatement("select * "
                     + "from EmpresaUsuario "
-                    //+ "where idUsuario = ? and clave = ? and tipoUsuario != ?");
                     + "where idUsuario = ? and clave = ?");
             stmUsuario.setString(1, idUsuario);
             stmUsuario.setString(2, clave);
-            //stmUsuario.setString(3, "PendAlta");           //Igual que en validarUsuarioInversor
             rsUsuario = stmUsuario.executeQuery();
             if (rsUsuario.next()) {
                 resultado = new EmpresaUsuario(rsUsuario.getString("idUsuario"), rsUsuario.getString("clave"),
@@ -316,7 +312,7 @@ public class DAOUsuarios extends AbstractDAO {
         }
     }
 
-    public int comprobarIdInversor(String id) {          //Posible union de las dos funciones con ifs
+    public int comprobarIdInversor(String id) { 
         Integer resultado = null;
         Connection con;
         PreparedStatement stmPrestamos = null;
@@ -447,7 +443,7 @@ public class DAOUsuarios extends AbstractDAO {
         try {
             stmUsuarios = con.prepareStatement("update inversorUsuario "
                     + "set clave = ?, nombre = ?, apellido1 = ?, apellido2 = ?, direccion = ?, telefono = ? "
-                    + "where idusuario= ?");            //Posible complicacion, segun lo que dijo mosquera
+                    + "where idusuario= ?");  
 
             stmUsuarios.setString(1, u.getClave());
             stmUsuarios.setString(2, u.getNombre());
@@ -1109,7 +1105,7 @@ public class DAOUsuarios extends AbstractDAO {
             stmUsuario.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
-            //this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
         } finally {
             try {
                 stmUsuario.close();
@@ -1131,7 +1127,7 @@ public class DAOUsuarios extends AbstractDAO {
             stmUsuario.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
-            //this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
         } finally {
             try {
                 stmUsuario.close();
@@ -1156,7 +1152,7 @@ public class DAOUsuarios extends AbstractDAO {
             stmUsuario.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
-            //this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
         } finally {
             try {
                 stmUsuario.close();
@@ -1181,7 +1177,7 @@ public class DAOUsuarios extends AbstractDAO {
             stmUsuario.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
-            //this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
         } finally {
             try {
                 stmUsuario.close();

@@ -80,7 +80,6 @@ public class ModeloTablaSaldos extends AbstractTableModel {
         return this.saldos.get(i);
     }
 
-    //Función que devuelve la fila en la que se encuentra la id que se pasa por parámetro, si no se encuentra se devuelve 0
     public int getUsuarioRow(String id){
         int i = -1;
         

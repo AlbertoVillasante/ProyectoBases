@@ -1,20 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package aplicacion;
 
-import java.sql.Timestamp;
-
-/**
- *
- * @author hugo
- */
 public class OfertaParticipaciones {
 
     private String fechaOferta;
-   // private Timestamp fechaOferta;
     private String idUsuario1;
     private String idUsuario2;
     private int numeroParticipaciones;

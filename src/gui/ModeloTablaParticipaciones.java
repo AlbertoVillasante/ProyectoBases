@@ -1,18 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package gui;
 
 import aplicacion.OfertaParticipaciones;
 import javax.swing.table.AbstractTableModel;
 import aplicacion.FachadaAplicacion;
 
-/**
- *
- * @author alumnogreibd
- */
+
 public class ModeloTablaParticipaciones extends AbstractTableModel {
 
     FachadaAplicacion fa;

@@ -66,7 +66,7 @@ public class ModeloTablaBeneficios extends AbstractTableModel {
         return false;
     }
 
-    public Object getValueAt(int row, int col) {      //Comentado por ahora, para que no de error
+    public Object getValueAt(int row, int col) { 
         Object resultado = null;
 
         switch (col) {

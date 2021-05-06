@@ -2,7 +2,6 @@ package gui;
 
 import aplicacion.EmpresaUsuario;
 import aplicacion.InversorUsuario;
-import java.util.ArrayList;
 import javax.swing.table.*;
 
 public class ModeloTablaVerificacion extends AbstractTableModel {
@@ -82,7 +81,7 @@ public class ModeloTablaVerificacion extends AbstractTableModel {
         return false;
     }
 
-    public Object getValueAt(int row, int col) {      //Comentado por ahora, para que no de error
+    public Object getValueAt(int row, int col) {      
         Object resultado = null;
         
         if(row < usuariosEmp.size()){
@@ -153,12 +152,5 @@ public class ModeloTablaVerificacion extends AbstractTableModel {
         return this.usuariosEmp.size();
     }
 
-    /*public java.util.List<String> obtenerId() {
-        java.util.ArrayList<String> us = new ArrayList<String>();
-        for (EmpresaUsuario u : this.usuarios) {
-            us.add(u.getIdUsuario());
-        }
-        return us;
-    }*/
 
 }

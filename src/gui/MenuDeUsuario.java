@@ -35,6 +35,7 @@ public class MenuDeUsuario extends javax.swing.JFrame {
         fa.pagarBeneficios();
         initComponents();
         this.getContentPane().setBackground(prueba);
+        PRESTAMO.setBackground(prueba1);
         btnCerrarSesion.setBackground(prueba1);
 
     }
@@ -59,6 +60,7 @@ public class MenuDeUsuario extends javax.swing.JFrame {
         textoMenu = new javax.swing.JLabel();
         btnSalir = new javax.swing.JButton();
         btnCerrarSesion = new javax.swing.JButton();
+        PRESTAMO = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -140,6 +142,15 @@ public class MenuDeUsuario extends javax.swing.JFrame {
             }
         });
 
+        PRESTAMO.setForeground(new java.awt.Color(187, 187, 188));
+        PRESTAMO.setText("Prestamo");
+        PRESTAMO.setFocusable(false);
+        PRESTAMO.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PRESTAMOActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -173,7 +184,9 @@ public class MenuDeUsuario extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(311, 311, 311)
                 .addComponent(textoMenu)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(PRESTAMO)
+                .addGap(26, 26, 26))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(btnCerrarSesion)
@@ -185,7 +198,9 @@ public class MenuDeUsuario extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(25, 25, 25)
-                .addComponent(textoMenu)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(textoMenu)
+                    .addComponent(PRESTAMO))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -241,8 +256,14 @@ public class MenuDeUsuario extends javax.swing.JFrame {
         va.setVisible(true);
     }//GEN-LAST:event_btnCerrarSesionActionPerformed
 
+    private void PRESTAMOActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PRESTAMOActionPerformed
+        VPrestamo vp = new VPrestamo(fa, iu, eu);
+        vp.setVisible(true);
+    }//GEN-LAST:event_PRESTAMOActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton PRESTAMO;
     private javax.swing.JButton botonBeneficios;
     private javax.swing.JButton botonConfiguracion;
     private javax.swing.JButton botonEstadisticas;

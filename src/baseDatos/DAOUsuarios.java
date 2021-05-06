@@ -5,6 +5,7 @@ import aplicacion.Estadisticas;
 import aplicacion.InversorUsuario;
 import aplicacion.Saldos;
 import aplicacion.TipoUsuario;
+import aplicacion.prestamo;
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -166,6 +167,7 @@ public class DAOUsuarios extends AbstractDAO {
                         rsUsuario.getString("telefono"), TipoUsuario.valueOf(rsUsuario.getString("tipoUsuario")));
                 resultado.setnParticipaciones(Integer.parseInt(rsUsuario.getString("numeroParticipaciones")));
                 resultado.setFondosDisponiblesCuenta(rsUsuario.getFloat("fondosDisponiblesCuenta"));
+                resultado.setValorParticipaciones(rsUsuario.getDouble("valorParticipaciones"));
 
             }
             try {
@@ -409,7 +411,7 @@ public class DAOUsuarios extends AbstractDAO {
         }
     }
 
-    public void modificarRegulador(InversorUsuario u){
+    public void modificarRegulador(InversorUsuario u) {
         Connection con;
         PreparedStatement stmUsuarios = null;
         con = super.getConexion();
@@ -417,7 +419,7 @@ public class DAOUsuarios extends AbstractDAO {
         try {
             stmUsuarios = con.prepareStatement("update inversorUsuario "
                     + "set clave = ?, direccion = ?, telefono = ? "
-                    + "where idusuario = ?");  
+                    + "where idusuario = ?");
 
             stmUsuarios.setString(1, u.getClave());
             stmUsuarios.setString(2, u.getDireccion());
@@ -436,13 +438,11 @@ public class DAOUsuarios extends AbstractDAO {
             }
         }
     }
-    
+
     public void modificarUsuarioInversor(InversorUsuario u) {
         Connection con;
         PreparedStatement stmUsuarios = null;
         con = super.getConexion();
-
-        
 
         try {
             stmUsuarios = con.prepareStatement("update inversorUsuario "
@@ -720,7 +720,7 @@ public class DAOUsuarios extends AbstractDAO {
         }
         return resultado;
     }
-    
+
     public ArrayList<Saldos> getSaldoUsuarios() {
         ArrayList<Saldos> resultado = new ArrayList<Saldos>();
         Connection con;
@@ -732,10 +732,10 @@ public class DAOUsuarios extends AbstractDAO {
 
         try {
             consulta = "SELECT idusuario, fondosdisponiblescuenta "
-                    +"FROM empresausuario "
-                    +"UNION "
-                    +"SELECT idusuario, fondosdisponiblescuenta "
-                    +"FROM inversorusuario";
+                    + "FROM empresausuario "
+                    + "UNION "
+                    + "SELECT idusuario, fondosdisponiblescuenta "
+                    + "FROM inversorusuario";
 
             stmPrestamos = con.prepareStatement(consulta);
             rsPrestamos = stmPrestamos.executeQuery();
@@ -754,23 +754,23 @@ public class DAOUsuarios extends AbstractDAO {
         }
         return resultado;
     }
-    
+
     public ArrayList<Saldos> getSaldoUsuario(String id) {
         ArrayList<Saldos> resultado = new ArrayList<Saldos>();
         Connection con;
         PreparedStatement stmPrestamos = null;
         ResultSet rsPrestamos;
         String consulta;
-        
+
         con = this.getConexion();
         try {
             consulta = "SELECT idusuario, fondosdisponiblescuenta "
-                    +"FROM inversorusuario "
-                    +"WHERE idusuario like ? "
-                    +"UNION "
-                    +"SELECT idusuario, fondosdisponiblescuenta "
-                    +"FROM empresausuario "
-                    +"WHERE idusuario like ?";
+                    + "FROM inversorusuario "
+                    + "WHERE idusuario like ? "
+                    + "UNION "
+                    + "SELECT idusuario, fondosdisponiblescuenta "
+                    + "FROM empresausuario "
+                    + "WHERE idusuario like ?";
             stmPrestamos = con.prepareStatement(consulta);
             stmPrestamos.setString(1, id + "%");
             stmPrestamos.setString(2, id + "%");
@@ -790,7 +790,7 @@ public class DAOUsuarios extends AbstractDAO {
         }
         return resultado;
     }
-    
+
     public ArrayList<Estadisticas> actualizarTablaEstadisticasInversor(String id) {
         ArrayList<Estadisticas> resultado = new ArrayList<Estadisticas>();
         Estadisticas est;
@@ -994,23 +994,22 @@ public class DAOUsuarios extends AbstractDAO {
         }
         return resultado;
     }
-    
-    public double getRendimientoInversor(String idUsuario){
+
+    public double getRendimientoInversor(String idUsuario) {
         double rendimiento = 1.0;
         Connection con;
         PreparedStatement stmUsuario = null;
         ResultSet rsUsuario;
         con = this.getConexion();
-        
-        
+
         try {
             stmUsuario = con.prepareStatement("select ((fondosDisponiblesCuenta-fondosInicialesCuenta + "
-                    + "(SELECT SUM(ppi.numParticipaciones * eu.valorParticipaciones) as dineroEnAcciones " +
-"			FROM poseerParticipacionesInversor as ppi, empresaUsuario as eu " +
-"			where ppi.idUsuario1 = ? and ppi.idUsuario2 = eu.idUsuario) "
-                    + ") / fondosInicialesCuenta) as rendimiento " +
-                "from inversorUsuario where "
-              + "fondosInicialesCuenta <>0 and  idUsuario = ?");
+                    + "(SELECT SUM(ppi.numParticipaciones * eu.valorParticipaciones) as dineroEnAcciones "
+                    + "			FROM poseerParticipacionesInversor as ppi, empresaUsuario as eu "
+                    + "			where ppi.idUsuario1 = ? and ppi.idUsuario2 = eu.idUsuario) "
+                    + ") / fondosInicialesCuenta) as rendimiento "
+                    + "from inversorUsuario where "
+                    + "fondosInicialesCuenta <>0 and  idUsuario = ?");
 
             stmUsuario.setString(1, idUsuario);
             stmUsuario.setString(2, idUsuario);
@@ -1031,8 +1030,8 @@ public class DAOUsuarios extends AbstractDAO {
         }
         return rendimiento * 100;
     }
-    
-    public double getRendimientoEmpresa(String idUsuario){
+
+    public double getRendimientoEmpresa(String idUsuario) {
         double rendimiento = 1.0;
         Connection con;
         PreparedStatement stmUsuario = null;
@@ -1041,12 +1040,12 @@ public class DAOUsuarios extends AbstractDAO {
         con = this.getConexion();
         try {
             stmUsuario = con.prepareStatement("select ((fondosDisponiblesCuenta-fondosInicialesCuenta + "
-                    + "(SELECT SUM(ppe.numParticipaciones * eu.valorParticipaciones) as dineroEnAcciones " +
-"			FROM poseerParticipacionesEmpresa as ppe, empresaUsuario as eu " +
-"			where ppe.idUsuario1 = ? and ppe.idUsuario2 = eu.idUsuario)"
-                    + ") / fondosInicialesCuenta)  as rendimiento " +
-                "from empresaUsuario where "
-              + "fondosInicialesCuenta <>0 and  idUsuario = ?");
+                    + "(SELECT SUM(ppe.numParticipaciones * eu.valorParticipaciones) as dineroEnAcciones "
+                    + "			FROM poseerParticipacionesEmpresa as ppe, empresaUsuario as eu "
+                    + "			where ppe.idUsuario1 = ? and ppe.idUsuario2 = eu.idUsuario)"
+                    + ") / fondosInicialesCuenta)  as rendimiento "
+                    + "from empresaUsuario where "
+                    + "fondosInicialesCuenta <>0 and  idUsuario = ?");
 
             stmUsuario.setString(1, idUsuario);
             stmUsuario.setString(2, idUsuario);
@@ -1098,144 +1097,231 @@ public class DAOUsuarios extends AbstractDAO {
         }
         return resultado;
     }
-    
-    public void eliminarInversor(String id){
+
+    public void eliminarInversor(String id) {
         Connection con;
-        PreparedStatement stmUsuario=null;
-        con=this.getConexion();
+        PreparedStatement stmUsuario = null;
+        con = this.getConexion();
 
         try {
-            stmUsuario=con.prepareStatement("delete from inversorusuario where idusuario = ?");
+            stmUsuario = con.prepareStatement("delete from inversorusuario where idusuario = ?");
             stmUsuario.setString(1, id);
             stmUsuario.executeUpdate();
-        } catch (SQLException e){
-          System.out.println(e.getMessage());
-          //this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
-        }finally{
-          try {stmUsuario.close();} catch (SQLException e){System.out.println("Imposible cerrar cursores");}
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            //this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        } finally {
+            try {
+                stmUsuario.close();
+            } catch (SQLException e) {
+                System.out.println("Imposible cerrar cursores");
+            }
         }
     }
-    
-    public void eliminarEmpresa(String id){
-        Connection con;
-        PreparedStatement stmUsuario=null;
 
-        con=this.getConexion();
+    public void eliminarEmpresa(String id) {
+        Connection con;
+        PreparedStatement stmUsuario = null;
+
+        con = this.getConexion();
 
         try {
-            stmUsuario=con.prepareStatement("delete from empresausuario where idusuario = ?");
+            stmUsuario = con.prepareStatement("delete from empresausuario where idusuario = ?");
             stmUsuario.setString(1, id);
             stmUsuario.executeUpdate();
-        } catch (SQLException e){
-          System.out.println(e.getMessage());
-          //this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
-        }finally{
-          try {stmUsuario.close();} catch (SQLException e){System.out.println("Imposible cerrar cursores");}
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            //this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        } finally {
+            try {
+                stmUsuario.close();
+            } catch (SQLException e) {
+                System.out.println("Imposible cerrar cursores");
+            }
         }
     }
-    
-    public void estadoNormalInv(String id){
-        Connection con;
-        PreparedStatement stmUsuario=null;
 
-        con=this.getConexion();
+    public void estadoNormalInv(String id) {
+        Connection con;
+        PreparedStatement stmUsuario = null;
+
+        con = this.getConexion();
 
         try {
-            stmUsuario=con.prepareStatement("update inversorUsuario "
-                        + "set tipousuario = ? "
-                        + "where idUsuario = ? ");
+            stmUsuario = con.prepareStatement("update inversorUsuario "
+                    + "set tipousuario = ? "
+                    + "where idUsuario = ? ");
             stmUsuario.setString(1, "Normal");
             stmUsuario.setString(2, id);
             stmUsuario.executeUpdate();
-        } catch (SQLException e){
-          System.out.println(e.getMessage());
-          //this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
-        }finally{
-          try {stmUsuario.close();} catch (SQLException e){System.out.println("Imposible cerrar cursores");}
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            //this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        } finally {
+            try {
+                stmUsuario.close();
+            } catch (SQLException e) {
+                System.out.println("Imposible cerrar cursores");
+            }
         }
     }
-    
-    public void estadoNormalEmpr(String id){
-        Connection con;
-        PreparedStatement stmUsuario=null;
 
-        con=this.getConexion();
+    public void estadoNormalEmpr(String id) {
+        Connection con;
+        PreparedStatement stmUsuario = null;
+
+        con = this.getConexion();
 
         try {
-            stmUsuario=con.prepareStatement("update empresaUsuario "
-                        + "set tipousuario = ? "
-                        + "where idUsuario = ? ");
+            stmUsuario = con.prepareStatement("update empresaUsuario "
+                    + "set tipousuario = ? "
+                    + "where idUsuario = ? ");
             stmUsuario.setString(1, "Normal");
             stmUsuario.setString(2, id);
             stmUsuario.executeUpdate();
-        } catch (SQLException e){
-          System.out.println(e.getMessage());
-          //this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
-        }finally{
-          try {stmUsuario.close();} catch (SQLException e){System.out.println("Imposible cerrar cursores");}
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            //this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        } finally {
+            try {
+                stmUsuario.close();
+            } catch (SQLException e) {
+                System.out.println("Imposible cerrar cursores");
+            }
         }
     }
-    
-    public void cambiarSaldoUsuario(Saldos s){
+
+    public void cambiarSaldoUsuario(Saldos s) {
         Connection con;
-        PreparedStatement stmUsuario=null;
+        PreparedStatement stmUsuario = null;
         String consulta;
-        
-        con=this.getConexion();
+
+        con = this.getConexion();
 
         try {
-            
-            if(s.getUsuario().length() == 9){
+
+            if (s.getUsuario().length() == 9) {
                 consulta = "update inversorUsuario "
                         + "set fondosDisponiblesCuenta = ? "
                         + "where idUsuario = ? ";
-            }else{
+            } else {
                 consulta = "update empresaUsuario "
                         + "set fondosDisponiblesCuenta = ? "
                         + "where idUsuario = ? ";
             }
-            
-            stmUsuario=con.prepareStatement(consulta);
+
+            stmUsuario = con.prepareStatement(consulta);
             stmUsuario.setDouble(1, s.getSaldo());
             stmUsuario.setString(2, s.getUsuario());
             stmUsuario.executeUpdate();
-        } catch (SQLException e){
-          System.out.println(e.getMessage());
-          this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
-        }finally{
-          try {stmUsuario.close();} catch (SQLException e){System.out.println("Imposible cerrar cursores");}
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        } finally {
+            try {
+                stmUsuario.close();
+            } catch (SQLException e) {
+                System.out.println("Imposible cerrar cursores");
+            }
         }
     }
-    
-    public void cambiarSaldoUsuarioInicial(Saldos s){
+
+    public void cambiarSaldoUsuarioInicial(Saldos s) {
         Connection con;
-        PreparedStatement stmUsuario=null;
+        PreparedStatement stmUsuario = null;
         String consulta;
-        
-        con=this.getConexion();
+
+        con = this.getConexion();
 
         try {
-            
-            if(s.getUsuario().length() == 9){
+
+            if (s.getUsuario().length() == 9) {
                 consulta = "update inversorUsuario "
                         + "set fondosInicialesCuenta = ? "
                         + "where idUsuario = ? ";
-            }else{
+            } else {
                 consulta = "update empresaUsuario "
                         + "set fondosInicialesCuenta = ? "
                         + "where idUsuario = ? ";
             }
-            
-            stmUsuario=con.prepareStatement(consulta);
+
+            stmUsuario = con.prepareStatement(consulta);
             stmUsuario.setDouble(1, s.getSaldo());
             stmUsuario.setString(2, s.getUsuario());
             stmUsuario.executeUpdate();
-        } catch (SQLException e){
-          System.out.println(e.getMessage());
-          this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
-        }finally{
-          try {stmUsuario.close();} catch (SQLException e){System.out.println("Imposible cerrar cursores");}
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        } finally {
+            try {
+                stmUsuario.close();
+            } catch (SQLException e) {
+                System.out.println("Imposible cerrar cursores");
+            }
         }
     }
-    
+
+    public void actualizaSaldoEmpresa(EmpresaUsuario eu, double precio) {
+        Connection con;
+        PreparedStatement stmUsuario = null;
+        String consulta;
+
+        con = this.getConexion();
+
+        try {
+            consulta = "update EmpresaUsuario "
+                    + "set valorParticipaciones = ? "
+                    + "where idUsuario = ? ";
+
+            stmUsuario = con.prepareStatement(consulta);
+            stmUsuario.setDouble(1, precio);
+            stmUsuario.setString(2, eu.getIdUsuario());
+            stmUsuario.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        } finally {
+            try {
+                stmUsuario.close();
+            } catch (SQLException e) {
+                System.out.println("Imposible cerrar cursores");
+            }
+        }
+
+    }
+
+    public ArrayList<prestamo> getPrestamo() {
+        ArrayList<prestamo> resultado = new ArrayList<prestamo>();
+        Connection con;
+        PreparedStatement stmPrestamos = null;
+        ResultSet rsPrestamos;
+        String consulta;
+        prestamo p;
+
+        con = this.getConexion();
+
+        try {
+            consulta = "select e.nombreComercial, e.idUsuario, e.valorParticipaciones "
+                    + "from empresausuario as e";
+
+            stmPrestamos = con.prepareStatement(consulta);
+            rsPrestamos = stmPrestamos.executeQuery();
+            while (rsPrestamos.next()) {
+                p= new prestamo(rsPrestamos.getString("idUsuario"), rsPrestamos.getString("nombreComercial"), rsPrestamos.getDouble("valorParticipaciones"));
+                resultado.add(p);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        } finally {
+            try {
+                stmPrestamos.close();
+            } catch (SQLException e) {
+                System.out.println("Imposible cerrar cursores");
+            }
+        }
+        return resultado;
+    }
+
 }

@@ -1,6 +1,7 @@
 package aplicacion;
 
 import java.util.ArrayList;
+import sun.awt.EmbeddedFrame;
 
 public class FachadaAplicacion {
 
@@ -364,10 +365,38 @@ public class FachadaAplicacion {
     }
 
     public void modificarRegulador(InversorUsuario u) {
-        fbd.modificarRegulador(u);
+        gu.modificarRegulador(u);
     }
 
     public float obtenerComisionOferta(String fechaOferta) {
-        return fbd.obtenerComisionOferta(fechaOferta);
+        return gpart.obtenerComisionOferta(fechaOferta);
+    }
+
+    public void actualizaSaldoEmpresa(EmpresaUsuario eu, double precio) {
+        gpart.actualizaSaldoEmpresa(eu, precio);
+    }
+
+    public ArrayList<prestamo> getPrestamo() {
+        return gpart.getPrestamo();
+    }
+
+    public int numParticipacionesInversorEmpresa(String usuario, String empresa) {
+        return gpart.numParticipacionesInversorEmpresa(usuario, empresa);
+    }
+
+    public int numParticipacionesEmpresaEmpresa(String usuario, String empresa) {
+        return gpart.numParticipacionesEmpresaEmpresa(usuario, empresa);
+    }
+
+    public int numParticipacionesALaVenta(String usuario, String empresa) {
+        return gpart.numParticipacionesALaVenta(usuario, empresa);
+    }
+
+    public double ventaParticipacionesAEmpresaI(InversorUsuario iu, String empresa, int nParticipaciones) {
+        return gpart.ventaParticipacionesAEmpresaI(iu, empresa, nParticipaciones);
+    }
+
+    public double ventaParticipacionesAEmpresaE(EmpresaUsuario eu, String empresa, int nParticipaciones) {
+        return gpart.ventaParticipacionesAEmpresaE(eu, empresa, nParticipaciones);
     }
 }

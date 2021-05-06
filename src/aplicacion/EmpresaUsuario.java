@@ -11,6 +11,7 @@ public class EmpresaUsuario {
     private int nParticipaciones;
     private float comision;
     private double fondosDisponiblesCuenta;
+    private double valorParticipaciones;
 
     public EmpresaUsuario(String idUsuario, String clave, String nombreComercial, String direccion, String telefono, TipoUsuario tipo) {
         this.idUsuario = idUsuario;
@@ -21,6 +22,15 @@ public class EmpresaUsuario {
         this.tipo = tipo;
     }
 
+    public double getValorParticipaciones() {
+        return valorParticipaciones;
+    }
+
+    public void setValorParticipaciones(double valorParticipaciones) {
+        this.valorParticipaciones = valorParticipaciones;
+    }
+
+    
     public String getNombreComercial() {
         return nombreComercial;
     }

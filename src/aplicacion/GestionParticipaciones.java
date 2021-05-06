@@ -2,6 +2,7 @@ package aplicacion;
 
 import gui.FachadaGui;
 import baseDatos.FachadaBaseDatos;
+import java.util.ArrayList;
 
 /**
  *
@@ -99,5 +100,32 @@ public class GestionParticipaciones {
 
     public float obtenerComisionOferta(String fechaOferta) {
         return fbd.obtenerComisionOferta(fechaOferta);
+    }
+
+    public void actualizaSaldoEmpresa(EmpresaUsuario eu, double precio) {
+        fbd.actualizaSaldoEmpresa(eu, precio);
+    }
+
+    public ArrayList<prestamo> getPrestamo() {
+        return fbd.getPrestamo();
+    }
+
+    public int numParticipacionesInversorEmpresa(String usuario, String empresa) {
+        return fbd.numParticipacionesInversorEmpresa(usuario, empresa);
+    }
+
+    public int numParticipacionesEmpresaEmpresa(String usuario, String empresa) {
+        return fbd.numParticipacionesEmpresaEmpresa(usuario, empresa);
+    }
+
+    public int numParticipacionesALaVenta(String usuario, String empresa) {
+        return fbd.numParticipacionesALaVenta(usuario, empresa);
+    }
+
+    public double ventaParticipacionesAEmpresaI(InversorUsuario iu, String empresa, int nParticipaciones) {
+        return fbd.ventaParticipacionesAEmpresaI(iu, empresa, nParticipaciones);
+    }
+    public double ventaParticipacionesAEmpresaE(EmpresaUsuario eu, String empresa, int nParticipaciones) {
+        return fbd.ventaParticipacionesAEmpresaE(eu, empresa, nParticipaciones);
     }
 }

@@ -190,4 +190,5 @@ public class GestionUsuarios {
     public void modificarRegulador(InversorUsuario u) {
         fbd.modificarRegulador(u);
     }
+      
 }

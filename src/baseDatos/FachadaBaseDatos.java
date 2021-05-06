@@ -9,7 +9,9 @@ import aplicacion.Estadisticas;
 import aplicacion.Libro;
 import aplicacion.Noticias;
 import aplicacion.OfertaParticipaciones;
+import aplicacion.Prestamo;
 import aplicacion.Saldos;
+import aplicacion.prestamo;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -426,4 +428,33 @@ public class FachadaBaseDatos {
     public float obtenerComisionOferta(String fechaOferta) {
         return daoParticipaciones.obtenerComisionOferta(fechaOferta);
     }
+
+    public void actualizaSaldoEmpresa(EmpresaUsuario eu, double precio) {
+        daoUsuarios.actualizaSaldoEmpresa(eu, precio);
+    }
+
+    public ArrayList<prestamo> getPrestamo() {
+        return daoUsuarios.getPrestamo();
+    }
+
+    public int numParticipacionesInversorEmpresa(String usuario, String empresa) {
+        return daoParticipaciones.numParticipacionesInversorEmpresa(usuario, empresa);
+    }
+
+    public int numParticipacionesEmpresaEmpresa(String usuario, String empresa) {
+        return daoParticipaciones.numParticipacionesEmpresaEmpresa(usuario, empresa);
+    }
+
+    public int numParticipacionesALaVenta(String usuario, String empresa) {
+        return daoParticipaciones.numParticipacionesALaVenta(usuario, empresa);
+    }
+
+    public double ventaParticipacionesAEmpresaI(InversorUsuario iu, String empresa, int nParticipaciones) {
+        return daoParticipaciones.ventaParticipacionesAEmpresaI(iu, empresa, nParticipaciones);
+    }
+
+    public double ventaParticipacionesAEmpresaE(EmpresaUsuario eu, String empresa, int nParticipaciones) {
+        return daoParticipaciones.ventaParticipacionesAEmpresaE(eu, empresa, nParticipaciones);
+    }
+
 }

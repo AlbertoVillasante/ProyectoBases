@@ -6,6 +6,7 @@
 package baseDatos;
 
 import aplicacion.EmpresaUsuario;
+import aplicacion.InversorUsuario;
 import aplicacion.TipoUsuario;
 import aplicacion.OfertaParticipaciones;
 import java.sql.*;
@@ -19,32 +20,31 @@ public class DAOParticipaciones extends AbstractDAO {
         super.setFachadaAplicacion(fa);
     }
 
-    
     //FUNCION DE ALTA MODIFICADA POR HUGO: CREO QUE SERÍA ALGO ASÍ:
-       public void altaParticipacionesEmpresa(int participaciones, String id) {
+    public void altaParticipacionesEmpresa(int participaciones, String id) {
         Connection con;
         PreparedStatement stmParticipaciones = null;
         con = super.getConexion();
-        String consulta ="update EmpresaUsuario "
-                        +"set numeroParticipaciones = numeroParticipaciones + ? "
-                        +"where idUsuario=?; ";
-        
-        if(poseerYaParticipacionesEmpresa(id, id)){ //duda
+        String consulta = "update EmpresaUsuario "
+                + "set numeroParticipaciones = numeroParticipaciones + ? "
+                + "where idUsuario=?; ";
+
+        if (poseerYaParticipacionesEmpresa(id, id)) { //duda
             consulta += "update poseerParticipacionesEmpresa "
-                       +"set numParticipaciones = numParticipaciones + ? "
-                       +"where idUsuario1 = ? and idUsuario2 = ?;";
-        }else{
+                    + "set numParticipaciones = numParticipaciones + ? "
+                    + "where idUsuario1 = ? and idUsuario2 = ?;";
+        } else {
             consulta += "insert into poseerParticipacionesEmpresa values (?, ?, ?);";
         }
 
         try {
-            
+
             con.setAutoCommit(false);
             stmParticipaciones = con.prepareStatement(consulta);
             //Para la tabla empresaUsuario
             stmParticipaciones.setInt(1, participaciones);
             stmParticipaciones.setString(2, id);
-            
+
             //Para la tabla poseerParticipacionesEmpresa
             stmParticipaciones.setInt(3, participaciones);
             stmParticipaciones.setString(4, id);
@@ -53,7 +53,7 @@ public class DAOParticipaciones extends AbstractDAO {
             stmParticipaciones.executeUpdate();
             con.commit();
             con.setAutoCommit(true);
-            
+
         } catch (SQLException e) {
             System.out.println(e.getMessage());
             try {
@@ -70,9 +70,9 @@ public class DAOParticipaciones extends AbstractDAO {
             }
         }
     }
-       
-    public int participacionesComprobarBaja(String id){
-        int participaciones=0;
+
+    public int participacionesComprobarBaja(String id) {
+        int participaciones = 0;
         Connection con;
         PreparedStatement stmParticipaciones = null;
         ResultSet rsBaja;
@@ -96,31 +96,29 @@ public class DAOParticipaciones extends AbstractDAO {
                 System.out.println("Imposible cerrar cursores");
             }
         }
-        return participaciones;  
+        return participaciones;
     }
-    
+
     public void bajaParticipacionesEmpresa(int participaciones, String id) {
         Connection con;
         PreparedStatement stmParticipaciones = null;
         con = super.getConexion();
-        String consulta ="update EmpresaUsuario "
-                        +"set numeroParticipaciones = numeroParticipaciones - ? "
-                        +"where idUsuario=?; ";
-        
-        
+        String consulta = "update EmpresaUsuario "
+                + "set numeroParticipaciones = numeroParticipaciones - ? "
+                + "where idUsuario=?; ";
+
         consulta += "update poseerParticipacionesEmpresa "
-                    +"set numParticipaciones = numParticipaciones - ? "
-                    +"where idUsuario1 = ? and idUsuario2 = ?;";
-        
+                + "set numParticipaciones = numParticipaciones - ? "
+                + "where idUsuario1 = ? and idUsuario2 = ?;";
 
         try {
-            
+
             con.setAutoCommit(false);
             stmParticipaciones = con.prepareStatement(consulta);
             //Para la tabla empresaUsuario
             stmParticipaciones.setInt(1, participaciones);
             stmParticipaciones.setString(2, id);
-            
+
             //Para la tabla poseerParticipacionesEmpresa
             stmParticipaciones.setInt(3, participaciones);
             stmParticipaciones.setString(4, id);
@@ -129,7 +127,7 @@ public class DAOParticipaciones extends AbstractDAO {
             stmParticipaciones.executeUpdate();
             con.commit();
             con.setAutoCommit(true);
-            
+
         } catch (SQLException e) {
             System.out.println(e.getMessage());
             try {
@@ -424,7 +422,7 @@ public class DAOParticipaciones extends AbstractDAO {
     }
 
     public int numParticipacionesInvEmpr(String idUsuario, String idEmpresa) {
-        Integer resultado = null;
+        Integer resultado = 0;
         Connection con;
         PreparedStatement stmPrestamos = null;
         ResultSet rsPrestamos;
@@ -458,7 +456,7 @@ public class DAOParticipaciones extends AbstractDAO {
     }
 
     public int numParticipacionesEmprEmpr(String idUsuario, String idEmpresa) {
-        Integer resultado = null;
+        Integer resultado = 0;
         Connection con;
         PreparedStatement stmPrestamos = null;
         ResultSet rsPrestamos;
@@ -806,9 +804,9 @@ public class DAOParticipaciones extends AbstractDAO {
 
         consulta += "where idusuario1 = ? and idusuario2 = ? and fecha = ?; ";
 
-        if (poseerYaParticipacionesEmpresa(idUsuario, oferta.getIdUsuario2()) ||
-            poseerYaParticipacionesInversor(idUsuario, oferta.getIdUsuario2())) {
-            
+        if (poseerYaParticipacionesEmpresa(idUsuario, oferta.getIdUsuario2())
+                || poseerYaParticipacionesInversor(idUsuario, oferta.getIdUsuario2())) {
+
             if (idUsuario.length() != 9) {
                 consulta += "update poseerparticipacionesempresa ";
             } else {
@@ -858,7 +856,7 @@ public class DAOParticipaciones extends AbstractDAO {
         consulta += "update inversorusuario ";
 
         consulta += "set fondosDisponiblesCuenta = fondosDisponiblesCuenta + ? "
-                + "where idUsuario = '76736439T';";
+                + "where tipoUsuario = 'Regulador';";
 
         try {
             con.setAutoCommit(false);
@@ -931,7 +929,7 @@ public class DAOParticipaciones extends AbstractDAO {
                 + "and idusuario2 = ? "
                 + "and fecha = ?; ";
 
-        if (poseerYaParticipacionesEmpresa(idUsuario,oferta.getIdUsuario2()) || poseerYaParticipacionesInversor(idUsuario,oferta.getIdUsuario2())) {
+        if (poseerYaParticipacionesEmpresa(idUsuario, oferta.getIdUsuario2()) || poseerYaParticipacionesInversor(idUsuario, oferta.getIdUsuario2())) {
             if (idUsuario.length() != 9) {
                 consulta += "update poseerparticipacionesempresa ";
             } else {
@@ -980,7 +978,7 @@ public class DAOParticipaciones extends AbstractDAO {
 
         consulta += "update inversorusuario ";
         consulta += "set fondosDisponiblesCuenta = fondosDisponiblesCuenta + ? "
-                + "where idUsuario = '76736439T';";
+                + "where tipoUsuario = 'Regulador';";
 
         try {
             con.setAutoCommit(false);
@@ -1033,20 +1031,20 @@ public class DAOParticipaciones extends AbstractDAO {
             }
         }
     }
-    
-    public double getSaldoCompraVenta(String id){
-        double dinero=0;
-        
+
+    public double getSaldoCompraVenta(String id) {
+        double dinero = 0;
+
         Connection con;
         PreparedStatement stmCheck = null;
         ResultSet rsOferta;
 
         con = this.getConexion();
-        String consulta = "(select fondosDisponiblesCuenta " 
-                         +"from inversorusuario where idUsuario = ?) "
-                         +"union " 
-                         +"(select fondosDisponiblesCuenta "
-                         +"from empresausuario where idUsuario = ?)";
+        String consulta = "(select fondosDisponiblesCuenta "
+                + "from inversorusuario where idUsuario = ?) "
+                + "union "
+                + "(select fondosDisponiblesCuenta "
+                + "from empresausuario where idUsuario = ?)";
         try {
 
             stmCheck = con.prepareStatement(consulta);
@@ -1055,9 +1053,9 @@ public class DAOParticipaciones extends AbstractDAO {
 
             rsOferta = stmCheck.executeQuery();
             if (rsOferta.next()) {
-                dinero=rsOferta.getDouble("fondosDisponiblesCuenta");
+                dinero = rsOferta.getDouble("fondosDisponiblesCuenta");
             }
-            
+
         } catch (SQLException e) {
             System.out.println(e.getMessage());
             this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
@@ -1070,26 +1068,26 @@ public class DAOParticipaciones extends AbstractDAO {
         }
         return dinero;
     }
-    
-    public float obtenerComisionOferta(String fechaOferta){
+
+    public float obtenerComisionOferta(String fechaOferta) {
         float comision = 0;
-        
+
         Connection con;
         PreparedStatement stmCheck = null;
         ResultSet rsComision;
 
         con = this.getConexion();
         String consulta = "select valor from comision where fechaComision <= ? order by fechaComision desc LIMIT 1";
-        
+
         try {
             stmCheck = con.prepareStatement(consulta);
             stmCheck.setTimestamp(1, Timestamp.valueOf(fechaOferta));
 
             rsComision = stmCheck.executeQuery();
             if (rsComision.next()) {
-                comision=rsComision.getFloat("valor");
+                comision = rsComision.getFloat("valor");
             }
-            
+
         } catch (SQLException e) {
             System.out.println(e.getMessage());
             this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
@@ -1102,4 +1100,290 @@ public class DAOParticipaciones extends AbstractDAO {
         }
         return comision;
     }
+
+    public int numParticipacionesEmpresaEmpresa(String usuario, String empresa) {
+        int respuesta = 0;
+
+        Connection con;
+        PreparedStatement stmCheck = null;
+        ResultSet rsOferta;
+
+        con = this.getConexion();
+        String consulta = "select numParticipaciones from poseerparticipacionesempresa where idusuario1 = ? and idUsuario2 = ?";
+        try {
+
+            stmCheck = con.prepareStatement(consulta);
+            stmCheck.setString(1, usuario);
+            stmCheck.setString(2, empresa);
+
+            rsOferta = stmCheck.executeQuery();
+            if (rsOferta.next()) {
+                respuesta = rsOferta.getInt("numParticipaciones");
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        } finally {
+            try {
+                stmCheck.close();
+            } catch (SQLException e) {
+                System.out.println("Imposible cerrar cursores");
+            }
+        }
+        return respuesta;
+    }
+
+    public int numParticipacionesInversorEmpresa(String usuario, String empresa) {
+        int respuesta = 0;
+
+        Connection con;
+        PreparedStatement stmCheck = null;
+        ResultSet rsOferta;
+
+        con = this.getConexion();
+        String consulta = "select numParticipaciones from poseerparticipacionesinversor where idusuario1 = ? and idUsuario2 = ?";
+        try {
+
+            stmCheck = con.prepareStatement(consulta);
+            stmCheck.setString(1, usuario);
+            stmCheck.setString(2, empresa);
+
+            rsOferta = stmCheck.executeQuery();
+            if (rsOferta.next()) {
+                respuesta = rsOferta.getInt("numParticipaciones");
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        } finally {
+            try {
+                stmCheck.close();
+            } catch (SQLException e) {
+                System.out.println("Imposible cerrar cursores");
+            }
+        }
+        return respuesta;
+    }
+    
+    public int numParticipacionesALaVenta(String id, String empresa){
+               int respuesta = 0;
+
+        Connection con;
+        PreparedStatement stmCheck = null;
+        ResultSet rsOferta;
+        con = this.getConexion();
+        
+        String consulta = "select sum(o.numeroParticipaciones) " +
+                          "from ( " +
+                                    "(select numeroParticipaciones,idusuario1 " +
+                                    "from ofertaparticipacionesventaempresa " +
+                                    "where idusuario1 = ? " +
+                                    "and idusuario2 = ?) " +
+                                    " union all " +
+                                    " (select numeroParticipaciones,idusuario1 " +
+                                    "from ofertaparticipacionesventainversor " +
+                                    "where idusuario1 = ? " +
+                                    "and idusuario2 = ?)) as o " +
+                                    "GROUP BY o.idusuario1;";
+       
+        try {
+
+            stmCheck = con.prepareStatement(consulta);
+            stmCheck.setString(1, id);
+            stmCheck.setString(2, empresa);
+            stmCheck.setString(3, id);
+            stmCheck.setString(4, empresa);
+            rsOferta = stmCheck.executeQuery();
+            if (rsOferta.next()) {
+                respuesta = rsOferta.getInt("sum");
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        } finally {
+            try {
+                stmCheck.close();
+            } catch (SQLException e) {
+                System.out.println("Imposible cerrar cursores");
+            }
+        }
+        return respuesta;
+    }
+    
+    
+    public double ventaParticipacionesAEmpresaI(InversorUsuario iu, String empresa, int nParticipaciones) {
+        Connection con;
+        PreparedStatement stmOferta = null;
+        double comision = nParticipaciones*precioEstimadoEmpresa(empresa)*iu.getComision()/100;
+        double dinero = (nParticipaciones*precioEstimadoEmpresa(empresa))-comision;
+        con = this.getConexion();
+
+        String consulta = "";
+        
+        //LE QUITO LAS PARTICIPACIONES AL USUARIO
+      
+      
+        consulta += "update poseerparticipacionesinversor ";
+
+        consulta += "set numparticipaciones = numparticipaciones - ? "
+                + "where idusuario1 = ? "
+                + "and idusuario2 = ?; ";
+        
+        //SE LAS DOY A LA EMPRESA COMPRADORA
+
+        consulta += "update poseerparticipacionesempresa "
+                  + "set numparticipaciones= numparticipaciones + ? "
+                  + "where idusuario1 = ? "
+                  + "and idusuario2 = ?; ";
+
+        //LE DOY SU DINERO A LA PERSONA QUE CEDE LAS PARTICIPACIONES
+        consulta += "update inversorusuario ";
+
+        consulta += "set fondosDisponiblesCuenta = fondosDisponiblesCuenta + ? "
+                + "where idUsuario = ?; ";
+
+        //EL  REGULADOR SE LLEVA SU COMISION
+        consulta += "update inversorusuario ";
+        consulta += "set fondosDisponiblesCuenta = fondosDisponiblesCuenta + ? "
+                  + "where tipoUsuario = 'Regulador';";
+
+        try {
+            con.setAutoCommit(false);
+            stmOferta = con.prepareStatement(consulta);
+            stmOferta.setInt(1, nParticipaciones);
+            stmOferta.setString(2, iu.getIdUsuario());
+            stmOferta.setString(3, empresa);
+            stmOferta.setInt(4, nParticipaciones);
+            stmOferta.setString(5, iu.getIdUsuario());
+            stmOferta.setString(6, empresa);
+            stmOferta.setDouble(7, dinero);
+            stmOferta.setString(8, iu.getIdUsuario());
+            stmOferta.setDouble(9, comision);
+            stmOferta.executeUpdate();
+            con.commit();
+            con.setAutoCommit(true);
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            try {
+                con.rollback();
+            } catch (SQLException ex) {
+                Logger.getLogger(DAOParticipaciones.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        } finally {
+            try {
+                stmOferta.close();
+            } catch (SQLException e) {
+                System.out.println("Imposible cerrar cursores");
+            }
+        }
+        return dinero;
+    }
+    
+     public double ventaParticipacionesAEmpresaE(EmpresaUsuario eu, String empresa, int nParticipaciones) {
+         Connection con;
+        PreparedStatement stmOferta = null;
+        double comision = nParticipaciones*precioEstimadoEmpresa(empresa)*eu.getComision()/100;
+        double dinero = (nParticipaciones*precioEstimadoEmpresa(empresa))-comision;
+        con = this.getConexion();
+
+        String consulta = "";
+        
+        //LE QUITO LAS PARTICIPACIONES AL USUARIO
+      
+      
+        consulta += "update poseerparticipacionesempresa ";
+
+        consulta += "set numparticipaciones = numparticipaciones - ? "
+                + "where idusuario1 = ? "
+                + "and idusuario2 = ?; ";
+        
+        //SE LAS DOY A LA EMPRESA COMPRADORA
+
+        consulta += "update poseerparticipacionesempresa "
+                  + "set numparticipaciones= numparticipaciones + ? "
+                  + "where idusuario1 = ? "
+                  + "and idusuario2 = ?; ";
+
+        //LE DOY SU DINERO A LA PERSONA QUE CEDE LAS PARTICIPACIONES
+        consulta += "update empresausuario ";
+
+        consulta += "set fondosDisponiblesCuenta = fondosDisponiblesCuenta + ? "
+                + "where idUsuario = ?; ";
+
+        //EL  REGULADOR SE LLEVA SU COMISION
+        consulta += "update inversorusuario ";
+        consulta += "set fondosDisponiblesCuenta = fondosDisponiblesCuenta + ? "
+                  + "where tipoUsuario = 'Regulador';";
+
+        try {
+            con.setAutoCommit(false);
+            stmOferta = con.prepareStatement(consulta);
+            stmOferta.setInt(1, nParticipaciones);
+            stmOferta.setString(2, eu.getIdUsuario());
+            stmOferta.setString(3, empresa);
+            stmOferta.setInt(4, nParticipaciones);
+            stmOferta.setString(5, eu.getIdUsuario());
+            stmOferta.setString(6, empresa);
+            stmOferta.setDouble(7, dinero);
+            stmOferta.setString(8, eu.getIdUsuario());
+            stmOferta.setDouble(9, comision);
+            stmOferta.executeUpdate();
+            con.commit();
+            con.setAutoCommit(true);
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            try {
+                con.rollback();
+            } catch (SQLException ex) {
+                Logger.getLogger(DAOParticipaciones.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        } finally {
+            try {
+                stmOferta.close();
+            } catch (SQLException e) {
+                System.out.println("Imposible cerrar cursores");
+            }
+        }
+        return dinero;
+    }
+     
+     
+     public double precioEstimadoEmpresa(String idEmpresa){
+        double respuesta = 0;
+
+        Connection con;
+        PreparedStatement stmCheck = null;
+        ResultSet rsOferta;
+
+        con = this.getConexion();
+        String consulta = "select valorParticipaciones from empresaUsuario where idusuario = ? ";
+        try {
+
+            stmCheck = con.prepareStatement(consulta);
+            stmCheck.setString(1, idEmpresa);
+
+            rsOferta = stmCheck.executeQuery();
+            if (rsOferta.next()) {
+                respuesta = rsOferta.getDouble("valorParticipaciones");
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        } finally {
+            try {
+                stmCheck.close();
+            } catch (SQLException e) {
+                System.out.println("Imposible cerrar cursores");
+            }
+        }
+        return respuesta;
+     }
 }

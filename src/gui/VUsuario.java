@@ -71,6 +71,7 @@ public class VUsuario extends javax.swing.JDialog {
         txtUsuarioNoDisponible = new javax.swing.JLabel();
         btnClave1 = new javax.swing.JTextField();
         volver = new javax.swing.JButton();
+        Participaciones = new javax.swing.JButton();
 
         jButton4.setText("Guardar");
 
@@ -253,6 +254,14 @@ public class VUsuario extends javax.swing.JDialog {
             }
         });
 
+        Participaciones.setForeground(new java.awt.Color(187, 187, 188));
+        Participaciones.setText("Participaciones");
+        Participaciones.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ParticipacionesActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -307,6 +316,7 @@ public class VUsuario extends javax.swing.JDialog {
                                             .addComponent(btnCancelar)
                                             .addComponent(btnApellido2, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addGap(10, 10, 10)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                             .addGroup(layout.createSequentialGroup()
                                                 .addComponent(volver)
@@ -328,10 +338,13 @@ public class VUsuario extends javax.swing.JDialog {
                                     .addComponent(btnDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 187, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(apellido1)
-                                    .addComponent(apellido2))
-                                .addGap(69, 69, 69)
-                                .addComponent(btnApellido1, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(apellido1)
+                                            .addComponent(apellido2))
+                                        .addGap(69, 69, 69)
+                                        .addComponent(btnApellido1, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(Participaciones))
                                 .addGap(35, 35, 35))))))
         );
         layout.setVerticalGroup(
@@ -390,7 +403,8 @@ public class VUsuario extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnRegistrar)
                     .addComponent(btnActualizar)
-                    .addComponent(btnCancelar))
+                    .addComponent(btnCancelar)
+                    .addComponent(Participaciones))
                 .addGap(35, 35, 35))
         );
 
@@ -536,7 +550,7 @@ public class VUsuario extends javax.swing.JDialog {
         if (obligatorioTexto.isEnabled()) {
             return;
         }
-        
+
         actualizarDatos();
 
         //btnBorrar.setEnabled(true);
@@ -669,8 +683,15 @@ public class VUsuario extends javax.swing.JDialog {
         va.setVisible(true);
     }//GEN-LAST:event_volverActionPerformed
 
+    private void ParticipacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ParticipacionesActionPerformed
+        VCambioPrecioParticipaciones vcp;
+        vcp = new VCambioPrecioParticipaciones(fa, eu);
+        vcp.setVisible(true);
+    }//GEN-LAST:event_ParticipacionesActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Participaciones;
     private javax.swing.JLabel apellido1;
     private javax.swing.JLabel apellido2;
     private javax.swing.JButton btnActualizar;
@@ -708,7 +729,6 @@ public class VUsuario extends javax.swing.JDialog {
     private javax.swing.JButton volver;
     // End of variables declaration//GEN-END:variables
 
-    
     public void registrarUsuario() {
         Integer tipoUser = tipo_usr.getSelectedIndex();
         String tipo = "PendAlta";
@@ -793,6 +813,7 @@ public class VUsuario extends javax.swing.JDialog {
         btnTelefono.setBackground(prueba1);
         btnUsuario.setBackground(prueba1);
         txtUsuarioNoDisponible.setEnabled(false);
+        Participaciones.setBackground(prueba1);
 
         if (flag) { //REGISTRO
             btnUsuario.setEditable(true);
@@ -805,6 +826,8 @@ public class VUsuario extends javax.swing.JDialog {
             btnRegistrar.setVisible(true);
             btnActualizar.setVisible(false);
             volver.setVisible(true);
+            Participaciones.setVisible(false);
+
 
         } else { //MODIFICACIÓN
             btnUsuario.setEditable(false);
@@ -823,6 +846,8 @@ public class VUsuario extends javax.swing.JDialog {
                 btnInversor.setText(iu.getNombre());
                 btnApellido1.setText(iu.getApellido1());
                 btnApellido2.setText(iu.getApellido2());
+                Participaciones.setVisible(false);
+
 
             }
             if (eu != null) {
@@ -832,6 +857,7 @@ public class VUsuario extends javax.swing.JDialog {
                 btnDireccion.setText(eu.getDireccion());
                 btnTelefono.setText(eu.getTelefono());
                 btnEmpresa.setText(eu.getNombreComercial());
+                Participaciones.setVisible(true);
             }
         }
     }

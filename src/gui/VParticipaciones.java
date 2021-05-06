@@ -856,41 +856,41 @@ public class VParticipaciones extends javax.swing.JDialog {
         boolean exito = true;
 
         if (eu != null) {
-            if (fa.getnombreEmpresa(eu.getIdUsuario()).equals(idEmpresa)) {
+            /*if (fa.getnombreEmpresa(eu.getIdUsuario()).equals(idEmpresa)) {
                 VAviso vnoticia;
                 vnoticia = new VAviso("No puedes comprar participaciones de tu propia empresa");
                 vnoticia.setVisible(true);
                 exito = false;
 
-            } else {
-                //En primer lugar comprobamos si la empresa tiene el dinero suficiente para comprar las participaciones que quiere:
-                if (participacionesRestantes * precio > eu.getFondosDisponiblesCuenta()) {
+            }else {*/
+            //En primer lugar comprobamos si la empresa tiene el dinero suficiente para comprar las participaciones que quiere:
+            if (participacionesRestantes * precio > eu.getFondosDisponiblesCuenta()) {
 
-                    VAviso vnoticia;
-                    vnoticia = new VAviso("El precio y numero de participaciones introducido es incompatible con la cantidad de dinero que posee");
-                    vnoticia.setVisible(true);
+                VAviso vnoticia;
+                vnoticia = new VAviso("El precio y numero de participaciones introducido es incompatible con la cantidad de dinero que posee");
+                vnoticia.setVisible(true);
+                exito = false;
+
+            } else {
+                ofertasRestantes = fa.contarOfertas(idEmpresa, precio, eu.getIdUsuario()); //Relleno el número de ofertas que cumplan lo que pido
+                if (ofertasRestantes == 0) {
+
+                    VAviso vofertas;
+                    vofertas = new VAviso("No hay ofertas disponibles con esas características");
+                    vofertas.setVisible(true);
                     exito = false;
 
                 } else {
-                    ofertasRestantes = fa.contarOfertas(idEmpresa, precio, eu.getIdUsuario()); //Relleno el número de ofertas que cumplan lo que pido
-                    if (ofertasRestantes == 0) {
 
-                        VAviso vofertas;
-                        vofertas = new VAviso("No hay ofertas disponibles con esas características");
-                        vofertas.setVisible(true);
-                        exito = false;
+                    //mientras me quede dinero sigo comprando las más baratas o queden participaciones que pueda comprar con el dinero indicado
+                    while (participacionesRestantes > 0 && ofertasRestantes > 0) {
 
-                    } else {
+                        oferta = fa.getOfertaParticipaciones(idEmpresa, precio, eu.getIdUsuario()); //saco la primera
+                        oferta.setComision(fa.obtenerComisionOferta(oferta.getFechaOferta()));
 
-                        //mientras me quede dinero sigo comprando las más baratas o queden participaciones que pueda comprar con el dinero indicado
-                        while (participacionesRestantes > 0 && ofertasRestantes > 0) {
+                        if (oferta.getNumeroParticipaciones() <= participacionesRestantes) {
 
-                            oferta = fa.getOfertaParticipaciones(idEmpresa, precio, eu.getIdUsuario()); //saco la primera
-                            oferta.setComision(fa.obtenerComisionOferta(oferta.getFechaOferta()));
-
-                            if (oferta.getNumeroParticipaciones() <= participacionesRestantes) {
-
-                                /*=============================================================================================================
+                            /*=============================================================================================================
                                 Esta funcion :
                                 1- tiene como return el número de participaciones totales ya que como se quitan todas se puede hacer
                                 2- recibe como argumentos el usuario y  la oferta.
@@ -899,28 +899,28 @@ public class VParticipaciones extends javax.swing.JDialog {
                                 5- actualiza el dinero de las dos tablas.
                                 6- le da el dinero al regulador.
                             ==============================================================================================================*/
-                                participacionesRestantes -= fa.moverParticipacionesTodas(eu.getIdUsuario(), oferta);
-                                if (oferta.getIdUsuario1().length() == 9) {
-                                    fa.insertarNoticia("Compra", "El usuario " + eu.getNombreComercial() + "ha comprado " + oferta.getNumeroParticipaciones() + " participaciones al usuario " + fa.getnombreInversor(oferta.getIdUsuario1()), eu.getIdUsuario());
-                                } else {
-                                    fa.insertarNoticia("Compra", "El usuario " + eu.getNombreComercial() + "ha comprado " + oferta.getNumeroParticipaciones() + " participaciones al usuario " + fa.getnombreEmpresa(oferta.getIdUsuario1()), eu.getIdUsuario());
-                                }
-
+                            participacionesRestantes -= fa.moverParticipacionesTodas(eu.getIdUsuario(), oferta);
+                            if (oferta.getIdUsuario1().length() == 9) {
+                                fa.insertarNoticia("Compra", "El usuario " + eu.getNombreComercial() + "ha comprado " + oferta.getNumeroParticipaciones() + " participaciones al usuario " + fa.getnombreInversor(oferta.getIdUsuario1()), eu.getIdUsuario());
                             } else {
-                                fa.moverParticipacionesParciales(oferta, eu.getIdUsuario(), participacionesRestantes);
-                                if (oferta.getIdUsuario1().length() == 9) {
-                                    fa.insertarNoticia("Compra", "El usuario " + eu.getNombreComercial() + "ha comprado " + participacionesRestantes + " participaciones al usuario " + fa.getnombreInversor(oferta.getIdUsuario1()), eu.getIdUsuario());
-                                } else {
-                                    fa.insertarNoticia("Compra", "El usuario " + eu.getNombreComercial() + "ha comprado " + participacionesRestantes + " participaciones al usuario " + fa.getnombreEmpresa(oferta.getIdUsuario1()), eu.getIdUsuario());
-                                }
-                                participacionesRestantes = 0;
-
+                                fa.insertarNoticia("Compra", "El usuario " + eu.getNombreComercial() + "ha comprado " + oferta.getNumeroParticipaciones() + " participaciones al usuario " + fa.getnombreEmpresa(oferta.getIdUsuario1()), eu.getIdUsuario());
                             }
-                            ofertasRestantes--;
+
+                        } else {
+                            fa.moverParticipacionesParciales(oferta, eu.getIdUsuario(), participacionesRestantes);
+                            if (oferta.getIdUsuario1().length() == 9) {
+                                fa.insertarNoticia("Compra", "El usuario " + eu.getNombreComercial() + "ha comprado " + participacionesRestantes + " participaciones al usuario " + fa.getnombreInversor(oferta.getIdUsuario1()), eu.getIdUsuario());
+                            } else {
+                                fa.insertarNoticia("Compra", "El usuario " + eu.getNombreComercial() + "ha comprado " + participacionesRestantes + " participaciones al usuario " + fa.getnombreEmpresa(oferta.getIdUsuario1()), eu.getIdUsuario());
+                            }
+                            participacionesRestantes = 0;
+
                         }
+                        ofertasRestantes--;
                     }
                 }
             }
+            //}
         } else {
             //En primer lugar comprobamos si la empresa tiene el dinero suficiente para comprar las participaciones que quiere:
             if (participacionesRestantes * precio > iu.getFondosDisponiblesCuenta()) {

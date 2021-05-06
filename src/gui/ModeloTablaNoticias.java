@@ -16,7 +16,6 @@ import javax.swing.table.AbstractTableModel;
 public class ModeloTablaNoticias extends AbstractTableModel{
     private java.util.List<Noticias> noticia;
     FachadaAplicacion fa;
-    private int flag;
 
     public ModeloTablaNoticias() {
         this.noticia = new java.util.ArrayList<Noticias>();
@@ -70,9 +69,8 @@ public class ModeloTablaNoticias extends AbstractTableModel{
         return resultado;
     }
 
-    public void setFilas(java.util.List<Noticias> not, int flag) {
+    public void setFilas(java.util.List<Noticias> not) {
         this.noticia = not;
-        this.flag = flag;
         fireTableDataChanged();
     }
 }

@@ -65,7 +65,7 @@ public class VPagosHoy extends javax.swing.JDialog {
 
         aviso.setAlignment(java.awt.Label.CENTER);
         aviso.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
-        aviso.setForeground(new java.awt.Color(0, 0, 0));
+        aviso.setForeground(new java.awt.Color(187, 187, 188));
         aviso.setMinimumSize(new java.awt.Dimension(80, 27));
         aviso.setPreferredSize(new java.awt.Dimension(80, 30));
         aviso.setText("PAGO DE BENEFICIOS");
@@ -75,9 +75,9 @@ public class VPagosHoy extends javax.swing.JDialog {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(16, 16, 16)
                 .addComponent(btnDerecha, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 432, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()

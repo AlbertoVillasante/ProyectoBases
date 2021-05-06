@@ -121,7 +121,7 @@ public class VNoticias extends javax.swing.JDialog {
         jLabel4.setText("Participaciones");
 
         jLabel5.setForeground(new java.awt.Color(187, 187, 188));
-        jLabel5.setText("Altas y Bajas");
+        jLabel5.setText("Altas ");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -139,11 +139,10 @@ public class VNoticias extends javax.swing.JDialog {
                 .addGap(162, 162, 162)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(12, 12, 12)
+                        .addGap(42, 42, 42)
                         .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel3)
-                        .addGap(189, 189, 189))
+                        .addGap(210, 210, 210)
+                        .addComponent(jLabel3))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(gente)
                         .addGap(141, 141, 141)

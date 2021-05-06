@@ -637,15 +637,6 @@ public class VUsuario extends javax.swing.JDialog {
 
         registrarUsuario();
 
-        /* EmpresaUsuario u;
-        u = new EmpresaUsuario(btnUsuario.getText(), btnDireccion.getText(), btnClave.getText(), btnEmpresa.getText(),
-                btnTelefono.getText(), TipoUsuario.valueOf(tipo_usr.getSelectedItem().toString()));
-        if (m.obtenerId().contains(u.getIdUsuario())) {
-            id = u.getIdUsuario();
-        }*/
-        //fa.actualizarUsuario(u, id);  //Comentado para que no de error
-        //this.buscarUsuarios();
-        // this.BtnNuevoUsuarioActionPerformed(evt);
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
     private void btnInversorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInversorActionPerformed
@@ -741,6 +732,8 @@ public class VUsuario extends javax.swing.JDialog {
                     iu = new InversorUsuario(btnUsuario.getText(), btnClave1.getText(), btnInversor.getText(), btnApellido1.getText(), btnApellido2.getText(), btnDireccion.getText(), btnTelefono.getText(), TipoUsuario.valueOf(tipo));
                     fa.insertarUsuarioInversor(iu);
                     this.dispose();
+                    VAvisoCorrecto vav = new VAvisoCorrecto("A la espera de confirmación por el regulador");
+                    vav.setVisible(true);
                 }
             }
             if (fa.comprobarIdInversor(btnUsuario.getText()) != 0) {
@@ -757,6 +750,8 @@ public class VUsuario extends javax.swing.JDialog {
                     eu = new EmpresaUsuario(btnUsuario.getText(), btnClave1.getText(), btnEmpresa.getText(), btnDireccion.getText(), btnTelefono.getText(), TipoUsuario.valueOf(tipo));
                     fa.insertarUsuarioEmpresa(eu);
                     this.dispose();
+                    VAvisoCorrecto vav = new VAvisoCorrecto("A la espera de confirmación por el regulador");
+                    vav.setVisible(true);
                 }
             }
             if (fa.comprobarIdEmpresa(btnUsuario.getText()) != 0) {
@@ -828,7 +823,6 @@ public class VUsuario extends javax.swing.JDialog {
             volver.setVisible(true);
             Participaciones.setVisible(false);
 
-
         } else { //MODIFICACIÓN
             btnUsuario.setEditable(false);
             btnBaja.setVisible(true);
@@ -847,7 +841,6 @@ public class VUsuario extends javax.swing.JDialog {
                 btnApellido1.setText(iu.getApellido1());
                 btnApellido2.setText(iu.getApellido2());
                 Participaciones.setVisible(false);
-
 
             }
             if (eu != null) {

@@ -8,7 +8,6 @@ import aplicacion.FachadaAplicacion;
 
 public class ModeloTablaParticipaciones extends AbstractTableModel {
 
-    FachadaAplicacion fa;
     private java.util.List<OfertaParticipaciones> ofertas;
 
     public ModeloTablaParticipaciones() {

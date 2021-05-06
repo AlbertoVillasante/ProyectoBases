@@ -1,4 +1,3 @@
-
 package gui;
 
 import aplicacion.EmpresaUsuario;
@@ -10,10 +9,8 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-
 public class VBeneficios extends javax.swing.JDialog {
 
-    
     Color prueba = new Color(60, 63, 65);
     Color prueba1 = new Color(78, 82, 85);
     FachadaAplicacion fa;
@@ -36,8 +33,6 @@ public class VBeneficios extends javax.swing.JDialog {
             this.eu = eu;
         }
 
-        
-        
         this.getContentPane().setBackground(prueba);
         actualizarTablaBeneficios();
         btnSelector.setBackground(prueba1);
@@ -58,7 +53,6 @@ public class VBeneficios extends javax.swing.JDialog {
 
     }
 
-    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -249,7 +243,7 @@ public class VBeneficios extends javax.swing.JDialog {
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
         //comprobaciones
-         if (!btnSelector.getSelectedItem().toString().equals(eu.getNombreComercial())) {
+        if (!btnSelector.getSelectedItem().toString().equals(eu.getNombreComercial())) {
             VAviso va;
             va=new   VAviso("Esa empresa no es de su propiedad.\nAcción no disponible");
             va.setVisible(true);
@@ -257,20 +251,20 @@ public class VBeneficios extends javax.swing.JDialog {
             if (cuadroBeneficio.getText().equals("")) {
                 cuadroBeneficio.setText("0");
             }
-            if (Integer.parseInt(numPart.getValue().toString())==0 && Double.parseDouble(cuadroBeneficio.getText()) <= 0) {
+            if (Integer.parseInt(numPart.getValue().toString()) == 0 && Double.parseDouble(cuadroBeneficio.getText()) <= 0) {
                 error.setVisible(true);
             } else {
                 if (cuadroFechaPago.getDate() == null) {
                     error.setVisible(true);
                 }
-                if(fa.getSaldoRetenciones(eu.getIdUsuario()) < 0){
+                if (fa.getSaldoRetenciones(eu.getIdUsuario()) < 0) {
                     error.setText("Saldo insuficiente para completar la transacción");
                     error.setVisible(true);
                 }
-                if(fa.getParticipacionesRetenciones(eu.getIdUsuario()) < 0){
+                if (fa.getParticipacionesRetenciones(eu.getIdUsuario()) < 0) {
                     error.setText("Participaciones insuficientes para completar la transacción");
-                    error.setVisible(true); 
-                }else {
+                    error.setVisible(true);
+                } else {
                     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
                     String date = sdf.format(cuadroFechaPago.getDate());
                     fa.altaPagoBeneficios(date, Double.parseDouble(cuadroBeneficio.getText()), btnSelector.getSelectedItem().toString(), Integer.parseInt(numPart.getValue().toString()));
@@ -294,7 +288,7 @@ public class VBeneficios extends javax.swing.JDialog {
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnPagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPagarActionPerformed
-         //comprobaciones
+        //comprobaciones
         if (!btnSelector.getSelectedItem().toString().equals(eu.getNombreComercial())) {
             VAviso va;
             va=new   VAviso("Esa empresa no es de su propiedad.\nAcción no disponible");
@@ -303,19 +297,19 @@ public class VBeneficios extends javax.swing.JDialog {
             if (cuadroBeneficio.getText().equals("")) {
                 cuadroBeneficio.setText("0");
             }
-            if (Integer.parseInt(numPart.getValue().toString())==0 && Double.parseDouble(cuadroBeneficio.getText()) <= 0) {
+            if (Integer.parseInt(numPart.getValue().toString()) == 0 && Double.parseDouble(cuadroBeneficio.getText()) <= 0) {
                 error.setVisible(true);
             } else {
 
-                if(fa.getSaldoRetenciones(eu.getIdUsuario()) < 0){
+                if (fa.getSaldoRetenciones(eu.getIdUsuario()) < 0) {
                     error.setText("Saldo insuficiente para completar la transacción");
                     error.setVisible(true);
                 }
-                if(fa.getParticipacionesRetenciones(eu.getIdUsuario()) < 0){
+                if (fa.getParticipacionesRetenciones(eu.getIdUsuario()) < 0) {
                     error.setText("Participaciones insuficientes para completar la transacción");
-                    error.setVisible(true); 
-                }else {
-                    
+                    error.setVisible(true);
+                } else {
+
                     fa.altaPagoBeneficios(String.valueOf(LocalDate.now()), Double.parseDouble(cuadroBeneficio.getText()), btnSelector.getSelectedItem().toString(), Integer.parseInt(numPart.getValue().toString()));
                     fa.pagarBeneficios();
                     actualizarTablaBeneficios();

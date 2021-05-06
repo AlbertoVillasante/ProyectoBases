@@ -210,7 +210,11 @@ public class FachadaBaseDatos {
     }
 
     public java.util.List<OfertaParticipaciones> mostrarVentas() {
-        return daoParticipaciones.mostrarVentas();
+        java.util.List<OfertaParticipaciones> a = daoParticipaciones.mostrarVentas();
+        for(OfertaParticipaciones of: a){
+            of.setIdUsuario2(daoUsuarios.getnombreEmpresa(of.getIdUsuario2()));
+        }
+        return a;
     }
 
     public void ofertaVentaInv(OfertaParticipaciones v) {

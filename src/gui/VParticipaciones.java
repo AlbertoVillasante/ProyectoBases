@@ -6,7 +6,6 @@
 package gui;
 
 import aplicacion.EmpresaUsuario;
-import aplicacion.FachadaAplicacion;
 import aplicacion.InversorUsuario;
 import aplicacion.OfertaParticipaciones;
 import java.awt.Color;
@@ -15,7 +14,6 @@ import static java.lang.Integer.parseInt;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Locale;
-import javax.swing.JPanel;
 
 /**
  *
@@ -35,6 +33,8 @@ public class VParticipaciones extends javax.swing.JDialog {
      */
     public VParticipaciones(aplicacion.FachadaAplicacion fa, EmpresaUsuario eu, InversorUsuario iu) {
         initComponents();
+        this.fa = fa;
+
         colores();
 
         if (eu != null) {
@@ -45,8 +45,6 @@ public class VParticipaciones extends javax.swing.JDialog {
         } else {
             participacionesPanel.setSelectedIndex(1);
             participacionesPanel.setEnabled(false);
-            partBloqText.setVisible(false);
-            jLabel8.setVisible(false);
             this.iu = iu;
         }
 
@@ -54,7 +52,6 @@ public class VParticipaciones extends javax.swing.JDialog {
         for (String e : empresas) {
             btnEmpresas.addItem(e);
         }
-        this.fa = fa;
 
         mostrarVentas();
 
@@ -572,7 +569,6 @@ public class VParticipaciones extends javax.swing.JDialog {
             }
         }
         numeroText.setText("");
-        //this.dispose();
     }//GEN-LAST:event_aceptarButton1ActionPerformed
 
     private void selectorCVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectorCVActionPerformed
@@ -584,6 +580,8 @@ public class VParticipaciones extends javax.swing.JDialog {
             for (String i : fa.getEmpresas()) {//cogemos todas las empresas
                 btnEmpresas.addItem(i);
             }
+            partPropText.setText("");
+            partBloqText.setText("");
 
         } else { //Vender
 
@@ -807,6 +805,7 @@ public class VParticipaciones extends javax.swing.JDialog {
         m = (ModeloTablaParticipaciones) tablaParticipacionesVenta.getModel();
         i = tablaParticipacionesVenta.getSelectedRow();
         OfertaParticipaciones v = m.obtenerVenta(i);
+        v.setIdUsuario2(fa.getIdEmpresa(v.getIdUsuario2()));
         VAviso eliminarOfertas = new VAviso("¡No puedes eliminar ofertas que no sean de tu propiedad!");
 
         if (iu != null) {
@@ -827,23 +826,29 @@ public class VParticipaciones extends javax.swing.JDialog {
 
     public void compraParticipaciones() {
 
+        boolean exito = true;
         //Se utilizará esta variable para llevar la cuenta de las participaciones que faltan por comprar:
+        if (nParticipacionesText.getText().isEmpty() || Integer.parseInt(nParticipacionesText.getText()) < 0) {
+            VAviso vnoticia;
+            vnoticia = new VAviso("Formato incorrecto");
+            vnoticia.setVisible(true);
+            return;
+        }
         Integer participacionesRestantes = Integer.parseInt(nParticipacionesText.getText());
         int aux = Integer.parseInt(nParticipacionesText.getText());
+        if (precioText.getText().isEmpty() || Double.parseDouble(precioText.getText()) < 0) {
+            VAviso vnoticia;
+            vnoticia = new VAviso("Formato incorrecto");
+            vnoticia.setVisible(true);
+            return;
+        }
         Double precio = Double.parseDouble(precioText.getText());
         Integer ofertasRestantes;
         OfertaParticipaciones oferta;
         String idEmpresa = fa.getIdEmpresa(btnEmpresas.getSelectedItem().toString());
-        boolean exito = true;
 
         if (eu != null) {
-            /*if (fa.getnombreEmpresa(eu.getIdUsuario()).equals(idEmpresa)) {
-                VAviso vnoticia;
-                vnoticia = new VAviso("No puedes comprar participaciones de tu propia empresa");
-                vnoticia.setVisible(true);
-                exito = false;
 
-            }else {*/
             //En primer lugar comprobamos si la empresa tiene el dinero suficiente para comprar las participaciones que quiere:
             if (participacionesRestantes * precio > eu.getFondosDisponiblesCuenta()) {
 

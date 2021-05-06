@@ -1,12 +1,12 @@
-
 package gui;
 
 import aplicacion.EmpresaUsuario;
 import aplicacion.FachadaAplicacion;
 import aplicacion.InversorUsuario;
 import java.awt.Color;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
-
+import java.util.Locale;
 
 public class VPrestamo extends javax.swing.JDialog {
 
@@ -35,16 +35,15 @@ public class VPrestamo extends javax.swing.JDialog {
             btnEmpresas.addItem(e);
         }
         if (iu != null) {
-            saldoText.setText(String.valueOf(iu.getFondosDisponiblesCuenta()));
+            saldoText.setText(String.valueOf(convertir(iu.getFondosDisponiblesCuenta())));
             interes.setText(String.valueOf(iu.getComision()));
         } else {
-            saldoText.setText(String.valueOf(eu.getFondosDisponiblesCuenta()));
+            saldoText.setText(String.valueOf(convertir(eu.getFondosDisponiblesCuenta())));
             interes.setText(String.valueOf(eu.getComision()));
         }
         actualizarTabla();
     }
 
-  
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -291,6 +290,12 @@ public class VPrestamo extends javax.swing.JDialog {
         m.setFilas(fa.getPrestamo());
     }
 
+    public static String convertir(double val) {
+        Locale.setDefault(Locale.US);
+        DecimalFormat num = new DecimalFormat("#,###.00");
+        return num.format(val);
+    }
+
     public void venderParticipacionesAEmpresa() {
         boolean correcto = true;
         double dinero = 0;
@@ -306,7 +311,7 @@ public class VPrestamo extends javax.swing.JDialog {
                 } else {
                     dinero = fa.ventaParticipacionesAEmpresaI(iu, fa.getIdEmpresa(btnEmpresas.getSelectedItem().toString()), Integer.valueOf(participaciones.getText()));
                     iu.setFondosDisponiblesCuenta(iu.getFondosDisponiblesCuenta() + dinero);
-                    saldoText.setText(String.valueOf(iu.getFondosDisponiblesCuenta()));
+                    saldoText.setText(String.valueOf(convertir(iu.getFondosDisponiblesCuenta())));
                 }
 
             } else {
@@ -320,7 +325,7 @@ public class VPrestamo extends javax.swing.JDialog {
                 } else {
                     dinero = fa.ventaParticipacionesAEmpresaE(eu, fa.getIdEmpresa(btnEmpresas.getSelectedItem().toString()), Integer.valueOf(participaciones.getText()));
                     eu.setFondosDisponiblesCuenta(eu.getFondosDisponiblesCuenta() + dinero);
-                    saldoText.setText(String.valueOf(eu.getFondosDisponiblesCuenta()));
+                    saldoText.setText(String.valueOf(convertir(iu.getFondosDisponiblesCuenta())));
                 }
             }
         } catch (java.lang.NumberFormatException e) {

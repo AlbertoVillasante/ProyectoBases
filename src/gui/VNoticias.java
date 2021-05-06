@@ -203,7 +203,7 @@ public class VNoticias extends javax.swing.JDialog {
     }//GEN-LAST:event_botonBeneficiosActionPerformed
 
     private void genteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_genteActionPerformed
-        fa.nuevoNoticiero("ANUNCIOS DE ALTAS Y BAJAS");
+        fa.nuevoNoticiero("ANUNCIOS DE ALTAS");
     }//GEN-LAST:event_genteActionPerformed
 
     private void participacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_participacionesActionPerformed

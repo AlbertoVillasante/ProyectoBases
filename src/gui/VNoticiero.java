@@ -21,7 +21,7 @@ public class VNoticiero extends javax.swing.JDialog {
             fotoNoticia.setIcon(new ImageIcon(getClass().getResource("/gui/Beneficios.png")));
             flag = 0;
         }
-        if(tiponoticia.equals("ANUNCIOS DE ALTAS Y BAJAS")){
+        if(tiponoticia.equals("ANUNCIOS DE ALTAS")){
             fotoNoticia.setIcon(new ImageIcon(getClass().getResource("/gui/gente.png")));
             flag = 1;
         }

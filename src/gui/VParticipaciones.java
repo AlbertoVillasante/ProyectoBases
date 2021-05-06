@@ -886,7 +886,7 @@ public class VParticipaciones extends javax.swing.JDialog {
                         while (participacionesRestantes > 0 && ofertasRestantes > 0) {
 
                             oferta = fa.getOfertaParticipaciones(idEmpresa, precio, eu.getIdUsuario()); //saco la primera
-                            oferta.setComision(eu.getComision());
+                            oferta.setComision(fa.obtenerComisionOferta(oferta.getFechaOferta()));
 
                             if (oferta.getNumeroParticipaciones() <= participacionesRestantes) {
 
@@ -945,7 +945,7 @@ public class VParticipaciones extends javax.swing.JDialog {
                     while (participacionesRestantes > 0 && ofertasRestantes > 0) {
 
                         oferta = fa.getOfertaParticipaciones(idEmpresa, precio, iu.getIdUsuario()); //saco la primera
-                        oferta.setComision(iu.getComision());
+                        oferta.setComision(fa.obtenerComisionOferta(oferta.getFechaOferta()));
 
                         if (oferta.getNumeroParticipaciones() <= participacionesRestantes) {
                             participacionesRestantes -= fa.moverParticipacionesTodas(iu.getIdUsuario(), oferta);

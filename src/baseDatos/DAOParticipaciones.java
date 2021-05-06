@@ -1070,4 +1070,36 @@ public class DAOParticipaciones extends AbstractDAO {
         }
         return dinero;
     }
+    
+    public float obtenerComisionOferta(String fechaOferta){
+        float comision = 0;
+        
+        Connection con;
+        PreparedStatement stmCheck = null;
+        ResultSet rsComision;
+
+        con = this.getConexion();
+        String consulta = "select valor from comision where fechaComision <= ? order by fechaComision desc LIMIT 1";
+        
+        try {
+            stmCheck = con.prepareStatement(consulta);
+            stmCheck.setTimestamp(1, Timestamp.valueOf(fechaOferta));
+
+            rsComision = stmCheck.executeQuery();
+            if (rsComision.next()) {
+                comision=rsComision.getFloat("valor");
+            }
+            
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        } finally {
+            try {
+                stmCheck.close();
+            } catch (SQLException e) {
+                System.out.println("Imposible cerrar cursores");
+            }
+        }
+        return comision;
+    }
 }

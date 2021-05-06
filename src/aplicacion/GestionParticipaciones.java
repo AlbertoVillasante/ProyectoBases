@@ -73,12 +73,12 @@ public class GestionParticipaciones {
         fbd.borrarVentaEmpr(v);
     }
 
-    public int contarOfertas(String id, double precio,String yo) {
-        return fbd.contarOfertas(id, precio,yo);
+    public int contarOfertas(String id, double precio, String yo) {
+        return fbd.contarOfertas(id, precio, yo);
     }
 
-    public OfertaParticipaciones getOfertaParticipaciones(String id, double precio,String yo) {
-        return fbd.getOfertaParticipaciones(id, precio,yo);
+    public OfertaParticipaciones getOfertaParticipaciones(String id, double precio, String yo) {
+        return fbd.getOfertaParticipaciones(id, precio, yo);
     }
 
     public int moverParticipacionesTodas(String idUsuario, OfertaParticipaciones oferta) {
@@ -88,12 +88,16 @@ public class GestionParticipaciones {
     public void moverParticipacionesParciales(OfertaParticipaciones oferta, String idUsuario, int participacionesRestantes) {
         fbd.moverParticipacionesParciales(oferta, idUsuario, participacionesRestantes);
     }
-    
+
     public double getSaldoCompraVenta(String id) {
         return fbd.getSaldoCompraVenta(id);
     }
-    
+
     public int participacionesComprobarBaja(String id) {
         return fbd.participacionesComprobarBaja(id);
+    }
+
+    public float obtenerComisionOferta(String fechaOferta) {
+        return fbd.obtenerComisionOferta(fechaOferta);
     }
 }

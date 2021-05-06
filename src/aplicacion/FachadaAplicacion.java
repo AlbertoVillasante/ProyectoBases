@@ -366,4 +366,8 @@ public class FachadaAplicacion {
     public void modificarRegulador(InversorUsuario u) {
         fbd.modificarRegulador(u);
     }
+
+    public float obtenerComisionOferta(String fechaOferta) {
+        return fbd.obtenerComisionOferta(fechaOferta);
+    }
 }

@@ -422,4 +422,8 @@ public class FachadaBaseDatos {
     public void modificarRegulador(InversorUsuario u) {
         daoUsuarios.modificarRegulador(u);
     }
+
+    public float obtenerComisionOferta(String fechaOferta) {
+        return daoParticipaciones.obtenerComisionOferta(fechaOferta);
+    }
 }

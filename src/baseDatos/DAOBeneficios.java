@@ -503,4 +503,35 @@ public class DAOBeneficios extends AbstractDAO {
 
     }
     
+    
+    public boolean comprobarFecha(String empresa, String fecha){
+        boolean check=false;
+        Connection con;
+        PreparedStatement stmBeneficios = null;
+        con = super.getConexion();
+        ResultSet checkeo;
+
+        try {
+            stmBeneficios = con.prepareStatement("select * from anunciarbeneficios where idEmpresa = ? and fechaAnuncioPago = ?");
+            stmBeneficios.setString(1, empresa);
+            stmBeneficios.setDate(2, Date.valueOf(fecha));
+            checkeo=stmBeneficios.executeQuery();
+            
+            if(checkeo.next()){
+                check=true;
+            }
+            
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        } finally {
+            try {
+                stmBeneficios.close();
+            } catch (SQLException e) {
+                System.out.println("Imposible cerrar cursores");
+            }
+        }
+        return check;
+    }
+    
 }

@@ -77,6 +77,11 @@ public class VBeneficios extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         btnSelector.setForeground(new java.awt.Color(187, 187, 188));
+        btnSelector.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSelectorActionPerformed(evt);
+            }
+        });
 
         jButton1.setBackground(new java.awt.Color(180, 22, 45));
         jButton1.setForeground(new java.awt.Color(0, 0, 0));
@@ -119,7 +124,7 @@ public class VBeneficios extends javax.swing.JDialog {
             }
         });
 
-        numPart.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(0), Integer.valueOf(0), null, Integer.valueOf(1)));
+        numPart.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
 
         jLabel3.setForeground(new java.awt.Color(187, 187, 188));
         jLabel3.setText("Número de Participaciones:");
@@ -153,57 +158,56 @@ public class VBeneficios extends javax.swing.JDialog {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(70, 70, 70)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(btnPagar)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(btnSelector, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(btnPagar)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(btnSelector, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(btnAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(63, 63, 63)
                                 .addComponent(error)
                                 .addGap(0, 0, Short.MAX_VALUE)))
-                        .addGap(43, 43, 43)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGap(118, 118, 118)
+                        .addComponent(estadisticas)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(estadisticas)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(textoEstadísticas))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(113, 113, 113)
+                                .addComponent(jButton1)))
+                        .addGap(90, 90, 90))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(numPart, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(textoEstadísticas))
+                                        .addComponent(jLabel1)
+                                        .addGap(97, 97, 97))
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jButton1))))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel3)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(numPart, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel1)
-                                    .addGap(97, 97, 97))
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(cuadroBeneficio, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
-                                .addComponent(cuadroFechaPago, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(cuadroBeneficio, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                                    .addComponent(cuadroFechaPago, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGap(36, 36, 36)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(70, 70, 70))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(30, 30, 30)
+                .addGap(40, 40, 40)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -217,7 +221,7 @@ public class VBeneficios extends javax.swing.JDialog {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
                             .addComponent(numPart, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                        .addGap(26, 26, 26)
                         .addComponent(btnSelector, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -231,7 +235,7 @@ public class VBeneficios extends javax.swing.JDialog {
                     .addComponent(textoEstadísticas)
                     .addComponent(estadisticas)
                     .addComponent(error))
-                .addGap(26, 26, 26))
+                .addGap(40, 40, 40))
         );
 
         pack();
@@ -243,34 +247,41 @@ public class VBeneficios extends javax.swing.JDialog {
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
         //comprobaciones
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String date = sdf.format(cuadroFechaPago.getDate());
         if (!btnSelector.getSelectedItem().toString().equals(eu.getNombreComercial())) {
             VAviso va;
             va=new   VAviso("Esa empresa no es de su propiedad.\nAcción no disponible");
             va.setVisible(true);
         } else {
-            if (cuadroBeneficio.getText().equals("")) {
-                cuadroBeneficio.setText("0");
-            }
-            if (Integer.parseInt(numPart.getValue().toString()) == 0 && Double.parseDouble(cuadroBeneficio.getText()) <= 0) {
-                error.setVisible(true);
+            if (fa.comprobarFecha(fa.getIdEmpresa(btnSelector.getSelectedItem().toString()), date)) {
+                VAviso falloFecha;
+                falloFecha = new VAviso("Hoy ya no puedes anunciar beneficios.\nAcción no disponible");
+                falloFecha.setVisible(true);
             } else {
-                if (cuadroFechaPago.getDate() == null) {
-                    error.setVisible(true);
+                if (cuadroBeneficio.getText().equals("")) {
+                    cuadroBeneficio.setText("0");
                 }
-                if (fa.getSaldoRetenciones(eu.getIdUsuario()) < 0) {
-                    error.setText("Saldo insuficiente para completar la transacción");
-                    error.setVisible(true);
-                }
-                if (fa.getParticipacionesRetenciones(eu.getIdUsuario()) < 0) {
-                    error.setText("Participaciones insuficientes para completar la transacción");
+                if (Integer.parseInt(numPart.getValue().toString()) == 0 && Double.parseDouble(cuadroBeneficio.getText()) <= 0) {
                     error.setVisible(true);
                 } else {
-                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                    String date = sdf.format(cuadroFechaPago.getDate());
-                    fa.altaPagoBeneficios(date, Double.parseDouble(cuadroBeneficio.getText()), btnSelector.getSelectedItem().toString(), Integer.parseInt(numPart.getValue().toString()));
-                    fa.insertarNoticia("Anuncio beneficios", "El usuario " + eu.getNombreComercial() + " ha anunciado " + cuadroBeneficio.getText() + " de beneficio por participacion", eu.getIdUsuario());
-                    actualizarTablaBeneficios();
-                    error.setVisible(false);
+                    if (cuadroFechaPago.getDate() == null) {
+                        error.setVisible(true);
+                    }
+                    if (fa.getSaldoRetenciones(eu.getIdUsuario()) < 0) {
+                        error.setText("Saldo insuficiente ");
+                        error.setVisible(true);
+                    }
+                    if (fa.getParticipacionesRetenciones(eu.getIdUsuario()) < 0) {
+                        error.setText("Participaciones insuficientes");
+                        error.setVisible(true);
+                    } else {
+                        fa.altaPagoBeneficios(date, Double.parseDouble(cuadroBeneficio.getText()), btnSelector.getSelectedItem().toString(), Integer.parseInt(numPart.getValue().toString()));
+                        fa.insertarNoticia("Anuncio beneficios", "El usuario " + eu.getNombreComercial() + " ha anunciado " + cuadroBeneficio.getText() + " de beneficio por participacion", eu.getIdUsuario());
+                        actualizarTablaBeneficios();
+                        error.setVisible(false);
+                    }
                 }
             }
         }
@@ -318,6 +329,10 @@ public class VBeneficios extends javax.swing.JDialog {
             }
         }
     }//GEN-LAST:event_btnPagarActionPerformed
+
+    private void btnSelectorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSelectorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnSelectorActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

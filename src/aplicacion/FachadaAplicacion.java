@@ -362,4 +362,8 @@ public class FachadaAplicacion {
     public double ventaParticipacionesAEmpresaE(EmpresaUsuario eu, String empresa, int nParticipaciones) {
         return gpart.ventaParticipacionesAEmpresaE(eu, empresa, nParticipaciones);
     }
+
+    public boolean comprobarFecha(String empresa, String fecha) {
+        return gb.comprobarFecha(empresa, fecha);
+    }
 }

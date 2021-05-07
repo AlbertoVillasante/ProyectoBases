@@ -211,7 +211,7 @@ public class FachadaBaseDatos {
 
     public java.util.List<OfertaParticipaciones> mostrarVentas() {
         java.util.List<OfertaParticipaciones> a = daoParticipaciones.mostrarVentas();
-        for(OfertaParticipaciones of: a){
+        for (OfertaParticipaciones of : a) {
             of.setIdUsuario2(daoUsuarios.getnombreEmpresa(of.getIdUsuario2()));
         }
         return a;
@@ -371,6 +371,10 @@ public class FachadaBaseDatos {
 
     public double ventaParticipacionesAEmpresaE(EmpresaUsuario eu, String empresa, int nParticipaciones) {
         return daoParticipaciones.ventaParticipacionesAEmpresaE(eu, empresa, nParticipaciones);
+    }
+
+    public boolean comprobarFecha(String empresa, String fecha) {
+        return daoBeneficios.comprobarFecha(empresa, fecha);
     }
 
 }

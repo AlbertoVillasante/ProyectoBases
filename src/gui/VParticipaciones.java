@@ -630,11 +630,11 @@ public class VParticipaciones extends javax.swing.JDialog {
                 compraParticipaciones();
             } else {
                 vender();
-                mostrarVentas();
                 actualizarPartBloq(iu, eu);
                 nParticipacionesText.setText("");
                 precioText.setText("");
             }
+            mostrarVentas();
         }
 
         // TODO add your handling code here:

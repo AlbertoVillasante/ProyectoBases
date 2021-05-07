@@ -214,7 +214,7 @@ public class DAOParticipaciones extends AbstractDAO {
         try {
             stmVenta = con.prepareStatement("select o.precio, o.numeroparticipaciones, o.idUsuario2, o.idUsuario1 "
                     + "from ofertaparticipacionesventainversor as o, poseerparticipacionesinversor as p "
-                    + "where o.numeroparticipaciones <= p.numparticipaciones and o.idUsuario1 = p.idUsuario1 and o.idUsuario2 = p.idUsuario2 ");
+                    + "where o.idUsuario1 = p.idUsuario1 and o.idUsuario2 = p.idUsuario2 ");
             rsVenta = stmVenta.executeQuery();
             while (rsVenta.next()) {
                 v = new OfertaParticipaciones(rsVenta.getFloat("precio"), rsVenta.getInt("numeroparticipaciones"), rsVenta.getString("idUsuario2"), rsVenta.getString("idUsuario1"));
@@ -224,7 +224,7 @@ public class DAOParticipaciones extends AbstractDAO {
             try {
                 stmVenta = con.prepareStatement("select o.precio, o.numeroparticipaciones, o.idUsuario2, o.idUsuario1 "
                         + "from ofertaparticipacionesventaempresa as o, poseerparticipacionesempresa as p "
-                        + "where o.numeroparticipaciones <= p.numparticipaciones and o.idUsuario1 = p.idUsuario1 and o.idUsuario2 = p.idUsuario2 ");
+                        + "where o.idUsuario1 = p.idUsuario1 and o.idUsuario2 = p.idUsuario2 ");
                 rsVenta = stmVenta.executeQuery();
                 while (rsVenta.next()) {
                     v = new OfertaParticipaciones(rsVenta.getFloat("precio"), rsVenta.getInt("numeroparticipaciones"), rsVenta.getString("idUsuario2"), rsVenta.getString("idUsuario1"));

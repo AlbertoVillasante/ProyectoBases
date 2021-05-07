@@ -116,8 +116,10 @@ public class VEstadistica extends javax.swing.JDialog {
             }
         });
 
+        textPartTot.setEditable(false);
         textPartTot.setForeground(new java.awt.Color(187, 187, 188));
 
+        TextFond.setEditable(false);
         TextFond.setForeground(new java.awt.Color(187, 187, 188));
 
         jLabel1.setForeground(new java.awt.Color(187, 187, 188));
@@ -135,6 +137,7 @@ public class VEstadistica extends javax.swing.JDialog {
         jLabel5.setForeground(new java.awt.Color(187, 187, 188));
         jLabel5.setText("Fondos tras retenciones:");
 
+        TextFondosRetenciones.setEditable(false);
         TextFondosRetenciones.setForeground(new java.awt.Color(187, 187, 188));
         TextFondosRetenciones.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -145,11 +148,13 @@ public class VEstadistica extends javax.swing.JDialog {
         jLabel6.setForeground(new java.awt.Color(187, 187, 188));
         jLabel6.setText("Nº participaciones tras retenciones:");
 
+        textPartTot1.setEditable(false);
         textPartTot1.setForeground(new java.awt.Color(187, 187, 188));
 
         rendimientoLabel.setForeground(new java.awt.Color(187, 187, 188));
         rendimientoLabel.setText("Rendimiento:");
 
+        rendimientoText.setEditable(false);
         rendimientoText.setForeground(new java.awt.Color(187, 187, 188));
 
         porcentajeLabel.setForeground(new java.awt.Color(187, 187, 188));
@@ -235,9 +240,8 @@ public class VEstadistica extends javax.swing.JDialog {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(rendimientoLabel)
                             .addComponent(rendimientoText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(porcentajeLabel))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addGap(26, 26, 26))
+                            .addComponent(porcentajeLabel))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();

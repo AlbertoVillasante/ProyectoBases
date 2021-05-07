@@ -325,7 +325,7 @@ public class VPrestamo extends javax.swing.JDialog {
                 } else {
                     dinero = fa.ventaParticipacionesAEmpresaE(eu, fa.getIdEmpresa(btnEmpresas.getSelectedItem().toString()), Integer.valueOf(participaciones.getText()));
                     eu.setFondosDisponiblesCuenta(eu.getFondosDisponiblesCuenta() + dinero);
-                    saldoText.setText(String.valueOf(convertir(iu.getFondosDisponiblesCuenta())));
+                    saldoText.setText(String.valueOf(convertir(eu.getFondosDisponiblesCuenta())));
                 }
             }
         } catch (java.lang.NumberFormatException e) {

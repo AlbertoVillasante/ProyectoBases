@@ -620,7 +620,7 @@ public class VParticipaciones extends javax.swing.JDialog {
     }//GEN-LAST:event_selectorCVActionPerformed
 
     private void aceptarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aceptarButtonActionPerformed
-        if (nParticipacionesText.getText().isEmpty() && precioText.getText().isEmpty()) {
+        if (nParticipacionesText.getText().isEmpty() || precioText.getText().isEmpty()) {
             jLabel4.setVisible(true);
             jLabel6.setVisible(true);
             jLabel7.setVisible(true);
@@ -630,10 +630,10 @@ public class VParticipaciones extends javax.swing.JDialog {
                 compraParticipaciones();
             } else {
                 vender();
-                actualizarPartBloq(iu, eu);
                 nParticipacionesText.setText("");
                 precioText.setText("");
             }
+            actualizarPartBloq(iu, eu);
             mostrarVentas();
         }
 
@@ -657,6 +657,7 @@ public class VParticipaciones extends javax.swing.JDialog {
     private void eliminarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarBtnActionPerformed
         eliminar();
         mostrarVentas();
+
         // TODO add your handling code here:
     }//GEN-LAST:event_eliminarBtnActionPerformed
 
@@ -822,6 +823,8 @@ public class VParticipaciones extends javax.swing.JDialog {
                 eliminarOfertas.setVisible(true);
             }
         }
+        actualizarPartBloq(iu, eu);
+
     }
 
     public void compraParticipaciones() {
@@ -960,13 +963,17 @@ public class VParticipaciones extends javax.swing.JDialog {
         if (exito) {
 
             int participacionesCompradas = aux - participacionesRestantes;
-            VAvisoCorrecto compraEfectuada = new VAvisoCorrecto("Compra realizada con éxito.\nTu nuevo saldo es de "
-                    + convertir(fa.getSaldoCompraVenta(iu.getIdUsuario())) + " €.\nSe han comprado " + participacionesCompradas + " participaciones.");
-            compraEfectuada.setVisible(true);
+
             if (iu != null) {
                 saldoText.setText(convertir(fa.getSaldoCompraVenta(iu.getIdUsuario())));
+                VAvisoCorrecto compraEfectuada = new VAvisoCorrecto("Compra realizada con éxito.\nTu nuevo saldo es de "
+                        + convertir(fa.getSaldoCompraVenta(iu.getIdUsuario())) + " €.\nSe han comprado " + participacionesCompradas + " participaciones.");
+                compraEfectuada.setVisible(true);
             } else {
                 saldoText.setText(convertir(fa.getSaldoCompraVenta(eu.getIdUsuario())));
+                VAvisoCorrecto compraEfectuada = new VAvisoCorrecto("Compra realizada con éxito.\nTu nuevo saldo es de "
+                        + convertir(fa.getSaldoCompraVenta(eu.getIdUsuario())) + " €.\nSe han comprado " + participacionesCompradas + " participaciones.");
+                compraEfectuada.setVisible(true);
             }
         }
     }

@@ -246,7 +246,7 @@ public class DAOBeneficios extends AbstractDAO {
         try {
             stmSaldo = con.prepareStatement("select eu.fondosdisponiblescuenta - sum(distinct ab.importe) * (sum( distinct ppi.numparticipaciones) + sum(distinct ppe.numparticipaciones)) as dineroFinal "
                     + "from EmpresaUsuario as eu,AnunciarBeneficios as ab,poseerparticipacionesinversor as ppi, poseerparticipacionesempresa ppe "
-                    + "where ab.fechaAnuncioPago = CURRENT_DATE and eu.idUsuario= ab.idEmpresa and ab.idEmpresa= ? and ((ab.idEmpresa = ppi.idUsuario2 and ab.idEmpresa != ppi.idUsuario1) and (ab.idEmpresa = ppe.idUsuario2 and ab.idEmpresa != ppe.idUsuario1)) "
+                    + "where ab.fechaAnuncioPago = CURRENT_DATE and eu.idUsuario= ab.idEmpresa and ab.idEmpresa = ? and ((ab.idEmpresa = ppi.idUsuario2 and ab.idEmpresa != ppi.idUsuario1) and (ab.idEmpresa = ppe.idUsuario2 and ab.idEmpresa != ppe.idUsuario1)) "
                     + "group by eu.idUsuario");
 
             stmSaldo.setString(1, id);
@@ -268,7 +268,7 @@ public class DAOBeneficios extends AbstractDAO {
         return saldo;
     }
 
-    public int getParticipacionesTrasPagarBeneficiosHoy(String id) {
+    public int getParticipacionesTrasPagarBeneficiosHoy(String id) { //AÑADIDA 1 LINEA
         Connection con;
         PreparedStatement stmSaldo = null;
         con = super.getConexion();
@@ -279,13 +279,15 @@ public class DAOBeneficios extends AbstractDAO {
             stmSaldo = con.prepareStatement("select poseerParticipacionesEmpresa.numParticipaciones - "
                     + "(select sum(distinct ab.numParticipaciones) * (sum( distinct ppi.numparticipaciones) + sum(distinct ppe.numparticipaciones)) "
                     + "from AnunciarBeneficios as ab,poseerparticipacionesinversor as ppi, poseerparticipacionesempresa ppe "
-                    + "where  ab.fechaAnuncioPago = current_date and ab.idEmpresa= ?  and ((ab.idEmpresa = ppi.idUsuario2 and ab.idEmpresa != ppi.idUsuario1) and (ab.idEmpresa = ppe.idUsuario2 and ab.idEmpresa != ppe.idUsuario1)) "
+                    + "where  ab.fechaAnuncioPago = current_date and ab.idEmpresa = ?  and ((ab.idEmpresa = ppi.idUsuario2 and ab.idEmpresa != ppi.idUsuario1) and (ab.idEmpresa = ppe.idUsuario2 and ab.idEmpresa != ppe.idUsuario1)) "
                     + "group by ppe.idUsuario1 ) as ParticipacionesFinales "
                     + "FROM poseerParticipacionesEmpresa "
-                    + "WHERE idUsuario1 = ?");
+                    + "WHERE idUsuario1 = ? and idUsuario2 = ?");
 
             stmSaldo.setString(1, id);
             stmSaldo.setString(2, id);
+            stmSaldo.setString(3, id);
+
             participacionesFinal = stmSaldo.executeQuery();
             if (participacionesFinal.next()) {
                 participaciones = participacionesFinal.getInt("participacionesFinales");
@@ -330,10 +332,8 @@ public class DAOBeneficios extends AbstractDAO {
                     + ")", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
             
             rsBeneficios = stmAnunciosBeneficios.executeQuery(); // Obtenemos los usuarios que tienen participaciones de las empresas que pagan beneficios hoy
-            
             while (rsBeneficios.next()) {
                 if ((rsBeneficios.getString("usuarioCobrador")).length() == 9) { // Es INVERSOR
-
                     try { // Actualizamos el saldo de los inversores usuarios a partir de los resultados de la fila anterior
                         stmCobradores = con.prepareStatement("UPDATE inversorUsuario "
                                 + "SET fondosDisponiblesCuenta = fondosDisponiblesCuenta + (? * ?) "
@@ -417,11 +417,10 @@ public class DAOBeneficios extends AbstractDAO {
 
                 try {
 
-                    stmEmpresas = con.prepareStatement("SELECT idEmpresa FROM anunciarBeneficios where fechaAnuncioPago=current_date"
+                    stmEmpresas = con.prepareStatement("SELECT idEmpresa FROM anunciarBeneficios where fechaAnuncioPago = current_date"
                     , ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
                     rsEmpresas = stmEmpresas.executeQuery();
                     while (rsEmpresas.next()) { // TRas obtener las empresas que anunciaron beneficios hoy les restamos a esta el dinero y las participaciones
-
                         try {
 
                             stmQuitarDineroParticipacionesEmpresa = con.prepareStatement("UPDATE empresaUsuario "

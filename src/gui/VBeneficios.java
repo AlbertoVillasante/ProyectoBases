@@ -337,7 +337,7 @@ public class VBeneficios extends javax.swing.JDialog {
                     fa.altaPagoBeneficios(String.valueOf(LocalDate.now()), Double.parseDouble(cuadroBeneficio.getText()), btnSelector.getSelectedItem().toString(), Integer.parseInt(numPart.getValue().toString()));
                     actualizarTablaBeneficios();
                     fa.pagarBeneficios();
-                    VAvisoCorrecto bien = new VAvisoCorrecto("Se han pagado beneficios porun valor de " + cuadroBeneficio.getText() + " euros por participación."
+                    VAvisoCorrecto bien = new VAvisoCorrecto("Se han pagado beneficios por un valor de " + cuadroBeneficio.getText() + " euros por participación."
                             + "\n y " + numPart.getValue().toString() + " participaciones");
                     bien.setVisible(true);
                     error.setVisible(false);

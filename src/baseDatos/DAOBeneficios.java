@@ -1,4 +1,3 @@
-
 package baseDatos;
 
 import aplicacion.AnunciarBeneficios;
@@ -106,7 +105,7 @@ public class DAOBeneficios extends AbstractDAO {
         }
         return resultado;
     }
-    
+
     public ArrayList<AnunciarBeneficios> getBeneficiosEmpresa(String idEmpresa) {
         Connection con;
         PreparedStatement stmBeneficios = null;
@@ -316,7 +315,7 @@ public class DAOBeneficios extends AbstractDAO {
         con = super.getConexion();
         ResultSet rsBeneficios;
         ResultSet rsEmpresas;
-        
+
         try {
             con.setAutoCommit(false);
             stmAnunciosBeneficios = con.prepareStatement("( "
@@ -330,7 +329,7 @@ public class DAOBeneficios extends AbstractDAO {
                     + "FROM poseerParticipacionesEmpresa as ppe, anunciarbeneficios as ab "
                     + "WHERE ppe.idUsuario2 = ab.idEmpresa and ppe.idUsuario1 != ab.idEmpresa and  ab.fechaAnuncioPago = CURRENT_DATE "
                     + ")", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-            
+
             rsBeneficios = stmAnunciosBeneficios.executeQuery(); // Obtenemos los usuarios que tienen participaciones de las empresas que pagan beneficios hoy
             while (rsBeneficios.next()) {
                 if ((rsBeneficios.getString("usuarioCobrador")).length() == 9) { // Es INVERSOR
@@ -417,8 +416,7 @@ public class DAOBeneficios extends AbstractDAO {
 
                 try {
 
-                    stmEmpresas = con.prepareStatement("SELECT idEmpresa FROM anunciarBeneficios where fechaAnuncioPago = current_date"
-                    , ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+                    stmEmpresas = con.prepareStatement("SELECT idEmpresa FROM anunciarBeneficios where fechaAnuncioPago = current_date");
                     rsEmpresas = stmEmpresas.executeQuery();
                     while (rsEmpresas.next()) { // TRas obtener las empresas que anunciaron beneficios hoy les restamos a esta el dinero y las participaciones
                         try {
@@ -455,22 +453,6 @@ public class DAOBeneficios extends AbstractDAO {
 
                     }
 
-                    if (rsEmpresas.first()) {
-                        // Si hay al menos un beneficio debemos eliminarlo
-                        try {
-
-                            stmBorrarBeneficios = con.prepareStatement("DELETE from AnunciarBeneficios where fechaAnuncioPago = CURRENT_DATE"); // Borramos todos los anuncios que ya se han pagado hoy
-                            stmBorrarBeneficios.executeUpdate();
-
-                        } catch (SQLException e) {
-                            System.out.println(e.getMessage());
-                            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
-                        } finally {
-                            stmBorrarBeneficios.close();
-                        }
-
-                    }
-
                 } catch (SQLException e) {
                     System.out.println(e.getMessage());
                     this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
@@ -479,12 +461,22 @@ public class DAOBeneficios extends AbstractDAO {
                 }
 
             }
+            try {
 
+                stmBorrarBeneficios = con.prepareStatement("DELETE from AnunciarBeneficios where fechaAnuncioPago = CURRENT_DATE"); // Borramos todos los anuncios que ya se han pagado hoy
+                stmBorrarBeneficios.executeUpdate();
+
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+                this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+            } finally {
+                stmBorrarBeneficios.close();
+            }
             con.commit();
             con.setAutoCommit(true);
-         
+
         } catch (SQLException e) {
-            
+
             System.out.println(e.getMessage());
             try {
                 con.rollback();
@@ -501,10 +493,9 @@ public class DAOBeneficios extends AbstractDAO {
         }
 
     }
-    
-    
-    public boolean comprobarFecha(String empresa, String fecha){
-        boolean check=false;
+
+    public boolean comprobarFecha(String empresa, String fecha) {
+        boolean check = false;
         Connection con;
         PreparedStatement stmBeneficios = null;
         con = super.getConexion();
@@ -514,12 +505,12 @@ public class DAOBeneficios extends AbstractDAO {
             stmBeneficios = con.prepareStatement("select * from anunciarbeneficios where idEmpresa = ? and fechaAnuncioPago = ?");
             stmBeneficios.setString(1, empresa);
             stmBeneficios.setDate(2, Date.valueOf(fecha));
-            checkeo=stmBeneficios.executeQuery();
-            
-            if(checkeo.next()){
-                check=true;
+            checkeo = stmBeneficios.executeQuery();
+
+            if (checkeo.next()) {
+                check = true;
             }
-            
+
         } catch (SQLException e) {
             System.out.println(e.getMessage());
             this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
@@ -532,5 +523,5 @@ public class DAOBeneficios extends AbstractDAO {
         }
         return check;
     }
-    
+
 }

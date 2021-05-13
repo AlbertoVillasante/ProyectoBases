@@ -303,8 +303,8 @@ public class FachadaAplicacion {
         gu.estadoNormalEmpr(id);
     }
 
-    public void pagarBeneficios() {
-        gb.pagarBeneficios();
+    public boolean pagarBeneficios() {
+        return gb.pagarBeneficios();
     }
 
     public void cambiarSaldoUsuario(Saldos s) {

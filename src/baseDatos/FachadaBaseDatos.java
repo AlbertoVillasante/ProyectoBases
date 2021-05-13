@@ -30,8 +30,8 @@ public class FachadaBaseDatos {
         FileInputStream arqConfiguracion;
 
         try {
-            //arqConfiguracion = new FileInputStream("baseDatos.properties"); //linea a cambiar
-            arqConfiguracion = new FileInputStream("basesDatos.properties");
+            arqConfiguracion = new FileInputStream("baseDatos.properties"); //linea a cambiar
+            //arqConfiguracion = new FileInputStream("basesDatos.properties");
 
             configuracion.load(arqConfiguracion);
             arqConfiguracion.close();
@@ -317,8 +317,8 @@ public class FachadaBaseDatos {
         daoUsuarios.cambiarSaldoUsuarioInicial(s);
     }
 
-    public void pagarBeneficios() {
-        daoBeneficios.pagarBeneficios();
+    public boolean pagarBeneficios() {
+        return daoBeneficios.pagarBeneficios();
     }
 
     public void insertarNoticia(String tipo, String descripcion, String id) {

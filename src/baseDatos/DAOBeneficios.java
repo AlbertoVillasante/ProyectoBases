@@ -305,7 +305,7 @@ public class DAOBeneficios extends AbstractDAO {
         return participaciones;
     }
 
-    public void pagarBeneficios() {
+    public boolean pagarBeneficios() {
         Connection con;
         PreparedStatement stmAnunciosBeneficios = null;
         PreparedStatement stmCobradores = null;
@@ -421,12 +421,23 @@ public class DAOBeneficios extends AbstractDAO {
                     while (rsEmpresas.next()) { // TRas obtener las empresas que anunciaron beneficios hoy les restamos a esta el dinero y las participaciones
                         try {
 
+                            if(this.getSaldoTrasPagarBeneficiosHoy(rsEmpresas.getString("idEmpresa")) < 0){
+                            // saliiiirr
+                                try {
+                                    con.rollback();
+                                } catch (SQLException ex) {
+                                    Logger.getLogger(DAOParticipaciones.class.getName()).log(Level.SEVERE, null, ex);
+                                }
+                                return false;
+                                
+                            }
                             stmQuitarDineroParticipacionesEmpresa = con.prepareStatement("UPDATE empresaUsuario "
                                     + "SET fondosDisponiblesCuenta = ? "
                                     + "where idUsuario =  ? ");
 
                             stmQuitarDineroParticipacionesEmpresa.setDouble(1, this.getSaldoTrasPagarBeneficiosHoy(rsEmpresas.getString("idEmpresa")));
                             stmQuitarDineroParticipacionesEmpresa.setString(2, rsEmpresas.getString("idEmpresa"));
+                            stmQuitarDineroParticipacionesEmpresa.executeUpdate();
 
                         } catch (SQLException e) {
                             System.out.println(e.getMessage());
@@ -436,6 +447,15 @@ public class DAOBeneficios extends AbstractDAO {
                         }
 
                         try {
+                            if (this.getParticipacionesTrasPagarBeneficiosHoy(rsEmpresas.getString("idEmpresa")) < 0) {
+                                // saliiiirr
+                                try {
+                                    con.rollback();
+                                } catch (SQLException ex) {
+                                    Logger.getLogger(DAOParticipaciones.class.getName()).log(Level.SEVERE, null, ex);
+                                }
+                                return false;
+                            }
                             stmQuitarDineroParticipacionesEmpresa = null;
                             stmQuitarDineroParticipacionesEmpresa = con.prepareStatement("UPDATE poseerParticipacionesEmpresa "
                                     + "SET numParticipaciones = ? "
@@ -443,6 +463,7 @@ public class DAOBeneficios extends AbstractDAO {
 
                             stmQuitarDineroParticipacionesEmpresa.setInt(1, this.getParticipacionesTrasPagarBeneficiosHoy(rsEmpresas.getString("idEmpresa")));
                             stmQuitarDineroParticipacionesEmpresa.setString(2, rsEmpresas.getString("idEmpresa"));
+                            stmQuitarDineroParticipacionesEmpresa.executeUpdate();
 
                         } catch (SQLException e) {
                             System.out.println(e.getMessage());
@@ -492,6 +513,7 @@ public class DAOBeneficios extends AbstractDAO {
             }
         }
 
+        return true;
     }
 
     public boolean comprobarFecha(String empresa, String fecha) {

@@ -54,8 +54,8 @@ public class GestionBeneficios {
         return fbd.getParticipacionesRetenciones(id);
     }
 
-    public void pagarBeneficios() {
-        fbd.pagarBeneficios();
+    public boolean pagarBeneficios() {
+        return fbd.pagarBeneficios();
     }
 
     public boolean comprobarFecha(String empresa, String fecha) {

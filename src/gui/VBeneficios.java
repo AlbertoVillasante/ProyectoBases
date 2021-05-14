@@ -256,7 +256,7 @@ public class VBeneficios extends javax.swing.JDialog {
 
             if (!btnSelector.getSelectedItem().toString().equals(eu.getNombreComercial())) {
                 VAviso va;
-                va=new   VAviso("Esa empresa no es de su propiedad.\nAcción no disponible");
+                va = new VAviso("Esa empresa no es de su propiedad.\nAcción no disponible");
                 va.setVisible(true);
             } else {
                 if (fa.comprobarFecha(fa.getIdEmpresa(btnSelector.getSelectedItem().toString()), date)) {
@@ -269,24 +269,48 @@ public class VBeneficios extends javax.swing.JDialog {
                     }
                     if (Integer.parseInt(numPart.getValue().toString()) == 0 && Double.parseDouble(cuadroBeneficio.getText()) <= 0) {
                         error.setVisible(true);
+                    } else if (Double.parseDouble(cuadroBeneficio.getText()) < 0) {
+                        error.setVisible(true);
                     } else {
 
                         if (fa.getSaldoRetenciones(eu.getIdUsuario()) < 0) {
                             /*error.setText("Saldo insuficiente para completar la transacción");
-                    error.setVisible(true);*/
+                             error.setVisible(true);*/
                             VAviso saldo = new VAviso("El saldo es insuficiente");
                             saldo.setVisible(true);
+
                         }
-                        if (fa.getParticipacionesRetenciones(eu.getIdUsuario()) < 0) {
+                        if (fa.getParticipacionesRetenciones(eu.getIdUsuario()) < 0 && Integer.parseInt(numPart.getValue().toString()) > 0) {
                             /*error.setText("Saldo insuficiente para completar la transacción");
-                    error.setVisible(true);*/
+                             error.setVisible(true);*/
                             VAviso part = new VAviso("El saldo es insuficiente");
                             part.setVisible(true);
+
                         } else {
+                          
                             fa.altaPagoBeneficios(date, Double.parseDouble(cuadroBeneficio.getText()), btnSelector.getSelectedItem().toString(), Integer.parseInt(numPart.getValue().toString()));
-                            fa.insertarNoticia("Anuncio beneficios", "El usuario " + eu.getNombreComercial() + " ha anunciado " + cuadroBeneficio.getText() + " de beneficio por participacion", eu.getIdUsuario());
-                            actualizarTablaBeneficios();
-                            error.setVisible(false);
+                            if (fa.getSaldoRetenciones(eu.getIdUsuario()) < 0) {
+                                /*error.setText("Saldo insuficiente para completar la transacción");
+                                 error.setVisible(true);*/
+                                VAviso saldo = new VAviso("El saldo es insuficiente");
+                                saldo.setVisible(true);
+                                fa.bajaAnuncioBeneficios(date, btnSelector.getSelectedItem().toString());
+
+                            } else if (fa.getParticipacionesRetenciones(eu.getIdUsuario()) < 0 && Integer.parseInt(numPart.getValue().toString()) > 0) {
+                                /*error.setText("Participaciones insuficientes para completar la transacción");
+                                 error.setVisible(true);*/
+                                VAviso part = new VAviso("Las participaciones son insuficiente");
+                                part.setVisible(true);
+                                fa.bajaAnuncioBeneficios(date, btnSelector.getSelectedItem().toString());
+
+                            } else {
+                                VAvisoCorrecto bien = new VAvisoCorrecto("Se han anunciado beneficios por un valor de " + cuadroBeneficio.getText() + " euros por participación."
+                                        + "\n y " + numPart.getValue().toString() + " participaciones");
+                                bien.setVisible(true);
+                                fa.insertarNoticia("Anuncio beneficios", "El usuario " + eu.getNombreComercial() + " ha anunciado " + cuadroBeneficio.getText() + " de beneficio por participacion", eu.getIdUsuario());
+                                actualizarTablaBeneficios();
+                                error.setVisible(false);
+                            }
                         }
                     }
                 }
@@ -310,7 +334,7 @@ public class VBeneficios extends javax.swing.JDialog {
 
         if (!btnSelector.getSelectedItem().toString().equals(eu.getNombreComercial())) {
             VAviso va;
-            va=new   VAviso("Esa empresa no es de su propiedad.\nAcción no disponible");
+            va = new VAviso("Esa empresa no es de su propiedad.\nAcción no disponible");
             va.setVisible(true);
         } else {
             if (cuadroBeneficio.getText().equals("")) {
@@ -318,29 +342,55 @@ public class VBeneficios extends javax.swing.JDialog {
             }
             if (Integer.parseInt(numPart.getValue().toString()) == 0 && Double.parseDouble(cuadroBeneficio.getText()) <= 0) {
                 error.setVisible(true);
+            } else if (Double.parseDouble(cuadroBeneficio.getText()) < 0 ) {
+                error.setVisible(true);
             } else {
 
                 if (fa.getSaldoRetenciones(eu.getIdUsuario()) < 0) {
                     /*error.setText("Saldo insuficiente para completar la transacción");
-                    error.setVisible(true);*/
+                     error.setVisible(true);*/
                     VAviso saldo = new VAviso("El saldo es insuficiente");
                     saldo.setVisible(true);
-                    return;
+
                 }
-                if (fa.getParticipacionesRetenciones(eu.getIdUsuario()) < 0) {
+                if (fa.getParticipacionesRetenciones(eu.getIdUsuario()) < 0  && Integer.parseInt(numPart.getValue().toString()) > 0) {
                     /*error.setText("Participaciones insuficientes para completar la transacción");
-                    error.setVisible(true);*/
+                     error.setVisible(true);*/
                     VAviso part = new VAviso("Las participaciones son insuficiente");
                     part.setVisible(true);
 
                 } else {
+
                     fa.altaPagoBeneficios(String.valueOf(LocalDate.now()), Double.parseDouble(cuadroBeneficio.getText()), btnSelector.getSelectedItem().toString(), Integer.parseInt(numPart.getValue().toString()));
+
                     actualizarTablaBeneficios();
-                    fa.pagarBeneficios();
-                    VAvisoCorrecto bien = new VAvisoCorrecto("Se han pagado beneficios por un valor de " + cuadroBeneficio.getText() + " euros por participación."
-                            + "\n y " + numPart.getValue().toString() + " participaciones");
-                    bien.setVisible(true);
-                    error.setVisible(false);
+
+                    if (fa.getSaldoRetenciones(eu.getIdUsuario()) < 0) {
+                        /*error.setText("Saldo insuficiente para completar la transacción");
+                         error.setVisible(true);*/
+                        VAviso saldo = new VAviso("El saldo es insuficiente");
+                        saldo.setVisible(true);
+
+                        fa.bajaAnuncioBeneficios(String.valueOf(LocalDate.now()), btnSelector.getSelectedItem().toString());
+
+                    } else if (fa.getParticipacionesRetenciones(eu.getIdUsuario()) < 0 &&  Integer.parseInt(numPart.getValue().toString()) > 0) {
+                        /*error.setText("Participaciones insuficientes para completar la transacción");
+                         error.setVisible(true);*/
+                        VAviso part = new VAviso("Las participaciones son insuficientes");
+                        part.setVisible(true);
+                        fa.bajaAnuncioBeneficios(String.valueOf(LocalDate.now()), btnSelector.getSelectedItem().toString());
+
+                    } else {
+
+                        fa.pagarBeneficios();
+
+                        VAvisoCorrecto bien = new VAvisoCorrecto("Se han pagado beneficios por un valor de " + cuadroBeneficio.getText() + " euros por participación."
+                                + "\n y " + numPart.getValue().toString() + " participaciones");
+                        bien.setVisible(true);
+                        error.setVisible(false);
+
+                    }
+
                 }
             }
         }

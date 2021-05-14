@@ -25,6 +25,7 @@ public class DAOBeneficios extends AbstractDAO {
             stmBeneficios.setDouble(2, importe);
             stmBeneficios.setInt(4, acciones);
             stmBeneficios.setString(3, idEmpresa);
+
             stmBeneficios.executeUpdate();
 
         } catch (SQLException e) {
@@ -155,9 +156,12 @@ public class DAOBeneficios extends AbstractDAO {
                     + "group by eu.idUsuario");
 
             stmSaldo.setString(1, id);
+
             saldoFinal = stmSaldo.executeQuery();
+
             if (saldoFinal.next()) {
                 saldo = saldoFinal.getFloat("dineroFinal");
+
             }
 
         } catch (SQLException e) {
@@ -179,23 +183,26 @@ public class DAOBeneficios extends AbstractDAO {
         con = super.getConexion();
         int participaciones = 0;
         ResultSet participacionesFinal;
-
+       
         try {
-            stmSaldo = con.prepareStatement("select poseerParticipacionesEmpresa.numParticipaciones - "
+            stmSaldo = con.prepareStatement("select sum(ppe.numParticipaciones - "
                     + "(select sum(distinct ab.numParticipaciones) * (sum( distinct ppi.numparticipaciones) + sum(distinct ppe.numparticipaciones)) "
                     + "from AnunciarBeneficios as ab,poseerparticipacionesinversor as ppi, poseerparticipacionesempresa ppe "
-                    + "where  ab.idEmpresa= ?  and ((ab.idEmpresa = ppi.idUsuario2 and ab.idEmpresa != ppi.idUsuario1) and (ab.idEmpresa = ppe.idUsuario2 and ab.idEmpresa != ppe.idUsuario1)) "
-                    + "group by ppe.idUsuario1 ) as ParticipacionesFinales "
-                    + "FROM poseerParticipacionesEmpresa "
-                    + "WHERE idUsuario1 = ?");
-
+                    + "where  ab.idEmpresa= ? and ((ab.idEmpresa = ppi.idUsuario2 and ab.idEmpresa != ppi.idUsuario1) and (ab.idEmpresa = ppe.idUsuario2 and ab.idEmpresa != ppe.idUsuario1)) "
+                    + "group by ab.idEmpresa )) as ParticipacionesFinales "
+                    + "FROM poseerParticipacionesEmpresa as ppe "
+                    + "WHERE idUsuario1 = ? and idUsuario2 = ? ");
+          
             stmSaldo.setString(1, id);
             stmSaldo.setString(2, id);
+            stmSaldo.setString(3, id);
+            
             participacionesFinal = stmSaldo.executeQuery();
             if (participacionesFinal.next()) {
                 participaciones = participacionesFinal.getInt("participacionesFinales");
+                
             }
-
+            
         } catch (SQLException e) {
             System.out.println(e.getMessage());
             this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
@@ -243,13 +250,16 @@ public class DAOBeneficios extends AbstractDAO {
         ResultSet saldoFinal;
 
         try {
+
             stmSaldo = con.prepareStatement("select eu.fondosdisponiblescuenta - sum(distinct ab.importe) * (sum( distinct ppi.numparticipaciones) + sum(distinct ppe.numparticipaciones)) as dineroFinal "
                     + "from EmpresaUsuario as eu,AnunciarBeneficios as ab,poseerparticipacionesinversor as ppi, poseerparticipacionesempresa ppe "
                     + "where ab.fechaAnuncioPago = CURRENT_DATE and eu.idUsuario= ab.idEmpresa and ab.idEmpresa = ? and ((ab.idEmpresa = ppi.idUsuario2 and ab.idEmpresa != ppi.idUsuario1) and (ab.idEmpresa = ppe.idUsuario2 and ab.idEmpresa != ppe.idUsuario1)) "
                     + "group by eu.idUsuario");
 
             stmSaldo.setString(1, id);
+
             saldoFinal = stmSaldo.executeQuery();
+
             if (saldoFinal.next()) {
                 saldo = saldoFinal.getFloat("dineroFinal");
             }
@@ -275,12 +285,12 @@ public class DAOBeneficios extends AbstractDAO {
         ResultSet participacionesFinal;
 
         try {
-            stmSaldo = con.prepareStatement("select poseerParticipacionesEmpresa.numParticipaciones - "
+            stmSaldo = con.prepareStatement("select sum(ppe.numParticipaciones - "
                     + "(select sum(distinct ab.numParticipaciones) * (sum( distinct ppi.numparticipaciones) + sum(distinct ppe.numparticipaciones)) "
                     + "from AnunciarBeneficios as ab,poseerparticipacionesinversor as ppi, poseerparticipacionesempresa ppe "
                     + "where  ab.fechaAnuncioPago = current_date and ab.idEmpresa = ?  and ((ab.idEmpresa = ppi.idUsuario2 and ab.idEmpresa != ppi.idUsuario1) and (ab.idEmpresa = ppe.idUsuario2 and ab.idEmpresa != ppe.idUsuario1)) "
-                    + "group by ppe.idUsuario1 ) as ParticipacionesFinales "
-                    + "FROM poseerParticipacionesEmpresa "
+                    + "group by ab.idEmpresa )) as ParticipacionesFinales "
+                    + "FROM poseerParticipacionesEmpresa as ppe "
                     + "WHERE idUsuario1 = ? and idUsuario2 = ?");
 
             stmSaldo.setString(1, id);
@@ -288,6 +298,7 @@ public class DAOBeneficios extends AbstractDAO {
             stmSaldo.setString(3, id);
 
             participacionesFinal = stmSaldo.executeQuery();
+
             if (participacionesFinal.next()) {
                 participaciones = participacionesFinal.getInt("participacionesFinales");
             }
@@ -318,6 +329,61 @@ public class DAOBeneficios extends AbstractDAO {
 
         try {
             con.setAutoCommit(false);
+           
+                // Actualizamos la cartera de participaciones y el dinero de la empresa que anuncia beneficios
+
+                try {
+
+                    stmEmpresas = con.prepareStatement("SELECT idEmpresa FROM anunciarBeneficios where fechaAnuncioPago = current_date");
+                    rsEmpresas = stmEmpresas.executeQuery();
+                    while (rsEmpresas.next()) { // TRas obtener las empresas que anunciaron beneficios hoy les restamos a esta el dinero y las participaciones
+                        try {
+
+                            stmQuitarDineroParticipacionesEmpresa = con.prepareStatement("UPDATE empresaUsuario "
+                                    + "SET fondosDisponiblesCuenta = ? "
+                                    + "where idUsuario =  ? ");
+
+                            stmQuitarDineroParticipacionesEmpresa.setDouble(1, this.getSaldoTrasPagarBeneficiosHoy(rsEmpresas.getString("idEmpresa")));
+                            stmQuitarDineroParticipacionesEmpresa.setString(2, rsEmpresas.getString("idEmpresa"));
+                            stmQuitarDineroParticipacionesEmpresa.executeUpdate();
+
+                        } catch (SQLException e) {
+                            System.out.println(e.getMessage());
+                            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+                        } finally {
+                            stmQuitarDineroParticipacionesEmpresa.close();
+                        }
+
+                        try {
+
+                            stmQuitarDineroParticipacionesEmpresa = null;
+                            stmQuitarDineroParticipacionesEmpresa = con.prepareStatement("UPDATE poseerParticipacionesEmpresa "
+                                    + "SET numParticipaciones = ? "
+                                    + "where idUsuario1 =  ? ");
+
+                            stmQuitarDineroParticipacionesEmpresa.setInt(1, this.getParticipacionesTrasPagarBeneficiosHoy(rsEmpresas.getString("idEmpresa")));
+                            stmQuitarDineroParticipacionesEmpresa.setString(2, rsEmpresas.getString("idEmpresa"));
+                            stmQuitarDineroParticipacionesEmpresa.executeUpdate();
+
+                        } catch (SQLException e) {
+                            System.out.println(e.getMessage());
+                            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+                        } finally {
+                            stmQuitarDineroParticipacionesEmpresa.close();
+                        }
+
+                    }
+
+                } catch (SQLException e) {
+                    System.out.println(e.getMessage());
+                    this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+                } finally {
+                    stmEmpresas.close();
+                }
+
+            
+            
+            
             stmAnunciosBeneficios = con.prepareStatement("( "
                     + "SELECT distinct ppi.idUsuario1 as usuarioCobrador,  ppi.numParticipaciones as participacionesEmpresaAB, ab.importe as dineroPorParticipacion,  ab.numparticipaciones as participacionesPorParticipacion, ab.idEmpresa as empresaPagadora "
                     + "FROM poseerParticipacionesInversor as ppi, anunciarbeneficios as ab "
@@ -387,7 +453,7 @@ public class DAOBeneficios extends AbstractDAO {
                     } finally {
                         stmCobradores.close();
                     }
-
+//AQUI
                     try { // Actualizamos la cartera de participaciones de la empresa usuario
                         stmCobradores = null;
                         stmCobradores = con.prepareStatement("UPDATE poseerParticipacionesEmpresa "
@@ -411,77 +477,7 @@ public class DAOBeneficios extends AbstractDAO {
 
             }
 
-            if (rsBeneficios.first()) { // Comprobamos que hay al menos una fila y hay que borrar el anuncio
-                // Actualizamos la cartera de participaciones y el dinero de la empresa que anuncia beneficios
-
-                try {
-
-                    stmEmpresas = con.prepareStatement("SELECT idEmpresa FROM anunciarBeneficios where fechaAnuncioPago = current_date");
-                    rsEmpresas = stmEmpresas.executeQuery();
-                    while (rsEmpresas.next()) { // TRas obtener las empresas que anunciaron beneficios hoy les restamos a esta el dinero y las participaciones
-                        try {
-
-                            if(this.getSaldoTrasPagarBeneficiosHoy(rsEmpresas.getString("idEmpresa")) < 0){
-                            // saliiiirr
-                                try {
-                                    con.rollback();
-                                } catch (SQLException ex) {
-                                    Logger.getLogger(DAOParticipaciones.class.getName()).log(Level.SEVERE, null, ex);
-                                }
-                                return false;
-                                
-                            }
-                            stmQuitarDineroParticipacionesEmpresa = con.prepareStatement("UPDATE empresaUsuario "
-                                    + "SET fondosDisponiblesCuenta = ? "
-                                    + "where idUsuario =  ? ");
-
-                            stmQuitarDineroParticipacionesEmpresa.setDouble(1, this.getSaldoTrasPagarBeneficiosHoy(rsEmpresas.getString("idEmpresa")));
-                            stmQuitarDineroParticipacionesEmpresa.setString(2, rsEmpresas.getString("idEmpresa"));
-                            stmQuitarDineroParticipacionesEmpresa.executeUpdate();
-
-                        } catch (SQLException e) {
-                            System.out.println(e.getMessage());
-                            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
-                        } finally {
-                            stmQuitarDineroParticipacionesEmpresa.close();
-                        }
-
-                        try {
-                            if (this.getParticipacionesTrasPagarBeneficiosHoy(rsEmpresas.getString("idEmpresa")) < 0) {
-                                // saliiiirr
-                                try {
-                                    con.rollback();
-                                } catch (SQLException ex) {
-                                    Logger.getLogger(DAOParticipaciones.class.getName()).log(Level.SEVERE, null, ex);
-                                }
-                                return false;
-                            }
-                            stmQuitarDineroParticipacionesEmpresa = null;
-                            stmQuitarDineroParticipacionesEmpresa = con.prepareStatement("UPDATE poseerParticipacionesEmpresa "
-                                    + "SET numParticipaciones = ? "
-                                    + "where idUsuario1 =  ? ");
-
-                            stmQuitarDineroParticipacionesEmpresa.setInt(1, this.getParticipacionesTrasPagarBeneficiosHoy(rsEmpresas.getString("idEmpresa")));
-                            stmQuitarDineroParticipacionesEmpresa.setString(2, rsEmpresas.getString("idEmpresa"));
-                            stmQuitarDineroParticipacionesEmpresa.executeUpdate();
-
-                        } catch (SQLException e) {
-                            System.out.println(e.getMessage());
-                            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
-                        } finally {
-                            stmQuitarDineroParticipacionesEmpresa.close();
-                        }
-
-                    }
-
-                } catch (SQLException e) {
-                    System.out.println(e.getMessage());
-                    this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
-                } finally {
-                    stmEmpresas.close();
-                }
-
-            }
+ 
             try {
 
                 stmBorrarBeneficios = con.prepareStatement("DELETE from AnunciarBeneficios where fechaAnuncioPago = CURRENT_DATE"); // Borramos todos los anuncios que ya se han pagado hoy
